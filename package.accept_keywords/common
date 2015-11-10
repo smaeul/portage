@@ -1,0 +1,2 @@
+# Required to support /etc/portage/repos.conf
+~app-portage/layman-2.3.0 ~amd64
