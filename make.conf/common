@@ -10,6 +10,3 @@ CHOST="x86_64-gentoo-linux-musl"
 # These are the USE flags that were used in addition to what is provided by the
 # profile used for building.
 USE="bindist mmx sse sse2"
-PORTDIR="/usr/portage"
-DISTDIR="${PORTDIR}/distfiles"
-PKGDIR="${PORTDIR}/packages"
