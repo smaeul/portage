@@ -1,0 +1,1 @@
+app-emulation/qemu -fdt numa spice tls usb usbredir virtfs
