@@ -9,6 +9,22 @@ CHOST="x86_64-gentoo-linux-musl"
 # Basic USE flags
 # General
 USE="-bindist hardened -jemalloc3 nptl -pch pie -static-libs -tcmalloc threads xattr"
+# Bindings
+USE="$USE -cxx -fortran -guile -introspection -lua -orc -perl -python -vala"
+# Compression
+USE="$USE bzip2 lzma lzo zlib"
+# Database
+USE="$USE -berkdb sqlite"
+# Internationalization
+USE="$USE -iconv icu -nls unicode"
+# Networking
+USE="$USE -avahi curl idn ipv6 -kerberos -zeroconf"
+# Security
+USE="$USE acl caps filecaps -pam ssl -suid"
+# Services
+USE="$USE -dbus -systemd -tcpd udev"
+# Other
+USE="$USE git"
 
 # Extended USE flags
 CPU_FLAGS_X86="aes mmx mmxext popcnt sse sse2 sse3 sse4_1 sse4_2 ssse3"
