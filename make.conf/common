@@ -15,7 +15,7 @@ USE="$USE -cxx -fortran -guile -introspection -lua -orc -perl -python -vala"
 # Compression
 USE="$USE bzip2 lzma lzo zlib"
 # Database
-USE="$USE -berkdb sqlite"
+USE="$USE -berkdb -gdbm sqlite"
 # Internationalization
 USE="$USE -iconv icu -nls unicode"
 # Networking
