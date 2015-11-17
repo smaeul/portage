@@ -5,7 +5,7 @@ GENTOO_MIRRORS="http://lug.mtu.edu/gentoo/ http://gentoo.cites.uiuc.edu/pub/gent
 CFLAGS="-fomit-frame-pointer -march=westmere -mtune=native -O2 -pipe"
 CXXFLAGS="${CFLAGS}"
 LDFLAGS="-Wl,-O1 -Wl,--as-needed -Wl,--hash-style=both"
-CHOST="x86_64-gentoo-linux-musl"
+CHOST="x86_64-pc-linux-gnu"
 
 # Basic USE flags
 # General
