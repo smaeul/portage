@@ -1,3 +1,4 @@
 app-emulation/qemu -fdt numa spice tls usb usbredir virtfs
 dev-scheme/guile -deprecated -regex
 net-libs/gnutls -crywrap -openssl
+sys-auth/pambase minimal -nullok
