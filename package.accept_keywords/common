@@ -1,2 +1,36 @@
+# These packages are either only available as git repositories, or have
+# significant features added/changed since their latest release. As they
+# are relatively nonessential packages, I consider them basically safe to
+# install from git.
+=x11-misc/compton-9999 **
+=x11-misc/i3status-mpd-9999 **
+=x11-misc/j4-dmenu-desktop-9999 **
+
+# These packages have no stable version, so at least one version must be
+# accepted in order to install the package at all.
+app-emulation/winetricks ~amd64
+app-eselect/eselect-rust ~amd64
+app-mobilephone/heimdall ~amd64
+dev-lang/rust ~amd64
+dev-libs/libgudev ~amd64
+net-misc/unison ~amd64
+sys-firmware/iwl3160-7260-bt-ucode ~amd64
+sys-firmware/iwl7260-ucode ~amd64
+sys-firmware/radeon-ucode ~amd64
+
+# The following packages have a stable version, but due to the fast-moving
+# nature of the software it is often broken.
+net-misc/youtube-dl ~amd64
+
+# The following packages have significant features or bugfixes in releases
+# currently marked as testing. Only that specific version should be accepted
+# here, and it should be removed from this list once it is marked stable.
+#
+# GnuPG 2.1 moves from pth (which doesn't work with musl) to npth (which does)
+=app-crypt/gnupg-2.1* ~amd64
+# Wine 1.6 is broken with gcc 4.9
+=app-emulation/wine-1.7* ~amd64
 # Required to support /etc/portage/repos.conf
 ~app-portage/layman-2.3.0 ~amd64
+# Fixes font weights (stable version has Regular being Bold)
+~media-fonts/roboto-2015.03 ~amd64
