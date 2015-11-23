@@ -1,5 +1,10 @@
-# Mirrors
+# Portage options
+FEATURES="cgroup ipc-sandbox multilib-strict network-sandbox stricter"
 GENTOO_MIRRORS="http://lug.mtu.edu/gentoo/ http://gentoo.cites.uiuc.edu/pub/gentoo/"
+PORTAGE_COMPRESS="xz"
+PORTAGE_COMPRESS_FLAGS="-4"
+PORTAGE_NICENESS="2"
+PORTAGE_TMPDIR="/tmp"
 
 # Compilation options
 CFLAGS="-fomit-frame-pointer -march=westmere -mtune=native -O2 -pipe"
