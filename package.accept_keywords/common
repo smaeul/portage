@@ -40,6 +40,8 @@ sys-kernel/spl ~amd64
 =app-emulation/wine-1.7* ~amd64
 # Required to support /etc/portage/repos.conf
 ~app-portage/layman-2.3.0 ~amd64
+# New version required for new OCaml version
+~dev-ml/lablgtk-2.18.3 ~amd64
 # Fixes font weights (stable version has Regular being Bold)
 ~media-fonts/roboto-2015.03 ~amd64
 # Matches sys-libs/libgudev version
