@@ -1,0 +1,46 @@
+# These USE changes are necessary to fulfill a dependency from
+# another package.
+# Required by thunderbird
+dev-db/sqlite secure-delete
+# Required by ncmpcpp
+dev-libs/boost nls
+# Required by chromium
+media-libs/libpng apng
+# Required by thunderbird
+media-libs/libvpx postproc
+# Required by spice-gtk
+media-sound/pulseaudio alsa dbus
+# One of berkdb or gdbm is required
+sys-apps/man-db berkdb
+# Required by chromium
+sys-libs/zlib minizip
+
+# These packages have features (GUIs, networking, etc.) we want to
+# enable or disable.
+app-accessibility/speech-dispatcher -espeak
+app-crypt/pinentry -gtk
+app-editors/vim -X
+dev-ml/lablgtk -opengl
+mail-client/thunderbird -crypt system-cairo system-icu system-jpeg system-libvpx system-sqlite
+media-gfx/feh exif
+media-libs/harfbuzz -graphite
+media-libs/imlib2 -mp3
+media-libs/libass -enca
+media-libs/mesa -dri3 -gallium -llvm
+media-plugins/alsa-plugins -* pulseaudio
+media-sound/mpd -network
+media-sound/ncmpcpp visualizer
+media-sound/pulseaudio -asyncns -gtk -webrtc-aec
+media-video/ffmpeg -encode
+media-video/mpv -enca -luajit
+net-misc/openssh -X
+net-misc/spice-gtk usbredir
+sys-apps/groff -X
+sys-process/psmisc -X
+virtual/ffmpeg -encode
+www-client/w3m -X -gtk
+x11-base/xorg-server glamor
+x11-libs/cairo -glib xcb
+x11-libs/libxcb xkb
+x11-misc/redshift -gtk
+x11-terms/rxvt-unicode 256-color alt-font-width iso14755 secondary-wheel -vanilla

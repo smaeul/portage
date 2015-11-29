@@ -1,0 +1,20 @@
+# Basic USE flags
+# Audio
+USE="$USE -alsa -libsamplerate -oss pulseaudio"
+# Codecs
+USE="$USE aac -dvd ffmpeg flac gif jpeg -mad mp3 ogg opus png sndfile speex svg -tiff vorbis"
+# Fonts
+USE="$USE fontconfig truetype xft"
+# Graphics
+USE="$USE cairo dri gtk lcms opengl -qt4 -qt5 vaapi X -xscreensaver"
+# Networking
+USE="$USE bluetooth"
+# Services
+USE="$USE -gnome"
+# Other
+USE="$USE -cups startup-notification"
+
+# Extended USE flags
+FFTOOLS=""
+INPUT_DEVICES="evdev"
+VIDEO_CARDS="i965 intel"
