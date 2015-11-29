@@ -1,0 +1,12 @@
+diff -ur i3-4.10.4/i3bar/src/xcb.c i3-fixed/i3bar/src/xcb.c
+--- i3-4.10.4/i3bar/src/xcb.c	2015-09-08 02:19:20.000000000 -0500
++++ i3-fixed/i3bar/src/xcb.c	2015-10-03 10:07:52.154059110 -0500
+@@ -1214,7 +1214,7 @@
+     font = load_font(fontname, true);
+     set_font(&font);
+     DLOG("Calculated font height: %d\n", font.height);
+-    bar_height = font.height + 2 * logical_px(ws_voff_px);
++    bar_height = font.height + 2 * logical_px(ws_voff_px) + 1;
+ 
+     if (config.separator_symbol)
+         separator_symbol_width = predict_text_width(config.separator_symbol);
