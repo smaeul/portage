@@ -1,5 +1,16 @@
-app-emulation/qemu -fdt numa spice tls usb usbredir virtfs
+app-crypt/gnupg -gnutls
+app-emulation/qemu -bluetooth -fdt -gtk -jpeg -opengl -npg spice usb usbredir virtfs -vnc
+app-shells/bash -net
 dev-scheme/guile -deprecated -regex
+dev-util/cmake system-jsoncpp
+dev-vcs/git -gtk perl
 net-libs/gnutls -crywrap -openssl
+net-misc/openvpn iproute2 -pam -plugins
+sys-apps/busybox -pam static -systemd
+sys-apps/pciutils dns
+sys-apps/systemd xkb
+sys-apps/util-linux -cramfs
 sys-auth/pambase minimal -nullok
+sys-devel/clang multitarget
+sys-devel/llvm clang multitarget
 sys-fs/lvm2 -* device-mapper-only
