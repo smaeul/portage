@@ -1,0 +1,17 @@
+app-crypt/pinentry stricterfail
+app-text/ghostscript-gpl stricterfail
+app-text/hunspell stricterfail
+dev-lang/rust stricterfail
+dev-libs/nss stricterfail
+media-libs/freeglut stricterfail
+sys-apps/acl stricterfail
+sys-devel/bin86 stricterfail
+sys-devel/dev86 stricterfail
+sys-devel/llvm stricterfail
+sys-libs/libcxx stricterfail
+sys-libs/ncurses stricterfail
+sys-libs/pam stricterfail
+x11-libs/gdk-pixbuf stricterfail
+x11-libs/gtk+:2 stricterfail
+x11-libs/libva stricterfail
+x11-wm/i3 stricterfail
