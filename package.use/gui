@@ -26,7 +26,7 @@ media-gfx/feh exif
 media-libs/harfbuzz -graphite
 media-libs/imlib2 -mp3
 media-libs/libass -enca
-media-libs/mesa -dri3 -gallium -llvm
+media-libs/mesa d3d9 -llvm
 media-plugins/alsa-plugins -* pulseaudio
 media-sound/mpd -network
 media-sound/ncmpcpp visualizer
@@ -42,5 +42,6 @@ www-client/w3m -X -gtk
 x11-base/xorg-server glamor
 x11-libs/cairo -glib xcb
 x11-libs/libxcb xkb
+x11-libs/libva -opengl
 x11-misc/redshift -gtk
 x11-terms/rxvt-unicode 256-color alt-font-width iso14755 secondary-wheel -vanilla

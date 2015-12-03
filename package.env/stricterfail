@@ -13,5 +13,6 @@ sys-libs/ncurses stricterfail
 sys-libs/pam stricterfail
 x11-libs/gdk-pixbuf stricterfail
 x11-libs/gtk+:2 stricterfail
+x11-libs/libdrm stricterfail
 x11-libs/libva stricterfail
 x11-wm/i3 stricterfail
