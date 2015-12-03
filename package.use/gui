@@ -20,6 +20,8 @@ sys-libs/zlib minizip
 app-accessibility/speech-dispatcher -espeak
 app-crypt/pinentry -gtk
 app-editors/vim -X
+app-emulation/wine abi_x86_32 alsa openal -pulseaudio -realtime -staging -udisks -vaapi
+app-emulation/winetricks -gtk
 dev-ml/lablgtk -opengl
 mail-client/thunderbird -crypt system-cairo system-icu system-jpeg system-libvpx system-sqlite
 media-gfx/feh exif
