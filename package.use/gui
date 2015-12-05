@@ -40,6 +40,7 @@ net-misc/spice-gtk usbredir
 sys-apps/groff -X
 sys-process/psmisc -X
 virtual/ffmpeg -encode
+www-client/chromium -hangouts
 www-client/w3m -X -gtk
 x11-base/xorg-server glamor
 x11-libs/cairo -glib xcb
