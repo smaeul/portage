@@ -14,3 +14,4 @@ sys-auth/pambase minimal -nullok
 sys-devel/clang multitarget
 sys-devel/llvm clang multitarget
 sys-fs/lvm2 -* device-mapper-only
+sys-process/systemd-cron cron-boot python_single_target_python3_4
