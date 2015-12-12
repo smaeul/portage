@@ -11,6 +11,7 @@
 app-emulation/winetricks ~amd64
 app-eselect/eselect-rust ~amd64
 app-mobilephone/heimdall ~amd64
+dev-java/icedtea ~amd64
 dev-lang/rust ~amd64
 dev-libs/libgudev ~amd64
 net-misc/unison ~amd64
