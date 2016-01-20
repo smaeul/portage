@@ -23,14 +23,6 @@ sys-process/systemd-cron ~amd64
 # nature of the software it is often broken.
 net-misc/youtube-dl ~amd64
 
-# The following packages have a stable versio, but the upstream maintainer has
-# a high enough standard for release stability that I trust any of their
-# releases. The improvements in newer versions of these packages outweigh the
-# possible slight decrease in stability.
-sys-fs/zfs ~amd64
-sys-fs/zfs-kmod ~amd64
-sys-kernel/spl ~amd64
-
 # The following packages have significant features or bugfixes in releases
 # currently marked as testing. Only that specific version should be accepted
 # here, and it should be removed from this list once it is marked stable.
@@ -43,3 +35,7 @@ sys-kernel/spl ~amd64
 ~app-portage/layman-2.3.0 ~amd64
 # Fixes font weights (stable version has Regular being Bold)
 ~media-fonts/roboto-2015.03 ~amd64
+# Latest working ZFS version
+=sys-fs/zfs-0.6.5.3 ~amd64
+=sys-fs/zfs-kmod-0.6.5.3 ~amd64
+=sys-kernel/spl-0.6.5.3 ~amd64
