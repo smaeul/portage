@@ -13,7 +13,6 @@ app-eselect/eselect-rust ~amd64
 app-mobilephone/heimdall ~amd64
 dev-java/icedtea ~amd64
 dev-lang/rust ~amd64
-dev-libs/libgudev ~amd64
 net-misc/unison ~amd64
 sys-firmware/iwl3160-7260-bt-ucode ~amd64
 sys-firmware/iwl7260-ucode ~amd64
@@ -44,5 +43,3 @@ sys-kernel/spl ~amd64
 ~app-portage/layman-2.3.0 ~amd64
 # Fixes font weights (stable version has Regular being Bold)
 ~media-fonts/roboto-2015.03 ~amd64
-# Matches sys-libs/libgudev version
-~virtual/libgudev-230 ~amd64
