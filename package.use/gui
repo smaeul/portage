@@ -47,6 +47,7 @@ sys-apps/groff -X
 sys-process/psmisc -X
 virtual/ffmpeg -encode
 www-client/chromium -hangouts
+www-client/firefox system-cairo system-icu system-jpeg system-libvpx system-sqlite
 www-client/w3m -X -gtk
 x11-base/xorg-server glamor
 x11-libs/cairo -glib xcb
