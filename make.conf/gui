@@ -16,5 +16,5 @@ USE="$USE -cups startup-notification"
 
 # Extended USE flags
 FFTOOLS=""
-INPUT_DEVICES="evdev"
+INPUT_DEVICES="evdev synaptics"
 VIDEO_CARDS="i965 intel"
