@@ -31,6 +31,8 @@ net-misc/youtube-dl ~amd64
 #
 # GnuPG 2.1 moves from pth (which doesn't work with musl) to npth (which does)
 =app-crypt/gnupg-2.1* ~amd64
+# 2.5 needed for patch for GPU passthrough
+~app-emulation/qemu-2.5.0 ~amd64
 # Wine 1.6 is broken with gcc 4.9
 =app-emulation/wine-1.7* ~amd64
 # Required to support /etc/portage/repos.conf
