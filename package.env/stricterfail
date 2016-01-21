@@ -10,6 +10,7 @@ dev-libs/nss stricterfail
 media-libs/freeglut stricterfail
 media-sound/mpg123 stricterfail
 sys-apps/acl stricterfail
+sys-apps/ethtool stricterfail
 sys-devel/bin86 stricterfail
 sys-devel/dev86 stricterfail
 sys-devel/llvm stricterfail
