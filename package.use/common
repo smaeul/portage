@@ -2,7 +2,6 @@ app-crypt/gnupg -gnutls
 app-emulation/qemu -bluetooth -fdt -gtk -jpeg -opengl -npg spice usb usbredir virtfs -vnc
 app-shells/bash -net
 dev-libs/boost python
-dev-python/pyyaml libyaml
 dev-scheme/guile -deprecated -regex
 dev-util/cmake system-jsoncpp
 dev-vcs/git -gtk perl
