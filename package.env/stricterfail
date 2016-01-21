@@ -1,7 +1,9 @@
 app-crypt/pinentry stricterfail
 app-text/ghostscript-gpl stricterfail
 app-text/hunspell stricterfail
+dev-java/gnu-classpath stricterfail
 dev-java/icedtea stricterfail
+dev-java/netbeans-dlight stricterfail
 dev-lang/nasm stricterfail
 dev-lang/rust stricterfail
 dev-libs/nss stricterfail

@@ -1,0 +1,34 @@
+# The following packages have a stable version, but due to the fast-moving
+# nature of the software it is often broken.
+dev-util/android-sdk-update-manager ~amd64
+dev-util/android-studio ~amd64
+
+# The following packages have significant features or bugfixes in releases
+# currently marked as testing. Only that specific version should be accepted
+# here, and it should be removed from this list once it is marked stable.
+#
+# Required for updated netbeans-java*
+~dev-java/guice-4.0 ~amd64
+~dev-java/jcommander-1.48 ~amd64
+~dev-java/jtidy-1.0 ~amd64
+# Required for updated netbeans metapackage
+~dev-java/netbeans-cnd-8.1 ~amd64
+~dev-java/netbeans-dlight-8.1 ~amd64
+~dev-java/netbeans-extide-8.1 ~amd64
+~dev-java/netbeans-harness-8.1 ~amd64
+~dev-java/netbeans-ide-8.1 ~amd64
+~dev-java/netbeans-java-8.1 ~amd64
+~dev-java/netbeans-javafx-8.1 ~amd64
+~dev-java/netbeans-nb-8.1 ~amd64
+~dev-java/netbeans-platform-8.1 ~amd64
+~dev-java/netbeans-websvccommon-8.1 ~amd64
+# Required for updated netbeans-java*
+~dev-java/snakeyaml-1.16 ~amd64
+~dev-java/testng-6.9.10 ~amd64
+# Required for updated netbeans
+=dev-java/oracle-jdk-bin-1.8* ~amd64
+# Required for university class
+~dev-util/netbeans-8.1 ~amd64
+# Required for oracle-jdk-bin to satisfy the virtual
+=virtual/jdk-1.8* ~amd64
+=virtual/jre-1.8* ~amd64

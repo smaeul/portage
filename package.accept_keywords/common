@@ -11,7 +11,6 @@
 app-emulation/winetricks ~amd64
 app-eselect/eselect-rust ~amd64
 app-mobilephone/heimdall ~amd64
-dev-java/icedtea ~amd64
 dev-lang/rust ~amd64
 net-misc/unison ~amd64
 sys-firmware/iwl3160-7260-bt-ucode ~amd64
@@ -21,8 +20,6 @@ sys-process/systemd-cron ~amd64
 
 # The following packages have a stable version, but due to the fast-moving
 # nature of the software it is often broken.
-dev-util/android-sdk-update-manager ~amd64
-dev-util/android-studio ~amd64
 net-misc/youtube-dl ~amd64
 
 # The following packages have significant features or bugfixes in releases
