@@ -35,6 +35,8 @@ sys-power/powertop ~amd64
 =app-emulation/wine-1.7* ~amd64
 # Required to support /etc/portage/repos.conf
 ~app-portage/layman-2.3.0 ~amd64
+# Required for gnupg 2.1.10+
+~dev-libs/libassuan-2.4.2 ~amd64
 # Fixes font weights (stable version has Regular being Bold)
 ~media-fonts/roboto-2015.03 ~amd64
 # Latest working ZFS version
