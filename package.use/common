@@ -10,7 +10,7 @@ net-libs/rb_libtorrent python
 net-misc/openvpn iproute2 -pam -plugins
 sys-apps/busybox -pam static -systemd
 sys-apps/pciutils dns
-sys-apps/systemd xkb
+sys-apps/systemd gnuefi -kdbus xkb
 sys-apps/util-linux -cramfs
 sys-auth/pambase minimal -nullok
 sys-devel/clang multitarget
