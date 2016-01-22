@@ -49,6 +49,7 @@ virtual/ffmpeg -encode
 www-client/chromium -hangouts
 www-client/firefox system-cairo system-icu system-jpeg system-libvpx system-sqlite
 www-client/w3m -X -gtk
+www-plugins/chrome-binary-plugins -widevine
 x11-base/xorg-server glamor
 x11-libs/cairo -glib xcb
 x11-libs/libxcb xkb
