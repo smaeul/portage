@@ -1,3 +1,7 @@
+# These USE changes are necessary to fulfill a dependency from another package.
+# One of berkdb or gdbm is required
+sys-apps/man-db berkdb
+
 app-crypt/gnupg -gnutls
 app-emulation/qemu -bluetooth -fdt -gtk -jpeg -opengl -npg spice usb usbredir virtfs -vnc
 app-shells/bash -net

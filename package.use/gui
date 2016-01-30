@@ -1,5 +1,4 @@
-# These USE changes are necessary to fulfill a dependency from
-# another package.
+# These USE changes are necessary to fulfill a dependency from another package.
 # Required by thunderbird
 dev-db/sqlite secure-delete
 # Required by ncmpcpp
@@ -10,13 +9,10 @@ media-libs/libpng apng
 media-libs/libvpx postproc
 # Required by spice-gtk
 media-sound/pulseaudio alsa dbus
-# One of berkdb or gdbm is required
-sys-apps/man-db berkdb
 # Required by chromium
 sys-libs/zlib minizip
 
-# These packages have features (GUIs, networking, etc.) we want to
-# enable or disable.
+# These packages have features (GUIs, networking, etc.) we want to enable or disable.
 app-accessibility/speech-dispatcher -espeak
 app-crypt/pinentry -gtk
 app-editors/vim -X
