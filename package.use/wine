@@ -58,6 +58,7 @@ x11-libs/libXdmcp abi_x86_32
 x11-libs/libXext abi_x86_32
 x11-libs/libXfixes abi_x86_32
 x11-libs/libXi abi_x86_32
+x11-libs/libXinerama abi_x86_32
 x11-libs/libXrandr abi_x86_32
 x11-libs/libXrender abi_x86_32
 x11-libs/libXtst abi_x86_32
@@ -85,4 +86,5 @@ x11-proto/xextproto abi_x86_32
 x11-proto/xf86bigfontproto abi_x86_32
 x11-proto/xf86driproto abi_x86_32
 x11-proto/xf86vidmodeproto abi_x86_32
+x11-proto/xineramaproto abi_x86_32
 x11-proto/xproto abi_x86_32
