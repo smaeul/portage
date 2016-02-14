@@ -1,3 +1,4 @@
 dev-java/oracle-jdk-bin alsa javafx nsplugin
 dev-java/swing-layout source
+dev-java/javatoolkit python_targets_python2_7
 dev-java/junit source

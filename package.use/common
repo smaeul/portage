@@ -2,15 +2,27 @@
 # One of berkdb or gdbm is required
 sys-apps/man-db berkdb
 
+app-admin/ansible python_targets_python2_7
 app-crypt/gnupg -gnutls
-app-emulation/qemu -bluetooth -fdt -gtk -jpeg -opengl -npg spice usb usbredir virtfs -vnc
+app-emulation/qemu -bluetooth -fdt -gtk -jpeg -opengl -npg python_targets_python2_7 spice usb usbredir virtfs -vnc
 app-shells/bash -net
+app-text/asciidoc python_single_target_python2_7 python_targets_python2_7
 dev-libs/boost python
+dev-python/certifi python_targets_python2_7
+dev-python/httplib2 python_targets_python2_7
+dev-python/jinja python_targets_python2_7
+dev-python/keyczar python_targets_python2_7
+dev-python/markupsafe python_targets_python2_7
+dev-python/packaging python_targets_python2_7
+dev-python/pyasn1 python_targets_python2_7
+dev-python/setuptools python_targets_python2_7
 dev-scheme/guile -deprecated -regex
 dev-util/cmake system-jsoncpp
 dev-vcs/git -gtk perl
+dev-vcs/mercurial python_targets_python2_7
 net-libs/gnutls -crywrap -openssl
 net-libs/rb_libtorrent python
+net-mail/offlineimap python_targets_python2_7
 net-misc/openvpn iproute2 -pam -plugins
 sys-apps/busybox -pam static -systemd
 sys-apps/man-db -manpager
@@ -19,6 +31,6 @@ sys-apps/systemd gnuefi -kdbus xkb
 sys-apps/util-linux -cramfs
 sys-auth/pambase minimal -nullok
 sys-devel/clang multitarget
-sys-devel/llvm clang multitarget
+sys-devel/llvm clang multitarget python_targets_python2_7
 sys-fs/lvm2 -* device-mapper-only
 sys-process/systemd-cron cron-boot python_single_target_python3_4
