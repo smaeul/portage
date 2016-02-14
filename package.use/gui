@@ -25,10 +25,13 @@ dev-ml/lablgtk -opengl
 mail-client/thunderbird -crypt system-cairo system-icu system-jpeg system-libvpx system-sqlite
 media-fonts/urw-fonts -*
 media-gfx/feh exif
+media-gfx/imagemagick raw
+media-gfx/ufraw -gtk
 media-libs/harfbuzz -graphite
 media-libs/imlib2 -mp3
+media-libs/lensfun python_targets_python2_7
 media-libs/libass -enca
-media-libs/mesa d3d9 -llvm
+media-libs/mesa d3d9 gles2 -llvm
 media-plugins/alsa-plugins -* pulseaudio
 media-sound/mpd libsoxr -network
 media-sound/ncmpcpp visualizer
