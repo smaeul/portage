@@ -21,6 +21,8 @@ sys-process/systemd-cron ~amd64
 # The following packages have a stable version, but due to the fast-moving
 # nature of the software it is often broken.
 net-misc/youtube-dl ~amd64
+sys-devel/clang ~amd64
+sys-devel/llvm ~amd64
 sys-power/powertop ~amd64
 
 # The following packages have significant features or bugfixes in releases
