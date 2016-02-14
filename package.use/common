@@ -26,6 +26,7 @@ net-mail/offlineimap python_targets_python2_7
 net-misc/openvpn iproute2 -pam -plugins
 sys-apps/busybox -pam static -systemd
 sys-apps/man-db -manpager
+sys-apps/openrc -netifrc -newnet
 sys-apps/pciutils dns
 sys-apps/systemd gnuefi -kdbus xkb
 sys-apps/util-linux -cramfs
