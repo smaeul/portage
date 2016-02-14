@@ -24,7 +24,7 @@ USE="$USE -berkdb -gdbm sqlite"
 # Internationalization
 USE="$USE -iconv icu -nls unicode"
 # Networking
-USE="$USE -avahi curl idn ipv6 -kerberos -zeroconf"
+USE="$USE -avahi curl -idn ipv6 -kerberos -zeroconf"
 # Security
 USE="$USE acl caps -cracklib filecaps pam ssl -suid"
 # Services
