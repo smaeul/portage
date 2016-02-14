@@ -14,6 +14,7 @@ dev-libs/libtasn1 abi_x86_32
 dev-libs/libxml2 abi_x86_32
 dev-libs/libxslt abi_x86_32
 dev-libs/nettle abi_x86_32
+dev-libs/wayland abi_x86_32
 dev-util/pkgconf abi_x86_32
 media-libs/alsa-lib abi_x86_32
 media-libs/flac abi_x86_32
