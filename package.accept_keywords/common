@@ -43,7 +43,7 @@ sys-power/powertop ~amd64
 ~dev-libs/libgpg-error-1.21 ~amd64
 # Fixes font weights (stable version has Regular being Bold)
 ~media-fonts/roboto-2015.03 ~amd64
-# Latest working ZFS version
-=sys-fs/zfs-0.6.5.3 ~amd64
-=sys-fs/zfs-kmod-0.6.5.3 ~amd64
-=sys-kernel/spl-0.6.5.3 ~amd64
+# Latest working ZFS version (not keyworded; see 1fcf208e)
+=sys-fs/zfs-0.6.5.4 **
+=sys-fs/zfs-kmod-0.6.5.4 **
+=sys-kernel/spl-0.6.5.4 **
