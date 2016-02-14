@@ -26,6 +26,7 @@ media-libs/libogg abi_x86_32
 media-libs/libpng abi_x86_32
 media-libs/libsndfile abi_x86_32
 media-libs/libtxc_dxtn abi_x86_32
+media-libs/libv4l abi_x86_32
 media-libs/libvorbis abi_x86_32
 media-libs/mesa abi_x86_32
 media-libs/openal abi_x86_32

@@ -2,7 +2,7 @@
 # Audio
 USE="$USE -alsa -libsamplerate -oss pulseaudio"
 # Codecs
-USE="$USE aac -dvd ffmpeg flac gif jpeg -mad mp3 ogg opus png sndfile speex svg -tiff vorbis"
+USE="$USE aac -dvd ffmpeg flac gif jpeg -mad modplug mp3 ogg opus png sndfile speex svg -tiff v4l vorbis"
 # Fonts
 USE="$USE fontconfig truetype xft"
 # Graphics
