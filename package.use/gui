@@ -51,4 +51,4 @@ x11-libs/cairo -glib xcb
 x11-libs/libxcb xkb
 x11-libs/libva -opengl
 x11-misc/redshift -gtk
-x11-terms/rxvt-unicode 256-color alt-font-width iso14755 secondary-wheel -vanilla
+x11-terms/rxvt-unicode 256-color alt-font-width iso14755 secondary-wheel unicode3 -vanilla
