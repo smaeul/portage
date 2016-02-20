@@ -14,8 +14,10 @@ dev-python/jinja python_targets_python2_7
 dev-python/keyczar python_targets_python2_7
 dev-python/markupsafe python_targets_python2_7
 dev-python/packaging python_targets_python2_7
+dev-python/ply python_targets_python2_7
 dev-python/pyasn1 python_targets_python2_7
 dev-python/setuptools python_targets_python2_7
+dev-python/six python_targets_python2_7
 dev-scheme/guile -deprecated -regex
 dev-util/cmake system-jsoncpp
 dev-vcs/git -gtk perl
