@@ -18,12 +18,8 @@ app-crypt/pinentry -gtk
 app-editors/vim -X
 app-emulation/wine abi_x86_32 alsa openal -pulseaudio -realtime -staging -udisks -vaapi
 app-emulation/winetricks -gtk
-app-text/ghostscript-gpl -* cups
-app-text/poppler -* cxx lcms utils
-dev-java/icedtea -sunec
 dev-ml/lablgtk -opengl
 mail-client/thunderbird -crypt system-cairo system-icu system-jpeg system-libvpx system-sqlite
-media-fonts/urw-fonts -*
 media-gfx/feh exif
 media-gfx/imagemagick raw
 media-gfx/ufraw -gtk
@@ -40,8 +36,6 @@ media-video/ffmpeg -encode libsoxr
 media-video/mpv -enca -luajit
 net-misc/openssh -X
 net-misc/spice-gtk usbredir
-net-print/cups -*
-net-print/cups-filters -*
 sys-apps/groff -X
 sys-process/psmisc -X
 virtual/ffmpeg -encode
