@@ -9,6 +9,7 @@ dev-util/android-studio ~amd64
 #
 # Required for updated netbeans-java*
 ~dev-java/guice-4.0 ~amd64
+~dev-java/icu4j-55.1 ~amd64
 ~dev-java/jtidy-1.0 ~amd64
 # Required for updated netbeans metapackage
 ~dev-java/netbeans-cnd-8.1 ~amd64
