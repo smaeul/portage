@@ -9,7 +9,6 @@ dev-util/android-studio ~amd64
 #
 # Required for updated netbeans-java*
 ~dev-java/guice-4.0 ~amd64
-~dev-java/jcommander-1.48 ~amd64
 ~dev-java/jtidy-1.0 ~amd64
 # Required for updated netbeans metapackage
 ~dev-java/netbeans-cnd-8.1 ~amd64
@@ -25,8 +24,6 @@ dev-util/android-studio ~amd64
 # Required for updated netbeans-java*
 ~dev-java/snakeyaml-1.16 ~amd64
 ~dev-java/testng-6.9.10 ~amd64
-# Required for updated netbeans
-=dev-java/oracle-jdk-bin-1.8* ~amd64
 # Required for university class
 ~dev-util/netbeans-8.1 ~amd64
 # Required for oracle-jdk-bin to satisfy the virtual
