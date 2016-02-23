@@ -45,6 +45,7 @@ www-client/w3m -X -gtk
 www-plugins/chrome-binary-plugins -* flash
 x11-base/xorg-server glamor
 x11-libs/cairo -glib xcb
+x11-libs/gtk+ -vim-syntax
 x11-libs/libxcb xkb
 x11-libs/libva -opengl
 x11-misc/redshift -gtk
