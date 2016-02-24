@@ -9,6 +9,11 @@ dev-lang/rust stricterfail
 dev-libs/nss stricterfail
 media-libs/freeglut stricterfail
 media-sound/mpg123 stricterfail
+
+# glibc only
+# imsg-buffer.c:258:3: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+net-misc/openntpd stricterfail
+
 sys-apps/acl stricterfail
 sys-apps/ethtool stricterfail
 sys-devel/bin86 stricterfail
