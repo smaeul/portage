@@ -15,6 +15,7 @@ dev-lang/rust ~amd64
 net-misc/unison ~amd64
 sys-firmware/iwl3160-7260-bt-ucode ~amd64
 sys-firmware/iwl7260-ucode ~amd64
+sys-firmware/ovmf-bin ~amd64
 sys-firmware/radeon-ucode ~amd64
 sys-process/systemd-cron ~amd64
 
@@ -36,6 +37,8 @@ sys-power/powertop ~amd64
 ~app-emulation/qemu-2.5.0 ~amd64
 # Wine 1.6 is broken with gcc 4.9
 =app-emulation/wine-1.7* ~amd64
+# Actually the stable version upstream; version marked as stable is obsolete
+~app-office/ledger-3.1 ~amd64
 # Required to support /etc/portage/repos.conf
 ~app-portage/layman-2.3.0 ~amd64
 # Required for gnupg 2.1.10+
