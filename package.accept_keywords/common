@@ -17,7 +17,6 @@ sys-firmware/iwl3160-7260-bt-ucode ~amd64
 sys-firmware/iwl7260-ucode ~amd64
 sys-firmware/ovmf-bin ~amd64
 sys-firmware/radeon-ucode ~amd64
-sys-process/systemd-cron ~amd64
 
 # The following packages have a stable version, but due to the fast-moving
 # nature of the software it is often broken.

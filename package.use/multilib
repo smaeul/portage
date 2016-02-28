@@ -10,8 +10,8 @@ media-libs/freetype abi_x86_32
 media-libs/libpng abi_x86_32
 media-libs/mesa abi_x86_32
 sys-apps/attr abi_x86_32
-sys-apps/systemd abi_x86_32
 sys-apps/util-linux abi_x86_32
+sys-fs/eudev abi_x86_32
 sys-libs/libcap abi_x86_32
 sys-libs/ncurses abi_x86_32
 sys-libs/zlib abi_x86_32

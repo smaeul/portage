@@ -26,9 +26,9 @@ USE="$USE -iconv icu -nls unicode"
 # Networking
 USE="$USE -avahi curl -idn ipv6 -kerberos -zeroconf"
 # Security
-USE="$USE acl caps -cracklib filecaps pam ssl -suid"
+USE="$USE acl caps -cracklib filecaps -pam ssl -suid"
 # Services
-USE="$USE -dbus systemd -tcpd udev"
+USE="$USE -dbus -systemd -tcpd udev"
 # Other
 USE="$USE git -pcre vim-syntax"
 

@@ -21,7 +21,6 @@ sys-devel/dev86 stricterfail
 sys-devel/llvm stricterfail
 sys-libs/libcxx stricterfail
 sys-libs/ncurses stricterfail
-sys-libs/pam stricterfail
 www-client/firefox stricterfail
 x11-libs/gdk-pixbuf stricterfail
 x11-libs/gtk+:2 stricterfail
