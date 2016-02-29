@@ -1,25 +1,34 @@
 app-crypt/pinentry stricterfail
-app-text/ghostscript-gpl stricterfail
 app-text/hunspell stricterfail
+# Due to OpenSP
+# /usr/include/OpenSP/Vector.cxx:124:5: warning: iteration 384307168202282326ul invokes undefined behavior [-Waggressive-loop-optimizations]
+# /usr/include/OpenSP/Vector.cxx:124:5: warning: iteration 576460752303423488ul invokes undefined behavior [-Waggressive-loop-optimizations]
+# /usr/include/OpenSP/Vector.cxx:124:5: warning: iteration 768614336404564651ul invokes undefined behavior [-Waggressive-loop-optimizations]
+# /usr/include/OpenSP/Vector.cxx:124:5: warning: iteration 1152921504606846976ul invokes undefined behavior [-Waggressive-loop-optimizations]
+# /usr/include/OpenSP/Vector.cxx:124:5: warning: iteration 2305843009213693952ul invokes undefined behavior [-Waggressive-loop-optimizations]
+app-text/openjade stricterfail
 dev-java/gnu-classpath stricterfail
-dev-java/icedtea stricterfail
 dev-java/netbeans-dlight stricterfail
+# Warranted
 dev-lang/nasm stricterfail
 dev-lang/rust stricterfail
 dev-libs/nss stricterfail
 media-libs/freeglut stricterfail
 media-sound/mpg123 stricterfail
-
 # glibc only
 # imsg-buffer.c:258:3: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 net-misc/openntpd stricterfail
-
+# Spurious
+# libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]
 sys-apps/acl stricterfail
 sys-apps/ethtool stricterfail
 sys-devel/bin86 stricterfail
 sys-devel/dev86 stricterfail
 sys-devel/llvm stricterfail
 sys-libs/libcxx stricterfail
+# Spurious
+# ../include/curses.h:1275:46: warning: the comparison will always evaluate as 'true' for the address of 'old_attr' will never be NULL [-Waddress]
+# ../include/curses.h:1276:18: warning: the comparison will always evaluate as 'true' for the address of 'old_pair' will never be NULL [-Waddress]
 sys-libs/ncurses stricterfail
 www-client/firefox stricterfail
 x11-libs/gdk-pixbuf stricterfail
