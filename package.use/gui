@@ -18,6 +18,7 @@ app-crypt/pinentry -gtk
 app-editors/vim -X
 app-emulation/wine abi_x86_32 alsa openal -pulseaudio -realtime -staging -udisks -vaapi
 app-emulation/winetricks -gtk
+dev-libs/libixion python_targets_python2_7
 dev-ml/lablgtk -opengl
 mail-client/thunderbird -crypt system-cairo system-icu system-jpeg system-libvpx system-sqlite
 media-gfx/feh exif

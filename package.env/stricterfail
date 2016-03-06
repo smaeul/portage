@@ -7,6 +7,9 @@ app-text/hunspell stricterfail
 # /usr/include/OpenSP/Vector.cxx:124:5: warning: iteration 1152921504606846976ul invokes undefined behavior [-Waggressive-loop-optimizations]
 # /usr/include/OpenSP/Vector.cxx:124:5: warning: iteration 2305843009213693952ul invokes undefined behavior [-Waggressive-loop-optimizations]
 app-text/openjade stricterfail
+# Warranted, but not problematic; this could easily be patched
+# src/core/CLucene/index/DocumentsWriter.cpp:129:33: warning: passing NULL to non-pointer argument 2 of 'void* memset(void*, int, size_t)' [-Wconversion-null]
+dev-cpp/clucene stricterfail
 dev-java/gnu-classpath stricterfail
 dev-java/netbeans-dlight stricterfail
 # Warranted
