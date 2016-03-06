@@ -12,11 +12,13 @@ app-emulation/winetricks ~amd64
 app-eselect/eselect-rust ~amd64
 app-mobilephone/heimdall ~amd64
 dev-lang/rust ~amd64
+dev-util/cargo ~amd64
 net-misc/unison ~amd64
 sys-firmware/iwl3160-7260-bt-ucode ~amd64
 sys-firmware/iwl7260-ucode ~amd64
 sys-firmware/ovmf-bin ~amd64
 sys-firmware/radeon-ucode ~amd64
+virtual/rust ~amd64
 
 # The following packages have a stable version, but due to the fast-moving
 # nature of the software it is often broken.
