@@ -49,4 +49,4 @@ sys-power/powertop ~amd64
 # Latest working ZFS version (not keyworded; see 1fcf208e)
 =sys-fs/zfs-0.6.5.4 **
 =sys-fs/zfs-kmod-0.6.5.4 **
-=sys-kernel/spl-0.6.5.4 **
+=sys-kernel/spl-0.6.5.4-r1 ~amd64
