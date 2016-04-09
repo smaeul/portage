@@ -15,6 +15,9 @@ dev-java/netbeans-dlight stricterfail
 # Warranted
 dev-lang/nasm stricterfail
 dev-lang/rust stricterfail
+# musl only? Harmless
+# dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
+dev-libs/boehm-gc stricterfail
 dev-libs/nss stricterfail
 media-libs/freeglut stricterfail
 media-sound/mpg123 stricterfail
@@ -25,8 +28,6 @@ net-misc/openntpd stricterfail
 # libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]
 sys-apps/acl stricterfail
 sys-apps/ethtool stricterfail
-sys-devel/bin86 stricterfail
-sys-devel/dev86 stricterfail
 sys-devel/llvm stricterfail
 sys-libs/libcxx stricterfail
 # Spurious
