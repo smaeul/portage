@@ -4,6 +4,14 @@
 # install from git.
 =x11-misc/compton-9999 **
 =x11-misc/i3status-mpd-9999 **
+
+# I personally maintain or control versions of these packages, so keywords
+# are irrelevant, since they are updated manually anyway.
+app-emulation/kvm-tools::smaeul **
+sys-firmware/ovmf-bin::smaeul **
+sys-fs/zfs::smaeul **
+sys-fs/zfs-kmod::smaeul **
+sys-kernel/spl::smaeul **
 =x11-misc/j4-dmenu-desktop-9999 **
 
 # These packages have no stable version, so at least one version must be
@@ -16,9 +24,19 @@ dev-util/cargo ~amd64
 net-misc/unison ~amd64
 sys-firmware/iwl3160-7260-bt-ucode ~amd64
 sys-firmware/iwl7260-ucode ~amd64
-sys-firmware/ovmf-bin ~amd64
 sys-firmware/radeon-ucode ~amd64
 virtual/rust ~amd64
+
+# I trust the maintainer of the following packages to not cause significant
+# breakage; plus some of these packages have no stable version. I care more
+# about the packages matching versions (not mixing old and new).
+dev-lang/execline ~amd64
+dev-libs/skalibs ~amd64
+sys-apps/s6 ~amd64
+sys-apps/s6-linux-init ~amd64
+sys-apps/s6-linux-utils ~amd64
+sys-apps/s6-portable-utils ~amd64
+sys-apps/s6-rc ~amd64
 
 # The following packages have a stable version, but due to the fast-moving
 # nature of the software it is often broken.
@@ -34,8 +52,8 @@ sys-power/powertop ~amd64
 #
 # GnuPG 2.1 moves from pth (which doesn't work with musl) to npth (which does)
 =app-crypt/gnupg-2.1* ~amd64
-# 2.5 needed for patch for GPU passthrough
-~app-emulation/qemu-2.5.0 ~amd64
+# Don't start with something already outdated
+=app-emulation/docker-1.10* ~amd64
 # Wine 1.6 is broken with gcc 4.9
 =app-emulation/wine-1.7* ~amd64
 # Actually the stable version upstream; version marked as stable is obsolete
@@ -50,7 +68,3 @@ sys-power/powertop ~amd64
 ~media-fonts/roboto-2015.03 ~amd64
 # Old stablized version is not supported
 ~net-irc/weechat-1.4 ~amd64
-# Latest working ZFS version (not keyworded; see 1fcf208e)
-=sys-fs/zfs-0.6.5.4 **
-=sys-fs/zfs-kmod-0.6.5.4 **
-=sys-kernel/spl-0.6.5.4-r1 ~amd64
