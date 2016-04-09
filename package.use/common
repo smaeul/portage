@@ -1,10 +1,14 @@
 # These USE changes are necessary to fulfill a dependency from another package.
 # One of berkdb or gdbm is required
 sys-apps/man-db berkdb
+# Required by app-emulation/docker
+sys-libs/libseccomp static-libs
 
 app-admin/ansible python_targets_python2_7
 app-crypt/gnupg -gnutls
-app-emulation/qemu -bluetooth -fdt -gtk -jpeg -opengl -npg python_targets_python2_7 spice usb usbredir virtfs -vnc
+app-emulation/docker -device-mapper
+app-emulation/kvm-tools python_targets_python2_7
+app-emulation/qemu -bluetooth -curl -gtk -jpeg -opengl numa -png python_targets_python2_7 spice usb usbredir -vnc
 app-office/libreoffice -bluetooth
 app-shells/bash -net
 app-text/asciidoc python_single_target_python2_7 python_targets_python2_7
@@ -20,6 +24,8 @@ dev-python/markupsafe python_targets_python2_7
 dev-python/packaging python_targets_python2_7
 dev-python/ply python_targets_python2_7
 dev-python/pyasn1 python_targets_python2_7
+dev-python/pyparsing python_targets_python2_7
+dev-python/pypax -ptpax
 dev-python/setuptools python_targets_python2_7
 dev-python/simplejson python_targets_python2_7
 dev-python/six python_targets_python2_7
@@ -32,6 +38,7 @@ net-libs/rb_libtorrent python
 net-mail/offlineimap python_targets_python2_7
 net-misc/openvpn iproute2 -plugins
 sys-apps/busybox static syslog
+sys-apps/elfix -ptpax
 sys-apps/man-db -manpager
 sys-apps/openrc -netifrc -newnet
 sys-apps/pciutils dns
@@ -39,3 +46,4 @@ sys-apps/util-linux -cramfs
 sys-devel/clang multitarget
 sys-devel/llvm clang multitarget python_targets_python2_7
 sys-fs/lvm2 -* device-mapper-only
+sys-power/nut usb
