@@ -1,0 +1,32 @@
+diff -urN criu-1.8/criu/include/sigevent.h criu-1.8-fixed/criu/include/sigevent.h
+--- criu-1.8/criu/include/sigevent.h	1969-12-31 18:00:00.000000000 -0600
++++ criu-1.8-fixed/criu/include/sigevent.h	2016-03-07 19:27:47.387009364 -0600
+@@ -0,0 +1,17 @@
++#ifndef __CR_SIGEVENT_H__
++#define __CR_SIGEVENT_H__
++
++/*
++ * sigevent definitions
++ * 
++ * It seems likely that SIGEV_THREAD will have to be handled from 
++ * userspace, libpthread transmuting it to SIGEV_SIGNAL, which the
++ * thread manager then catches and does the appropriate nonsense.
++ * However, everything is written out here so as to not get lost.
++ */
++#define SIGEV_SIGNAL	0	/* notify via signal */
++#define SIGEV_NONE	1	/* other notification: meaningless */
++#define SIGEV_THREAD	2	/* deliver via thread creation */
++#define SIGEV_THREAD_ID 4	/* deliver to thread */
++
++#endif /* __CR_SIGEVENT_H__ */
+diff -urN criu-1.8/criu/proc_parse.c criu-1.8-fixed/criu/proc_parse.c
+--- criu-1.8/criu/proc_parse.c	2015-12-07 02:29:53.000000000 -0600
++++ criu-1.8-fixed/criu/proc_parse.c	2016-03-07 19:29:04.165036969 -0600
+@@ -31,6 +31,7 @@
+ #include "namespaces.h"
+ #include "files-reg.h"
+ #include "cgroup.h"
++#include "sigevent.h"
+ 
+ #include "protobuf.h"
+ #include "protobuf/fdinfo.pb-c.h"

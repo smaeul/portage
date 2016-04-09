@@ -1,0 +1,21 @@
+diff -ur src/github.com/lxc/lxd/lxd/storage_zfs.go src-fixed/github.com/lxc/lxd/lxd/storage_zfs.go
+--- src/github.com/lxc/lxd/lxd/storage_zfs.go	2016-03-07 19:39:36.000000000 -0600
++++ src-fixed/github.com/lxc/lxd/lxd/storage_zfs.go	2016-03-27 14:22:12.041193883 -0500
+@@ -69,7 +69,7 @@
+ 		}
+ 	}
+ 
+-	output, err := exec.Command("zfs", "get", "version", "-H", "-o", "value", s.zfsPool).CombinedOutput()
++	output, err := exec.Command("zfs", "get", "-H", "-o", "value", "version", s.zfsPool).CombinedOutput()
+ 	if err != nil {
+ 		return s, fmt.Errorf("The 'zfs' tool isn't working properly")
+ 	}
+@@ -675,7 +675,7 @@
+ // Helper functions
+ func (s *storageZfs) zfsCheckPool(pool string) error {
+ 	output, err := exec.Command(
+-		"zfs", "get", "type", "-H", "-o", "value", pool).CombinedOutput()
++		"zfs", "get", "-H", "-o", "value", "type", pool).CombinedOutput()
+ 	if err != nil {
+ 		return fmt.Errorf(strings.Split(string(output), "\n")[0])
+ 	}

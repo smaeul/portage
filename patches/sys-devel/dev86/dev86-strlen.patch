@@ -1,0 +1,9 @@
+diff -ur dev86-0.16.19/bcc/dbprintf.c dev86-fixed/bcc/dbprintf.c
+--- dev86-0.16.19/bcc/dbprintf.c	2004-06-20 12:14:58.000000000 -0500
++++ dev86-fixed/bcc/dbprintf.c	2015-11-15 16:06:08.649588245 -0600
+@@ -1,4 +1,4 @@
+-
++#include <string.h>
+ #include <sys/types.h>
+ #include <fcntl.h>
+ 

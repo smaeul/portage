@@ -1,0 +1,11 @@
+diff -ur gperf-3.0.4/lib/getopt.c gperf-fixed/lib/getopt.c
+--- gperf-3.0.4/lib/getopt.c	2008-08-23 13:52:48.000000000 -0500
++++ gperf-fixed/lib/getopt.c	2016-01-30 12:15:00.335047457 -0600
+@@ -38,6 +38,7 @@
+ #endif
+ 
+ #include <stdio.h>
++#include <string.h>
+ 
+ /* Comment out all this code if we are using the GNU C Library, and are not
+    actually compiling the library itself.  This code is part of the GNU C

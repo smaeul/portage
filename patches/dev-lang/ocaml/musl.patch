@@ -1,0 +1,12 @@
+diff -ur ocaml-4.02.3/configure ocaml-4.02.3-fixed/configure
+--- ocaml-4.02.3/configure	2015-05-12 09:46:37.000000000 -0500
++++ ocaml-4.02.3-fixed/configure	2016-02-22 21:58:40.351719473 -0600
+@@ -688,7 +688,7 @@
+       mksharedlib="$flexlink"
+       mkmaindll="$flexlink -maindll"
+       shared_libraries_supported=true;;
+-    *-*-linux-gnu|*-*-linux|*-*-freebsd[3-9]*|*-*-freebsd[1-9][0-9]*|*-*-openbsd*|*-*-netbsd*|*-*-gnu*|*-*-haiku*)
++    *-*-linux-gnu|*-*-linux-musl|*-*-linux|*-*-freebsd[3-9]*|*-*-freebsd[1-9][0-9]*|*-*-openbsd*|*-*-netbsd*|*-*-gnu*|*-*-haiku*)
+       sharedcccompopts="-fPIC"
+       mksharedlib="$bytecc -shared"
+       bytecclinkopts="$bytecclinkopts -Wl,-E"
