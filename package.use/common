@@ -10,6 +10,7 @@ app-shells/bash -net
 app-text/asciidoc python_single_target_python2_7 python_targets_python2_7
 app-text/poppler cxx
 dev-libs/boost python
+dev-python/beautifulsoup python_targets_python2_7
 dev-python/certifi python_targets_python2_7
 dev-python/html5lib python_targets_python2_7
 dev-python/httplib2 python_targets_python2_7
