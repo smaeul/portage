@@ -43,6 +43,7 @@ sys-apps/s6-rc ~amd64
 
 # The following packages have a stable version, but due to the fast-moving
 # nature of the software it is often broken.
+app-emulation/wine ~amd64
 app-misc/ca-certificates ~amd64
 net-misc/youtube-dl ~amd64
 sys-devel/clang ~amd64
