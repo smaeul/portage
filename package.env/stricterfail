@@ -34,6 +34,7 @@ sys-libs/libcxx stricterfail
 # ../include/curses.h:1275:46: warning: the comparison will always evaluate as 'true' for the address of 'old_attr' will never be NULL [-Waddress]
 # ../include/curses.h:1276:18: warning: the comparison will always evaluate as 'true' for the address of 'old_pair' will never be NULL [-Waddress]
 sys-libs/ncurses stricterfail
+sys-libs/pam stricterfail
 www-client/firefox stricterfail
 x11-libs/gdk-pixbuf stricterfail
 x11-libs/gtk+:2 stricterfail

@@ -36,14 +36,17 @@ dev-vcs/mercurial python_targets_python2_7
 net-libs/gnutls -crywrap -openssl
 net-libs/rb_libtorrent python
 net-mail/offlineimap python_targets_python2_7
-net-misc/openvpn iproute2 -plugins
-sys-apps/busybox static syslog
+net-misc/openvpn iproute2 -pam -plugins
+sys-apps/busybox -pam static syslog -systemd
 sys-apps/elfix -ptpax
 sys-apps/man-db -manpager
 sys-apps/openrc -netifrc -newnet
 sys-apps/pciutils dns
+sys-apps/systemd -kdbus xkb
 sys-apps/util-linux -cramfs
+sys-auth/pambase minimal -nullok
 sys-devel/clang multitarget
 sys-devel/llvm clang multitarget python_targets_python2_7
 sys-fs/lvm2 -* device-mapper-only
 sys-power/nut usb
+sys-process/systemd-cron cron-boot
