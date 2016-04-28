@@ -18,6 +18,7 @@ sys-kernel/spl::smaeul **
 # accepted in order to install the package at all.
 app-emulation/winetricks ~amd64
 app-eselect/eselect-rust ~amd64
+app-laptop/tpacpi-bat ~amd64
 app-mobilephone/heimdall ~amd64
 dev-lang/rust ~amd64
 dev-util/cargo ~amd64
@@ -25,6 +26,7 @@ net-misc/unison ~amd64
 sys-firmware/iwl3160-7260-bt-ucode ~amd64
 sys-firmware/iwl7260-ucode ~amd64
 sys-firmware/radeon-ucode ~amd64
+sys-power/acpi_call ~amd64
 sys-process/systemd-cron ~amd64
 virtual/rust ~amd64
 
