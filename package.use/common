@@ -42,7 +42,7 @@ sys-apps/elfix -ptpax
 sys-apps/man-db -manpager
 sys-apps/openrc -netifrc -newnet
 sys-apps/pciutils dns
-sys-apps/systemd -kdbus xkb
+sys-apps/systemd gcrypt importd -kdbus xkb
 sys-apps/util-linux -cramfs
 sys-auth/pambase minimal -nullok
 sys-devel/clang multitarget
