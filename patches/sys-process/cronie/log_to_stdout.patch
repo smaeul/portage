@@ -1,0 +1,264 @@
+diff -ur cronie-1.5.0/config.h.in cronie-1.5.0.fixed/config.h.in
+--- cronie-1.5.0/config.h.in	2015-05-28 08:56:20.000000000 -0500
++++ cronie-1.5.0.fixed/config.h.in	2016-04-09 18:28:06.997975759 -0500
+@@ -180,9 +180,6 @@
+ /* Define to 1 if you have the ANSI C header files. */
+ #undef STDC_HEADERS
+ 
+-/* Using syslog for log messages. */
+-#undef SYSLOG
+-
+ /* Define to 1 if your <sys/time.h> declares `struct tm'. */
+ #undef TM_IN_SYS_TIME
+ 
+diff -ur cronie-1.5.0/configure cronie-1.5.0.fixed/configure
+--- cronie-1.5.0/configure	2015-05-28 08:56:18.000000000 -0500
++++ cronie-1.5.0.fixed/configure	2016-04-09 18:27:17.769246115 -0500
+@@ -5248,10 +5248,6 @@
+ 
+ 
+ 
+-$as_echo "#define SYSLOG 1" >>confdefs.h
+-
+-
+-
+ $as_echo "#define CAPITALIZE_FOR_PS 1" >>confdefs.h
+ 
+ 
+diff -ur cronie-1.5.0/configure.ac cronie-1.5.0.fixed/configure.ac
+--- cronie-1.5.0/configure.ac	2015-05-28 08:47:34.000000000 -0500
++++ cronie-1.5.0.fixed/configure.ac	2016-04-09 18:27:40.878649776 -0500
+@@ -205,8 +205,6 @@
+ -f %s = Envelope sender address
+ -d = undocumented but common flag.])
+ 
+-AC_DEFINE(SYSLOG,1,[Using syslog for log messages.])
+-
+ AC_DEFINE(CAPITALIZE_FOR_PS, 1, [if you have a tm_gmtoff member in struct tm])
+ 
+ # Check whether user wants Linux audit support
+diff -ur cronie-1.5.0/src/cron.c cronie-1.5.0.fixed/src/cron.c
+--- cronie-1.5.0/src/cron.c	2015-02-05 09:29:17.000000000 -0600
++++ cronie-1.5.0.fixed/src/cron.c	2016-04-09 18:21:22.498414004 -0500
+@@ -164,7 +164,6 @@
+ 		}
+ #endif
+ 		database->mtime = (time_t) 0;
+-		log_close();
+ 	}
+ 
+ 	if (got_sigchld) {
+diff -ur cronie-1.5.0/src/do_command.c cronie-1.5.0.fixed/src/do_command.c
+--- cronie-1.5.0/src/do_command.c	2015-05-28 06:01:04.000000000 -0500
++++ cronie-1.5.0.fixed/src/do_command.c	2016-04-09 18:30:19.634553029 -0500
+@@ -371,14 +371,6 @@
+ 			FILE *mail = NULL;
+ 			int bytes = 1;
+ 			int status = 0;
+-#if defined(SYSLOG)
+-			char logbuf[1024];
+-			int bufidx = 0;
+-			if (SyslogOutput) {
+-				if (ch != '\n')
+-					logbuf[bufidx++] = ch;
+-			}
+-#endif
+ 
+ 			Debug(DPROC | DEXT,
+ 				("[%ld] got data (%x:%c) from grandchild\n",
+@@ -502,19 +494,6 @@
+ 				bytes++;
+ 				if (mail)
+ 					putc(ch, mail);
+-#if defined(SYSLOG)
+-				if (SyslogOutput) {
+-					logbuf[bufidx++] = ch;
+-					if ((ch == '\n') || (bufidx == sizeof(logbuf)-1)) {
+-						if (ch == '\n')
+-							logbuf[bufidx-1] = '\0';
+-						else
+-							logbuf[bufidx] = '\0';
+-						log_it(usernm, getpid(), "CMDOUT", logbuf, 0);
+-						bufidx = 0;
+-					}
+-				}
+-#endif
+ 			}
+ 			/* only close pipe if we opened it -- i.e., we're
+ 			 * mailing...
+@@ -530,14 +509,6 @@
+ 					 */
+ 					status = cron_pclose(mail);
+ 			}
+-#if defined(SYSLOG)
+-			if (SyslogOutput) {
+-				if (bufidx) {
+-					logbuf[bufidx] = '\0';
+-					log_it(usernm, getpid(), "CMDOUT", logbuf, 0);
+-				}
+-			}
+-#endif
+ 
+ 			/* if there was output and we could not mail it,
+ 			 * log the facts so the poor user can figure out
+diff -ur cronie-1.5.0/src/funcs.h cronie-1.5.0.fixed/src/funcs.h
+--- cronie-1.5.0/src/funcs.h	2015-05-28 06:01:04.000000000 -0500
++++ cronie-1.5.0.fixed/src/funcs.h	2016-04-09 18:22:23.346843788 -0500
+@@ -51,7 +51,6 @@
+ 		acquire_daemonlock(int),
+ 		skip_comments(FILE *),
+ 		log_it(const char *, PID_T, const char *, const char *, int),
+-		log_close(void),
+ 		check_orphans(cron_db *);
+ #if defined WITH_INOTIFY
+ void 		set_cron_watched(int ),
+diff -ur cronie-1.5.0/src/misc.c cronie-1.5.0.fixed/src/misc.c
+--- cronie-1.5.0/src/misc.c	2014-11-04 08:40:24.000000000 -0600
++++ cronie-1.5.0.fixed/src/misc.c	2016-04-09 18:36:53.634385733 -0500
+@@ -36,10 +36,6 @@
+ #include <string.h>
+ #include <sys/stat.h>
+ 
+-#if defined(SYSLOG)
+-# include <syslog.h>
+-#endif
+-
+ #ifdef WITH_AUDIT
+ # include <libaudit.h>
+ #endif
+@@ -58,24 +54,6 @@
+ #include "macros.h"
+ #include "pathnames.h"
+ 
+-#if defined(SYSLOG) && defined(LOG_FILE)
+-# undef LOG_FILE
+-#endif
+-
+-#if defined(LOG_DAEMON) && !defined(LOG_CRON)
+-# define LOG_CRON LOG_DAEMON
+-#endif
+-
+-#ifndef FACILITY
+-# define FACILITY LOG_CRON
+-#endif
+-
+-static int LogFD = ERR;
+-
+-#if defined(SYSLOG)
+-static int syslog_open = FALSE;
+-#endif
+-
+ #if defined(HAVE_FLOCK)
+ # define trylock_file(fd)      flock((fd), LOCK_EX|LOCK_NB)
+ #elif defined(HAVE_FCNTL) && defined(F_SETLK)
+@@ -520,95 +498,10 @@
+ 
+ void log_it(const char *username, PID_T xpid, const char *event,
+ 	const char *detail, int err) {
+-#if defined(LOG_FILE) || DEBUGGING
+-	PID_T pid = xpid;
+-#endif
+-#if defined(LOG_FILE)
+-	char *msg;
+-	TIME_T now = time((TIME_T) 0);
+-	struct tm *t = localtime(&now);
+-	int msg_size;
+-#endif
+-
+-#if defined(LOG_FILE)
+-	/* we assume that MAX_TEMPSTR will hold the date, time, &punctuation.
+-	 */
+-	msg = malloc(msg_size = (strlen(username)
+-			+ strlen(event)
+-			+ strlen(detail)
+-			+ MAX_TEMPSTR)
+-		);
+-	if (msg == NULL) {	/* damn, out of mem and we did not test that before... */
+-		fprintf(stderr, "%s: Run OUT OF MEMORY while %s\n",
+-			ProgramName, __FUNCTION__);
+-		return;
+-	}
+-	if (LogFD < OK) {
+-		LogFD = open(LOG_FILE, O_WRONLY | O_APPEND | O_CREAT, 0600);
+-		if (LogFD < OK) {
+-			fprintf(stderr, "%s: can't open log file\n", ProgramName);
+-			perror(LOG_FILE);
+-		}
+-		else {
+-			(void) fcntl(LogFD, F_SETFD, 1);
+-		}
+-	}
+-
+-	/* we have to snprintf() it because fprintf() doesn't always write
+-	 * everything out in one chunk and this has to be atomically appended
+-	 * to the log file.
+-	 */
+-	snprintf(msg, msg_size,
+-		"%s (%02d/%02d-%02d:%02d:%02d-%d) %s (%s)%s%s\n", username,
+-		t->tm_mon + 1, t->tm_mday, t->tm_hour, t->tm_min, t->tm_sec, pid,
+-		event, detail, err != 0 ? ": " : "", err != 0 ? strerror(err) : "");
+-
+-	/* we have to run strlen() because sprintf() returns (char*) on old BSD
+-	 */
+-	if (LogFD < OK || write(LogFD, msg, strlen(msg)) < OK) {
+-		if (LogFD >= OK)
+-			perror(LOG_FILE);
+-		fprintf(stderr, "%s: can't write to log file\n", ProgramName);
+-		write(STDERR, msg, strlen(msg));
+-	}
+-
+-	free(msg);
+-#endif /*LOG_FILE */
+-
+-#if defined(SYSLOG)
+-	if (!syslog_open) {
+-# ifdef LOG_DAEMON
+-		openlog(ProgramName, LOG_PID, FACILITY);
+-# else
+-		openlog(ProgramName, LOG_PID);
+-# endif
+-		syslog_open = TRUE;	/* assume openlog success */
+-	}
+-
+-	syslog(err != 0 ? LOG_ERR : LOG_INFO,
+-		"(%s) %s (%s)%s%s", username, event, detail,
++	fprintf(stdout,
++		"(%s) %s (%s)%s%s\n", username, event, detail,
+ 		err != 0 ? ": " : "", err != 0 ? strerror(err) : "");
+-
+-
+-#endif	 /*SYSLOG*/
+-#if DEBUGGING
+-	if (DebugFlags) {
+-		fprintf(stderr, "log_it: (%s %ld) %s (%s)%s%s\n",
+-			username, (long) pid, event, detail,
+-			err != 0 ? ": " : "", err != 0 ? strerror(err) : "");
+-	}
+-#endif
+-}
+-
+-void log_close(void) {
+-	if (LogFD != ERR) {
+-		close(LogFD);
+-		LogFD = ERR;
+-	}
+-#if defined(SYSLOG)
+-	closelog();
+-	syslog_open = FALSE;
+-#endif	 /*SYSLOG*/
++	fflush(stdout);
+ }
+ 
+ /* char *first_word(const char *s, const char *t)
+diff -ur cronie-1.5.0/src/security.c cronie-1.5.0.fixed/src/security.c
+--- cronie-1.5.0/src/security.c	2015-01-02 03:17:39.000000000 -0600
++++ cronie-1.5.0.fixed/src/security.c	2016-04-09 18:21:35.868068998 -0500
+@@ -267,8 +267,6 @@
+ 		return -1;
+ 	}
+ 
+-	log_close();
+-
+ 	return 0;
+ }
+ 
