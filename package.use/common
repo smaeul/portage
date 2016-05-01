@@ -5,6 +5,7 @@ sys-apps/man-db berkdb
 sys-libs/libseccomp static-libs
 
 app-admin/ansible python_targets_python2_7
+app-benchmarks/i7z -X
 app-crypt/gnupg -gnutls
 app-emulation/docker -device-mapper
 app-emulation/kvm-tools python_targets_python2_7
