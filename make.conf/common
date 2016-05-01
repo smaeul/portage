@@ -14,7 +14,7 @@ CHOST="x86_64-pc-linux-gnu"
 
 # Basic USE flags
 # General
-USE="-bindist hardened -jemalloc3 nptl -pch pie -static-libs -tcmalloc threads xattr"
+USE="-bindist -branding hardened -jemalloc3 nptl -pch pie -static-libs -tcmalloc threads xattr"
 # Bindings
 USE="$USE -cxx -fortran -guile -introspection -lua -orc -perl -python -vala"
 # Compression
