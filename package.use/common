@@ -6,6 +6,7 @@ sys-libs/libseccomp static-libs
 
 app-benchmarks/i7z -X
 app-crypt/gnupg -gnutls
+app-editors/vim python
 app-emulation/docker -device-mapper
 app-emulation/qemu -bluetooth -curl -gtk -jpeg -opengl numa -png spice usb usbredir -vnc
 app-office/libreoffice -bluetooth
