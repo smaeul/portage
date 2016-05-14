@@ -19,6 +19,8 @@ dev-lang/rust stricterfail
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
 dev-libs/boehm-gc stricterfail
 dev-libs/nss stricterfail
+# execstacks in opt/android-studio/bin/fsnotifier-arm (a prebuilt ARM executable)
+dev-util/android-studio stricterfail
 media-libs/freeglut stricterfail
 media-sound/mpg123 stricterfail
 # glibc only
