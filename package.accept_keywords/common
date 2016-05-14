@@ -23,6 +23,8 @@ app-mobilephone/heimdall ~amd64
 dev-lang/rust ~amd64
 dev-util/cargo ~amd64
 net-misc/unison ~amd64
+net-p2p/syncthing ~amd64
+net-p2p/transmission-remote-cli ~amd64
 sys-firmware/iwl3160-7260-bt-ucode ~amd64
 sys-firmware/iwl7260-ucode ~amd64
 sys-firmware/radeon-ucode ~amd64

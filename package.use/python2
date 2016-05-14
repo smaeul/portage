@@ -17,4 +17,5 @@ dev-python/setuptools python_targets_python2_7
 # Required by dev-python/html5lib
 dev-python/six python_targets_python2_7
 net-mail/offlineimap python_targets_python2_7
+net-p2p/transmission-remote-cli python_targets_python2_7
 sys-devel/llvm python_targets_python2_7
