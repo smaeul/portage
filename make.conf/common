@@ -10,7 +10,6 @@ PORTAGE_TMPDIR="/tmp"
 CFLAGS="-fomit-frame-pointer -march=westmere -mtune=haswell -O2 -pipe"
 CXXFLAGS="${CFLAGS}"
 LDFLAGS="-Wl,-O1 -Wl,--as-needed -Wl,--hash-style=both"
-CHOST="x86_64-pc-linux-gnu"
 
 # Basic USE flags
 # General
