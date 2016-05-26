@@ -7,9 +7,15 @@ media-gfx/imagemagick cxx
 sys-apps/man-db berkdb
 # Required by app-emulation/docker
 sys-libs/libseccomp static-libs
+# Required by net-fs/samba
+sys-libs/ntdb python
+sys-libs/talloc python
+sys-libs/tdb python
+sys-libs/tevent python
 
 app-benchmarks/i7z -X
 app-crypt/gnupg -gnutls
+app-crypt/mit-krb5 -keyutils
 app-editors/vim python
 app-emulation/docker -device-mapper
 app-emulation/qemu -bluetooth -curl -gtk -jpeg -opengl numa -png spice usb usbredir -vnc
