@@ -1,4 +1,6 @@
 # These USE changes are necessary to fulfill a dependency from another package.
+# Required by ncmpcpp
+dev-libs/boost nls
 # Required by inkscape[imagemagick]
 media-gfx/imagemagick cxx
 # One of berkdb or gdbm is required
@@ -20,6 +22,10 @@ dev-scheme/guile -deprecated -regex
 dev-util/cmake system-jsoncpp
 dev-vcs/git -gtk perl
 media-gfx/imagemagick pango raw webp
+media-plugins/alsa-plugins -* pulseaudio
+media-sound/mpd libsoxr -network
+media-sound/ncmpcpp visualizer
+media-sound/pulseaudio alsa -asyncns -gtk -webrtc-aec
 net-libs/gnutls -crywrap -openssl
 net-misc/openvpn iproute2 -pam -plugins
 sys-apps/busybox -pam static syslog -systemd
