@@ -60,8 +60,6 @@ sys-power/powertop ~amd64
 =app-crypt/gnupg-2.1* ~amd64
 # Don't start with something already outdated
 =app-emulation/docker-1.10* ~amd64
-# Wine 1.6 is broken with gcc 4.9
-=app-emulation/wine-1.7* ~amd64
 # Actually the stable version upstream; version marked as stable is obsolete
 ~app-office/ledger-3.1 ~amd64
 # Required to support /etc/portage/repos.conf
@@ -73,4 +71,4 @@ sys-power/powertop ~amd64
 # Fixes font weights (stable version has Regular being Bold)
 ~media-fonts/roboto-2015.03 ~amd64
 # Old stablized version is not supported
-~net-irc/weechat-1.4 ~amd64
+~net-irc/weechat-1.5 ~amd64
