@@ -1,4 +1,6 @@
 # These USE changes are necessary to fulfill a dependency from another package.
+# Required by inkscape[imagemagick]
+media-gfx/imagemagick cxx
 # One of berkdb or gdbm is required
 sys-apps/man-db berkdb
 # Required by app-emulation/docker
@@ -17,6 +19,7 @@ dev-python/pypax -ptpax
 dev-scheme/guile -deprecated -regex
 dev-util/cmake system-jsoncpp
 dev-vcs/git -gtk perl
+media-gfx/imagemagick pango raw webp
 net-libs/gnutls -crywrap -openssl
 net-misc/openvpn iproute2 -pam -plugins
 sys-apps/busybox -pam static syslog -systemd
