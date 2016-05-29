@@ -7,6 +7,8 @@ app-text/asciidoc python_single_target_python2_7 python_targets_python2_7
 dev-python/beautifulsoup python_targets_python2_7
 # Required by dev-python/setuptools
 dev-python/certifi python_targets_python2_7
+# Required by dev-python/testtools
+dev-python/extras python_targets_python2_7
 # Required by www-client/chromium
 dev-python/html5lib python_targets_python2_7
 # Required by app-admin/ansible
@@ -17,12 +19,18 @@ dev-python/lxml python_targets_python2_7
 dev-python/jinja python_targets_python2_7
 # Required by app-admin/ansible
 dev-python/keyczar python_targets_python2_7
+# Required by dev-python/traceback2
+dev-python/linecache2 python_targets_python2_7
 # Required by dev-python/jinja
 dev-python/markupsafe python_targets_python2_7
+# Required by dev-python/testtools
+dev-python/mimeparse python_targets_python2_7
 # Required by media-gfx/inkscape
 dev-python/numpy python_targets_python2_7
 # Required by dev-python/setuptools
 dev-python/packaging python_targets_python2_7
+# Required by dev-python/testtools
+dev-python/pbr python_targets_python2_7
 # Required by media-gfx/uniconvertor
 dev-python/pillow python_targets_python2_7
 # Required by www-client/chromium
@@ -41,9 +49,28 @@ dev-python/setuptools python_targets_python2_7
 dev-python/simplejson python_targets_python2_7
 # Required by dev-python/html5lib
 dev-python/six python_targets_python2_7
+# Required by net-fs/samba
+dev-python/subunit python_targets_python2_7
+# Required by dev-python/subunit
+dev-python/testtools python_targets_python2_7
+# Required by dev-python/unittest2
+dev-python/traceback2 python_targets_python2_7
+# Required by dev-python/testtools
+dev-python/unittest2 python_targets_python2_7
 media-gfx/inkscape python_targets_python2_7
 # Required by media-gfx/inkscape
 media-gfx/uniconvertor python_targets_python2_7
+net-fs/samba python_targets_python2_7
 net-mail/offlineimap python_targets_python2_7
 net-p2p/transmission-remote-cli python_targets_python2_7
 sys-devel/llvm python_targets_python2_7
+# Required by net-fs/samba
+sys-libs/ldb python_targets_python2_7
+# Required by net-fs/samba
+sys-libs/ntdb python_targets_python2_7
+# Required by net-fs/samba
+sys-libs/talloc python_targets_python2_7
+# Required by net-fs/samba
+sys-libs/tdb python_targets_python2_7
+# Required by net-fs/samba
+sys-libs/tevent python_targets_python2_7
