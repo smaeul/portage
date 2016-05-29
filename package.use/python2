@@ -4,11 +4,21 @@ app-emulation/kvm-tools python_targets_python2_7
 app-emulation/qemu python_targets_python2_7
 app-text/asciidoc python_single_target_python2_7 python_targets_python2_7
 # Required by www-client/chromium
+dev-python/beautifulsoup python_targets_python2_7
+# Required by dev-python/setuptools
+dev-python/certifi python_targets_python2_7
+# Required by www-client/chromium
 dev-python/html5lib python_targets_python2_7
+# Required by app-admin/ansible
+dev-python/httplib2 python_targets_python2_7
 # Required by media-gfx/inkscape
 dev-python/lxml python_targets_python2_7
 # Required by app-admin/ansible
+dev-python/jinja python_targets_python2_7
+# Required by app-admin/ansible
 dev-python/keyczar python_targets_python2_7
+# Required by dev-python/jinja
+dev-python/markupsafe python_targets_python2_7
 # Required by media-gfx/inkscape
 dev-python/numpy python_targets_python2_7
 # Required by dev-python/setuptools
@@ -22,7 +32,13 @@ dev-python/pyasn1 python_targets_python2_7
 # Required by media-gfx/uniconvertor
 dev-python/pycairo python_targets_python2_7
 # Required by app-admin/ansible
+dev-python/pycrypto python_targets_python2_7
+# Required by app-admin/ansible
+dev-python/pyyaml python_targets_python2_7
+# Required by app-admin/ansible
 dev-python/setuptools python_targets_python2_7
+# Required by www-client/chromium
+dev-python/simplejson python_targets_python2_7
 # Required by dev-python/html5lib
 dev-python/six python_targets_python2_7
 media-gfx/inkscape python_targets_python2_7
