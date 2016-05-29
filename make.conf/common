@@ -1,15 +1,16 @@
 # Portage options
+EMERGE_DEFAULT_OPTS="--binpkg-respect-use=y --quiet-build --with-bdeps=y"
 FEATURES="cgroup ipc-sandbox multilib-strict network-sandbox stricter"
 GENTOO_MIRRORS="http://lug.mtu.edu/gentoo/ http://gentoo.cites.uiuc.edu/pub/gentoo/"
 PORTAGE_COMPRESS="xz"
-PORTAGE_COMPRESS_FLAGS="-4"
-PORTAGE_NICENESS="2"
+PORTAGE_COMPRESS_FLAGS="-6"
+PORTAGE_NICENESS="5"
 PORTAGE_TMPDIR="/tmp"
 
 # Compilation options
-CFLAGS="-fomit-frame-pointer -march=westmere -mtune=haswell -O2 -pipe"
+CFLAGS="-fno-asynchronous-unwind-tables -fomit-frame-pointer -march=native -mtune=native -O2 -pipe"
 CXXFLAGS="${CFLAGS}"
-LDFLAGS="-Wl,-O1 -Wl,--as-needed -Wl,--hash-style=both"
+LDFLAGS="-Wl,-O1 -Wl,--as-needed -Wl,--hash-style=both -Wl,--sort-common -Wl,--sort-section,alignment"
 
 # Basic USE flags
 # General
