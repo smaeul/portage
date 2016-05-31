@@ -3,7 +3,6 @@
 # are relatively nonessential packages, I consider them basically safe to
 # install from git.
 =x11-misc/compton-9999 **
-=x11-misc/i3status-mpd-9999 **
 
 # I personally maintain or control versions of these packages, so keywords
 # are irrelevant, since they are updated manually anyway.
@@ -12,6 +11,7 @@ sys-firmware/ovmf-bin::smaeul **
 sys-fs/zfs::smaeul **
 sys-fs/zfs-kmod::smaeul **
 sys-kernel/spl::smaeul **
+=x11-misc/i3status-mpd-9999 **
 =x11-misc/j4-dmenu-desktop-9999 **
 
 # These packages have no stable version, so at least one version must be
@@ -45,6 +45,7 @@ sys-apps/s6-rc ~amd64
 
 # The following packages have a stable version, but due to the fast-moving
 # nature of the software it is often broken.
+app-emulation/docker ~amd64
 app-emulation/wine ~amd64
 app-misc/ca-certificates ~amd64
 net-misc/youtube-dl ~amd64
@@ -52,23 +53,25 @@ sys-devel/clang ~amd64
 sys-devel/llvm ~amd64
 sys-power/powertop ~amd64
 
+# These packages have a stable version, but it never seems to get updated.
+# Since these are standalone applications that are unlikely to break, I'll
+# just use the testing version.
+app-office/ledger ~amd64
+net-irc/weechat ~amd64
+
 # The following packages have significant features or bugfixes in releases
 # currently marked as testing. Only that specific version should be accepted
 # here, and it should be removed from this list once it is marked stable.
 #
-# GnuPG 2.1 moves from pth (which doesn't work with musl) to npth (which does)
+# Required for musl (npth vs. pth)
 =app-crypt/gnupg-2.1* ~amd64
-# Don't start with something already outdated
-=app-emulation/docker-1.10* ~amd64
-# Actually the stable version upstream; version marked as stable is obsolete
-~app-office/ledger-3.1 ~amd64
 # Required to support /etc/portage/repos.conf
 ~app-portage/layman-2.3.0 ~amd64
 # Required for gnupg 2.1.10+
 ~dev-libs/libassuan-2.4.2 ~amd64
 # Required for gnupg 2.1.11+
-~dev-libs/libgpg-error-1.21 ~amd64
+~dev-libs/libgpg-error-1.22 ~amd64
 # Fixes font weights (stable version has Regular being Bold)
 ~media-fonts/roboto-2015.03 ~amd64
-# Old stablized version is not supported
-~net-irc/weechat-1.5 ~amd64
+# Required for /lib/gentoo/functions.sh and therefore openrc removal
+~sys-devel/gcc-config-1.8 ~amd64
