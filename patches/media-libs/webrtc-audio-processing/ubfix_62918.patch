@@ -1,0 +1,13 @@
+diff --git a/src/modules/audio_processing/agc/analog_agc.c b/src/modules/audio_processing/agc/analog_agc.c
+index 0c2ccee..8f209a5 100644
+--- a/src/modules/audio_processing/agc/analog_agc.c
++++ b/src/modules/audio_processing/agc/analog_agc.c
+@@ -1648,7 +1648,7 @@ int WebRtcAgc_Init(void *agcInst, WebRtc_Word32 minLevel, WebRtc_Word32 maxLevel
+     }
+     for (i = 0; i < 20; i++)
+     {
+-        stt->env[0][i] = 0;
++        stt->env[i/10][i%10] = 0;
+     }
+     stt->inQueue = 0;
+ 
