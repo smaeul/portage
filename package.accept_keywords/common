@@ -67,8 +67,10 @@ net-irc/weechat ~amd64
 #
 # Required for musl (npth vs. pth)
 =app-crypt/gnupg-2.1* ~amd64
-# Required to support /etc/portage/repos.conf
-~app-portage/layman-2.3.0 ~amd64
+# Autoconf fail in spice ≤0.12.6
+~app-emulation/spice-0.12.7 ~amd64
+~net-misc/spice-gtk-0.31 ~amd64
+~app-emulation/spice-protocol-0.12.11 ~amd64
 # Required for gnupg 2.1.10+
 ~dev-libs/libassuan-2.4.2 ~amd64
 # Required for gnupg 2.1.11+
