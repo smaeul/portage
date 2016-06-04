@@ -3,6 +3,8 @@ app-editors/vim python_targets_python2_7
 app-emulation/kvm-tools python_targets_python2_7
 app-emulation/qemu python_targets_python2_7
 app-text/asciidoc python_single_target_python2_7 python_targets_python2_7
+# Required by dev-libs/liborcus → app-office/libreoffice
+dev-libs/libixion python_targets_python2_7
 # Required by www-client/chromium
 dev-python/beautifulsoup python_targets_python2_7
 # Required by dev-python/setuptools
@@ -41,9 +43,13 @@ dev-python/setuptools python_targets_python2_7
 dev-python/simplejson python_targets_python2_7
 # Required by dev-python/html5lib
 dev-python/six python_targets_python2_7
+# Required by dev-java/icedtea
+dev-util/systemtap python_targets_python2_7
 media-gfx/inkscape python_targets_python2_7
 # Required by media-gfx/inkscape
 media-gfx/uniconvertor python_targets_python2_7
+# Required by media-gfx/ufraw → media-gfx/imagemagick
+media-libs/lensfun python_targets_python2_7
 net-mail/offlineimap python_targets_python2_7
 net-p2p/transmission-remote-cli python_targets_python2_7
 sys-devel/llvm python_targets_python2_7

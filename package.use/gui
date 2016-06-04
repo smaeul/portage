@@ -1,45 +1,34 @@
-# These USE changes are necessary to fulfill a dependency from another package.
-# Required by thunderbird
-dev-db/sqlite secure-delete
-# Required by chromium
-media-libs/libpng apng
-# Required by thunderbird
-media-libs/libvpx postproc
-# Required by spice-gtk
-media-sound/pulseaudio dbus
-# Required by chromium
-sys-libs/zlib minizip
+# Required by media-gfx/inkscape
+dev-cpp/cairomm X
+# Required by net-misc/unison[gtk]
+dev-lang/ocaml X
+# Required by x11-wm/i3
+x11-libs/cairo -glib xcb
+x11-libs/libxcb xkb
 
 app-accessibility/speech-dispatcher -espeak
-app-crypt/pinentry -gtk
-app-editors/vim -X
-app-emulation/wine abi_x86_32 alsa openal -realtime -staging -udisks -vaapi
-app-emulation/winetricks -gtk
-dev-libs/libixion python_targets_python2_7
+app-emulation/wine alsa -cups d3d9 -gecko -mp3 openal -realtime s3tc staging -udisks X
+app-office/libreoffice gtk
+app-text/mupdf X
+dev-java/oracle-jdk-bin alsa javafx nsplugin
 dev-ml/lablgtk -opengl
 mail-client/thunderbird -crypt system-cairo system-icu system-jpeg system-libvpx system-sqlite
+media-fonts/* X
 media-gfx/feh exif
-media-gfx/ufraw -gtk
+media-libs/freetype X
 media-libs/harfbuzz -graphite
-media-libs/imlib2 -mp3
-media-libs/lensfun python_targets_python2_7
+media-libs/imlib2 -mp3 X
 media-libs/libass -enca
 media-libs/mesa d3d9 gles2 -llvm
-media-video/ffmpeg -encode libsoxr
-media-video/mpv -enca -luajit
-net-misc/openssh -X
+media-sound/pulseaudio X
+media-video/mpv -enca -luajit X
+net-misc/freerdp X
 net-misc/spice-gtk usbredir
-sys-apps/groff -X
-sys-process/psmisc -X
-virtual/ffmpeg -encode
+net-misc/unison gtk
 www-client/chromium -hangouts
 www-client/firefox system-cairo system-icu system-jpeg system-libvpx system-sqlite
-www-client/w3m -X -gtk
 www-plugins/chrome-binary-plugins -* flash
 x11-base/xorg-server glamor
-x11-libs/cairo -glib xcb
+x11-libs/* X
 x11-libs/gtk+ -vim-syntax
-x11-libs/libxcb xkb
-x11-libs/libva -opengl
-x11-misc/redshift -gtk
 x11-terms/rxvt-unicode 256-color alt-font-width iso14755 secondary-wheel unicode3 -vanilla

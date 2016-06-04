@@ -3,10 +3,7 @@ app-arch/lz4 abi_x86_32
 app-arch/xz-utils abi_x86_32
 dev-libs/expat abi_x86_32
 dev-libs/libffi abi_x86_32
-dev-libs/libgcrypt abi_x86_32
-dev-libs/libgpg-error abi_x86_32
 dev-libs/libpthread-stubs abi_x86_32
-dev-libs/wayland abi_x86_32
 media-libs/fontconfig abi_x86_32
 media-libs/freetype abi_x86_32
 media-libs/libpng abi_x86_32
@@ -17,8 +14,8 @@ sys-apps/util-linux abi_x86_32
 sys-libs/libcap abi_x86_32
 sys-libs/ncurses abi_x86_32
 sys-libs/zlib abi_x86_32
-virtual/libffi abi_x86_32
 virtual/libudev abi_x86_32
+virtual/opengl abi_x86_32
 x11-libs/libX11 abi_x86_32
 x11-libs/libXau abi_x86_32
 x11-libs/libXdamage abi_x86_32
