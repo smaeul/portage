@@ -1,0 +1,21 @@
+dev-lang/python xml
+dev-libs/nettle gmp
+dev-libs/openssl asm
+dev-python/pypax xtpax
+dev-util/pkgconf pkg-config
+dev-vcs/git blksha1 curl
+net-analyzer/tcpdump drop-root
+net-dns/bind-tools -idn urandom
+net-dns/dnsmasq dhcp dhcp-tools dnssec inotify script tftp
+# IDN and tracepath currently broken on musl
+#net-misc/iputils tracepath
+net-misc/iputils -idn
+net-misc/openvpn iproute2 lzo ssl
+sys-apps/busybox static
+sys-apps/elfix xtpax
+sys-apps/hwids net pci usb
+sys-apps/kmod tools
+sys-apps/man-db berkdb
+sys-devel/gdb client
+sys-fs/eudev hwdb kmod
+sys-process/procps kill

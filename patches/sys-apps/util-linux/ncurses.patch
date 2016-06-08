@@ -1,0 +1,12 @@
+diff --git a/util-linux-2.26.2/disk-utils/cfdisk.c b/util-linux-2.26.2-fixed/disk-utils/cfdisk.c
+index e60d9e4..7dde9b8 100644
+--- a/util-linux-2.26.2/disk-utils/cfdisk.c
++++ b/util-linux-2.26.2-fixed/disk-utils/cfdisk.c
+@@ -29,6 +29,7 @@
+ # include <slang/slang.h>
+ #endif
+ 
++#define _XOPEN_SOURCE_EXTENDED
+ #ifdef HAVE_SLCURSES_H
+ # include <slcurses.h>
+ #elif defined(HAVE_SLANG_SLCURSES_H)
