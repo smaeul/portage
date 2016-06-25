@@ -54,6 +54,7 @@ sys-apps/util-linux -cramfs
 sys-auth/pambase minimal -nullok
 sys-devel/clang multitarget
 sys-devel/llvm clang multitarget
+sys-firmware/iwl7260-ucode bluetooth
 sys-fs/lvm2 -* device-mapper-only
 sys-power/nut usb
 sys-process/systemd-cron cron-boot
