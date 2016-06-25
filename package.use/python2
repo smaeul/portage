@@ -10,6 +10,8 @@ dev-libs/libixion python_targets_python2_7
 dev-python/beautifulsoup python_targets_python2_7
 # Required by dev-python/setuptools
 dev-python/certifi python_targets_python2_7
+# Required by net-print/hplip
+dev-python/dbus-python python_targets_python2_7
 # Required by www-client/chromium
 dev-python/html5lib python_targets_python2_7
 # Required by app-admin/ansible
@@ -36,8 +38,12 @@ dev-python/pyasn1 python_targets_python2_7
 dev-python/pycairo python_targets_python2_7
 # Required by app-admin/ansible
 dev-python/pycrypto python_targets_python2_7
+# Required by net-print/hplip
+dev-python/pygobject python_targets_python2_7
 # Required by app-admin/ansible
 dev-python/pyyaml python_targets_python2_7
+# Required by net-print/hplip
+dev-python/reportlab python_targets_python2_7
 # Required by app-admin/ansible
 dev-python/setuptools python_targets_python2_7
 # Required by www-client/chromium
@@ -53,4 +59,5 @@ media-gfx/uniconvertor python_targets_python2_7
 media-libs/lensfun python_targets_python2_7
 net-mail/offlineimap python_targets_python2_7
 net-p2p/transmission-remote-cli python_targets_python2_7
+net-print/hplip python_targets_python2_7
 sys-devel/llvm python_targets_python2_7

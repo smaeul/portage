@@ -3,6 +3,8 @@
 dev-db/sqlite secure-delete
 # Required by ncmpcpp (nls)
 dev-libs/boost nls python
+# Required by reportlab
+dev-python/pillow tiff
 # Required by inkscape[imagemagick]
 media-gfx/imagemagick cxx
 # Required by chromium
@@ -41,6 +43,7 @@ media-sound/pulseaudio alsa -asyncns bluetooth dbus
 media-video/ffmpeg -encode libsoxr
 net-libs/gnutls -crywrap -openssl
 net-misc/openvpn iproute2
+net-print/hplip scanner
 sys-apps/busybox -pam static syslog -systemd
 sys-apps/elfix -ptpax
 sys-apps/man-db -manpager
