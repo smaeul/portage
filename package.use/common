@@ -42,6 +42,7 @@ media-sound/ncmpcpp visualizer
 media-sound/pulseaudio alsa -asyncns bluetooth dbus
 media-video/ffmpeg -encode libsoxr
 net-libs/gnutls -crywrap -openssl
+net-misc/iputils tracepath
 net-misc/openvpn iproute2
 net-print/hplip scanner
 sys-apps/busybox -pam static syslog -systemd
