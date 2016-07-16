@@ -11,11 +11,10 @@ app-office/libreoffice gtk
 app-text/mupdf X
 dev-java/oracle-jdk-bin alsa javafx nsplugin
 dev-ml/lablgtk -opengl
-mail-client/thunderbird -crypt system-cairo system-icu system-jpeg system-libvpx system-sqlite
+mail-client/thunderbird -crypt system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/* X
 media-gfx/feh exif
 media-libs/freetype X
-media-libs/harfbuzz -graphite
 media-libs/imlib2 -mp3 X
 media-libs/libass -enca
 media-libs/mesa d3d9 gles2 -llvm
@@ -25,7 +24,7 @@ net-misc/freerdp X
 net-misc/spice-gtk usbredir
 net-misc/unison gtk
 www-client/chromium -hangouts
-www-client/firefox system-cairo system-icu system-jpeg system-libvpx system-sqlite
+www-client/firefox system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 www-plugins/chrome-binary-plugins -* flash
 x11-base/xorg-server glamor
 x11-libs/* X
