@@ -16,7 +16,6 @@ sys-kernel/spl::smaeul **
 
 # These packages have no stable version, so at least one version must be
 # accepted in order to install the package at all.
-app-emulation/winetricks ~amd64
 app-eselect/eselect-rust ~amd64
 app-laptop/tpacpi-bat ~amd64
 app-mobilephone/heimdall ~amd64
@@ -48,7 +47,6 @@ sys-apps/s6-rc ~amd64
 # The following packages have a stable version, but due to the fast-moving
 # nature of the software it is often broken.
 app-emulation/docker ~amd64
-app-emulation/wine ~amd64
 app-misc/ca-certificates ~amd64
 dev-util/android-sdk-update-manager ~amd64
 dev-util/android-studio ~amd64

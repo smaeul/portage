@@ -7,7 +7,6 @@ x11-libs/cairo -glib xcb
 x11-libs/libxcb xkb
 
 app-accessibility/speech-dispatcher -espeak
-app-emulation/wine alsa -cups d3d9 -gecko -mp3 openal -realtime s3tc staging -udisks X
 app-office/libreoffice gtk
 app-text/mupdf X
 dev-java/oracle-jdk-bin alsa javafx nsplugin
