@@ -11,11 +11,13 @@ sys-apps/s6-rc ~amd64
 
 # Required for musl (npth vs. pth)
 =app-crypt/gnupg-2.1* ~amd64
-# Required for gnupg 2.1.10+
-~dev-libs/libassuan-2.4.2 ~amd64
+# Required for gnupg 2.1.14+
+~dev-libs/libassuan-2.4.3 ~amd64
 # Required for gnupg 2.1.13+
 ~dev-libs/libgcrypt-1.7.1 ~amd64
-# Required for gnupg 2.1.11+
-~dev-libs/libgpg-error-1.22 ~amd64
+# Required for gnupg 2.1.14+
+~dev-libs/libgpg-error-1.24 ~amd64
+# Required for gnupg 2.1.14+
+~dev-libs/npth-1.2 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64
