@@ -9,8 +9,6 @@ dev-python/pillow tiff
 media-gfx/imagemagick cxx
 # Required by chromium
 media-libs/libpng apng
-# Required by being broken
-media-libs/libv4l -jpeg
 # Required by thunderbird
 media-libs/libvpx postproc
 # One of berkdb or gdbm is required
