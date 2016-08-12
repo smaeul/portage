@@ -60,6 +60,7 @@ sys-power/powertop ~amd64
 # just use the testing version.
 app-office/ledger ~amd64
 net-irc/weechat ~amd64
+net-fs/samba ~amd64
 
 # The following packages have significant features or bugfixes in releases
 # currently marked as testing. Only that specific version should be accepted
@@ -83,5 +84,7 @@ net-irc/weechat ~amd64
 ~media-fonts/roboto-2015.03 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64
+# Required for samba 4.4+
+=sys-libs/talloc-2.1.7 ~amd64
 # Fixes scrolling on ThinkPad
 =www-client/chromium-53.0* ~amd64
