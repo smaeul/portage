@@ -40,7 +40,7 @@ media-gfx/imagemagick pango raw webp
 media-plugins/alsa-plugins -* pulseaudio
 media-sound/mpd libsoxr -network
 media-sound/ncmpcpp visualizer
-media-sound/pulseaudio alsa -asyncns bluetooth dbus
+media-sound/pulseaudio alsa -asyncns dbus
 media-video/ffmpeg -encode libsoxr
 net-libs/gnutls -crywrap -openssl
 net-misc/iputils tracepath
@@ -56,7 +56,6 @@ sys-apps/util-linux -cramfs
 sys-auth/pambase minimal -nullok
 sys-devel/clang multitarget
 sys-devel/llvm clang default-compiler-rt default-libcxx multitarget
-sys-firmware/iwl7260-ucode bluetooth
 sys-kernel/hardened-sources symlink
 sys-fs/lvm2 -* device-mapper-only
 sys-libs/libcxx libunwind
