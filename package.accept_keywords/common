@@ -86,6 +86,8 @@ net-fs/samba ~amd64
 ~media-fonts/roboto-2.134 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64
+# Because why not?
+=sys-kernel/hardened-sources-4.7* ~amd64
 # Required for samba 4.4+
 =sys-libs/talloc-2.1.7 ~amd64
 # Fixes scrolling on ThinkPad
