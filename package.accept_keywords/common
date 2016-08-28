@@ -80,7 +80,7 @@ net-fs/samba ~amd64
 # Required for gnupg 2.1.14+
 ~dev-libs/npth-1.2 ~amd64
 # Fixes font weights (stable version has Regular being Bold)
-~media-fonts/roboto-2015.03 ~amd64
+~media-fonts/roboto-2.134 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64
 # Required for samba 4.4+
