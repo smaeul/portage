@@ -24,6 +24,7 @@ dev-util/cargo ~amd64
 net-firewall/nftables ~amd64
 net-libs/libnftnl ~amd64
 net-misc/unison ~amd64
+net-misc/wireguard ~amd64
 net-p2p/syncthing ~amd64
 net-p2p/transmission-remote-cli ~amd64
 sys-firmware/iwl3160-7260-bt-ucode ~amd64
