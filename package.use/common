@@ -45,6 +45,7 @@ net-libs/gnutls -crywrap -openssl
 net-misc/iputils tracepath
 net-misc/openvpn iproute2
 net-print/hplip scanner
+net-wireless/hostapd -wps
 sys-apps/busybox -pam static syslog -systemd
 sys-apps/elfix -ptpax
 sys-apps/man-db -manpager

@@ -26,6 +26,8 @@ dev-python/jinja python_targets_python2_7
 dev-python/keyczar python_targets_python2_7
 # Required by dev-python/traceback2
 dev-python/linecache2 python_targets_python2_7
+# Required by net-wireless/crda
+dev-python/m2crypto python_targets_python2_7
 # Required by dev-python/jinja
 dev-python/markupsafe python_targets_python2_7
 # Required by dev-python/testtools
