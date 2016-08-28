@@ -54,6 +54,9 @@ dev-util/android-studio ~amd64
 net-misc/youtube-dl ~amd64
 sys-devel/clang ~amd64
 sys-devel/llvm ~amd64
+sys-libs/libcxx ~amd64
+sys-libs/libcxxrt ~amd64
+sys-libs/llvm-libunwind ~amd64
 sys-power/powertop ~amd64
 
 # These packages have a stable version, but it never seems to get updated.

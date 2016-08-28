@@ -30,6 +30,7 @@ app-emulation/docker -device-mapper
 app-emulation/qemu -curl -jpeg -opengl numa -png spice usb usbredir -vnc
 app-shells/bash -net
 app-text/poppler cxx
+dev-lang/rust clang libcxx
 dev-libs/libxslt -crypt
 dev-python/pypax -ptpax
 dev-scheme/guile -deprecated -regex
@@ -54,9 +55,11 @@ sys-apps/systemd -kdbus
 sys-apps/util-linux -cramfs
 sys-auth/pambase minimal -nullok
 sys-devel/clang multitarget
-sys-devel/llvm clang multitarget
+sys-devel/llvm clang default-compiler-rt default-libcxx multitarget
 sys-firmware/iwl7260-ucode bluetooth
 sys-fs/lvm2 -* device-mapper-only
+sys-libs/libcxx libunwind
+sys-libs/libcxxrt libunwind
 sys-power/nut usb
 sys-process/systemd-cron cron-boot
 virtual/ffmpeg -encode
