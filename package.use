@@ -3,7 +3,7 @@ dev-libs/nettle gmp
 dev-libs/openssl asm
 dev-python/pypax xtpax
 dev-util/pkgconf pkg-config
-dev-vcs/git blksha1 curl
+dev-vcs/git blksha1 curl perl
 mail-mta/opensmtpd mta
 net-analyzer/tcpdump drop-root
 net-dns/bind-tools -idn urandom
