@@ -3,6 +3,7 @@ dev-libs/skalibs ~amd64
 net-firewall/nftables ~amd64
 net-libs/libnftnl ~amd64
 net-misc/dhcpcd ~amd64
+net-misc/wireguard ~amd64
 sys-apps/s6 ~amd64
 sys-apps/s6-linux-init ~amd64
 sys-apps/s6-linux-utils ~amd64
