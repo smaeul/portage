@@ -19,4 +19,5 @@ sys-apps/kmod tools
 sys-apps/man-db berkdb
 sys-devel/gdb client
 sys-fs/eudev hwdb kmod
+sys-power/nut usb
 sys-process/procps kill
