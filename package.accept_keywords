@@ -20,5 +20,7 @@ sys-apps/s6-rc ~amd64
 ~dev-libs/libgpg-error-1.24 ~amd64
 # Required for gnupg 2.1.14+
 ~dev-libs/npth-1.2 ~amd64
+# Required for musl (res_randomid)
+~net-libs/libasr-1.0.2.201602131606 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64

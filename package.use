@@ -4,6 +4,7 @@ dev-libs/openssl asm
 dev-python/pypax xtpax
 dev-util/pkgconf pkg-config
 dev-vcs/git blksha1 curl
+mail-mta/opensmtpd mta
 net-analyzer/tcpdump drop-root
 net-dns/bind-tools -idn urandom
 net-dns/dnsmasq dhcp dhcp-tools dnssec inotify script tftp
