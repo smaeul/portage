@@ -1,6 +1,6 @@
 dev-lang/python xml
+dev-libs/libressl asm
 dev-libs/nettle gmp
-dev-libs/openssl asm
 dev-python/pypax xtpax
 dev-util/pkgconf pkg-config
 dev-vcs/git blksha1 curl perl
@@ -19,5 +19,5 @@ sys-apps/kmod tools
 sys-apps/man-db berkdb
 sys-devel/gdb client
 sys-fs/eudev hwdb kmod
-sys-power/nut usb
+sys-power/nut -ssl ups_drivers_usbhid-ups usb
 sys-process/procps kill
