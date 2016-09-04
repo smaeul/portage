@@ -51,7 +51,6 @@ sys-apps/busybox -pam static syslog -systemd
 sys-apps/elfix -ptpax
 sys-apps/man-db -manpager
 sys-apps/pciutils dns
-sys-apps/systemd -kdbus
 sys-apps/util-linux -cramfs
 sys-auth/pambase minimal -nullok
 sys-devel/clang multitarget

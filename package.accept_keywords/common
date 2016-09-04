@@ -31,7 +31,6 @@ sys-firmware/iwl3160-7260-bt-ucode ~amd64
 sys-firmware/iwl7260-ucode ~amd64
 sys-firmware/radeon-ucode ~amd64
 sys-power/acpi_call ~amd64
-sys-process/systemd-cron ~amd64
 virtual/rust ~amd64
 
 # I trust the maintainer of the following packages to not cause significant
