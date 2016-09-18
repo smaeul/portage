@@ -69,8 +69,6 @@ net-fs/samba ~amd64
 # currently marked as testing. Only that specific version should be accepted
 # here, and it should be removed from this list once it is marked stable.
 #
-# Required for >=www-client/chromium-53
-~app-arch/gzip-1.8 ~amd64
 # Required for musl (npth vs. pth)
 =app-crypt/gnupg-2.1* ~amd64
 # Autoconf fail in spice ≤0.12.6
@@ -89,5 +87,3 @@ net-fs/samba ~amd64
 =sys-kernel/hardened-sources-4.7* ~amd64
 # Required for samba 4.4+
 =sys-libs/talloc-2.1.7 ~amd64
-# Fixes scrolling on ThinkPad
-=www-client/chromium-53.0* ~amd64
