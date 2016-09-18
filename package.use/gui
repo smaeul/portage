@@ -9,7 +9,7 @@ x11-libs/libxcb xkb
 app-accessibility/speech-dispatcher -espeak
 app-office/libreoffice gtk
 app-text/mupdf X
-dev-java/oracle-jdk-bin alsa javafx nsplugin
+dev-java/icedtea gtk
 dev-ml/lablgtk -opengl
 mail-client/thunderbird -crypt system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/* X
