@@ -17,7 +17,7 @@ media-gfx/feh exif
 media-libs/freetype X
 media-libs/imlib2 -mp3 X
 media-libs/libass -enca
-media-libs/mesa d3d9 gles2 -llvm
+media-libs/mesa gles2 -llvm
 media-sound/pulseaudio X
 media-video/mpv -enca -luajit X
 net-misc/freerdp X
