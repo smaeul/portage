@@ -18,7 +18,6 @@ sys-kernel/spl::smaeul **
 # accepted in order to install the package at all.
 app-eselect/eselect-rust ~amd64
 app-laptop/tpacpi-bat ~amd64
-app-mobilephone/heimdall ~amd64
 dev-java/icedtea ~amd64
 dev-lang/rust ~amd64
 dev-util/cargo ~amd64
@@ -28,9 +27,6 @@ net-misc/unison ~amd64
 net-misc/wireguard ~amd64
 net-p2p/syncthing ~amd64
 net-p2p/transmission-remote-cli ~amd64
-sys-firmware/iwl3160-7260-bt-ucode ~amd64
-sys-firmware/iwl7260-ucode ~amd64
-sys-firmware/radeon-ucode ~amd64
 sys-power/acpi_call ~amd64
 virtual/rust ~amd64
 
@@ -72,8 +68,6 @@ net-fs/samba ~amd64
 #
 # Required for musl (npth vs. pth)
 =app-crypt/gnupg-2.1* ~amd64
-# Autoconf fail in spice ≤0.12.6
-~net-misc/spice-gtk-0.31 ~amd64
 # Required for gnupg 2.1.14+
 ~dev-libs/libassuan-2.4.3 ~amd64
 # Required for gnupg 2.1.14+
@@ -86,5 +80,3 @@ net-fs/samba ~amd64
 ~sys-devel/gcc-config-1.8 ~amd64
 # Because why not?
 =sys-kernel/hardened-sources-4.7* ~amd64
-# Required for samba 4.4+
-=sys-libs/talloc-2.1.7 ~amd64

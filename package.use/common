@@ -45,7 +45,6 @@ media-video/ffmpeg -encode libsoxr
 net-libs/gnutls -crywrap -openssl
 net-misc/iputils tracepath
 net-misc/openvpn iproute2
-net-print/hplip scanner
 net-wireless/hostapd -wps
 sys-apps/busybox -pam static
 sys-apps/elfix -ptpax
