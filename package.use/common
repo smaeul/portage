@@ -23,6 +23,7 @@ sys-libs/tevent python
 # Required by chromium
 sys-libs/zlib minizip
 
+app-arch/libarchive -e2fsprogs
 app-crypt/gnupg -gnutls
 app-crypt/mit-krb5 -keyutils
 app-editors/vim python
