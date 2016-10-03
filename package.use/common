@@ -64,7 +64,7 @@ sys-fs/eudev hwdb kmod
 sys-kernel/*-sources symlink
 sys-libs/libcxx libcxxrt libunwind
 sys-libs/libcxxrt libunwind
-sys-power/nut usb
+sys-power/nut -ssl ups_drivers_usbhid-ups usb
 sys-process/procps kill
 www-client/firefox system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 www-plugins/chrome-binary-plugins flash -widevine

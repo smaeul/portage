@@ -89,6 +89,6 @@ sys-kernel/*-sources ~amd64
 ~sys-devel/gcc-5.4.0 ~amd64
 ~sys-libs/ncurses-6.0 ~amd64
 # Required for building with -ssl
-#~sys-power/nut-2.7.3 ~amd64
+~sys-power/nut-2.7.3 ~amd64
 # Required for libressl
 ~www-client/w3m-0.5.3 ~amd64
