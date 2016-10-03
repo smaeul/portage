@@ -17,6 +17,7 @@ sys-apps/elfix xtpax
 sys-apps/hwids net pci usb
 sys-apps/kmod tools
 sys-apps/man-db berkdb
+sys-apps/net-tools arp hostname
 sys-devel/gdb client
 sys-fs/eudev hwdb kmod
 sys-power/nut -ssl ups_drivers_usbhid-ups usb
