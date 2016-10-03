@@ -1,0 +1,94 @@
+# These packages are either only available as git repositories, or have
+# significant features added/changed since their latest release. As they
+# are relatively nonessential packages, I consider them basically safe to
+# install from git.
+=x11-misc/compton-9999 **
+
+# I personally maintain or control versions of these packages, so keywords
+# are irrelevant, since they are updated manually anyway.
+app-emulation/kvm-tools::smaeul **
+sys-firmware/ovmf-bin::smaeul **
+sys-fs/zfs::smaeul **
+sys-fs/zfs-kmod::smaeul **
+sys-kernel/spl::smaeul **
+=x11-misc/i3status-mpd-9999 **
+=x11-misc/j4-dmenu-desktop-9999 **
+
+# These packages have no stable version, so at least one version must be
+# accepted in order to install the package at all.
+app-eselect/eselect-rust ~amd64
+app-laptop/tpacpi-bat ~amd64
+dev-java/icedtea ~amd64
+dev-lang/rust ~amd64
+dev-libs/libressl ~amd64
+dev-util/cargo ~amd64
+net-firewall/nftables ~amd64
+net-misc/unison ~amd64
+net-misc/wireguard ~amd64
+net-p2p/syncthing ~amd64
+net-p2p/transmission-remote-cli ~amd64
+sys-power/acpi_call ~amd64
+virtual/rust ~amd64
+
+# I trust the maintainer of the following packages to not cause significant
+# breakage; plus some of these packages have no stable version. I care more
+# about the packages matching versions (not mixing old and new).
+dev-lang/execline ~amd64
+dev-libs/skalibs ~amd64
+sys-apps/s6 ~amd64
+sys-apps/s6-linux-init ~amd64
+sys-apps/s6-linux-utils ~amd64
+sys-apps/s6-portable-utils ~amd64
+sys-apps/s6-rc ~amd64
+
+# The following packages have a stable version, but due to the fast-moving
+# nature of the software it is often broken.
+app-misc/ca-certificates ~amd64
+dev-util/android-sdk-update-manager ~amd64
+dev-util/android-studio ~amd64
+net-misc/youtube-dl ~amd64
+sys-devel/clang ~amd64
+sys-devel/llvm ~amd64
+sys-libs/libcxx ~amd64
+sys-libs/libcxxrt ~amd64
+sys-libs/llvm-libunwind ~amd64
+sys-power/powertop ~amd64
+
+# These packages have a stable version, but it never seems to get updated.
+# Since these are standalone applications that are unlikely to break, I'll
+# just use the testing version.
+net-irc/weechat ~amd64
+net-fs/samba ~amd64
+sys-kernel/*-sources ~amd64
+
+# The following packages have significant features or bugfixes in releases
+# currently marked as testing. Only that specific version should be accepted
+# here, and it should be removed from this list once it is marked stable.
+#
+# Required for musl (npth vs. pth)
+=app-crypt/gnupg-2.1* ~amd64
+# Required for libressl
+~dev-lang/python-2.7.12 ~amd64
+# Required for gnupg 2.1.14+
+~dev-libs/libassuan-2.4.3 ~amd64
+# Required for libressl
+~dev-libs/libevent-2.0.22 ~amd64
+# Required for gnupg 2.1.14+
+~dev-libs/libgpg-error-1.24 ~amd64
+# Required for gnupg 2.1.14+
+~dev-libs/npth-1.2 ~amd64
+# Required for libressl
+~dev-python/m2crypto-0.24.0 ~amd64
+# Fixes font weights (stable version has Regular being Bold)
+~media-fonts/roboto-2.134 ~amd64
+# Required for musl (res_randomid)
+~net-libs/libasr-1.0.2.201602131606 ~amd64
+# Required for /lib/gentoo/functions.sh and therefore openrc removal
+~sys-devel/gcc-config-1.8 ~amd64
+# Required for sanity?
+~sys-devel/gcc-5.4.0 ~amd64
+~sys-libs/ncurses-6.0 ~amd64
+# Required for building with -ssl
+#~sys-power/nut-2.7.3 ~amd64
+# Required for libressl
+~www-client/w3m-0.5.3 ~amd64

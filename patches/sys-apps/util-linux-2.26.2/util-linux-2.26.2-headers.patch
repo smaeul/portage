@@ -1,0 +1,12 @@
+diff --git a/util-linux-2.26.2/login-utils/lslogins.c b/util-linux-fixed/login-utils/lslogins.c
+index 48ba6d8..a80f095 100644
+--- a/util-linux-2.26.2/login-utils/lslogins.c
++++ b/util-linux-fixed/login-utils/lslogins.c
+@@ -23,6 +23,7 @@
+ #include <stdlib.h>
+ #include <unistd.h>
+ #include <getopt.h>
++#include <sys/time.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <sys/syslog.h>

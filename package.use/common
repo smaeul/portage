@@ -1,8 +1,10 @@
 # These USE changes are necessary to fulfill a dependency from another package.
 # Required by thunderbird
 dev-db/sqlite secure-delete
-# Required by ncmpcpp (nls)
-dev-libs/boost nls python
+# Required by gentoolkit
+dev-lang/python xml
+# Required by ncmpcpp
+dev-libs/boost icu nls
 # Required by reportlab
 dev-python/pillow tiff
 # Required by inkscape[imagemagick]
@@ -11,10 +13,6 @@ media-gfx/imagemagick cxx
 media-libs/libpng apng
 # Required by thunderbird
 media-libs/libvpx postproc
-# One of berkdb or gdbm is required
-sys-apps/man-db berkdb
-# Required by app-emulation/docker
-sys-libs/libseccomp static-libs
 # Required by net-fs/samba
 sys-libs/ntdb python
 sys-libs/talloc python
@@ -23,41 +21,59 @@ sys-libs/tevent python
 # Required by chromium
 sys-libs/zlib minizip
 
-app-arch/libarchive -e2fsprogs
-app-crypt/gnupg -gnutls
-app-crypt/mit-krb5 -keyutils
 app-editors/vim python
-app-emulation/docker -device-mapper
-app-emulation/qemu -curl -jpeg -opengl numa -png spice usb usbredir -vnc
-app-shells/bash -net
-app-text/poppler cxx
+app-emulation/qemu -curl -jpeg -opengl numa -png spice usb usbredir
+dev-lang/python readline wide-unicode
 dev-lang/rust clang libcxx
-dev-libs/libxslt -crypt
-dev-python/pypax -ptpax
-dev-scheme/guile -deprecated -regex
+dev-libs/gmp asm
+dev-libs/libressl asm
+dev-ml/lablgtk -opengl
+dev-python/pypax xtpax
 dev-util/cmake system-jsoncpp
-dev-vcs/git perl
+dev-util/pkgconf pkg-config
+dev-vcs/git blksha1 perl
+mail-client/nail -ssl
+mail-client/thunderbird system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+mail-mta/opensmtpd mta
 media-gfx/imagemagick pango raw webp
-media-plugins/alsa-plugins -* pulseaudio
-media-sound/mpd libsoxr -network
-media-sound/ncmpcpp visualizer
-media-sound/pulseaudio alsa -asyncns
-media-video/ffmpeg -encode libsoxr
-net-libs/gnutls -crywrap -openssl
-net-misc/iputils tracepath
-net-misc/openvpn iproute2
-net-wireless/hostapd -wps
-sys-apps/busybox -pam static
-sys-apps/elfix -ptpax
-sys-apps/man-db -manpager
-sys-apps/pciutils dns
-sys-apps/util-linux -cramfs
-sys-auth/pambase minimal -nullok
+media-libs/imlib2 -mp3
+media-libs/mesa classic dri3 egl gallium gbm gles2 llvm
+media-sound/mpd libsoxr -sqlite -vorbis
+media-sound/pulseaudio alsa
+media-video/ffmpeg libsoxr network
+media-video/mpv cli drm egl
+net-analyzer/tcpdump drop-root
+net-dns/bind-tools -idn urandom
+net-dns/dnsmasq dhcp inotify
+net-misc/dhcpcd embedded
+net-misc/iputils -idn tracepath
+net-misc/spice-gtk usbredir
+net-wireless/wpa_supplicant p2p readline
+sys-apps/busybox static
+sys-apps/elfix xtpax
+sys-apps/hwids net pci usb
+sys-apps/kmod tools
+sys-apps/man-db berkdb
+sys-apps/net-tools arp hostname
+sys-apps/pciutils dns kmod
+sys-apps/util-linux -ncurses
 sys-devel/clang multitarget
+sys-devel/gdb client
 sys-devel/llvm clang default-compiler-rt default-libcxx multitarget
-sys-kernel/hardened-sources symlink
-sys-fs/lvm2 -* device-mapper-only
-sys-libs/libcxx libunwind
+sys-fs/eudev hwdb kmod
+sys-kernel/*-sources symlink
+sys-libs/libcxx libcxxrt libunwind
 sys-libs/libcxxrt libunwind
 sys-power/nut usb
-virtual/ffmpeg -encode
+sys-process/procps kill
+www-client/firefox system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+www-plugins/chrome-binary-plugins flash -widevine
+x11-apps/xinit minimal
+x11-base/xorg-server glamor xorg
+# There are reports of crashes when using DRI3
+x11-drivers/xf86-video-intel sna
+x11-libs/gtk+ -vim-syntax
+x11-libs/libva drm egl
+x11-libs/libva-intel-driver drm
+x11-terms/rxvt-unicode 256-color alt-font-width font-styles iso14755 mousewheel secondary-wheel unicode3 wcwidth
+#x11-wm/i3 pango

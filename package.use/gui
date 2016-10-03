@@ -3,30 +3,17 @@ dev-cpp/cairomm X
 # Required by net-misc/unison[gtk]
 dev-lang/ocaml X
 # Required by x11-wm/i3
-x11-libs/cairo -glib xcb
+x11-libs/cairo xcb
 x11-libs/libxcb xkb
 
-app-accessibility/speech-dispatcher -espeak
 app-office/libreoffice gtk
 app-text/mupdf X
 dev-java/icedtea gtk
-dev-ml/lablgtk -opengl
-mail-client/thunderbird -crypt system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/* X
-media-gfx/feh exif
 media-libs/freetype X
-media-libs/imlib2 -mp3 X
-media-libs/libass -enca
-media-libs/mesa gles2 -llvm
+media-libs/imlib2 X
 media-sound/pulseaudio X
-media-video/mpv -enca -luajit X
+media-video/mpv X
 net-misc/freerdp X
-net-misc/spice-gtk usbredir
 net-misc/unison gtk
-www-client/chromium -hangouts
-www-client/firefox system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
-www-plugins/chrome-binary-plugins -* flash
-x11-base/xorg-server glamor
 x11-libs/* X
-x11-libs/gtk+ -vim-syntax
-x11-terms/rxvt-unicode 256-color alt-font-width iso14755 secondary-wheel unicode3 -vanilla

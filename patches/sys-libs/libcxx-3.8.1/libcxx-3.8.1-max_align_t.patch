@@ -1,0 +1,16 @@
+diff --git a/libcxx-3.8.1.src/include/stddef.h b/libcxx-fixed/include/stddef.h
+index 8841bbe..12ec54f 100644
+--- a/libcxx-3.8.1.src/include/stddef.h
++++ b/libcxx-fixed/include/stddef.h
+@@ -52,11 +52,6 @@ extern "C++" {
+ using std::nullptr_t;
+ }
+ 
+-// Re-use the compiler's <stddef.h> max_align_t where possible.
+-#if !defined(__CLANG_MAX_ALIGN_T_DEFINED) && !defined(_GCC_MAX_ALIGN_T)
+-typedef long double max_align_t;
+-#endif
+-
+ #endif
+ 
+ #endif  // _LIBCPP_STDDEF_H

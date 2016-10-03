@@ -1,0 +1,13 @@
+diff --git a/gperf-3.0.4/lib/getopt.c b/gperf-fixed/lib/getopt.c
+index 32d6efc..88d4ab4 100644
+--- a/gperf-3.0.4/lib/getopt.c
++++ b/gperf-fixed/lib/getopt.c
+@@ -67,6 +67,8 @@
+ #include <unistd.h>
+ #endif	/* GNU C library.  */
+ 
++#include <string.h>
++
+ #ifdef VMS
+ #include <unixlib.h>
+ #if HAVE_STRING_H - 0

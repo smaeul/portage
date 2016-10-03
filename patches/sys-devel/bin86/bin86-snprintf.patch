@@ -1,9 +1,0 @@
-diff -ur bin86-0.16.21/ld/mkar.c bin86-fixed/ld/mkar.c
---- bin86-0.16.21/ld/mkar.c	2013-10-29 10:45:37.000000000 -0500
-+++ bin86-fixed/ld/mkar.c	2015-11-15 15:58:16.969592393 -0600
-@@ -1,4 +1,4 @@
--
-+#define _XOPEN_SOURCE 500
- #include <stdio.h>
- #include <string.h>
- #include <sys/types.h>

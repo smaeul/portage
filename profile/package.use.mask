@@ -1,2 +1,4 @@
-www-client/firefox -system-cairo
+*/* -libressl
 mail-client/thunderbird -system-cairo
+net-misc/curl -curl_ssl_libressl
+www-client/firefox -system-cairo

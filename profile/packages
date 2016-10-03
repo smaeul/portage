@@ -1,2 +1,4 @@
+*app-arch/lzip
 -*sys-apps/openrc
 -*sys-fs/e2fsprogs
+*sys-libs/timezone-data
