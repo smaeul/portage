@@ -1,7 +1,7 @@
-diff --git a/boost_1_56_0/tools/build/src/engine/modules/path.c b/boost_fixed/tools/build/src/engine/modules/path.c
+diff --git src/engine/modules/path.c src-fixed/engine/modules/path.c
 index f8dedac..a689092 100644
---- a/engine/modules/path.c
-+++ b/engine/modules/path.c
+--- src/engine/modules/path.c
++++ src-fixed/engine/modules/path.c
 @@ -5,6 +5,7 @@
   */
  

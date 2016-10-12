@@ -1,7 +1,7 @@
-diff --git a/libcxx-3.8.1.src/include/__mutex_base b/libcxx-fixed/include/__mutex_base
+diff --git libcxx-3.8.1.src/include/__mutex_base libcxx-fixed/include/__mutex_base
 index b019b47..0dbe62b 100644
---- a/libcxx-3.8.1.src/include/__mutex_base
-+++ b/libcxx-fixed/include/__mutex_base
+--- libcxx-3.8.1.src/include/__mutex_base
++++ libcxx-fixed/include/__mutex_base
 @@ -32,11 +32,7 @@ class _LIBCPP_TYPE_VIS mutex
  
  public:

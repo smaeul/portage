@@ -3,6 +3,17 @@
 =dev-lang/perl-5.22.2 stricterfail
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
 ~dev-libs/boehm-gc-7.4.2 stricterfail
+# jarfile.c:696:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:700:6: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:701:6: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:723:6: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:728:6: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:729:6: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:767:3: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:790:11: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:791:4: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:792:4: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+=dev-libs/nss-3.23 stricterfail
 # sshkey.c:2395:2: warning: implicit declaration of function 'arc4random_buf' [-Wimplicit-function-declaration]
 # sshkey.c:3097:2: warning: implicit declaration of function 'arc4random' [-Wimplicit-function-declaration]
 # bindresvport.c:92:3: warning: implicit declaration of function 'arc4random_uniform' [-Wimplicit-function-declaration]
@@ -28,11 +39,39 @@
 # marvell.c:427:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # marvell.c:428:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 =sys-apps/ethtool-3.18 stricterfail
+# dbprintf.c:24:9: warning: implicit declaration of function 'vdbprintf' [-Wimplicit-function-declaration]
+# dbprintf.c:30:60: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
+# dbprintf.c:110:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
+# dbprintf.c:110:13: warning: incompatible implicit declaration of built-in function 'strlen'
+# makeboot.c:208:19: warning: implicit declaration of function 'set_superfield' [-Wimplicit-function-declaration]
+# makeboot.c:216:24: warning: implicit declaration of function 'Usage' [-Wimplicit-function-declaration]
+# makeboot.c:248:4: warning: implicit declaration of function 'open_disk' [-Wimplicit-function-declaration]
+# makeboot.c:249:8: warning: implicit declaration of function 'read_sector' [-Wimplicit-function-declaration]
+# makeboot.c:262:10: warning: implicit declaration of function 'check_msdos' [-Wimplicit-function-declaration]
+# makeboot.c:266:22: warning: implicit declaration of function 'check_simpledos' [-Wimplicit-function-declaration]
+# makeboot.c:269:7: warning: implicit declaration of function 'check_tar' [-Wimplicit-function-declaration]
+# makeboot.c:272:7: warning: implicit declaration of function 'check_zapped' [-Wimplicit-function-declaration]
+# makeboot.c:275:7: warning: implicit declaration of function 'check_mbr' [-Wimplicit-function-declaration]
+# makeboot.c:304:7: warning: implicit declaration of function 'copy_tarblock' [-Wimplicit-function-declaration]
+# makeboot.c:308:7: warning: implicit declaration of function 'copy_mbr' [-Wimplicit-function-declaration]
+# makeboot.c:325:7: warning: implicit declaration of function 'copy_superfields' [-Wimplicit-function-declaration]
+# makeboot.c:333:10: warning: implicit declaration of function 'save_super' [-Wimplicit-function-declaration]
+# makeboot.c:335:10: warning: implicit declaration of function 'print_super' [-Wimplicit-function-declaration]
+# makeboot.c:339:10: warning: implicit declaration of function 'close_disk' [-Wimplicit-function-declaration]
+# makeboot.c:348:7: warning: implicit declaration of function 'set_dosname' [-Wimplicit-function-declaration]
+# makeboot.c:351:7: warning: implicit declaration of function 'set_asciz' [-Wimplicit-function-declaration]
+# makeboot.c:359:7: warning: implicit declaration of function 'write_sector' [-Wimplicit-function-declaration]
+# dis.h:131:29: warning: implicit declaration of function 'Fetch' [-Wimplicit-function-declaration]
+=sys-devel/dev86-0.16.19 stricterfail
 # ../src/iostream.cpp:76:56: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # ../src/iostream.cpp:77:60: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # ../src/iostream.cpp:82:56: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # ../src/iostream.cpp:83:60: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 =sys-libs/libcxx-3.8.1 stricterfail
+# gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_a' will never be NULL [-Waddress]
+# gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_b' will never be NULL [-Waddress]
+# modules/other/gail/gailtreeview.c:1470:28: warning: the comparison will always evaluate as 'true' for the address of 'iter_to_row' will never be NULL [-Waddress]
+=x11-libs/gtk+-2.24.31 stricterfail
 # libdrm-2.4.70/xf86drmMode.c:891:15: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 =x11-libs/libdrm-2.4.70 stricterfail
 # ../i3-4.10.4/src/floating.c:743:5: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]

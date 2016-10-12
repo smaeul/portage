@@ -1,7 +1,7 @@
-diff --git a/i3-4.10.4/i3-config-wizard/main.c b/i3-fixed/i3-config-wizard/main.c
+diff --git i3-4.10.4/i3-config-wizard/main.c i3-fixed/i3-config-wizard/main.c
 index 35770dc..3687c0b 100644
---- a/i3-4.10.4/i3-config-wizard/main.c
-+++ b/i3-fixed/i3-config-wizard/main.c
+--- i3-4.10.4/i3-config-wizard/main.c
++++ i3-fixed/i3-config-wizard/main.c
 @@ -468,27 +468,15 @@ void debuglog(char *fmt, ...) {
   *
   */
@@ -39,10 +39,10 @@ index 35770dc..3687c0b 100644
  
      return result;
  }
-diff --git a/i3-4.10.4/i3bar/src/main.c b/i3-fixed/i3bar/src/main.c
+diff --git i3-4.10.4/i3bar/src/main.c i3-fixed/i3bar/src/main.c
 index a9a972d..43ae12a 100644
---- a/i3-4.10.4/i3bar/src/main.c
-+++ b/i3-fixed/i3bar/src/main.c
+--- i3-4.10.4/i3bar/src/main.c
++++ i3-fixed/i3bar/src/main.c
 @@ -45,13 +45,17 @@ void debuglog(char *fmt, ...) {
   *
   */
@@ -68,10 +68,10 @@ index a9a972d..43ae12a 100644
      return result;
  }
  
-diff --git a/i3-4.10.4/src/util.c b/i3-fixed/src/util.c
+diff --git i3-4.10.4/src/util.c i3-fixed/src/util.c
 index 5760ae7..94f21c6 100644
---- a/i3-4.10.4/src/util.c
-+++ b/i3-fixed/src/util.c
+--- i3-4.10.4/src/util.c
++++ i3-fixed/src/util.c
 @@ -166,27 +166,15 @@ void check_error(xcb_connection_t *conn, xcb_void_cookie_t cookie, char *err_mes
   *
   */

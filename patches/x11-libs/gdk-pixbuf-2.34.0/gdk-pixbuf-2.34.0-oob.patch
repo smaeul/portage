@@ -1,0 +1,13 @@
+diff --git gdk-pixbuf-2.34.0/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c gdk-pixbuf-fixed/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c
+index a871586..2f1c6c7 100644
+--- gdk-pixbuf-2.34.0/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c
++++ gdk-pixbuf-fixed/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c
+@@ -1354,7 +1354,7 @@ xlib_rgb_preprocess_dm_565 (void)
+       DM_565 = malloc(sizeof(guint32) * DM_WIDTH * DM_HEIGHT);
+       for (i = 0; i < DM_WIDTH * DM_HEIGHT; i++)
+ 	{
+-	  dith = DM[0][i] >> 3;
++	  dith = DM[i / 8][i % 8] >> 3;
+ 	  DM_565[i] = (dith << 20) | dith | (((7 - dith) >> 1) << 10);
+ #ifdef VERBOSE
+ 	  printf ("%i %x %x\n", i, dith, DM_565[i]);

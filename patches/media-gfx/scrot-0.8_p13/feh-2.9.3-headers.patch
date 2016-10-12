@@ -1,0 +1,13 @@
+diff --git feh-2.9.3/src/getopt.c feh-fixed/src/getopt.c
+index d212b3a..4d49d92 100644
+--- feh-2.9.3/src/getopt.c
++++ feh-fixed/src/getopt.c
+@@ -64,6 +64,8 @@
+ #include <unistd.h>
+ #endif				/* GNU C library.  */
+ 
++#include <string.h>
++
+ #ifdef VMS
+ #include <unixlib.h>
+ #if HAVE_STRING_H - 0

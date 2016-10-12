@@ -1,0 +1,37 @@
+diff --git iperf-3.0.12/src/cjson.h iperf-fixed/src/cjson.h
+index fb8cd3b..69cd272 100644
+--- iperf-3.0.12/src/cjson.h
++++ iperf-fixed/src/cjson.h
+@@ -23,6 +23,8 @@
+ #ifndef cJSON__h
+ #define cJSON__h
+ 
++#include <stdint.h>
++
+ #ifdef __cplusplus
+ extern "C"
+ {
+diff --git iperf-3.0.12/src/iperf_api.h iperf-fixed/src/iperf_api.h
+index c019a31..dd956fa 100644
+--- iperf-3.0.12/src/iperf_api.h
++++ iperf-fixed/src/iperf_api.h
+@@ -28,6 +28,7 @@
+ #define        __IPERF_API_H
+ 
+ #include <setjmp.h>
++#include <sys/select.h>
+ 
+ struct iperf_test;
+ struct iperf_stream_result;
+diff --git iperf-3.0.12/src/timer.h iperf-fixed/src/timer.h
+index 0f9c5eb..9b22b7f 100644
+--- iperf-3.0.12/src/timer.h
++++ iperf-fixed/src/timer.h
+@@ -30,6 +30,7 @@
+ #ifndef __TIMER_H
+ #define __TIMER_H
+ 
++#include <stdint.h>
+ #include <sys/time.h>
+ 
+ /* TimerClientData is an opaque value that tags along with a timer.  The

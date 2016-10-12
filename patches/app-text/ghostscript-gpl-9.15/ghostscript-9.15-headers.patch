@@ -1,0 +1,12 @@
+diff --git ghostscript-9.15/base/wrfont.c ghostscript-fixed/base/wrfont.c
+index fbac8ad..ee7b75c 100644
+--- ghostscript-9.15/base/wrfont.c
++++ ghostscript-fixed/base/wrfont.c
+@@ -21,6 +21,7 @@ Started by Graham Asher, 9th August 2002.
+ 
+ #include "wrfont.h"
+ #include "stdio_.h"
++#include <stdlib.h>
+ 
+ #define EEXEC_KEY 55665
+ #define EEXEC_FACTOR 52845

@@ -1,7 +1,7 @@
-diff --git a/libutempter-1.1.6/utempter.c b/libutempter-fixed/utempter.c
+diff --git libutempter-1.1.6/utempter.c libutempter-fixed/utempter.c
 index b79af97..13ed1a2 100644
---- a/libutempter-1.1.6/utempter.c
-+++ b/libutempter-fixed/utempter.c
+--- libutempter-1.1.6/utempter.c
++++ libutempter-fixed/utempter.c
 @@ -32,6 +32,7 @@
  #include <pwd.h>
  #include <sys/ioctl.h>

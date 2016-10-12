@@ -1,0 +1,26 @@
+diff --git bin86-0.16.21/ld/writebin.c bin86-fixed/ld/writebin.c
+index d3032e3..02b5862 100644
+--- bin86-0.16.21/ld/writebin.c
++++ bin86-fixed/ld/writebin.c
+@@ -66,7 +66,7 @@
+ 
+ #define ABS_TEXT_MAX 64
+ 
+-#define offsetof(struc, mem) ((int) &((struc *) 0)->mem)
++#define offsetof(struc, mem) ((unsigned long) &((struc *) 0)->mem)
+ #define memsizeof(struc, mem) sizeof(((struc *) 0)->mem)
+ 
+ PRIVATE bool_t bits32;		/* nonzero for 32-bit executable */
+diff --git bin86-0.16.21/ld/writex86.c bin86-fixed/ld/writex86.c
+index feb7b55..cb3450f 100644
+--- bin86-0.16.21/ld/writex86.c
++++ bin86-fixed/ld/writex86.c
+@@ -56,7 +56,7 @@
+ 
+ #define ABS_TEXT_MAX 64
+ 
+-#define offsetof(struc, mem) ((int) &((struc *) 0)->mem)
++#define offsetof(struc, mem) ((unsigned long) &((struc *) 0)->mem)
+ #define memsizeof(struc, mem) sizeof(((struc *) 0)->mem)
+ 
+ PRIVATE bool_t bits32;		/* nonzero for 32-bit executable */

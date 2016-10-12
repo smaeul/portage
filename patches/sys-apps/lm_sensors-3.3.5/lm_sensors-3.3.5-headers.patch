@@ -1,7 +1,7 @@
-diff --git a/lm_sensors-3.3.5/prog/dump/isadump.c b/lm_sensors-fixed/prog/dump/isadump.c
+diff --git lm_sensors-3.3.5/prog/dump/isadump.c lm_sensors-fixed/prog/dump/isadump.c
 index e031e47..3398612 100644
---- a/lm_sensors-3.3.5/prog/dump/isadump.c
-+++ b/lm_sensors-fixed/prog/dump/isadump.c
+--- lm_sensors-3.3.5/prog/dump/isadump.c
++++ lm_sensors-fixed/prog/dump/isadump.c
 @@ -33,17 +33,10 @@
  #include <stdlib.h>
  #include <unistd.h>
@@ -21,10 +21,10 @@ index e031e47..3398612 100644
  #ifdef __powerpc__
  unsigned long isa_io_base = 0; /* XXX for now */
  #endif /* __powerpc__ */
-diff --git a/lm_sensors-3.3.5/prog/dump/isaset.c b/lm_sensors-fixed/prog/dump/isaset.c
+diff --git lm_sensors-3.3.5/prog/dump/isaset.c lm_sensors-fixed/prog/dump/isaset.c
 index 1d1bdad..a5443b9 100644
---- a/lm_sensors-3.3.5/prog/dump/isaset.c
-+++ b/lm_sensors-fixed/prog/dump/isaset.c
+--- lm_sensors-3.3.5/prog/dump/isaset.c
++++ lm_sensors-fixed/prog/dump/isaset.c
 @@ -30,15 +30,8 @@
  #include <stdlib.h>
  #include <unistd.h>
@@ -42,10 +42,10 @@ index 1d1bdad..a5443b9 100644
  
  #ifdef __powerpc__
  unsigned long isa_io_base = 0; /* XXX for now */
-diff --git a/lm_sensors-3.3.5/prog/dump/superio.c b/lm_sensors-fixed/prog/dump/superio.c
+diff --git lm_sensors-3.3.5/prog/dump/superio.c lm_sensors-fixed/prog/dump/superio.c
 index 1af7358..a57cce6 100644
---- a/lm_sensors-3.3.5/prog/dump/superio.c
-+++ b/lm_sensors-fixed/prog/dump/superio.c
+--- lm_sensors-3.3.5/prog/dump/superio.c
++++ lm_sensors-fixed/prog/dump/superio.c
 @@ -20,13 +20,7 @@
  */
  
@@ -60,10 +60,10 @@ index 1af7358..a57cce6 100644
  #include "superio.h"
  
  int superio_parse_key(unsigned char *key, const char *s)
-diff --git a/lm_sensors-3.3.5/prog/dump/util.c b/lm_sensors-fixed/prog/dump/util.c
+diff --git lm_sensors-3.3.5/prog/dump/util.c lm_sensors-fixed/prog/dump/util.c
 index 676c339..aab9fae 100644
---- a/lm_sensors-3.3.5/prog/dump/util.c
-+++ b/lm_sensors-fixed/prog/dump/util.c
+--- lm_sensors-3.3.5/prog/dump/util.c
++++ lm_sensors-fixed/prog/dump/util.c
 @@ -9,14 +9,8 @@
  */
  

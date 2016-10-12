@@ -1,7 +1,7 @@
-diff --git a/libcxx-3.8.1.src/include/stddef.h b/libcxx-fixed/include/stddef.h
+diff --git libcxx-3.8.1.src/include/stddef.h libcxx-fixed/include/stddef.h
 index 8841bbe..12ec54f 100644
---- a/libcxx-3.8.1.src/include/stddef.h
-+++ b/libcxx-fixed/include/stddef.h
+--- libcxx-3.8.1.src/include/stddef.h
++++ libcxx-fixed/include/stddef.h
 @@ -52,11 +52,6 @@ extern "C++" {
  using std::nullptr_t;
  }

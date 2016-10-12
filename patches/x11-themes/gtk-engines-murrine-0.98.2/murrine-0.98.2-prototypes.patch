@@ -1,0 +1,35 @@
+diff --git murrine-0.98.2/src/murrine_rc_style.h murrine-fixed/src/murrine_rc_style.h
+index 8e3d7a8..2823e7a 100644
+--- murrine-0.98.2/src/murrine_rc_style.h
++++ murrine-fixed/src/murrine_rc_style.h
+@@ -154,5 +154,6 @@ struct _MurrineRcStyleClass
+ };
+ 
+ GType murrine_rc_style_get_type	(void);
++void murrine_rc_style_register_types (GTypeModule *module);
+ 
+ #endif /* MURRINE_RC_STYLE_H */
+diff --git murrine-0.98.2/src/murrine_style.h murrine-fixed/src/murrine_style.h
+index 33ae51c..1646e6d 100644
+--- murrine-0.98.2/src/murrine_style.h
++++ murrine-fixed/src/murrine_style.h
+@@ -102,5 +102,6 @@ struct _MurrineStyleClass
+ };
+ 
+ GType murrine_style_get_type (void);
++void murrine_style_register_types (GTypeModule *module);
+ 
+ #endif /* MURRINE_STYLE_H */
+diff --git murrine-0.98.2/src/support.h murrine-fixed/src/support.h
+index e141067..f73b066 100644
+--- murrine-0.98.2/src/support.h
++++ murrine-fixed/src/support.h
+@@ -122,6 +122,8 @@ G_GNUC_INTERNAL GtkTextDirection murrine_get_direction (GtkWidget *widget);
+ G_GNUC_INTERNAL GtkWidget *murrine_special_get_ancestor (GtkWidget *widget, GType widget_type);
+ G_GNUC_INTERNAL GdkColor* murrine_get_parent_bgcolor (GtkWidget *widget);
+ G_GNUC_INTERNAL GtkWidget* murrine_get_parent_window (GtkWidget *widget);
++G_GNUC_INTERNAL gboolean murrine_object_is_a (const GObject *object, const gchar *type_name);
++G_GNUC_INTERNAL gboolean murrine_widget_is_ltr (GtkWidget *widget);
+ G_GNUC_INTERNAL gboolean murrine_is_combo_box (GtkWidget *widget);
+ G_GNUC_INTERNAL gboolean murrine_is_combo_box_entry (GtkWidget *widget);
+ G_GNUC_INTERNAL GtkWidget* murrine_find_combo_box_widget(GtkWidget *widget);

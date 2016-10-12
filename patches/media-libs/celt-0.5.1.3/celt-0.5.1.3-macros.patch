@@ -1,0 +1,18 @@
+diff --git celt-0.5.1.3/libcelt/ecintrin.h celt-fixed/libcelt/ecintrin.h
+index d2d229a..1179234 100644
+--- celt-0.5.1.3/libcelt/ecintrin.h
++++ celt-fixed/libcelt/ecintrin.h
+@@ -48,6 +48,13 @@
+   _c: The upper boud.*/
+ #define EC_CLAMPI(_a,_b,_c) (EC_MAXI(_a,EC_MINI(_b,_c)))
+ 
++#ifndef __GNUC_PREREQ
++# if defined __GNUC__ && defined __GNUC_MINOR__
++#  define __GNUC_PREREQ(maj, min)  ((__GNUC__ << 16) + __GNUC_MINOR__ >= ((maj) << 16) + (min))
++# else
++#  define __GNUC_PREREQ(maj, min) 0
++# endif
++#endif
+ 
+ /*Count leading zeros.
+   This macro should only be used for implementing ec_ilog(), if it is defined.

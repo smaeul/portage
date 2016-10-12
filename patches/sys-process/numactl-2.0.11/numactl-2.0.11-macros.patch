@@ -1,0 +1,22 @@
+diff --git numactl-2.0.11/syscall.c numactl-fixed/syscall.c
+index 4589b85..7d366e8 100644
+--- numactl-2.0.11/syscall.c
++++ numactl-fixed/syscall.c
+@@ -115,7 +115,8 @@
+ 
+ #endif
+ 
+-#if defined(__GLIBC__) && __GLIBC_PREREQ(2, 11)
++#if defined(__GLIBC__)
++#if __GLIBC_PREREQ(2, 11)
+ 
+ /* glibc 2.11 seems to have working 6 argument sycall. Use the
+    glibc supplied syscall in this case.
+@@ -177,6 +178,7 @@ long syscall6(long call, long a, long b, long c, long d, long e, long f)
+        return res;
+ }
+ 
++#endif
+ #else
+ #define syscall6 syscall
+ #endif
