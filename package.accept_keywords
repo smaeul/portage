@@ -53,6 +53,7 @@ sys-libs/libcxx ~amd64
 sys-libs/libcxxrt ~amd64
 sys-libs/llvm-libunwind ~amd64
 sys-power/powertop ~amd64
+www-client/firefox ~amd64
 
 # These packages have a stable version, but it never seems to get updated.
 # Since these are standalone applications that are unlikely to break, I'll
@@ -65,28 +66,34 @@ sys-kernel/*-sources ~amd64
 # currently marked as testing. Only that specific version should be accepted
 # here, and it should be removed from this list once it is marked stable.
 #
-# Required for musl (npth vs. pth)
-=app-crypt/gnupg-2.1* ~amd64
+# Required for musl (headers)
+=app-emulation/runc-1.0.0* ~amd64
+# Required for libressl
+~app-text/mupdf-1.8 ~amd64
 # Required for libressl
 ~dev-lang/python-2.7.12 ~amd64
-# Required for gnupg 2.1.14+
-~dev-libs/libassuan-2.4.3 ~amd64
+~dev-lang/python-3.4.5 ~amd64
 # Required for libressl
 ~dev-libs/libevent-2.0.22 ~amd64
-# Required for gnupg 2.1.14+
-~dev-libs/libgpg-error-1.24 ~amd64
-# Required for gnupg 2.1.14+
-~dev-libs/npth-1.2 ~amd64
+# Required for firefox
+=dev-libs/nss-3.27* ~amd64
 # Required for libressl
 ~dev-python/m2crypto-0.24.0 ~amd64
 # Fixes font weights (stable version has Regular being Bold)
 ~media-fonts/roboto-2.134 ~amd64
+# Fixes FTBFS
+~media-gfx/inkscape-0.91 ~amd64
+# Fixes several crashes
+~net-im/bitlbee-3.4.2 ~amd64
 # Required for musl (res_randomid)
 ~net-libs/libasr-1.0.2.201602131606 ~amd64
+# Required for libressl
+~net-misc/socat-1.7.3.1 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64
 # Required for sanity?
 ~sys-devel/gcc-5.4.0 ~amd64
+# Required for stricter
 ~sys-libs/ncurses-6.0 ~amd64
 # Required for building with -ssl
 ~sys-power/nut-2.7.3 ~amd64

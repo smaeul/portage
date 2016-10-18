@@ -4,7 +4,6 @@ dev-cpp/cairomm X
 dev-lang/ocaml X
 # Required by x11-wm/i3
 x11-libs/cairo xcb
-x11-libs/libxcb xkb
 
 app-office/libreoffice gtk
 app-text/mupdf X

@@ -1,18 +1,24 @@
 # These USE changes are necessary to fulfill a dependency from another package.
+# Required by cups-filters
+app-text/poppler cxx
 # Required by thunderbird
 dev-db/sqlite secure-delete
 # Required by gentoolkit
 dev-lang/python xml
 # Required by ncmpcpp
 dev-libs/boost icu nls
+# Required by chromium
+dev-libs/libxml2 icu
 # Required by reportlab
 dev-python/pillow tiff
 # Required by inkscape[imagemagick]
 media-gfx/imagemagick cxx
+# Required by thunderbird
+media-libs/harfbuzz icu
 # Required by chromium
 media-libs/libpng apng
-# Required by thunderbird
-media-libs/libvpx postproc
+# Required by thunderbird (postproc) and chromium (svc)
+media-libs/libvpx postproc svc
 # Required by net-fs/samba
 sys-libs/ntdb python
 sys-libs/talloc python
@@ -20,60 +26,54 @@ sys-libs/tdb python
 sys-libs/tevent python
 # Required by chromium
 sys-libs/zlib minizip
+# Required by x11-wm/i3
+x11-libs/libxcb xkb
 
+app-accessibility/speech-dispatcher -espeak
+app-arch/libarchive -e2fsprogs
 app-editors/vim python
-app-emulation/qemu -curl -jpeg -opengl numa -png spice usb usbredir
-dev-lang/python readline wide-unicode
+app-emulation/qemu -curl -jpeg -opengl numa -png spice usb usbredir -vnc
+app-shells/bash -net
+dev-lang/python readline
 dev-lang/rust clang libcxx
-dev-libs/gmp asm
-dev-libs/libressl asm
 dev-ml/lablgtk -opengl
-dev-python/pypax xtpax
+dev-python/pypax -ptpax
+dev-scheme/guile -deprecated
 dev-util/cmake system-jsoncpp
-dev-util/pkgconf pkg-config
-dev-vcs/git blksha1 perl
+dev-vcs/git perl
 mail-client/nail -ssl
-mail-client/thunderbird system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
-mail-mta/opensmtpd mta
+mail-client/thunderbird -crypt -ffmpeg -gstreamer -jemalloc3 system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-gfx/imagemagick pango raw webp
 media-libs/imlib2 -mp3
-media-libs/mesa classic dri3 egl gallium gbm gles2 llvm
-media-sound/mpd libsoxr -sqlite -vorbis
-media-sound/pulseaudio alsa
+media-libs/libass -enca
+media-libs/mesa gles2
+media-sound/mpd libsoxr -sqlite
 media-video/ffmpeg libsoxr network
-media-video/mpv cli drm egl
-net-analyzer/tcpdump drop-root
+media-video/mpv drm -dvd egl -enca
 net-dns/bind-tools -idn urandom
-net-dns/dnsmasq dhcp inotify
-net-misc/dhcpcd embedded
+net-im/bitlbee -gnutls oscar -plugins -yahoo
+net-irc/weechat -charset
+net-libs/gnutls -crywrap -openssl
 net-misc/iputils -idn tracepath
-net-misc/spice-gtk usbredir
-net-wireless/wpa_supplicant p2p readline
-sys-apps/busybox static
-sys-apps/elfix xtpax
-sys-apps/hwids net pci usb
-sys-apps/kmod tools
-sys-apps/man-db berkdb
-sys-apps/net-tools arp hostname
-sys-apps/pciutils dns kmod
-sys-apps/util-linux -ncurses
+net-misc/spice-gtk lz4 usbredir
+net-print/cups -usb
+net-wireless/wpa_supplicant ap -hs2-0 p2p readline
+sys-apps/elfix -ptpax
+sys-apps/iproute2 -iptables
+sys-apps/man-db berkdb -manpager
+sys-apps/pciutils dns
+sys-apps/util-linux -cramfs -ncurses
 sys-devel/clang multitarget
-sys-devel/gdb client
 sys-devel/llvm clang default-compiler-rt default-libcxx multitarget
-sys-fs/eudev hwdb kmod
+sys-fs/cryptsetup -gcrypt -libressl nettle
+sys-fs/lvm2 -thin
 sys-kernel/*-sources symlink
 sys-libs/libcxx libcxxrt libunwind
 sys-libs/libcxxrt libunwind
-sys-power/nut -ssl ups_drivers_usbhid-ups usb
-sys-process/procps kill
-www-client/firefox system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+sys-power/nut -ssl -ups_drivers_* ups_drivers_usbhid-ups
+www-client/chromium -hangouts -tcmalloc
+www-client/firefox gtk2 -jemalloc3 system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 www-plugins/chrome-binary-plugins flash -widevine
-x11-apps/xinit minimal
-x11-base/xorg-server glamor xorg
-# There are reports of crashes when using DRI3
-x11-drivers/xf86-video-intel sna
+x11-base/xorg-server glamor
 x11-libs/gtk+ -vim-syntax
-x11-libs/libva drm egl
-x11-libs/libva-intel-driver drm
-x11-terms/rxvt-unicode 256-color alt-font-width font-styles iso14755 mousewheel secondary-wheel unicode3 wcwidth
-#x11-wm/i3 pango
+x11-terms/rxvt-unicode 256-color alt-font-width iso14755 secondary-wheel unicode3 -vanilla wcwidth

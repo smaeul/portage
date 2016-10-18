@@ -1,0 +1,4 @@
+app-portage/gentoolkit PYTHON_TARGETS: -python2_7 python3_4
+sys-apps/portage PYTHON_TARGETS: -python2_7 python3_4
+x11-misc/compton PYTHON_TARGETS: python3_4
+x11-misc/redshift PYTHON_TARGETS: python3_4

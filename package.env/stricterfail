@@ -3,17 +3,19 @@
 =dev-lang/perl-5.22.2 stricterfail
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
 ~dev-libs/boehm-gc-7.4.2 stricterfail
-# jarfile.c:696:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# jarfile.c:700:6: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# jarfile.c:701:6: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# jarfile.c:723:6: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# jarfile.c:728:6: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# jarfile.c:729:6: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# jarfile.c:767:3: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# jarfile.c:790:11: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# jarfile.c:791:4: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# jarfile.c:792:4: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=dev-libs/nss-3.23 stricterfail
+# jarfile.c:692:9: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:696:13: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:697:13: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:719:13: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:724:13: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:725:13: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:763:17: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:786:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:787:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# jarfile.c:788:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+=dev-libs/nss-3.27.1 stricterfail
+# extension/internal/image-resolution.cpp:179:25: warning: null argument where non-null required (argument 1) [-Wnonnull]
+=media-gfx/inkscape-0.91-r3 stricterfail
 # sshkey.c:2395:2: warning: implicit declaration of function 'arc4random_buf' [-Wimplicit-function-declaration]
 # sshkey.c:3097:2: warning: implicit declaration of function 'arc4random' [-Wimplicit-function-declaration]
 # bindresvport.c:92:3: warning: implicit declaration of function 'arc4random_uniform' [-Wimplicit-function-declaration]
