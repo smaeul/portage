@@ -33,6 +33,7 @@ app-accessibility/speech-dispatcher -espeak
 app-arch/libarchive -e2fsprogs
 app-editors/vim python
 app-emulation/qemu -curl -jpeg -opengl numa -png spice usb usbredir -vnc
+app-office/libreoffice -branding
 app-shells/bash -net
 dev-lang/python readline
 dev-lang/rust clang libcxx
@@ -47,7 +48,7 @@ media-gfx/imagemagick pango raw webp
 media-libs/imlib2 -mp3
 media-libs/libass -enca
 media-libs/mesa gles2
-media-sound/mpd libsoxr -sqlite
+media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
 media-video/ffmpeg libsoxr network
 media-video/mpv drm -dvd egl -enca
 net-dns/bind-tools -idn urandom

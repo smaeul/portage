@@ -1,4 +1,24 @@
-app-portage/gentoolkit PYTHON_TARGETS: -python2_7 python3_4
-sys-apps/portage PYTHON_TARGETS: -python2_7 python3_4
-x11-misc/compton PYTHON_TARGETS: python3_4
-x11-misc/redshift PYTHON_TARGETS: python3_4
+~app-admin/ansible-1.9.6 PYTHON_TARGETS: python2_7
+~app-emulation/qemu-2.7.0 PYTHON_TARGETS: python2_7
+~dev-libs/libixion-0.9.0 PYTHON_TARGETS: python2_7
+~dev-python/certifi-2015.11.20 PYTHON_TARGETS: python2_7
+#~dev-python/html5lib-0.9999999 PYTHON_TARGETS: python2_7
+~dev-python/httplib2-0.9.1 PYTHON_TARGETS: python2_7
+~dev-python/jinja-2.8 PYTHON_TARGETS: python2_7
+~dev-python/keyczar-0.715 PYTHON_TARGETS: python2_7
+~dev-python/lxml-3.6.0 PYTHON_TARGETS: python2_7
+~dev-python/markupsafe-0.23 PYTHON_TARGETS: python2_7
+~dev-python/numpy-1.10.4 PYTHON_TARGETS: python2_7
+~dev-python/pillow-3.1.1 PYTHON_TARGETS: python2_7
+~dev-python/pyasn1-0.1.8 PYTHON_TARGETS: python2_7
+~dev-python/pycairo-1.10.0 PYTHON_TARGETS: python2_7
+~dev-python/pycrypto-2.6.1 PYTHON_TARGETS: python2_7
+~dev-python/pyyaml-3.12 PYTHON_TARGETS: python2_7
+~dev-python/setuptools-20.6.7 PYTHON_TARGETS: python2_7
+#~dev-python/six-1.10.0 PYTHON_TARGETS: python2_7
+~media-gfx/inkscape-0.91 PYTHON_TARGETS: python2_7
+~media-gfx/uniconvertor-2.0_pre379 PYTHON_TARGETS: python2_7
+~media-libs/lensfun-0.3.1 PYTHON_TARGETS: python2_7
+~net-mail/offlineimap-6.5.6 PYTHON_TARGETS: python2_7
+~net-p2p/transmission-remote-cli-1.7.1 PYTHON_TARGETS: python2_7
+~sys-devel/llvm-3.8.1 PYTHON_TARGETS: python2_7

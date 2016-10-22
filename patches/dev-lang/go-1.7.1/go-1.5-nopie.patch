@@ -1,7 +1,7 @@
-diff --git src/cmd/link/internal/ld/lib.go src/cmd/link/internal/ld/lib.go
+diff --git go-1.7.1/src/cmd/link/internal/ld/lib.go go-1.7.1/src/cmd/link/internal/ld/lib.go
 index 8ccbec9dd634..4e96bfadc260 100644
---- src/cmd/link/internal/ld/lib.go
-+++ src/cmd/link/internal/ld/lib.go
+--- go-1.7.1/src/cmd/link/internal/ld/lib.go
++++ go-1.7.1/src/cmd/link/internal/ld/lib.go
 @@ -1194,6 +1194,11 @@ func hostlink() {
  		argv = append(argv, peimporteddlls()...)
  	}

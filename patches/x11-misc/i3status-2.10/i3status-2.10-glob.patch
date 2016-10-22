@@ -1,0 +1,54 @@
+diff --git a/i3status-2.10/i3status.c b/i3status-fixed/i3status.c
+index 3781425..3f3ce8f 100644
+--- a/i3status-2.10/i3status.c
++++ b/i3status-fixed/i3status.c
+@@ -196,27 +196,15 @@ static int valid_color(const char *value) {
+  *
+  */
+ static char *resolve_tilde(const char *path) {
+-    static glob_t globbuf;
+-    char *head, *tail, *result = NULL;
+-
+-    tail = strchr(path, '/');
+-    head = strndup(path, tail ? (size_t)(tail - path) : strlen(path));
+-
+-    int res = glob(head, GLOB_TILDE, NULL, &globbuf);
+-    free(head);
+-    /* no match, or many wildcard matches are bad */
+-    if (res == GLOB_NOMATCH || globbuf.gl_pathc != 1)
+-        result = sstrdup(path);
+-    else if (res != 0) {
+-        die("glob() failed");
+-    } else {
+-        head = globbuf.gl_pathv[0];
+-        result = scalloc(strlen(head) + (tail ? strlen(tail) : 0) + 1);
+-        strncpy(result, head, strlen(head));
+-        if (tail)
+-            strncat(result, tail, strlen(tail));
+-    }
+-    globfree(&globbuf);
++    char *home, *result;
++
++    if (strncmp(path, "~/", 2))
++        return strdup(path);
++
++    if(!(home = getenv("HOME")))
++        die("can't determine homedir");
++
++    asprintf(&result, "%s/%s", getenv("HOME"), path+2);
+ 
+     return result;
+ }
+diff --git a/i3status-2.10/src/process_runs.c b/i3status-fixed/src/process_runs.c
+index b5e8f11..27b88d6 100644
+--- a/i3status-2.10/src/process_runs.c
++++ b/i3status-fixed/src/process_runs.c
+@@ -24,7 +24,7 @@ bool process_runs(const char *path) {
+     static glob_t globbuf;
+     memset(pidbuf, 0, sizeof(pidbuf));
+ 
+-    if (glob(path, GLOB_NOCHECK | GLOB_TILDE, NULL, &globbuf) < 0)
++    if (glob(path, GLOB_NOCHECK, NULL, &globbuf) < 0)
+         die("glob() failed\n");
+     if (globbuf.gl_pathc == 0) {
+         /* No glob matches, the specified path does not contain a wildcard. */

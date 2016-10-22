@@ -16,6 +16,12 @@
 =dev-libs/nss-3.27.1 stricterfail
 # extension/internal/image-resolution.cpp:179:25: warning: null argument where non-null required (argument 1) [-Wnonnull]
 =media-gfx/inkscape-0.91-r3 stricterfail
+# libraries/libldap/open.c:251:7: warning: implicit declaration of function 'ldap_is_ldapc_url' [-Wimplicit-function-declaration]
+# open.c:251:7: warning: implicit declaration of function 'ldap_is_ldapc_url' [-Wimplicit-function-declaration]
+# servers/slapd/back-ldap/bind.c:722:2: warning: implicit declaration of function 'slap_client_keepalive' [-Wimplicit-function-declaration]
+# servers/slapd/back-meta/conn.c:424:2: warning: implicit declaration of function 'slap_client_keepalive' [-Wimplicit-function-declaration]
+# cloak.c:246:4: warning: implicit declaration of function 'attr_clean' [-Wimplicit-function-declaration]
+=net-nds/openldap-2.4.43-r1 stricterfail
 # sshkey.c:2395:2: warning: implicit declaration of function 'arc4random_buf' [-Wimplicit-function-declaration]
 # sshkey.c:3097:2: warning: implicit declaration of function 'arc4random' [-Wimplicit-function-declaration]
 # bindresvport.c:92:3: warning: implicit declaration of function 'arc4random_uniform' [-Wimplicit-function-declaration]

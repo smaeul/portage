@@ -1,0 +1,13 @@
+diff --git a/src/fsmonitor/linux/inotify_stubs.c b/src-fixed/fsmonitor/linux/inotify_stubs.c
+index d432cea..f1af028 100644
+--- a/src/fsmonitor/linux/inotify_stubs.c
++++ b/src-fixed/fsmonitor/linux/inotify_stubs.c
+@@ -29,7 +29,7 @@
+ 
+ #include <features.h>
+ 
+-#if __GLIBC__ >= 2 && __GLIBC_MINOR__ >= 4
++#if !defined(__GLIBC__) || (__GLIBC__ >= 2 && __GLIBC_MINOR__ >= 4)
+ #define GLIBC_SUPPORT_INOTIFY 1
+ #else
+ #define GLIBC_SUPPORT_INOTIFY 0
