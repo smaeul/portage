@@ -1,7 +1,6 @@
 # These packages are either only available as git repositories, or have
-# significant features added/changed since their latest release. As they
-# are relatively nonessential packages, I consider them basically safe to
-# install from git.
+# significant features added/changed/fixed since their latest release.
+=dev-util/catalyst-9999 **
 =x11-misc/compton-9999 **
 
 # I personally maintain or control versions of these packages, so keywords
@@ -81,6 +80,10 @@ x11-misc/i3status ~amd64
 =dev-libs/nss-3.27* ~amd64
 # Required for libressl
 ~dev-python/m2crypto-0.24.0 ~amd64
+# Required for catalyst
+=dev-python/pydecomp-9999 **
+# Required for catalyst
+~dev-python/snakeoil-0.7.0 ~amd64
 # Fixes font weights (stable version has Regular being Bold)
 ~media-fonts/roboto-2.134 ~amd64
 # Fixes FTBFS

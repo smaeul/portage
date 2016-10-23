@@ -14,6 +14,7 @@
 =sys-apps/iproute2-4.4.0-r99 fcommon
 =sys-apps/dtc-1.4.1 fcommon
 =sys-apps/kbd-2.0.3 fcommon
+~sys-fs/squashfs-tools-4.3 fcommon
 =sys-libs/gdbm-1.11-r99 fcommon
 =sys-process/htop-1.0.3 fcommon
 =x11-base/xorg-server-1.18.4 fcommon

@@ -1,4 +1,4 @@
-diff --git mupdf-1.8/source/fitz/load-jpx.c b/source/fitz/load-jpx.c
+diff --git mupdf-1.8/source/fitz/load-jpx.c source/fitz/load-jpx.c
 index 6b92e5c..72dea50 100644
 --- mupdf-1.8/source/fitz/load-jpx.c
 +++ mupdf-1.8/source/fitz/load-jpx.c

@@ -1,7 +1,7 @@
-diff --git a/ocaml-4.02.3/configure b/ocaml-fixed/configure
+diff --git ocaml-4.02.3/configure ocaml-fixed/configure
 index 4ea1498..4c84a18 100755
---- a/ocaml-4.02.3/configure
-+++ b/ocaml-fixed/configure
+--- ocaml-4.02.3/configure
++++ ocaml-fixed/configure
 @@ -688,7 +688,7 @@ if test $with_sharedlibs = "yes"; then
        mksharedlib="$flexlink"
        mkmaindll="$flexlink -maindll"

@@ -1,3 +1,8 @@
+# shash.gaa:49:3: warning: implicit declaration of function 'hash_license' [-Wimplicit-function-declaration]
+# shash.gaa:48:3: warning: implicit declaration of function 'hash_version' [-Wimplicit-function-declaration]
+# shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
+# shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
+=app-crypt/shash-0.2.6-r2 stricterfail
 # APItest.xs:5045:9: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
 # ../../../handy.h:111:31: warning: the address of 'PL_sv_undef' will always evaluate as 'true' [-Waddress]
 =dev-lang/perl-5.22.2 stricterfail
