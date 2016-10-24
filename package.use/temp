@@ -1,0 +1,5 @@
+sys-apps/dbus systemd
+sys-apps/systemd abi_x86_32
+sys-auth/pambase systemd
+virtual/libudev systemd
+virtual/udev systemd

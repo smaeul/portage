@@ -10,7 +10,7 @@ media-gfx/imagemagick cxx
 # Required by chromium
 media-libs/libpng apng
 # Required by thunderbird
-media-libs/libvpx postproc
+media-libs/libvpx postproc svc
 # One of berkdb or gdbm is required
 sys-apps/man-db berkdb
 # Required by app-emulation/docker
