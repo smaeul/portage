@@ -1,0 +1,13 @@
+diff --git openmp-3.9.0.src/runtime/src/kmp_str.c openmp-fixed/runtime/src/kmp_str.c
+index b5f7005..d7e3e16 100644
+--- openmp-3.9.0.src/runtime/src/kmp_str.c
++++ openmp-fixed/runtime/src/kmp_str.c
+@@ -208,7 +208,7 @@ __kmp_str_buf_vprint(
+ 
+             #if ! KMP_OS_WINDOWS
+                 va_list _args;
+-                __va_copy( _args, args );  // Make copy of args.
++                va_copy( _args, args );    // Make copy of args.
+                 #define args _args         // Substitute args with its copy, _args.
+             #endif // KMP_OS_WINDOWS
+             rc = KMP_VSNPRINTF( buffer->str + buffer->used, free, format, args );

@@ -19,11 +19,6 @@ media-libs/harfbuzz icu
 media-libs/libpng apng
 # Required by thunderbird (postproc) and chromium (svc)
 media-libs/libvpx postproc svc
-# Required by net-fs/samba
-sys-libs/ntdb python
-sys-libs/talloc python
-sys-libs/tdb python
-sys-libs/tevent python
 # Required by chromium
 sys-libs/zlib minizip
 # Required by x11-wm/i3
@@ -65,15 +60,15 @@ sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
 sys-apps/util-linux -cramfs -ncurses
-sys-devel/clang multitarget
-sys-devel/llvm clang default-compiler-rt default-libcxx multitarget
+sys-devel/binutils cxx
+sys-devel/llvm clang default-compiler-rt default-libcxx
 sys-fs/cryptsetup -gcrypt -libressl nettle
 sys-fs/lvm2 -thin
 sys-kernel/*-sources symlink
-sys-libs/libcxx libcxxrt libunwind
-sys-libs/libcxxrt libunwind
+sys-libs/libcxx libcxxabi -libcxxrt libunwind
+sys-libs/libcxxabi libunwind
 sys-power/nut -ssl -ups_drivers_* ups_drivers_usbhid-ups
-www-client/chromium -hangouts -tcmalloc
+www-client/chromium gn -hangouts suid -tcmalloc
 www-client/firefox gtk2 -jemalloc system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 www-plugins/chrome-binary-plugins flash -widevine
 x11-base/xorg-server glamor

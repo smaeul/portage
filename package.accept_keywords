@@ -48,9 +48,11 @@ dev-util/android-sdk-update-manager ~amd64
 dev-util/android-studio ~amd64
 net-misc/youtube-dl ~amd64
 sys-devel/clang ~amd64
+sys-devel/clang-runtime ~amd64
 sys-devel/llvm ~amd64
 sys-libs/libcxx ~amd64
-sys-libs/libcxxrt ~amd64
+sys-libs/libcxxabi ~amd64
+sys-libs/libomp ~amd64
 sys-libs/llvm-libunwind ~amd64
 sys-power/powertop ~amd64
 www-client/firefox ~amd64
@@ -59,8 +61,6 @@ www-client/firefox ~amd64
 # Since these are standalone applications that are unlikely to break, I'll
 # just use the testing version.
 net-irc/weechat ~amd64
-net-fs/samba ~amd64
-sys-kernel/*-sources ~amd64
 x11-misc/i3status ~amd64
 
 # The following packages have significant features or bugfixes in releases
@@ -84,6 +84,8 @@ x11-misc/i3status ~amd64
 =dev-python/pydecomp-9999 **
 # Required for catalyst
 ~dev-python/snakeoil-0.7.0 ~amd64
+# Required for sys-devel/clang-runtime-3.9.0
+~dev-util/cmake-3.6.2 ~amd64
 # Fixes font weights (stable version has Regular being Bold)
 ~media-fonts/roboto-2.134 ~amd64
 # Fixes FTBFS

@@ -1,7 +1,7 @@
-diff --git a/alsa-plugins-1.0.29/arcam-av/arcam_av.c b/alsa-plugins-fixed/arcam-av/arcam_av.c
+diff --git alsa-plugins-1.0.29/arcam-av/arcam_av.c alsa-plugins-fixed/arcam-av/arcam_av.c
 index 0491fc6..da19c53 100644
---- a/alsa-plugins-1.0.29/arcam-av/arcam_av.c
-+++ b/alsa-plugins-fixed/arcam-av/arcam_av.c
+--- alsa-plugins-1.0.29/arcam-av/arcam_av.c
++++ alsa-plugins-fixed/arcam-av/arcam_av.c
 @@ -27,13 +27,14 @@
  #include <signal.h>
  #include <stddef.h>
