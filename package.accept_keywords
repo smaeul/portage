@@ -27,6 +27,7 @@ net-misc/unison ~amd64
 net-misc/wireguard ~amd64
 net-p2p/syncthing ~amd64
 net-p2p/transmission-remote-cli ~amd64
+sys-boot/systemd-boot ~amd64
 sys-power/acpi_call ~amd64
 virtual/rust ~amd64
 
@@ -102,6 +103,8 @@ x11-misc/i3status ~amd64
 ~net-misc/socat-1.7.3.1 ~amd64
 # Required for libressl
 ~net-nds/openldap-2.4.43 ~amd64
+# Required for systemd-boot
+~sys-apps/util-linux-2.28.2 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64
 # Required for sanity?

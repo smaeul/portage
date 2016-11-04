@@ -27,7 +27,7 @@ x11-libs/libxcb xkb
 app-accessibility/speech-dispatcher -espeak
 app-arch/libarchive -e2fsprogs
 app-editors/vim python
-app-emulation/qemu -curl -jpeg -opengl numa -png spice usb usbredir -vnc
+app-emulation/qemu -curl -jpeg -opengl numa -png -pulseaudio spice usb usbredir -vnc
 app-shells/bash -net
 dev-lang/python readline
 dev-lang/rust clang libcxx
