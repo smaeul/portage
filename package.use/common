@@ -26,9 +26,12 @@ x11-libs/libxcb xkb
 
 app-accessibility/speech-dispatcher -espeak
 app-arch/libarchive -e2fsprogs
+app-crypt/gnupg readline
 app-editors/vim python
 app-emulation/qemu -curl -jpeg -opengl numa -png -pulseaudio spice usb usbredir -vnc
 app-shells/bash -net
+dev-java/icedtea nsplugin
+dev-java/icedtea-web nsplugin
 dev-lang/python readline
 dev-lang/rust clang libcxx
 dev-ml/lablgtk -opengl
@@ -46,7 +49,7 @@ media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
 media-sound/pulseaudio alsa -asyncns -glib
 media-video/ffmpeg libsoxr network
-media-video/mpv drm -dvd egl -enca
+media-video/mpv drm -dvd egl -enca -luajit
 net-dns/bind-tools -idn urandom
 net-im/bitlbee -gnutls oscar -plugins -yahoo
 net-irc/weechat -charset
@@ -54,6 +57,7 @@ net-libs/gnutls -crywrap -openssl
 net-misc/iputils -idn tracepath
 net-misc/spice-gtk lz4 -pulseaudio usbredir
 net-print/cups -usb
+net-wireless/hostapd -wps
 net-wireless/wpa_supplicant ap -hs2-0 p2p readline
 sys-apps/elfix -ptpax
 sys-apps/iproute2 -iptables
@@ -61,6 +65,7 @@ sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
 sys-apps/util-linux -cramfs -ncurses
 sys-devel/binutils cxx
+sys-devel/gcc -vtv
 sys-devel/llvm clang default-compiler-rt default-libcxx
 sys-fs/cryptsetup -gcrypt -libressl nettle
 sys-fs/lvm2 -thin
