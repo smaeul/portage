@@ -73,6 +73,7 @@ sys-fs/lvm2 -thin
 sys-kernel/*-sources symlink
 sys-libs/libcxx libcxxabi -libcxxrt libunwind
 sys-libs/libcxxabi libunwind
+sys-libs/zlib ABI_X86: 32
 sys-power/nut -ssl -ups_drivers_* ups_drivers_usbhid-ups
 www-client/chromium gn -hangouts suid -tcmalloc
 www-client/firefox gtk2 -jemalloc system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite

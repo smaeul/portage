@@ -1,13 +1,25 @@
+# pinentry-curses.c:110:18: warning: implicit declaration of function 'addnwstr' [-Wimplicit-function-declaration]
+=app-crypt/pinentry-0.9.5 stricterfail
 # shash.gaa:49:3: warning: implicit declaration of function 'hash_license' [-Wimplicit-function-declaration]
 # shash.gaa:48:3: warning: implicit declaration of function 'hash_version' [-Wimplicit-function-declaration]
 # shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
 # shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
 =app-crypt/shash-0.2.6-r2 stricterfail
+# affentry.hxx:34:105: warning: converting to non-pointer type 'short unsigned int' from NULL [-Wconversion-null]
+# affentry.hxx:101:114: warning: converting to non-pointer type 'short unsigned int' from NULL [-Wconversion-null]
+# affentry.hxx:34:105: warning: converting to non-pointer type 'short unsigned int' from NULL [-Wconversion-null]
+# affentry.hxx:101:114: warning: converting to non-pointer type 'short unsigned int' from NULL [-Wconversion-null]
+=app-text/hunspell-1.3.3 stricterfail
+# src/core/CLucene/index/DocumentsWriter.cpp:129:33: warning: passing NULL to non-pointer argument 2 of 'void* memset(void*, int, size_t)' [-Wconversion-null]
+=dev-cpp/clucene-2.3.3.4-r5 stricterfail
 # APItest.xs:5045:9: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
 # ../../../handy.h:111:31: warning: the address of 'PL_sv_undef' will always evaluate as 'true' [-Waddress]
 =dev-lang/perl-5.22.2 stricterfail
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
 ~dev-libs/boehm-gc-7.4.2 stricterfail
+# ./asn1-gentables.c:283:8: warning: implicit declaration of function 'ksba_asn_parse_file' [-Wimplicit-function-declaration]
+# ./asn1-gentables.c:289:9: warning: implicit declaration of function 'ksba_asn_tree_dump' [-Wimplicit-function-declaration]
+=dev-libs/libksba-1.3.5 stricterfail
 # jarfile.c:692:9: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:696:13: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:697:13: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
@@ -93,6 +105,8 @@
 # src/fallback_malloc.ipp:64:72: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # src/fallback_malloc.ipp:74:30: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 =sys-libs/libcxxabi-3.9.0 stricterfail
+# libpam_misc/misc_conv.c:329:19: warning: the address of 'binary_prompt' will always evaluate as 'true' [-Waddress]
+=sys-libs/pam-1.2.1 stricterfail
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_a' will never be NULL [-Waddress]
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_b' will never be NULL [-Waddress]
 # modules/other/gail/gailtreeview.c:1470:28: warning: the comparison will always evaluate as 'true' for the address of 'iter_to_row' will never be NULL [-Waddress]

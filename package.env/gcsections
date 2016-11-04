@@ -2,5 +2,7 @@
 dev-lang/ocaml gcsections
 # breaks configure tests
 =dev-lang/perl-5.22.2 gcsections
+# uses ld -r (crt files)
+sys-libs/glibc gcsections
 # breaks configure tests
 =x11-libs/cairo-1.14.6 gcsections
