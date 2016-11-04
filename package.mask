@@ -1,3 +1,5 @@
+dev-libs/libbsd::musl
 dev-util/pkgconfig
 sys-apps/openrc
 sys-libs/libunwind
+www-client/chromium::smaeul

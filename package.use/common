@@ -65,6 +65,7 @@ sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
 sys-apps/util-linux -cramfs -ncurses
+sys-auth/pambase minimal -nullok
 sys-devel/binutils cxx
 sys-devel/gcc -vtv
 sys-devel/llvm clang default-compiler-rt default-libcxx
