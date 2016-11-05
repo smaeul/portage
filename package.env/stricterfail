@@ -15,6 +15,12 @@
 # APItest.xs:5045:9: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
 # ../../../handy.h:111:31: warning: the address of 'PL_sv_undef' will always evaluate as 'true' [-Waddress]
 =dev-lang/perl-5.22.2 stricterfail
+# !WX --- --- usr/lib64/rust-1.12.1/rustlib/x86_64-unknown-linux-gnu/lib/libcompiler-rt.a:chkstk.o
+# !WX --- --- usr/lib64/rust-1.12.1/rustlib/x86_64-unknown-linux-gnu/lib/libcompiler-rt.a:chkstk2.o
+# !WX --- --- usr/lib64/rust-1.12.1/rustlib/x86_64-unknown-linux-gnu/lib/libcompiler-rt.a:floatundidf.o
+# !WX --- --- usr/lib64/rust-1.12.1/rustlib/x86_64-unknown-linux-gnu/lib/libcompiler-rt.a:floatundisf.o
+# !WX --- --- usr/lib64/rust-1.12.1/rustlib/x86_64-unknown-linux-gnu/lib/libcompiler-rt.a:floatundixf.o
+=dev-lang/rust-1.12.1-r1 stricterfail
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
 ~dev-libs/boehm-gc-7.4.2 stricterfail
 # ./asn1-gentables.c:283:8: warning: implicit declaration of function 'ksba_asn_parse_file' [-Wimplicit-function-declaration]
