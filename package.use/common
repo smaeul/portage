@@ -29,9 +29,11 @@ app-arch/libarchive -e2fsprogs
 app-crypt/gnupg readline
 app-editors/vim python
 app-emulation/qemu -curl -jpeg -opengl numa -png -pulseaudio spice usb usbredir -vnc
+app-eselect/eselect-php fpm
 app-shells/bash -net
 dev-java/icedtea nsplugin
 dev-java/icedtea-web nsplugin
+dev-lang/php -exif fpm readline pdo postgres -truetype -webp
 dev-lang/python readline
 dev-lang/rust clang libcxx
 dev-ml/lablgtk -opengl

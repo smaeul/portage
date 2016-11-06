@@ -72,6 +72,8 @@ x11-misc/i3status ~amd64
 =app-emulation/runc-1.0.0* ~amd64
 # Required for libressl
 ~app-text/mupdf-1.8 ~amd64
+# Required for PHP7
+dev-lang/php:7.0 ~amd64
 # Required for libressl
 ~dev-lang/python-2.7.12 ~amd64
 ~dev-lang/python-3.4.5 ~amd64
