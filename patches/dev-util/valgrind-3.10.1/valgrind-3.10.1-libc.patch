@@ -1,7 +1,7 @@
-diff --git a/valgrind-3.10.1/configure.ac b/valgrind-fixed/configure.ac
+diff --git valgrind-3.10.1/configure.ac valgrind-fixed/configure.ac
 index 0fd2a41..bc87c37 100644
---- a/valgrind-3.10.1/configure.ac
-+++ b/valgrind-fixed/configure.ac
+--- valgrind-3.10.1/configure.ac
++++ valgrind-fixed/configure.ac
 @@ -1031,8 +1031,6 @@ case "${GLIBC_VERSION}" in
  
       *)
@@ -11,10 +11,10 @@ index 0fd2a41..bc87c37 100644
  	;;
  esac
  
-diff --git a/valgrind-3.10.1/coregrind/vg_preloaded.c b/valgrind-fixed/coregrind/vg_preloaded.c
+diff --git valgrind-3.10.1/coregrind/vg_preloaded.c valgrind-fixed/coregrind/vg_preloaded.c
 index 775f8b2..99db912 100644
---- a/valgrind-3.10.1/coregrind/vg_preloaded.c
-+++ b/valgrind-fixed/coregrind/vg_preloaded.c
+--- valgrind-3.10.1/coregrind/vg_preloaded.c
++++ valgrind-fixed/coregrind/vg_preloaded.c
 @@ -56,7 +56,7 @@
  void VG_NOTIFY_ON_LOAD(freeres)( void );
  void VG_NOTIFY_ON_LOAD(freeres)( void )
@@ -24,10 +24,10 @@ index 775f8b2..99db912 100644
     && !defined(VGPV_arm_linux_android) && !defined(VGPV_x86_linux_android) \
     && !defined(VGPV_mips32_linux_android)
     extern void __libc_freeres(void);
-diff --git a/valgrind-3.10.1/include/pub_tool_redir.h b/valgrind-fixed/include/pub_tool_redir.h
+diff --git valgrind-3.10.1/include/pub_tool_redir.h valgrind-fixed/include/pub_tool_redir.h
 index f99ffb7..dddcefb 100644
---- a/valgrind-3.10.1/include/pub_tool_redir.h
-+++ b/valgrind-fixed/include/pub_tool_redir.h
+--- valgrind-3.10.1/include/pub_tool_redir.h
++++ valgrind-fixed/include/pub_tool_redir.h
 @@ -241,7 +241,7 @@
  /* --- Soname of the standard C library. --- */
  

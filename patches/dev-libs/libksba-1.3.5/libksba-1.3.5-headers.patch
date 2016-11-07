@@ -1,0 +1,38 @@
+diff --git libksba-1.3.5/src/asn1-gentables.c libksba-fixed/src/asn1-gentables.c
+index c418fe1..c73bd71 100644
+--- libksba-1.3.5/src/asn1-gentables.c
++++ libksba-fixed/src/asn1-gentables.c
+@@ -23,6 +23,7 @@
+ #include <errno.h>
+ #include <stdarg.h>
+ 
++#include "ksba.h"
+ #include "gen-help.h"
+ #include "asn1-func.h"
+ 
+diff --git libksba-1.3.5/src/gen-help.c libksba-fixed/src/gen-help.c
+index 419f7e2..24baf45 100644
+--- libksba-1.3.5/src/gen-help.c
++++ libksba-fixed/src/gen-help.c
+@@ -95,7 +95,7 @@ gen_help_stpcpy (char *a, const char *b)
+ 
+ /* Simple replacement function to avoid the need for a build libgpg-error */
+ const char *
+-gpg_strerror (int err)
++gpg_strerror (unsigned int err)
+ {
+   switch (err)
+     {
+diff --git libksba-1.3.5/src/gen-help.h libksba-fixed/src/gen-help.h
+index c0a3776..2f562f7 100644
+--- libksba-1.3.5/src/gen-help.h
++++ libksba-fixed/src/gen-help.h
+@@ -86,7 +86,7 @@ char *gen_help_stpcpy (char *a, const char *b);
+ 
+ #define gpg_error(a)  (a)
+ #define gpg_error_from_syserror() (GPG_ERR_GENERAL);
+-const char *gpg_strerror (int err);
++const char *gpg_strerror (unsigned int err);
+ 
+ /* Duplicated type definitions from ksba.h.  */
+ typedef struct ksba_asn_tree_s *ksba_asn_tree_t;
