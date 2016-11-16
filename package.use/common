@@ -56,6 +56,7 @@ net-im/bitlbee -gnutls oscar -plugins -yahoo
 net-irc/weechat -charset
 net-libs/gnutls -crywrap -openssl
 net-misc/iputils -idn tracepath
+net-misc/openvpn iproute2 -plugins
 net-misc/spice-gtk lz4 -pulseaudio usbredir
 net-print/cups -usb
 net-wireless/hostapd -wps

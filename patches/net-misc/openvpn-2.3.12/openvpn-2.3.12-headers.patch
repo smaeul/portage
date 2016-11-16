@@ -1,0 +1,25 @@
+diff --git a/openvpn-2.3.12/src/openvpn/crypto_openssl.c b/openvpn-fixed/src/openvpn/crypto_openssl.c
+index 2180b1a..b7bc6d8 100644
+--- a/openvpn-2.3.12/src/openvpn/crypto_openssl.c
++++ b/openvpn-fixed/src/openvpn/crypto_openssl.c
+@@ -45,6 +45,7 @@
+ #include <openssl/objects.h>
+ #include <openssl/evp.h>
+ #include <openssl/des.h>
++#include <openssl/rand.h>
+ 
+ /*
+  * Check for key size creepage.
+diff --git a/openvpn-2.3.12/src/openvpn/tun.c b/openvpn-fixed/src/openvpn/tun.c
+index 11027dd..2d923fd 100644
+--- a/openvpn-2.3.12/src/openvpn/tun.c
++++ b/openvpn-fixed/src/openvpn/tun.c
+@@ -1492,6 +1492,8 @@ close_tun_generic (struct tuntap *tt)
+ 
+ #if defined(TARGET_LINUX)
+ 
++#include <sys/uio.h>
++
+ #ifdef HAVE_LINUX_IF_TUN_H	/* New driver support */
+ 
+ #ifndef HAVE_LINUX_SOCKIOS_H
