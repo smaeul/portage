@@ -1,7 +1,7 @@
-diff --git a/openvpn-2.3.12/src/openvpn/crypto_openssl.c b/openvpn-fixed/src/openvpn/crypto_openssl.c
+diff --git openvpn-2.3.12/src/openvpn/crypto_openssl.c openvpn-fixed/src/openvpn/crypto_openssl.c
 index 2180b1a..b7bc6d8 100644
---- a/openvpn-2.3.12/src/openvpn/crypto_openssl.c
-+++ b/openvpn-fixed/src/openvpn/crypto_openssl.c
+--- openvpn-2.3.12/src/openvpn/crypto_openssl.c
++++ openvpn-fixed/src/openvpn/crypto_openssl.c
 @@ -45,6 +45,7 @@
  #include <openssl/objects.h>
  #include <openssl/evp.h>
@@ -10,10 +10,10 @@ index 2180b1a..b7bc6d8 100644
  
  /*
   * Check for key size creepage.
-diff --git a/openvpn-2.3.12/src/openvpn/tun.c b/openvpn-fixed/src/openvpn/tun.c
+diff --git openvpn-2.3.12/src/openvpn/tun.c openvpn-fixed/src/openvpn/tun.c
 index 11027dd..2d923fd 100644
---- a/openvpn-2.3.12/src/openvpn/tun.c
-+++ b/openvpn-fixed/src/openvpn/tun.c
+--- openvpn-2.3.12/src/openvpn/tun.c
++++ openvpn-fixed/src/openvpn/tun.c
 @@ -1492,6 +1492,8 @@ close_tun_generic (struct tuntap *tt)
  
  #if defined(TARGET_LINUX)
