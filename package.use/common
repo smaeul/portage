@@ -33,7 +33,7 @@ app-eselect/eselect-php fpm
 app-shells/bash -net
 dev-java/icedtea nsplugin
 dev-java/icedtea-web nsplugin
-dev-lang/php -exif fpm readline pdo postgres -truetype -webp
+dev-lang/php -exif fpm mysql mysqli pdo postgres readline -truetype -webp
 dev-lang/python readline
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
