@@ -1,4 +1,5 @@
 */* -libressl
 mail-client/thunderbird -system-cairo
 net-misc/curl -curl_ssl_libressl
+>=sys-devel/llvm-3.9.0 -lldb
 www-client/firefox -system-cairo

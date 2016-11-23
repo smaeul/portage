@@ -6,22 +6,27 @@
 # I personally maintain or control versions of these packages, so keywords
 # are irrelevant, since they are updated manually anyway.
 app-emulation/kvm-tools::smaeul **
+dev-lang/zig::smaeul **
 sys-firmware/ovmf-bin::smaeul **
 sys-fs/zfs::smaeul **
 sys-fs/zfs-kmod::smaeul **
+sys-kernel/hardened-kernel::smaeul **
 sys-kernel/spl::smaeul **
-=x11-misc/i3status-mpd-9999 **
-=x11-misc/j4-dmenu-desktop-9999 **
+x11-misc/i3status-mpd::smaeul **
+x11-misc/j4-dmenu-desktop::smaeul **
+www-client/w3m::smaeul **
 
 # These packages have no stable version, so at least one version must be
 # accepted in order to install the package at all.
 app-eselect/eselect-rust ~amd64
 app-laptop/tpacpi-bat ~amd64
 app-mobilephone/heimdall ~amd64
+dev-dotnet/coreclr ~amd64
 dev-java/icedtea ~amd64
 dev-lang/rust ~amd64
 dev-libs/libressl ~amd64
 dev-util/cargo ~amd64
+dev-util/lldb ~amd64
 net-firewall/nftables ~amd64
 net-misc/unison ~amd64
 net-misc/wireguard ~amd64
@@ -31,7 +36,7 @@ sys-boot/systemd-boot ~amd64
 sys-power/acpi_call ~amd64
 virtual/rust ~amd64
 
-# I trust the maintainer of the following packages to not cause significant
+# I trust the author of the following packages to not cause significant
 # breakage; plus some of these packages have no stable version. I care more
 # about the packages matching versions (not mixing old and new).
 dev-lang/execline ~amd64
@@ -51,6 +56,7 @@ net-misc/youtube-dl ~amd64
 sys-devel/clang ~amd64
 sys-devel/clang-runtime ~amd64
 sys-devel/llvm ~amd64
+sys-kernel/hardened-sources ~amd64
 sys-libs/libcxx ~amd64
 sys-libs/libcxxabi ~amd64
 sys-libs/libomp ~amd64
@@ -62,7 +68,6 @@ www-client/firefox ~amd64
 # Since these are standalone applications that are unlikely to break, I'll
 # just use the testing version.
 net-irc/weechat ~amd64
-x11-misc/i3status ~amd64
 
 # The following packages have significant features or bugfixes in releases
 # currently marked as testing. Only that specific version should be accepted
@@ -70,8 +75,6 @@ x11-misc/i3status ~amd64
 #
 # Required for musl (headers)
 =app-emulation/runc-1.0.0* ~amd64
-# Required for libressl
-~app-text/mupdf-1.8 ~amd64
 # Required for PHP7
 dev-lang/php:7.0 ~amd64
 # Required for libressl
@@ -88,11 +91,9 @@ dev-lang/php:7.0 ~amd64
 # Required for catalyst
 ~dev-python/snakeoil-0.7.0 ~amd64
 # Required for sys-devel/clang-runtime-3.9.0
-~dev-util/cmake-3.6.2 ~amd64
+~dev-util/cmake-3.7.0 ~amd64
 # Fixes font weights (stable version has Regular being Bold)
 ~media-fonts/roboto-2.134 ~amd64
-# Fixes FTBFS
-~media-gfx/inkscape-0.91 ~amd64
 # Required for musl+gcc5
 =media-sound/mpd-0.19* ~amd64
 # Fixes several crashes
@@ -117,5 +118,3 @@ dev-lang/php:7.0 ~amd64
 ~sys-libs/ncurses-6.0 ~amd64
 # Required for building with -ssl
 ~sys-power/nut-2.7.3 ~amd64
-# Required for libressl
-~www-client/w3m-0.5.3 ~amd64

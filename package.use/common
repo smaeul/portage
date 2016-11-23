@@ -68,7 +68,7 @@ sys-apps/pciutils dns
 sys-apps/util-linux -cramfs -ncurses
 sys-devel/binutils cxx
 sys-devel/gcc -vtv
-sys-devel/llvm clang default-compiler-rt default-libcxx
+sys-devel/llvm clang default-compiler-rt default-libcxx lldb xml
 sys-fs/cryptsetup -gcrypt -libressl nettle
 sys-fs/lvm2 -thin
 sys-kernel/*-sources symlink
