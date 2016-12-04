@@ -1,0 +1,180 @@
+diff --git smartmontools-6.4/smartd.cpp smartmontools-fixed/smartd.cpp
+index 98c8ca4..7b41784 100644
+--- smartmontools-6.4/smartd.cpp
++++ smartmontools-fixed/smartd.cpp
+@@ -163,9 +162,6 @@ static std::string warning_script;
+ // command-line: when should we exit?
+ static int quit=0;
+ 
+-// command-line; this is the default syslog(3) log facility to use.
+-static int facility=LOG_DAEMON;
+-
+ #ifndef _WIN32
+ // command-line: fork into background?
+ static bool do_fork=true;
+@@ -194,7 +190,7 @@ static volatile int caughtsigHUP=0;
+ // set to signal value if we catch INT, QUIT, or TERM
+ static volatile int caughtsigEXIT=0;
+ 
+-// This function prints either to stdout or to the syslog as needed.
++// This function prints to stdout as needed.
+ static void PrintOut(int priority, const char *fmt, ...)
+                      __attribute_format_printf(2, 3);
+ 
+@@ -1192,27 +1188,6 @@ static void reset_warning_mail(const dev_config & cfg, dev_state & state, int wh
+   state.must_write = true;
+ }
+ 
+-#ifndef _WIN32
+-
+-// Output multiple lines via separate syslog(3) calls.
+-static void vsyslog_lines(int priority, const char * fmt, va_list ap)
+-{
+-  char buf[512+EBUFLEN]; // enough space for exec cmd output in MailWarning()
+-  vsnprintf(buf, sizeof(buf), fmt, ap);
+-
+-  for (char * p = buf, * q; p && *p; p = q) {
+-    if ((q = strchr(p, '\n')))
+-      *q++ = 0;
+-    if (*p)
+-      syslog(priority, "%s\n", p);
+-  }
+-}
+-
+-#else  // _WIN32
+-// os_win32/syslog_win32.cpp supports multiple lines.
+-#define vsyslog_lines vsyslog
+-#endif // _WIN32
+-
+ // Printing function for watching ataprint commands, or losing them
+ // [From GLIBC Manual: Since the prototype doesn't specify types for
+ // optional arguments, in a call to a variadic function the default
+@@ -1223,52 +1198,28 @@ static void vsyslog_lines(int priority, const char * fmt, va_list ap)
+ void pout(const char *fmt, ...){
+   va_list ap;
+ 
+-  // get the correct time in syslog()
++  // get the correct time
+   FixGlibcTimeZoneBug();
+   // initialize variable argument list 
+   va_start(ap,fmt);
+-  // in debugmode==1 mode we will print the output from the ataprint.o functions!
+-  if (debugmode && debugmode != 2) {
+-    FILE * f = stdout;
+-#ifdef _WIN32
+-    if (facility == LOG_LOCAL1) // logging to stdout
+-      f = stderr;
+-#endif
+-    vfprintf(f, fmt, ap);
+-    fflush(f);
+-  }
+-  // in debugmode==2 mode we print output from knowndrives.o functions
+-  else if (debugmode==2 || ata_debugmode || scsi_debugmode) {
+-    openlog("smartd", LOG_PID, facility);
+-    vsyslog_lines(LOG_INFO, fmt, ap);
+-    closelog();
+-  }
++  FILE * f = stdout;
++  vfprintf(f, fmt, ap);
++  fflush(f);
+   va_end(ap);
+   return;
+ }
+ 
+-// This function prints either to stdout or to the syslog as needed.
++// This function prints to stdout as needed.
+ static void PrintOut(int priority, const char *fmt, ...){
+   va_list ap;
+   
+-  // get the correct time in syslog()
++  // get the correct time
+   FixGlibcTimeZoneBug();
+   // initialize variable argument list 
+   va_start(ap,fmt);
+-  if (debugmode) {
+-    FILE * f = stdout;
+-#ifdef _WIN32
+-    if (facility == LOG_LOCAL1) // logging to stdout
+-      f = stderr;
+-#endif
+-    vfprintf(f, fmt, ap);
+-    fflush(f);
+-  }
+-  else {
+-    openlog("smartd", LOG_PID, facility);
+-    vsyslog_lines(priority, fmt, ap);
+-    closelog();
+-  }
++  FILE * f = stdout;
++  vfprintf(f, fmt, ap);
++  fflush(f);
+   va_end(ap);
+   return;
+ }
+@@ -1518,12 +1469,6 @@ static void Usage()
+   PrintOut(LOG_INFO,"        Display this help and exit\n\n");
+   PrintOut(LOG_INFO,"  -i N, --interval=N\n");
+   PrintOut(LOG_INFO,"        Set interval between disk checks to N seconds, where N >= 10\n\n");
+-  PrintOut(LOG_INFO,"  -l local[0-7], --logfacility=local[0-7]\n");
+-#ifndef _WIN32
+-  PrintOut(LOG_INFO,"        Use syslog facility local0 - local7 or daemon [default]\n\n");
+-#else
+-  PrintOut(LOG_INFO,"        Log to \"./smartd.log\", stdout, stderr [default is event log]\n\n");
+-#endif
+ #ifndef _WIN32
+   PrintOut(LOG_INFO,"  -n, --no-fork\n");
+   PrintOut(LOG_INFO,"        Do not fork into background\n\n");
+@@ -4417,7 +4362,6 @@ static void ParseOpts(int argc, char **argv)
+   // Please update GetValidArgList() if you edit longopts
+   struct option longopts[] = {
+     { "configfile",     required_argument, 0, 'c' },
+-    { "logfacility",    required_argument, 0, 'l' },
+     { "quit",           required_argument, 0, 'q' },
+     { "debug",          no_argument,       0, 'd' },
+     { "showdirectives", no_argument,       0, 'D' },
+@@ -4477,27 +4421,6 @@ static void ParseOpts(int argc, char **argv)
+       }
+       break;
+     case 'l':
+-      // set the log facility level
+-      if (!strcmp(optarg, "daemon"))
+-        facility=LOG_DAEMON;
+-      else if (!strcmp(optarg, "local0"))
+-        facility=LOG_LOCAL0;
+-      else if (!strcmp(optarg, "local1"))
+-        facility=LOG_LOCAL1;
+-      else if (!strcmp(optarg, "local2"))
+-        facility=LOG_LOCAL2;
+-      else if (!strcmp(optarg, "local3"))
+-        facility=LOG_LOCAL3;
+-      else if (!strcmp(optarg, "local4"))
+-        facility=LOG_LOCAL4;
+-      else if (!strcmp(optarg, "local5"))
+-        facility=LOG_LOCAL5;
+-      else if (!strcmp(optarg, "local6"))
+-        facility=LOG_LOCAL6;
+-      else if (!strcmp(optarg, "local7"))
+-        facility=LOG_LOCAL7;
+-      else
+-        badarg = true;
+       break;
+     case 'd':
+       // enable debug mode
+diff --git smartmontools-6.4/utility.cpp smartmontools-fixed/utility.cpp
+index ee6aadb..a94fe0f 100644
+--- smartmontools-6.4/utility.cpp
++++ smartmontools-fixed/utility.cpp
+@@ -221,6 +221,13 @@ void FixGlibcTimeZoneBug(){
+     }
+     tzset();
+   }
++#else
++  if (!getenv("TZ")) {
++    putenv((char *)"TZ=GMT"); // POSIX prototype is 'int putenv(char *)'
++    tzset();
++    putenv((char *)"TZ");
++    tzset();
++  }
+ #endif
+   // OTHER OS/LIBRARY FIXES SHOULD GO HERE, IF DESIRED.  PLEASE TRY TO
+   // KEEP THEM INDEPENDENT.
