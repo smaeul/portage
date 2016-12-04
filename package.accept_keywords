@@ -14,7 +14,6 @@ sys-kernel/hardened-kernel::smaeul **
 sys-kernel/spl::smaeul **
 x11-misc/i3status-mpd::smaeul **
 x11-misc/j4-dmenu-desktop::smaeul **
-www-client/w3m::smaeul **
 
 # These packages have no stable version, so at least one version must be
 # accepted in order to install the package at all.
@@ -68,6 +67,7 @@ www-client/firefox ~amd64
 # Since these are standalone applications that are unlikely to break, I'll
 # just use the testing version.
 net-irc/weechat ~amd64
+www-client/w3m ~amd64
 
 # The following packages have significant features or bugfixes in releases
 # currently marked as testing. Only that specific version should be accepted
