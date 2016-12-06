@@ -55,7 +55,6 @@ net-misc/youtube-dl ~amd64
 sys-devel/clang ~amd64
 sys-devel/clang-runtime ~amd64
 sys-devel/llvm ~amd64
-sys-kernel/hardened-sources ~amd64
 sys-libs/libcxx ~amd64
 sys-libs/libcxxabi ~amd64
 sys-libs/libomp ~amd64
@@ -118,3 +117,4 @@ dev-lang/php:7.0 ~amd64
 ~sys-libs/ncurses-6.0 ~amd64
 # Required for building with -ssl
 ~sys-power/nut-2.7.3 ~amd64
+=sys-devel/gdb-7.12 ~amd64
