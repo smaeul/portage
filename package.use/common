@@ -30,10 +30,12 @@ app-crypt/gnupg readline
 app-editors/vim python
 app-emulation/qemu -curl -jpeg -opengl numa -png -pulseaudio spice usb usbredir -vnc
 app-eselect/eselect-php fpm
+app-office/libreoffice java
 app-shells/bash -net
+dev-db/sqlite -icu
 dev-java/icedtea nsplugin
 dev-java/icedtea-web nsplugin
-dev-lang/php -exif fpm mysql mysqli pdo postgres readline -truetype -webp
+dev-lang/php -exif fpm pdo postgres readline -truetype -webp
 dev-lang/python readline
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
@@ -61,6 +63,7 @@ net-misc/spice-gtk lz4 -pulseaudio usbredir
 net-print/cups -usb
 net-wireless/hostapd -wps
 net-wireless/wpa_supplicant ap -hs2-0 p2p readline
+sys-apps/busybox savedconfig
 sys-apps/elfix -ptpax
 sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
@@ -74,6 +77,7 @@ sys-fs/lvm2 -thin
 sys-kernel/*-sources symlink
 sys-libs/libcxx libcxxabi -libcxxrt libunwind
 sys-libs/libcxxabi libunwind
+sys-libs/ncurses:5 tinfo
 sys-power/nut -ssl -ups_drivers_* ups_drivers_usbhid-ups
 www-client/chromium gn -hangouts suid -tcmalloc
 www-client/firefox gtk2 -jemalloc system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
