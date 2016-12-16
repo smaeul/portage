@@ -92,6 +92,8 @@ dev-lang/php:7.0 ~amd64
 ~dev-python/snakeoil-0.7.0 ~amd64
 # Required for sys-devel/clang-runtime-3.9.0
 ~dev-util/cmake-3.7.0 ~amd64
+# Required for musl
+~dev-vcs/git-2.11.0 ~amd64
 # Fixes font weights (stable version has Regular being Bold)
 ~media-fonts/roboto-2.134 ~amd64
 # Required for musl+gcc5
