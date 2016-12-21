@@ -1,34 +1,28 @@
-diff -ur i3-4.10.4/src/x.c i3-fixed/src/x.c
---- i3-4.10.4/src/x.c	2015-09-08 02:19:20.000000000 -0500
-+++ i3-fixed/src/x.c	2015-10-02 21:34:09.428300216 -0500
-@@ -490,7 +490,7 @@
+diff --git i3-4.13/src/x.c i3-fixed/src/x.c
+index 8d7d3dd..4982e0e 100644
+--- i3-4.13/src/x.c
++++ i3-fixed/src/x.c
+@@ -556,9 +556,9 @@ void x_draw_decoration(Con *con) {
  
-     /* 6: draw the title */
-     set_font_colors(parent->pm_gc, p->color->text, p->color->background);
--    int text_offset_y = (con->deco_rect.height - config.font.height) / 2;
-+    int text_offset_y = (con->deco_rect.height - config.font.height) / 2 + 1;
- 
-     struct Window *win = con->window;
-     if (win == NULL) {
-@@ -504,8 +504,8 @@
- 
-         draw_text_ascii(title,
-                         parent->pixmap, parent->pm_gc,
--                        con->deco_rect.x + 2, con->deco_rect.y + text_offset_y,
--                        con->deco_rect.width - 2);
-+                        con->deco_rect.x + 8, con->deco_rect.y + text_offset_y,
-+                        con->deco_rect.width - 8);
-         free(title);
+         draw_util_text(title, &(parent->frame_buffer),
+                        p->color->text, p->color->background,
+-                       con->deco_rect.x + logical_px(2),
++                       con->deco_rect.x + logical_px(8),
+                        con->deco_rect.y + text_offset_y,
+-                       con->deco_rect.width - 2 * logical_px(2));
++                       con->deco_rect.width - logical_px(8));
+         I3STRING_FREE(title);
  
          goto after_title;
-@@ -533,8 +533,8 @@
+@@ -602,9 +602,9 @@ void x_draw_decoration(Con *con) {
+     i3String *title = con->title_format == NULL ? win->name : con_parse_title_format(con);
+     draw_util_text(title, &(parent->frame_buffer),
+                    p->color->text, p->color->background,
+-                   con->deco_rect.x + logical_px(2),
++                   con->deco_rect.x + logical_px(8),
+                    con->deco_rect.y + text_offset_y,
+-                   con->deco_rect.width - mark_width - 2 * logical_px(2));
++                   con->deco_rect.width - mark_width - logical_px(8));
+     if (con->title_format != NULL)
+         I3STRING_FREE(title);
  
-     draw_text(win->name,
-               parent->pixmap, parent->pm_gc,
--              con->deco_rect.x + 2 + indent_px, con->deco_rect.y + text_offset_y,
--              con->deco_rect.width - 2 - indent_px);
-+              con->deco_rect.x + 8 + indent_px, con->deco_rect.y + text_offset_y,
-+              con->deco_rect.width - 8 - indent_px);
- 
- after_title:
-     /* Since we don’t clip the text at all, it might in some cases be painted

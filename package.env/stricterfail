@@ -3,9 +3,11 @@
 # shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
 # shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
 =app-crypt/shash-0.2.6-r2 stricterfail
-# APItest.xs:5045:9: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
+# config.h:1402:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
+# pp_sys.c:214:38: warning: implicit declaration of function 'eaccess' [-Wimplicit-function-declaration]
+# ../../config.h:1402:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
 # ../../../handy.h:111:31: warning: the address of 'PL_sv_undef' will always evaluate as 'true' [-Waddress]
-=dev-lang/perl-5.22.2 stricterfail
+=dev-lang/perl-5.22.3_rc4 stricterfail
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
 ~dev-libs/boehm-gc-7.4.2 stricterfail
 # jarfile.c:692:9: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
@@ -29,10 +31,6 @@
 =net-nds/openldap-2.4.43-r1 stricterfail
 # libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]
 =sys-apps/acl-2.2.52-r1 stricterfail
-# marvell.c:426:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# marvell.c:427:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# marvell.c:428:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=sys-apps/ethtool-3.18 stricterfail
 # dbprintf.c:24:9: warning: implicit declaration of function 'vdbprintf' [-Wimplicit-function-declaration]
 # dbprintf.c:30:60: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
 # dbprintf.c:110:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
@@ -68,12 +66,12 @@
 # projects/compiler-rt/lib/builtins/atomic.c:308:12: warning: implicit declaration of function '__c11_atomic_fetch_and' [-Wimplicit-function-declaration]
 # projects/compiler-rt/lib/builtins/atomic.c:308:12: warning: implicit declaration of function '__c11_atomic_fetch_or' [-Wimplicit-function-declaration]
 # projects/compiler-rt/lib/builtins/atomic.c:308:12: warning: implicit declaration of function '__c11_atomic_fetch_xor' [-Wimplicit-function-declaration]
-=sys-devel/llvm-3.9.0-r1 stricterfail
+=sys-devel/llvm-3.9.1 stricterfail
 # include/typeinfo:116:62: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=sys-libs/libcxx-3.9.0 stricterfail
+=sys-libs/libcxx-3.9.1 stricterfail
 # src/fallback_malloc.ipp:64:72: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # src/fallback_malloc.ipp:74:30: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=sys-libs/libcxxabi-3.9.0 stricterfail
+=sys-libs/libcxxabi-3.9.1 stricterfail
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_a' will never be NULL [-Waddress]
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_b' will never be NULL [-Waddress]
 # modules/other/gail/gailtreeview.c:1470:28: warning: the comparison will always evaluate as 'true' for the address of 'iter_to_row' will never be NULL [-Waddress]

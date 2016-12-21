@@ -1,6 +1,6 @@
-diff -ru sal.orig/osl/unx/backtrace.h sal/osl/unx/backtrace.h
---- a/sal/osl/unx/backtrace.h	2015-01-22 22:05:28.000000000 -0200
-+++ b/sal/osl/unx/backtrace.h	2015-02-02 17:06:27.765494731 -0200
+diff -ru libreoffice-4.4.1.2/sal/osl/unx/backtrace.h libreoffice-4.4.1.2/sal/osl/unx/backtrace.h
+--- libreoffice-4.4.1.2/sal/osl/unx/backtrace.h	2015-01-22 22:05:28.000000000 -0200
++++ libreoffice-4.4.1.2/sal/osl/unx/backtrace.h	2015-02-02 17:06:27.765494731 -0200
 @@ -47,7 +47,7 @@
  
  #endif /* defined SOLARIS || FREEBSD || NETBSD || OPENBSD */
@@ -10,9 +10,9 @@ diff -ru sal.orig/osl/unx/backtrace.h sal/osl/unx/backtrace.h
  #include <execinfo.h>
  #endif
  
-diff -ru sal.orig/osl/unx/signal.cxx sal/osl/unx/signal.cxx
---- a/sal/osl/unx/signal.cxx	2015-01-22 22:05:28.000000000 -0200
-+++ b/sal/osl/unx/signal.cxx	2015-02-02 17:06:53.495496086 -0200
+diff -ru libreoffice-4.4.1.2/sal/osl/unx/signal.cxx libreoffice-4.4.1.2/sal/osl/unx/signal.cxx
+--- libreoffice-4.4.1.2/sal/osl/unx/signal.cxx	2015-01-22 22:05:28.000000000 -0200
++++ libreoffice-4.4.1.2/sal/osl/unx/signal.cxx	2015-02-02 17:06:53.495496086 -0200
 @@ -36,7 +36,7 @@
  
  #endif /* MACOSX */

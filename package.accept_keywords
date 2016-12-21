@@ -27,7 +27,6 @@ dev-libs/libressl ~amd64
 dev-util/cargo ~amd64
 dev-util/lldb ~amd64
 net-firewall/nftables ~amd64
-net-misc/unison ~amd64
 net-misc/wireguard ~amd64
 net-p2p/syncthing ~amd64
 net-p2p/transmission-remote-cli ~amd64
@@ -35,6 +34,7 @@ sci-misc/boinc ~amd64
 sys-boot/systemd-boot ~amd64
 sys-power/acpi_call ~amd64
 virtual/rust ~amd64
+x11-libs/xcb-util-xrm ~amd64
 
 # I trust the author of the following packages to not cause significant
 # breakage; plus some of these packages have no stable version. I care more
@@ -67,7 +67,7 @@ www-client/firefox ~amd64
 # Since these are standalone applications that are unlikely to break, I'll
 # just use the testing version.
 net-irc/weechat ~amd64
-www-client/w3m ~amd64
+net-misc/unison ~amd64
 
 # The following packages have significant features or bugfixes in releases
 # currently marked as testing. Only that specific version should be accepted
@@ -78,9 +78,6 @@ www-client/w3m ~amd64
 # Required for PHP7
 dev-lang/php:7.0 ~amd64
 # Required for libressl
-~dev-lang/python-2.7.12 ~amd64
-~dev-lang/python-3.4.5 ~amd64
-# Required for libressl
 ~dev-libs/libevent-2.0.22 ~amd64
 # Required for firefox
 =dev-libs/nss-3.27* ~amd64
@@ -90,14 +87,12 @@ dev-lang/php:7.0 ~amd64
 =dev-python/pydecomp-9999 **
 # Required for catalyst
 ~dev-python/snakeoil-0.7.0 ~amd64
-# Required for sys-devel/clang-runtime-3.9.0
-~dev-util/cmake-3.7.0 ~amd64
 # Required for musl
 ~dev-vcs/git-2.11.0 ~amd64
-# Fixes font weights (stable version has Regular being Bold)
-~media-fonts/roboto-2.134 ~amd64
 # Required for musl+gcc5
 =media-sound/mpd-0.19* ~amd64
+# Required to fix fcommon
+~media-video/mpv-0.22.0 ~amd64
 # Fixes several crashes
 ~net-im/bitlbee-3.4.2 ~amd64
 # Required for musl (res_randomid)
@@ -108,16 +103,21 @@ dev-lang/php:7.0 ~amd64
 ~net-misc/socat-1.7.3.1 ~amd64
 # Required for libressl
 ~net-nds/openldap-2.4.43 ~amd64
+# Does not fix fcommon
+~net-print/cups-filters-1.13.1 ~amd64
+# Required to fix stricter
+~sys-apps/ethtool-4.8 ~amd64
+# Does not fix fcommon
+~sys-apps/iproute2-4.9.0 ~amd64
 # Required for systemd-boot
 ~sys-apps/util-linux-2.28.2 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64
 # Required for sanity?
 ~sys-devel/gcc-5.4.0 ~amd64
-# Required for android-studio
-=sys-libs/ncurses-5.9-r101 ~amd64
-# Required for stricter
-~sys-libs/ncurses-6.0 ~amd64
+# Required for patches
+~sys-devel/gdb-7.12 ~amd64
 # Required for building with -ssl
 ~sys-power/nut-2.7.3 ~amd64
-=sys-devel/gdb-7.12 ~amd64
+# Does not fix fcommon and stricter
+~x11-wm/i3-4.13 ~amd64

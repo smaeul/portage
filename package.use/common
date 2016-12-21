@@ -52,7 +52,7 @@ media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
 media-sound/pulseaudio alsa -asyncns -glib
 media-video/ffmpeg libsoxr network
-media-video/mpv drm -dvd egl -enca -luajit
+media-video/mpv drm -dvd egl -enca -luajit -uchardet
 net-dns/bind-tools -idn urandom
 net-im/bitlbee -gnutls oscar -plugins -yahoo
 net-irc/weechat -charset
@@ -62,6 +62,7 @@ net-misc/iputils -idn tracepath
 net-misc/openvpn iproute2 -plugins
 net-misc/spice-gtk lz4 -pulseaudio usbredir
 net-print/cups -usb
+net-print/cups-filters pdf
 net-wireless/hostapd -wps
 net-wireless/wpa_supplicant ap -hs2-0 p2p readline
 sys-apps/busybox savedconfig

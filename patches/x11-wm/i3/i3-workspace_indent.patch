@@ -1,12 +1,13 @@
-diff -ur i3-4.10.4/i3bar/src/xcb.c i3-fixed/i3bar/src/xcb.c
---- i3-4.10.4/i3bar/src/xcb.c	2015-09-08 02:19:20.000000000 -0500
-+++ i3-fixed/i3bar/src/xcb.c	2015-10-03 10:20:45.905602460 -0500
-@@ -1791,7 +1791,7 @@
-  */
- void draw_bars(bool unhide) {
-     DLOG("Drawing bars...\n");
+diff --git i3-4.13/i3bar/src/xcb.c i3-fixed/i3bar/src/xcb.c
+index 2715e44..26d83fc 100644
+--- i3-4.13/i3bar/src/xcb.c
++++ i3-fixed/i3bar/src/xcb.c
+@@ -465,7 +465,7 @@ void handle_button(xcb_button_press_event_t *event) {
+ 
+     DLOG("Got button %d\n", event->detail);
+ 
 -    int workspace_width = 0;
-+    int workspace_width = 2;
++    int workspace_width = logical_px(2);
+     i3_ws *cur_ws = NULL, *clicked_ws = NULL, *ws_walk;
  
-     refresh_statusline(false);
- 
+     TAILQ_FOREACH(ws_walk, walk->workspaces, tailq) {
