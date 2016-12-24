@@ -119,5 +119,7 @@ dev-lang/php:7.0 ~amd64
 ~sys-devel/gdb-7.12 ~amd64
 # Required for building with -ssl
 ~sys-power/nut-2.7.3 ~amd64
+# Required for no $USER
+~x11-misc/slock-1.4 ~amd64
 # Does not fix fcommon and stricter
 ~x11-wm/i3-4.13 ~amd64
