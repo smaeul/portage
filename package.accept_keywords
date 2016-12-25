@@ -75,6 +75,8 @@ net-misc/unison ~amd64
 #
 # Required for musl (headers)
 =app-emulation/runc-1.0.0* ~amd64
+# Cleans up /etc/portage
+~app-portage/portage-utils-0.64 ~amd64
 # Required for PHP7
 dev-lang/php:7.0 ~amd64
 # Required for libressl
