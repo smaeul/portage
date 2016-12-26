@@ -41,6 +41,8 @@ x11-libs/xcb-util-xrm ~amd64
 # about the packages matching versions (not mixing old and new).
 dev-lang/execline ~amd64
 dev-libs/skalibs ~amd64
+net-dns/s6-dns ~amd64
+net-misc/s6-networking ~amd64
 sys-apps/s6 ~amd64
 sys-apps/s6-linux-init ~amd64
 sys-apps/s6-linux-utils ~amd64
