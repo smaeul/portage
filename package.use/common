@@ -21,6 +21,8 @@ media-libs/libpng apng
 media-libs/libvpx postproc svc
 # Required by chromium
 sys-libs/zlib minizip
+# Required by LEDE/OpenWRT image builder
+sys-libs/zlib static-libs
 # Required by x11-wm/i3
 x11-libs/libxcb xkb
 
