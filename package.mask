@@ -1,3 +1,4 @@
 dev-util/pkgconfig
 sys-apps/openrc
+sys-kernel/linux-headers::gentoo
 sys-libs/libunwind
