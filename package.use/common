@@ -45,10 +45,11 @@ dev-scheme/guile -deprecated
 dev-util/cmake system-jsoncpp
 dev-vcs/git perl
 mail-client/nail -ssl
-mail-client/thunderbird -crypt -ffmpeg -gstreamer -jemalloc3 system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+mail-client/thunderbird -crypt -ffmpeg -gstreamer -jemalloc3 jit system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-gfx/imagemagick pango raw webp
 media-libs/imlib2 -mp3
 media-libs/libass -enca
+media-libs/libcanberra -gtk3 -sound -udev
 media-libs/mesa gles2
 media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
