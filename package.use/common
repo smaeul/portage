@@ -78,7 +78,8 @@ sys-devel/gcc -vtv
 sys-devel/llvm clang default-compiler-rt default-libcxx lldb xml
 sys-fs/cryptsetup -gcrypt -libressl nettle
 sys-fs/lvm2 -thin
-sys-kernel/*-sources symlink
+sys-kernel/hardened-sources symlink
+sys-kernel/linux-firmware savedconfig
 sys-libs/libcxx libcxxabi -libcxxrt libunwind
 sys-libs/libcxxabi libunwind
 sys-libs/ncurses:5 tinfo

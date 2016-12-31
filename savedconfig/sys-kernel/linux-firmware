@@ -1,0 +1,4 @@
+# Remove files that shall not be installed from this list.
+iwlwifi-6000g2a-6.ucode
+iwlwifi-7260-17.ucode
+rtl_nic/rtl8168e-3.fw
