@@ -100,6 +100,8 @@ dev-lang/php:7.0 ~amd64
 ~net-im/bitlbee-3.4.2 ~amd64
 # Required for musl (res_randomid)
 ~net-libs/libasr-1.0.2.201602131606 ~amd64
+# Required for nftables 0.7
+~net-libs/libnftnl-1.0.7 ~amd64
 # Required for libressl
 ~net-libs/neon-0.30.1 ~amd64
 # Required for libressl
