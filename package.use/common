@@ -67,7 +67,7 @@ net-misc/spice-gtk lz4 -pulseaudio usbredir
 net-print/cups -usb
 net-print/cups-filters pdf
 net-wireless/hostapd -wps
-net-wireless/wpa_supplicant ap -hs2-0 p2p readline
+net-wireless/wpa_supplicant ap -hs2-0 readline
 sys-apps/busybox savedconfig
 sys-apps/elfix -ptpax
 sys-apps/iproute2 -iptables
