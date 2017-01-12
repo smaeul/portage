@@ -1,0 +1,12 @@
+diff --git libasr-1.0.2/openbsd-compat/defines.h libasr-1.0.2/openbsd-compat/defines.h
+--- libasr-1.0.2/openbsd-compat/defines.h
++++ libasr-1.0.2/openbsd-compat/defines.h
+@@ -832,7 +832,7 @@ struct winsize {
+ #endif
+ 
+ #ifndef NETDB_SUCCESS
+-# define NETDB_SUCCESS -1
++# define NETDB_SUCCESS 0
+ #endif
+ 
+ /* end of chl */
