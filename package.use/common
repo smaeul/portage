@@ -86,7 +86,7 @@ sys-libs/libcxxabi libunwind
 sys-libs/ncurses:5 tinfo
 sys-power/nut -ssl -ups_drivers_* ups_drivers_usbhid-ups
 www-client/chromium gn -hangouts suid -tcmalloc
-www-client/firefox gtk2 -jemalloc system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+www-client/firefox -gmp-autoupdate gtk2 -jemalloc system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 www-plugins/chrome-binary-plugins flash -widevine
 x11-base/xorg-server glamor
 x11-libs/gtk+ -vim-syntax
