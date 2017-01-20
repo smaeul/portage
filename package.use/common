@@ -57,6 +57,7 @@ media-sound/pulseaudio alsa -asyncns -glib
 media-video/ffmpeg libsoxr network
 media-video/mpv drm -dvd egl -enca -luajit -uchardet
 net-dns/bind-tools -idn urandom
+net-fs/samba -cups
 net-im/bitlbee -gnutls oscar -plugins -yahoo
 net-irc/weechat -charset
 net-libs/gnutls -crywrap -openssl
@@ -81,6 +82,7 @@ sys-fs/cryptsetup -gcrypt -libressl nettle
 sys-fs/lvm2 -thin
 sys-kernel/hardened-sources symlink
 sys-kernel/linux-firmware savedconfig
+sys-libs/ldb -ldap
 sys-libs/libcxx libcxxabi -libcxxrt libunwind
 sys-libs/libcxxabi libunwind
 sys-libs/ncurses:5 tinfo

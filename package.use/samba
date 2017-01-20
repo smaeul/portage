@@ -1,0 +1,6 @@
+net-fs/samba PYTHON_TARGETS: python2_7
+sys-libs/ldb PYTHON_TARGETS: python2_7
+sys-libs/ntdb python PYTHON_TARGETS: python2_7
+sys-libs/talloc python PYTHON_TARGETS: python2_7
+sys-libs/tdb python PYTHON_TARGETS: python2_7
+sys-libs/tevent python PYTHON_TARGETS: python2_7

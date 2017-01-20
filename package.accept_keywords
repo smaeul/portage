@@ -72,6 +72,13 @@ www-client/firefox ~amd64
 net-irc/weechat ~amd64
 net-misc/unison ~amd64
 
+# These packages are just broken any way you look at them
+net-fs/samba ~amd64
+sys-libs/ldb ~amd64
+sys-libs/talloc ~amd64
+sys-libs/tdb ~amd64
+sys-libs/tevent ~amd64
+
 # The following packages have significant features or bugfixes in releases
 # currently marked as testing. Only that specific version should be accepted
 # here, and it should be removed from this list once it is marked stable.

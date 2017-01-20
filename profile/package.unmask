@@ -1,0 +1,3 @@
+>=net-fs/samba-4.3.0
+>=sys-libs/ldb-1.1.29
+>=sys-libs/tevent-0.9.30
