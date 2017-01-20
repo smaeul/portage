@@ -113,7 +113,7 @@ dev-lang/php:7.0 ~amd64
 # Required for libressl
 ~net-nds/openldap-2.4.43 ~amd64
 # Does not fix fcommon
-~net-print/cups-filters-1.13.1 ~amd64
+~net-print/cups-filters-1.13.3 ~amd64
 # Required to fix stricter
 ~sys-apps/ethtool-4.8 ~amd64
 # Does not fix fcommon

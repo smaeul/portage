@@ -12,7 +12,7 @@
 ~net-libs/libtirpc-0.2.5 fcommon
 =net-misc/freerdp-2.0.0_pre20160722 fcommon
 =net-misc/openntpd-6.0_p1 fcommon
-=net-print/cups-filters-1.13.1 fcommon
+=net-print/cups-filters-1.13.3 fcommon
 =sys-apps/iproute2-4.9.0 fcommon
 =sys-apps/dtc-1.4.1 fcommon
 =sys-apps/kbd-2.0.3 fcommon
