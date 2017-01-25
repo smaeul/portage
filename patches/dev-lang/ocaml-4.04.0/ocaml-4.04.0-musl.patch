@@ -1,0 +1,12 @@
+diff --git ocaml-4.04.0/configure.orig ocaml-4.04.0/configure
+index f43893a..a0e8ebc 100755
+--- ocaml-4.04.0/configure.orig
++++ ocaml-4.04.0/configure
+@@ -698,6 +698,7 @@ if test $with_sharedlibs = "yes"; then
+       mkmaindll="$flexlink -maindll"
+       shared_libraries_supported=true;;
+     *-*-linux-gnu|*-*-linux|*-*-freebsd[3-9]*|*-*-freebsd[1-9][0-9]*\
++    |*-*-linux-musl\
+     |*-*-openbsd*|*-*-netbsd*|*-*-dragonfly*|*-*-gnu*|*-*-haiku*)
+       sharedcccompopts="-fPIC"
+       mksharedlib="$bytecc -shared"

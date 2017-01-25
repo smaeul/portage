@@ -1,7 +1,7 @@
 =app-arch/cpio-2.12-r1 fcommon
 =app-crypt/gnupg-2.1.15 fcommon
 =dev-java/icedtea-3.2.0 fcommon
-=dev-lang/ocaml-4.02.3 fcommon
+=dev-lang/ocaml-4.04.0 fcommon
 ~dev-libs/boehm-gc-7.4.2 fcommon
 =dev-util/lttng-ust-2.7.1 fcommon
 ~mail-mta/opensmtpd-6.0.2_p1 fcommon

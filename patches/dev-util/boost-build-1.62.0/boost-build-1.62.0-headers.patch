@@ -1,0 +1,60 @@
+diff --git src/engine/execcmd.c b/build-fixed/src/engine/execcmd.c
+index 193c906..37584d5 100644
+--- src/engine/execcmd.c
++++ b/build-fixed/src/engine/execcmd.c
+@@ -10,6 +10,7 @@
+ 
+ #include "jam.h"
+ #include "execcmd.h"
++#include "output.h"
+ 
+ #include <assert.h>
+ #include <stdio.h>
+diff --git src/engine/filesys.h b/build-fixed/src/engine/filesys.h
+index 5b7f392..5f58c40 100644
+--- src/engine/filesys.h
++++ b/build-fixed/src/engine/filesys.h
+@@ -88,6 +88,7 @@ FILELIST * filelist_push_front( FILELIST * list, OBJECT * path );
+ FILELIST * filelist_pop_front( FILELIST * list );
+ int filelist_length( FILELIST * list );
+ void filelist_free( FILELIST * list );
++int filelist_empty( FILELIST * list );
+ 
+ FILELISTITER filelist_begin( FILELIST * list );
+ FILELISTITER filelist_end( FILELIST * list );
+diff --git src/engine/fileunix.c b/build-fixed/src/engine/fileunix.c
+index 766b0af..e9fa7ee 100644
+--- src/engine/fileunix.c
++++ b/build-fixed/src/engine/fileunix.c
+@@ -219,6 +219,7 @@ void file_supported_fmt_resolution( timestamp * const t )
+     timestamp_init( t, 1, 0 );
+ }
+ 
++int file_collect_archive_content_( file_archive_info_t * const archive );
+ 
+ /*
+  * file_archscan() - scan an archive for files
+diff --git src/engine/make.c b/build-fixed/src/engine/make.c
+index 56a6745..5b2f61f 100644
+--- src/engine/make.c
++++ b/build-fixed/src/engine/make.c
+@@ -39,6 +39,7 @@
+ #include "headers.h"
+ #include "lists.h"
+ #include "object.h"
++#include "output.h"
+ #include "parse.h"
+ #include "rules.h"
+ #include "search.h"
+diff --git src/engine/modules/path.c b/build-fixed/src/engine/modules/path.c
+index f8dedac..a689092 100644
+--- src/engine/modules/path.c
++++ b/build-fixed/src/engine/modules/path.c
+@@ -5,6 +5,7 @@
+  */
+ 
+ #include "../constants.h"
++#include "../filesys.h"
+ #include "../frames.h"
+ #include "../lists.h"
+ #include "../native.h"
