@@ -45,7 +45,7 @@ dev-scheme/guile -deprecated
 dev-util/cmake system-jsoncpp
 dev-vcs/git perl
 mail-client/nail -ssl
-mail-client/thunderbird -crypt -ffmpeg -gstreamer -jemalloc3 jit system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+mail-client/thunderbird -crypt -ffmpeg -gstreamer -jemalloc3 jit system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-gfx/imagemagick pango raw webp
 media-libs/imlib2 -mp3
 media-libs/libass -enca
@@ -88,7 +88,7 @@ sys-libs/libcxxabi libunwind
 sys-libs/ncurses:5 tinfo
 sys-power/nut -ssl -ups_drivers_* ups_drivers_usbhid-ups
 www-client/chromium gn -hangouts suid -tcmalloc
-www-client/firefox -gmp-autoupdate gtk2 -jemalloc system-cairo system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+www-client/firefox -gmp-autoupdate gtk2 -jemalloc system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 www-plugins/chrome-binary-plugins flash -widevine
 x11-base/xorg-server glamor
 x11-libs/gtk+ -vim-syntax
