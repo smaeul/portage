@@ -67,6 +67,7 @@ sys-libs/libomp ~amd64
 sys-libs/llvm-libunwind ~amd64
 sys-power/powertop ~amd64
 www-client/firefox ~amd64
+x11-drivers/xf86-video-intel ~amd64
 
 # These packages have a stable version, but it never seems to get updated.
 # Since these are standalone applications that are unlikely to break, I'll
@@ -74,7 +75,7 @@ www-client/firefox ~amd64
 net-irc/weechat ~amd64
 net-misc/unison ~amd64
 
-# These packages are just broken any way you look at them
+# These packages are just broken any way you look at them.
 net-fs/samba ~amd64
 sys-libs/ldb ~amd64
 sys-libs/talloc ~amd64
@@ -89,6 +90,8 @@ sys-libs/tevent ~amd64
 =app-emulation/runc-1.0.0* ~amd64
 # Cleans up /etc/portage
 ~app-portage/portage-utils-0.64 ~amd64
+# Required for firefox
+=dev-db/sqlite-3.16.2 ~amd64
 # Required for PHP7
 dev-lang/php:7.0 ~amd64
 # Required for newer bcron
@@ -118,7 +121,7 @@ dev-lang/php:7.0 ~amd64
 # Required for libressl
 ~net-libs/neon-0.30.1 ~amd64
 # Required for libressl
-~net-misc/socat-1.7.3.1 ~amd64
+~net-misc/socat-1.7.3.2 ~amd64
 # Required for libressl
 ~net-nds/openldap-2.4.43 ~amd64
 # Does not fix fcommon
