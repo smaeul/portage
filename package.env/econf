@@ -1,0 +1,2 @@
+net-misc/openntpd econf_openntpd
+x11-drivers/xf86-video-intel econf_xf86-video-intel

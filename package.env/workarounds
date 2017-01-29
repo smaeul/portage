@@ -1,15 +1,22 @@
+=app-arch/cpio-2.12-r1 fcommon
+=app-crypt/gnupg-2.1.15 fcommon
+=app-crypt/pinentry-0.9.7-r1 ncurseswidechar
 # shash.gaa:49:3: warning: implicit declaration of function 'hash_license' [-Wimplicit-function-declaration]
 # shash.gaa:48:3: warning: implicit declaration of function 'hash_version' [-Wimplicit-function-declaration]
 # shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
 # shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
-=app-crypt/shash-0.2.6-r2 stricterfail
+=app-crypt/shash-0.2.6-r2 nostricter
+=dev-java/icedtea-3.2.0 fcommon
+# -Wl,--gc-sections breaks use of ld -r
+=dev-lang/ocaml-4.04.0 fcommon nogcsections
+# -Wl,--gc-sections breaks configure tests
 # config.h:1402:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
 # pp_sys.c:214:38: warning: implicit declaration of function 'eaccess' [-Wimplicit-function-declaration]
 # ../../config.h:1402:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
 # ../../../handy.h:111:31: warning: the address of 'PL_sv_undef' will always evaluate as 'true' [-Waddress]
-=dev-lang/perl-5.22.3_rc4 stricterfail
+=dev-lang/perl-5.22.3_rc4 nogcsections nostricter
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
-~dev-libs/boehm-gc-7.4.2 stricterfail
+~dev-libs/boehm-gc-7.4.2 fcommon nostricter
 # jarfile.c:692:9: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:696:13: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:697:13: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
@@ -20,15 +27,30 @@
 # jarfile.c:786:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:787:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:788:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=dev-libs/nss-3.27.2 stricterfail
+=dev-libs/nss-3.27.2 nostricter
+=dev-util/lttng-ust-2.7.1 fcommon
+~mail-mta/opensmtpd-6.0.2_p1 fcommon
 # extension/internal/image-resolution.cpp:179:25: warning: null argument where non-null required (argument 1) [-Wnonnull]
-=media-gfx/inkscape-0.91-r3 stricterfail
+=media-gfx/inkscape-0.91-r3 nostricter
+=media-libs/freeglut-3.0.0 fcommon
+=media-sound/ncmpcpp-0.7.7 ncurseswidechar
+=media-video/mpv-0.9.2-r1 fcommon
+=net-firewall/nftables-0.7 fcommon
+=net-analyzer/iftop-1.0_pre4 fcommon
+~net-libs/libtirpc-0.2.5 fcommon
+=net-misc/freerdp-2.0.0_pre20160722 fcommon
+=net-misc/iperf-3.1.3 gnusource
+=net-misc/openntpd-6.0_p1 fcommon
 # openldap-2.4.44/libraries/libldap/open.c:251:7: warning: implicit declaration of function 'ldap_is_ldapc_url' [-Wimplicit-function-declaration]
 # openldap-2.4.44/servers/slapd/back-ldap/bind.c:722:2: warning: implicit declaration of function 'slap_client_keepalive' [-Wimplicit-function-declaration]
 # openldap-2.4.44/servers/slapd/back-meta/conn.c:424:2: warning: implicit declaration of function 'slap_client_keepalive' [-Wimplicit-function-declaration]
-=net-nds/openldap-2.4.44 stricterfail
+=net-nds/openldap-2.4.44 nostricter
+=net-print/cups-filters-1.13.3 fcommon
 # libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]
-=sys-apps/acl-2.2.52-r1 stricterfail
+=sys-apps/acl-2.2.52-r1 nostricter
+=sys-apps/iproute2-4.9.0 fcommon
+=sys-apps/dtc-1.4.1 fcommon
+=sys-apps/kbd-2.0.3 fcommon
 # dbprintf.c:24:9: warning: implicit declaration of function 'vdbprintf' [-Wimplicit-function-declaration]
 # dbprintf.c:30:60: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
 # dbprintf.c:110:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
@@ -52,7 +74,7 @@
 # makeboot.c:351:7: warning: implicit declaration of function 'set_asciz' [-Wimplicit-function-declaration]
 # makeboot.c:359:7: warning: implicit declaration of function 'write_sector' [-Wimplicit-function-declaration]
 # dis.h:131:29: warning: implicit declaration of function 'Fetch' [-Wimplicit-function-declaration]
-=sys-devel/dev86-0.16.19 stricterfail
+=sys-devel/dev86-0.16.19 nostricter
 # projects/compiler-rt/lib/builtins/atomic.c:93:3: warning: implicit declaration of function '__c11_atomic_store' [-Wimplicit-function-declaration]
 # projects/compiler-rt/lib/builtins/atomic.c:99:11: warning: implicit declaration of function '__c11_atomic_compare_exchange_weak' [-Wimplicit-function-declaration]
 # projects/compiler-rt/lib/builtins/atomic.c:129:24: warning: implicit declaration of function '__c11_atomic_is_lock_free' [-Wimplicit-function-declaration]
@@ -64,17 +86,24 @@
 # projects/compiler-rt/lib/builtins/atomic.c:308:12: warning: implicit declaration of function '__c11_atomic_fetch_and' [-Wimplicit-function-declaration]
 # projects/compiler-rt/lib/builtins/atomic.c:308:12: warning: implicit declaration of function '__c11_atomic_fetch_or' [-Wimplicit-function-declaration]
 # projects/compiler-rt/lib/builtins/atomic.c:308:12: warning: implicit declaration of function '__c11_atomic_fetch_xor' [-Wimplicit-function-declaration]
-~sys-devel/llvm-3.9.1 stricterfail
+~sys-devel/llvm-3.9.1 nostricter
+~sys-fs/squashfs-tools-4.3 fcommon
+=sys-libs/gdbm-1.11-r99 fcommon
 # include/typeinfo:116:62: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=sys-libs/libcxx-3.9.1 stricterfail
+=sys-libs/libcxx-3.9.1 nostricter
 # src/fallback_malloc.ipp:64:72: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # src/fallback_malloc.ipp:74:30: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=sys-libs/libcxxabi-3.9.1 stricterfail
+=sys-libs/libcxxabi-3.9.1 nostricter
+=sys-power/iasl-20160729 fcommon
+=sys-process/htop-2.0.2 fcommon
+=x11-base/xorg-server-1.18.4 fcommon
+=x11-drivers/xf86-video-intel-2.99.917_p20160621-r1 fcommon
+# -Wl,--gc-sections breaks configure tests
+=x11-libs/cairo-1.14.6 nogcsections
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_a' will never be NULL [-Waddress]
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_b' will never be NULL [-Waddress]
 # modules/other/gail/gailtreeview.c:1470:28: warning: the comparison will always evaluate as 'true' for the address of 'iter_to_row' will never be NULL [-Waddress]
-=x11-libs/gtk+-2.24.31 stricterfail
+=x11-libs/gtk+-2.24.31 nostricter
 # libdrm-2.4.70/xf86drmMode.c:891:15: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=x11-libs/libdrm-2.4.70 stricterfail
-# ../i3-4.10.4/src/floating.c:743:5: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=x11-wm/i3-4.10.4 stricterfail
+=x11-libs/libdrm-2.4.70 nostricter
+=x11-wm/i3-4.13-r1 fcommon

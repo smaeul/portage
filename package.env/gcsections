@@ -1,6 +1,0 @@
-# uses ld -r
-dev-lang/ocaml gcsections
-# breaks configure tests
-dev-lang/perl gcsections
-# breaks configure tests
-=x11-libs/cairo-1.14.6 gcsections
