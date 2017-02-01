@@ -88,7 +88,7 @@ sys-libs/libcxx libcxxabi -libcxxrt libunwind
 sys-libs/libcxxabi libunwind
 sys-libs/ncurses:5 tinfo
 sys-power/nut -ssl -ups_drivers_* ups_drivers_usbhid-ups
-www-client/chromium gn -hangouts suid -tcmalloc
+www-client/chromium -hangouts suid system-ffmpeg -tcmalloc
 www-client/firefox -gmp-autoupdate gtk2 -jemalloc system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 www-plugins/chrome-binary-plugins flash -widevine
 x11-base/xorg-server glamor

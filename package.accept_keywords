@@ -110,6 +110,8 @@ dev-lang/php:7.0 ~amd64
 ~dev-vcs/git-2.11.0 ~amd64
 # Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
+# Required for chromium[system-ffmpeg]
+~media-video/ffmpeg-3.2.2 ~amd64
 # Required to fix fcommon
 ~media-video/mpv-0.22.0 ~amd64
 # Fixes several crashes

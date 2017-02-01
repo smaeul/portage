@@ -1,3 +1,4 @@
 */* -libressl
 net-misc/curl -curl_ssl_libressl
 >=sys-devel/llvm-3.9.0 -lldb
+www-client/chromium -system-ffmpeg
