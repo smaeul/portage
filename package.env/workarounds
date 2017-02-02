@@ -6,6 +6,7 @@
 # shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
 # shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
 =app-crypt/shash-0.2.6-r2 nostricter
+=app-emulation/qemu-2.8.0 ncurseswidechar
 =dev-java/icedtea-3.3.0 fcommon
 # -Wl,--gc-sections breaks use of ld -r
 =dev-lang/ocaml-4.04.0 fcommon nogcsections
@@ -41,7 +42,6 @@
 =net-firewall/nftables-0.7 fcommon
 =net-analyzer/iftop-1.0_pre4 fcommon
 ~net-libs/libtirpc-0.2.5 fcommon
-=net-misc/freerdp-2.0.0_pre20160722 fcommon
 =net-misc/iperf-3.1.3 gnusource
 =net-misc/openntpd-6.0_p1 fcommon
 # openldap-2.4.44/libraries/libldap/open.c:251:7: warning: implicit declaration of function 'ldap_is_ldapc_url' [-Wimplicit-function-declaration]
