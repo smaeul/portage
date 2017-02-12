@@ -22,6 +22,7 @@ app-eselect/eselect-rust ~amd64
 app-laptop/tpacpi-bat ~amd64
 app-mobilephone/heimdall ~amd64
 dev-dotnet/coreclr ~amd64
+dev-go/go-bindata ~amd64
 dev-java/icedtea ~amd64
 dev-lang/rust ~amd64
 dev-libs/libressl ~amd64
@@ -35,12 +36,12 @@ sci-misc/boinc ~amd64
 sys-boot/systemd-boot ~amd64
 sys-power/acpi_call ~amd64
 virtual/rust ~amd64
+www-apps/gitea ~amd64
 x11-libs/xcb-util-xrm ~amd64
 
-# I trust the author of the following packages to not cause significant
+# I trust the authors of the following packages to not cause significant
 # breakage; plus some of these packages have no stable version. I care more
 # about the packages matching versions (not mixing old and new).
-dev-go/go-bindata ~amd64
 dev-lang/execline ~amd64
 dev-libs/skalibs ~amd64
 net-dns/s6-dns ~amd64
@@ -50,7 +51,6 @@ sys-apps/s6-linux-init ~amd64
 sys-apps/s6-linux-utils ~amd64
 sys-apps/s6-portable-utils ~amd64
 sys-apps/s6-rc ~amd64
-www-apps/gitea ~amd64
 
 # The following packages have a stable version, but due to the fast-moving
 # nature of the software it is often broken.
@@ -96,8 +96,6 @@ sys-libs/tevent ~amd64
 dev-lang/php:7.0 ~amd64
 # Required for newer bcron
 ~dev-libs/bglibs-2.03 ~amd64
-# Required for libressl
-~dev-libs/libevent-2.0.22 ~amd64
 # Required for firefox
 =dev-libs/nss-3.27* ~amd64
 # Required for libressl 2.5.1
@@ -113,7 +111,7 @@ dev-lang/php:7.0 ~amd64
 # Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
 # Required for chromium[system-ffmpeg]
-~media-video/ffmpeg-3.2.2 ~amd64
+media-video/ffmpeg:0/55.57.57 ~amd64
 # Required to fix fcommon
 ~media-video/mpv-0.22.0 ~amd64
 # Fixes several crashes

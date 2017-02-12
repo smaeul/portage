@@ -9,6 +9,8 @@ dev-lang/python xml
 dev-libs/boost icu nls
 # Required by chromium
 dev-libs/libxml2 icu
+# Required by kodi
+dev-libs/libpcre cxx
 # Required by reportlab
 dev-python/pillow tiff
 # Required by inkscape[imagemagick]
@@ -55,11 +57,12 @@ media-libs/mesa gles2
 media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
 media-sound/pulseaudio alsa -asyncns -glib
+media-tv/kodi css -samba
 media-video/ffmpeg libsoxr network
 media-video/mpv drm -dvd egl -enca -luajit -uchardet
 net-dns/bind-tools -idn urandom
 net-fs/samba -cups
-net-im/bitlbee -gnutls oscar -plugins -yahoo
+net-im/bitlbee -gnutls oscar twitter
 net-irc/weechat -charset
 net-libs/gnutls -crywrap -openssl
 net-misc/iputils -idn tracepath
@@ -78,6 +81,7 @@ sys-apps/pciutils dns
 sys-apps/util-linux -cramfs -ncurses
 sys-devel/binutils cxx
 sys-devel/gcc -vtv
+sys-devel/gdb python
 sys-devel/llvm clang default-compiler-rt default-libcxx lldb xml
 sys-fs/cryptsetup -gcrypt -libressl nettle
 sys-fs/lvm2 -thin

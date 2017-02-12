@@ -20,6 +20,7 @@ dev-util/systemtap PYTHON_TARGETS: python2_7
 media-gfx/inkscape PYTHON_TARGETS: python2_7
 media-gfx/uniconvertor PYTHON_TARGETS: python2_7
 media-libs/lensfun PYTHON_TARGETS: python2_7
+media-tv/kodi PYTHON_TARGETS: python2_7
 net-mail/offlineimap PYTHON_TARGETS: python2_7
 net-p2p/transmission-remote-cli PYTHON_TARGETS: python2_7
 sys-devel/llvm PYTHON_TARGETS: python2_7
