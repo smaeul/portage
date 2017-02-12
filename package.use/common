@@ -42,6 +42,7 @@ dev-java/icedtea nsplugin
 dev-java/icedtea-web nsplugin
 dev-lang/php -exif fpm pdo postgres readline -truetype -webp
 dev-lang/python readline
+dev-lang/rust local-bootstrap
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
 dev-scheme/guile -deprecated
