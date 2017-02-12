@@ -1,0 +1,13 @@
+diff --git pulseaudio-10.0/src/modules/raop/raop_client.c
+index 864c558..f5374a3 100644
+--- pulseaudio-10.0/src/modules/raop/raop_client.c.orig
++++ pulseaudio-10.0/src/modules/raop/raop_client.c
+@@ -75,7 +75,7 @@
+  * be able to upgrade to the new openssl version. To insulate ourselves from
+  * such transition problems, let's implement RSA_set0_key() ourselves if it's
+  * not available. */
+-#if OPENSSL_VERSION_NUMBER < 0x10100000L
++#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
+ static int RSA_set0_key(RSA *r, BIGNUM *n, BIGNUM *e, BIGNUM *d) {
+     r->n = n;
+     r->e = e;
