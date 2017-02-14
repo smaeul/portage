@@ -46,6 +46,7 @@ dev-lang/rust local-bootstrap
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
 dev-scheme/guile -deprecated
+dev-util/cargo local-bootstrap
 dev-util/cmake system-jsoncpp
 dev-vcs/git perl
 mail-client/nail -ssl
