@@ -51,6 +51,7 @@ sys-apps/s6-linux-init ~amd64
 sys-apps/s6-linux-utils ~amd64
 sys-apps/s6-portable-utils ~amd64
 sys-apps/s6-rc ~amd64
+sys-libs/musl ~amd64
 
 # The following packages have a stable version, but due to the fast-moving
 # nature of the software it is often broken.
