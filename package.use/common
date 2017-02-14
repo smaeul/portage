@@ -33,7 +33,7 @@ app-arch/libarchive -e2fsprogs
 app-arch/p7zip rar
 app-crypt/gnupg readline
 app-editors/vim python
-app-emulation/qemu -curl -jpeg -opengl numa -png -pulseaudio spice usb usbredir -vnc
+app-emulation/qemu -curl -jpeg -ncurses numa -opengl -png -pulseaudio spice usb usbredir -vnc
 app-eselect/eselect-php fpm
 app-office/libreoffice java
 app-shells/bash -net
