@@ -1,0 +1,21 @@
+diff --git lttng-ust-2.7.1/include/lttng/ust-dlfcn.h.orig lttng-ust-2.7.1/include/lttng/ust-dlfcn.h
+index c92f1bb6f3..f197bae163 100644
+--- lttng-ust-2.7.1/include/lttng/ust-dlfcn.h.orig
++++ lttng-ust-2.7.1/include/lttng/ust-dlfcn.h
+@@ -31,6 +31,7 @@
+ #error "Please include lttng/ust-dlfcn.h before dlfcn.h."
+ #endif /* _DLFCN_H */
+ 
++#ifdef __GLIBC__
+ /*
+  * glibc declares dlsym() and dlerror() with __attribute__((leaf)) (see
+  * THROW annotation). Unfortunately, this is not in sync with reality,
+@@ -57,5 +58,8 @@ extern int dlclose(void *__handle) __nonnull ((1));
+ extern void *dlsym(void *__restrict __handle,
+ 		__const char *__restrict __name) __nonnull ((2));
+ extern char *dlerror(void);
++#else
++#include <dlfcn.h>
++#endif
+ 
+ #endif /* _LTTNG_UST_DLFCN_H */
