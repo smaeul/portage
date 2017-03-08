@@ -40,7 +40,7 @@ app-shells/bash -net
 dev-db/sqlite -icu
 dev-java/icedtea nsplugin
 dev-java/icedtea-web nsplugin
-dev-lang/php -exif fpm pdo postgres readline -truetype -webp
+dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
 dev-lang/python readline
 dev-lang/rust local-bootstrap
 dev-ml/lablgtk -opengl
