@@ -1,0 +1,35 @@
+diff --git libtirpc-1.0.1/src/des_impl.c.orig libtirpc-1.0.1/src/des_impl.c
+--- libtirpc-1.0.1/src/des_impl.c.orig
++++ libtirpc-1.0.1/src/des_impl.c
+@@ -6,7 +6,7 @@
+ /* see <http://www.gnu.org/licenses/> to obtain a copy.  */
+ #include <string.h>
+ #include <stdint.h>
+-#include <rpc/rpc_des.h>
++#include <rpc/des.h>
+ 
+ 
+ static const uint32_t des_SPtrans[8][64] =
+diff --git libtirpc-1.0.1/src/getpublickey.c.orig libtirpc-1.0.1/src/getpublickey.c
+--- libtirpc-1.0.1/src/getpublickey.c.orig
++++ libtirpc-1.0.1/src/getpublickey.c
+@@ -38,8 +38,6 @@
+ #include <pwd.h>
+ #include <rpc/rpc.h>
+ #include <rpc/key_prot.h>
+-#include <rpcsvc/yp_prot.h>
+-#include <rpcsvc/ypclnt.h>
+ #include <string.h>
+ #include <stdlib.h>
+ 
+diff --git libtirpc-1.0.1/src/svc_raw.c.orig libtirpc-1.0.1/src/svc_raw.c
+--- libtirpc-1.0.1/src/svc_raw.c.orig
++++ libtirpc-1.0.1/src/svc_raw.c
+@@ -43,6 +43,7 @@
+ #include <sys/types.h>
+ #include <rpc/raw.h>
+ #include <stdlib.h>
++#include <string.h>
+ 
+ #ifndef UDPMSGSIZE
+ #define	UDPMSGSIZE 8800
