@@ -11,6 +11,7 @@ dev-java/icedtea gtk
 media-fonts/* X
 media-libs/freetype X
 media-libs/imlib2 X
+media-libs/libepoxy X
 media-tv/kodi X
 media-video/mpv X
 net-misc/unison gtk
