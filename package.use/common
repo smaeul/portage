@@ -37,6 +37,7 @@ app-emulation/qemu -curl -jpeg -ncurses numa -opengl -png -pulseaudio spice usb 
 app-eselect/eselect-php fpm
 app-office/libreoffice java
 app-shells/bash -net
+dev-db/mariadb -openssl
 dev-db/sqlite -icu
 dev-java/icedtea nsplugin
 dev-java/icedtea-web nsplugin
@@ -51,6 +52,7 @@ dev-util/cmake system-jsoncpp
 dev-vcs/git perl
 mail-client/nail -ssl
 mail-client/thunderbird -crypt -ffmpeg -gstreamer -jemalloc3 jit system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+media-fonts/noto cjk
 media-gfx/imagemagick pango raw webp
 media-libs/imlib2 -mp3
 media-libs/libass -enca
@@ -68,7 +70,7 @@ net-im/bitlbee -gnutls oscar twitter
 net-irc/weechat -charset
 net-libs/gnutls -crywrap -openssl
 net-misc/iputils -idn tracepath
-net-misc/openvpn iproute2 -plugins
+net-vpn/openvpn iproute2 -plugins
 net-misc/rdesktop xrandr
 net-misc/spice-gtk lz4 -pulseaudio usbredir
 net-print/cups -usb

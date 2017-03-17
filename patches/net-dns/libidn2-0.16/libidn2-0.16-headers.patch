@@ -1,0 +1,12 @@
+diff --git libidn2-0.16/tr46map.c
+index 81328cc..cc648b3 100644
+--- libidn2-0.16/tr46map.c.orig
++++ libidn2-0.16/tr46map.c
+@@ -30,6 +30,7 @@
+ #include <stdint.h>
+ #include <stdlib.h>		/* bsearch */
+ #include <string.h>		/* memset */
++#include <unistd.h>
+ 
+ #include "tr46map_data.c"
+ 
