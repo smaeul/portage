@@ -101,5 +101,6 @@ www-client/chromium -hangouts suid system-ffmpeg -tcmalloc
 www-client/firefox -gmp-autoupdate gtk2 -jemalloc system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 www-plugins/chrome-binary-plugins flash -widevine
 x11-base/xorg-server glamor
+x11-misc/slock savedconfig
 x11-libs/gtk+ -vim-syntax
 x11-terms/rxvt-unicode 256-color alt-font-width iso14755 secondary-wheel unicode3 -vanilla wcwidth
