@@ -1,3 +1,16 @@
+diff --git libidn2-0.16/src/idn2.c
+index 6abbc72..e42564a 100644
+--- libidn2-0.16/src/idn2.c.orig
++++ libidn2-0.16/src/idn2.c
+@@ -31,7 +31,7 @@
+ #include <unistr.h>
+ 
+ /* Gnulib headers. */
+-#include "error.h"
++#define error(e, ...) exit(e)
+ #include "gettext.h"
+ #define _(String) dgettext (PACKAGE, String)
+ #include "progname.h"
 diff --git libidn2-0.16/tr46map.c
 index 81328cc..cc648b3 100644
 --- libidn2-0.16/tr46map.c.orig
