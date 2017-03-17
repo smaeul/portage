@@ -100,11 +100,9 @@
 ~sys-devel/llvm-3.9.1 nostricter
 ~sys-fs/squashfs-tools-4.3 fcommon
 =sys-libs/gdbm-1.11-r99 fcommon
-# include/typeinfo:116:62: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=sys-libs/libcxx-3.9.1 nostricter
-# src/fallback_malloc.ipp:64:72: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# src/fallback_malloc.ipp:74:30: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=sys-libs/libcxxabi-3.9.1 nostricter
+# libcxxabi-4.0.0.src/src/fallback_malloc.cpp:69:72: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# libcxxabi-4.0.0.src/src/fallback_malloc.cpp:79:30: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+=sys-libs/libcxxabi-4.0.0 nostricter
 =sys-power/iasl-20160729 fcommon
 =sys-process/htop-2.0.2 fcommon
 =x11-base/xorg-server-1.19.2 fcommon

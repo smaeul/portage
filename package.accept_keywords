@@ -55,12 +55,15 @@ sys-libs/musl ~amd64
 # The following packages have a stable version, but due to the fast-moving
 # nature of the software it is often broken.
 app-misc/ca-certificates ~amd64
+app-vim/llvm-vim ~amd64
 dev-util/android-sdk-update-manager ~amd64
 dev-util/android-studio ~amd64
 net-misc/youtube-dl ~amd64
 sys-devel/clang ~amd64
 sys-devel/clang-runtime ~amd64
 sys-devel/llvm ~amd64
+sys-libs/compiler-rt ~amd64
+sys-libs/compiler-rt-sanitizers ~amd64
 sys-libs/libcxx ~amd64
 sys-libs/libcxxabi ~amd64
 sys-libs/libomp ~amd64

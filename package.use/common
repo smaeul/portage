@@ -57,7 +57,7 @@ media-gfx/imagemagick pango raw webp
 media-libs/imlib2 -mp3
 media-libs/libass -enca
 media-libs/libcanberra -gtk3 -sound -udev
-media-libs/mesa gles2
+media-libs/mesa gles2 -llvm
 media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
 media-sound/pulseaudio alsa -asyncns -glib
@@ -84,9 +84,10 @@ sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
 sys-apps/util-linux -cramfs -ncurses
 sys-devel/binutils cxx
+sys-devel/clang default-compiler-rt default-libcxx xml
+sys-devel/clang-runtime libcxx -sanitize
 sys-devel/gcc -vtv
 sys-devel/gdb python
-sys-devel/llvm clang default-compiler-rt default-libcxx lldb xml
 sys-fs/cryptsetup -gcrypt -libressl nettle
 sys-fs/lvm2 -thin
 sys-kernel/vanilla-sources symlink
