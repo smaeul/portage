@@ -98,7 +98,7 @@ sys-libs/tevent ~amd64
 # Required for catalyst
 =dev-python/pydecomp-9999 **
 # Required for catalyst
-~dev-python/snakeoil-0.7.0 ~amd64
+~dev-python/snakeoil-0.7.1 ~amd64
 # Not needed anymore, but avoid downgrading
 ~dev-vcs/git-2.11.0 ~amd64
 # Required for musl
