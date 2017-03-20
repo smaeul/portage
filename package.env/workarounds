@@ -86,18 +86,6 @@
 # makeboot.c:359:7: warning: implicit declaration of function 'write_sector' [-Wimplicit-function-declaration]
 # dis.h:131:29: warning: implicit declaration of function 'Fetch' [-Wimplicit-function-declaration]
 =sys-devel/dev86-0.16.19 nostricter
-# projects/compiler-rt/lib/builtins/atomic.c:93:3: warning: implicit declaration of function '__c11_atomic_store' [-Wimplicit-function-declaration]
-# projects/compiler-rt/lib/builtins/atomic.c:99:11: warning: implicit declaration of function '__c11_atomic_compare_exchange_weak' [-Wimplicit-function-declaration]
-# projects/compiler-rt/lib/builtins/atomic.c:129:24: warning: implicit declaration of function '__c11_atomic_is_lock_free' [-Wimplicit-function-declaration]
-# projects/compiler-rt/lib/builtins/atomic.c:164:22: warning: implicit declaration of function '__c11_atomic_load' [-Wimplicit-function-declaration]
-# projects/compiler-rt/lib/builtins/atomic.c:196:10: warning: implicit declaration of function '__c11_atomic_compare_exchange_strong' [-Wimplicit-function-declaration]
-# projects/compiler-rt/lib/builtins/atomic.c:216:19: warning: implicit declaration of function '__c11_atomic_exchange' [-Wimplicit-function-declaration]
-# projects/compiler-rt/lib/builtins/atomic.c:308:12: warning: implicit declaration of function '__c11_atomic_fetch_add' [-Wimplicit-function-declaration]
-# projects/compiler-rt/lib/builtins/atomic.c:308:12: warning: implicit declaration of function '__c11_atomic_fetch_sub' [-Wimplicit-function-declaration]
-# projects/compiler-rt/lib/builtins/atomic.c:308:12: warning: implicit declaration of function '__c11_atomic_fetch_and' [-Wimplicit-function-declaration]
-# projects/compiler-rt/lib/builtins/atomic.c:308:12: warning: implicit declaration of function '__c11_atomic_fetch_or' [-Wimplicit-function-declaration]
-# projects/compiler-rt/lib/builtins/atomic.c:308:12: warning: implicit declaration of function '__c11_atomic_fetch_xor' [-Wimplicit-function-declaration]
-~sys-devel/llvm-3.9.1 nostricter
 ~sys-fs/squashfs-tools-4.3 fcommon
 =sys-libs/gdbm-1.11-r99 fcommon
 # libcxxabi-4.0.0.src/src/fallback_malloc.cpp:69:72: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
