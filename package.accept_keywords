@@ -1,17 +1,12 @@
-# These packages are either only available as git repositories, or have
-# significant features added/changed/fixed since their latest release.
-=dev-util/catalyst-9999 **
-=sys-kernel/linux-firmware-99999999 **
-=x11-misc/compton-9999 **
-
 # I personally maintain or control versions of these packages, so keywords
 # are irrelevant, since they are updated manually anyway.
+dev-dotnet/coreclr::smaeul **
 dev-lang/zig::smaeul **
 sys-firmware/ovmf-bin::smaeul **
 sys-fs/zfs::smaeul **
 sys-fs/zfs-kmod::smaeul **
-sys-kernel/vanilla-kernel::smaeul **
 sys-kernel/spl::smaeul **
+sys-kernel/vanilla-kernel::smaeul **
 x11-misc/i3status-mpd::smaeul **
 x11-misc/j4-dmenu-desktop::smaeul **
 
@@ -19,14 +14,9 @@ x11-misc/j4-dmenu-desktop::smaeul **
 # accepted in order to install the package at all.
 app-laptop/tpacpi-bat ~amd64
 app-mobilephone/heimdall ~amd64
-dev-dotnet/coreclr ~amd64
 dev-go/go-bindata ~amd64
 dev-java/icedtea ~amd64
-dev-lang/rust ~amd64
 dev-libs/libressl ~amd64
-dev-util/cargo ~amd64
-dev-util/lldb ~amd64
-dev-util/rustfmt ~amd64
 net-firewall/nftables ~amd64
 net-vpn/wireguard ~amd64
 net-p2p/syncthing ~amd64
@@ -35,12 +25,42 @@ sci-misc/boinc ~amd64
 sys-boot/systemd-boot ~amd64
 sys-kernel/vanilla-sources ~amd64
 sys-power/acpi_call ~amd64
-virtual/rust ~amd64
 www-apps/gitea ~amd64
 
-# I trust the authors of the following packages to not cause significant
-# breakage; plus some of these packages have no stable version. I care more
-# about the packages matching versions (not mixing old and new).
+# These packages have a stable version, but either it is too out of date to be
+# useful, or I need the latest version for compatibility with other software.
+app-misc/ca-certificates ~amd64
+dev-util/android-sdk-update-manager ~amd64
+dev-util/android-studio ~amd64
+net-irc/weechat ~amd64
+net-misc/unison ~amd64
+net-misc/youtube-dl ~amd64
+sys-libs/musl ~amd64
+sys-power/powertop ~amd64
+www-client/firefox ~amd64
+x11-drivers/xf86-video-intel ~amd64
+
+# llvm and friends
+app-vim/llvm-vim ~amd64
+dev-util/lldb ~amd64
+sys-devel/clang ~amd64
+sys-devel/clang-runtime ~amd64
+sys-devel/lld ~amd64
+sys-devel/llvm ~amd64
+sys-libs/compiler-rt ~amd64
+sys-libs/compiler-rt-sanitizers ~amd64
+sys-libs/libcxx ~amd64
+sys-libs/libcxxabi ~amd64
+sys-libs/libomp ~amd64
+sys-libs/llvm-libunwind ~amd64
+
+# rust and friends
+dev-lang/rust ~amd64
+dev-util/cargo ~amd64
+dev-util/rustfmt ~amd64
+virtual/rust ~amd64
+
+# s6 and friends
 dev-lang/execline ~amd64
 dev-libs/skalibs ~amd64
 net-dns/s6-dns ~amd64
@@ -50,44 +70,22 @@ sys-apps/s6-linux-init ~amd64
 sys-apps/s6-linux-utils ~amd64
 sys-apps/s6-portable-utils ~amd64
 sys-apps/s6-rc ~amd64
-sys-libs/musl ~amd64
 
-# The following packages have a stable version, but due to the fast-moving
-# nature of the software it is often broken.
-app-misc/ca-certificates ~amd64
-app-vim/llvm-vim ~amd64
-dev-util/android-sdk-update-manager ~amd64
-dev-util/android-studio ~amd64
-net-misc/youtube-dl ~amd64
-sys-devel/clang ~amd64
-sys-devel/clang-runtime ~amd64
-sys-devel/llvm ~amd64
-sys-libs/compiler-rt ~amd64
-sys-libs/compiler-rt-sanitizers ~amd64
-sys-libs/libcxx ~amd64
-sys-libs/libcxxabi ~amd64
-sys-libs/libomp ~amd64
-sys-libs/llvm-libunwind ~amd64
-sys-power/powertop ~amd64
-www-client/firefox ~amd64
-x11-drivers/xf86-video-intel ~amd64
-
-# These packages have a stable version, but it never seems to get updated.
-# Since these are standalone applications that are unlikely to break, I'll
-# just use the testing version.
-net-irc/weechat ~amd64
-net-misc/unison ~amd64
-
-# These packages are just broken any way you look at them.
+# samba and friends
 net-fs/samba ~amd64
 sys-libs/ldb ~amd64
 sys-libs/talloc ~amd64
 sys-libs/tdb ~amd64
 sys-libs/tevent ~amd64
 
-# The following packages have significant features or bugfixes in releases
-# currently marked as testing. Only that specific version should be accepted
-# here, and it should be removed from this list once it is marked stable.
+# These packages are either only available as git repositories, or have
+# significant features added/changed/fixed since their latest release.
+=dev-util/catalyst-9999 **
+=sys-kernel/linux-firmware-99999999 **
+=x11-misc/compton-9999 **
+
+# The following packages have significant features or bugfixes in an unstable
+# version. These entries should be removed once that version is stabilized.
 #
 # Required for musl (headers)
 =app-emulation/runc-1.0.0* ~amd64
