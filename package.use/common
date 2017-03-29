@@ -1,6 +1,8 @@
 # These USE changes are necessary to fulfill a dependency from another package.
 # Required by cups-filters
 app-text/poppler cxx
+# Required by xdg-utils
+app-text/xmlto text
 # Required by thunderbird
 dev-db/sqlite secure-delete
 # Required by gentoolkit
@@ -79,6 +81,7 @@ net-wireless/hostapd -wps
 net-wireless/wpa_supplicant ap -hs2-0 readline
 sys-apps/busybox savedconfig
 sys-apps/elfix -ptpax
+sys-apps/flashrom -atavia -buspirate_spi -drkaiser -ft2232_spi -gfxnvidia -it8212 -ogp_spi -pickit2_spi -pony_spi -satasii tools -usbblaster_spi
 sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns

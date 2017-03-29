@@ -93,12 +93,14 @@ sys-libs/tevent ~amd64
 ~app-portage/portage-utils-0.64 ~amd64
 # Required for newer bcron
 ~dev-libs/bglibs-2.03 ~amd64
+# Required for musl
+=dev-libs/libnl-3.3.0* ~amd64
 # Required for catalyst
 =dev-python/pydecomp-9999 **
 # Required for catalyst
 ~dev-python/snakeoil-0.7.1 ~amd64
 # Not needed anymore, but avoid downgrading
-~dev-vcs/git-2.11.0 ~amd64
+~dev-vcs/git-2.12.1 ~amd64
 # Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
 # Required to fix fcommon

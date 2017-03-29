@@ -15,6 +15,7 @@
 # ../../config.h:1402:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
 # ../../../handy.h:111:31: warning: the address of 'PL_sv_undef' will always evaluate as 'true' [-Waddress]
 =dev-lang/perl-5.22.3_rc4 nogcsections nostricter
+=dev-lang/rust-1.17 nonetworksandbox
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
 ~dev-libs/boehm-gc-7.4.2 fcommon nostricter
 # jarfile.c:692:9: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
@@ -62,6 +63,7 @@
 =sys-apps/iproute2-4.9.0 fcommon
 =sys-apps/dtc-1.4.1 fcommon
 =sys-apps/kbd-2.0.3 fcommon
+=sys-apps/memtester-4.3.0 fcommon
 # dbprintf.c:24:9: warning: implicit declaration of function 'vdbprintf' [-Wimplicit-function-declaration]
 # dbprintf.c:30:60: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
 # dbprintf.c:110:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
