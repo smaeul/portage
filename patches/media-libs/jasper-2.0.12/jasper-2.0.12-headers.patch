@@ -10,6 +10,18 @@ index 2a3dfe5..81b74bf 100644
  #include "jasper/jas_getopt.h"
  #include "jasper/jas_math.h"
  
+diff --git jasper-2.0.12/src/libjasper/jp2/jp2_enc.c
+index 9a5e106..d386d15 100644
+--- jasper-2.0.12/src/libjasper/jp2/jp2_enc.c.orig
++++ jasper-2.0.12/src/libjasper/jp2/jp2_enc.c
+@@ -72,6 +72,7 @@
+ \******************************************************************************/
+ 
+ #include <assert.h>
++#include "jasper/jas_debug.h"
+ #include "jasper/jas_malloc.h"
+ #include "jasper/jas_image.h"
+ #include "jasper/jas_stream.h"
 diff --git jasper-version-1.900.6/src/libjasper/jpc/jpc_t1dec.c jasper-fixed/src/libjasper/jpc/jpc_t1dec.c
 index 8bbe83a..31a3bb8 100644
 --- jasper-version-1.900.6/src/libjasper/jpc/jpc_t1dec.c
