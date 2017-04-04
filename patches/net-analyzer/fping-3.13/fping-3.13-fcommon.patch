@@ -1,0 +1,13 @@
+diff --git fping-3.13/src/fping.h
+index 2066173..025c64a 100644
+--- fping-3.13/src/fping.h.orig
++++ fping-3.13/src/fping.h
+@@ -19,7 +19,7 @@
+ void crash_and_burn( char *message );
+ void errno_crash_and_burn( char *message );
+ int in_cksum( unsigned short *p, int n );
+-int random_data_flag;
++extern int random_data_flag;
+ 
+ /* socket.c */
+ int  open_ping_socket();

@@ -29,7 +29,7 @@
 # jarfile.c:786:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:787:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:788:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=dev-libs/nss-3.27.2 nostricter
+=dev-libs/nss-3.30 nostricter
 =dev-util/cargo-0.16.0 nonetworksandbox
 =dev-util/lttng-ust-2.7.1 fcommon
 ~mail-mta/opensmtpd-6.0.2_p1 fcommon
@@ -61,7 +61,8 @@
 =net-print/cups-filters-1.13.3-r2 fcommon
 # libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]
 =sys-apps/acl-2.2.52-r1 nostricter
-=sys-apps/iproute2-4.9.0 fcommon
+# actual bug: ipmroute.c and ipxfrm.c both define 'filter'
+=sys-apps/iproute2-4.10.0 fcommon
 =sys-apps/dtc-1.4.1 fcommon
 =sys-apps/kbd-2.0.3 fcommon
 =sys-apps/memtester-4.3.0 fcommon

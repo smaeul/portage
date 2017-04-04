@@ -23,6 +23,8 @@ media-libs/harfbuzz icu
 media-libs/libpng apng
 # Required by thunderbird (postproc) and chromium (svc)
 media-libs/libvpx postproc svc
+# Required by flent
+net-analyzer/netperf demo
 # Required by chromium
 sys-libs/zlib minizip
 # Required by LEDE/OpenWRT image builder
@@ -73,7 +75,6 @@ net-irc/weechat -charset
 net-libs/gnutls -crywrap -openssl
 net-misc/iputils -idn tracepath
 net-vpn/openvpn iproute2 -plugins
-net-misc/rdesktop xrandr
 net-misc/spice-gtk lz4 -pulseaudio usbredir
 net-print/cups -usb
 net-print/cups-filters pdf
