@@ -10,12 +10,10 @@
 =dev-java/icedtea-3.3.0 fcommon
 # -Wl,--gc-sections breaks use of ld -r
 =dev-lang/ocaml-4.04.0 fcommon nogcsections
-# -Wl,--gc-sections breaks configure tests
-# config.h:1402:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
-# pp_sys.c:214:38: warning: implicit declaration of function 'eaccess' [-Wimplicit-function-declaration]
-# ../../config.h:1402:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
-# ../../../handy.h:111:31: warning: the address of 'PL_sv_undef' will always evaluate as 'true' [-Waddress]
-=dev-lang/perl-5.22.3_rc4 nogcsections nostricter
+# config.h:1041:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
+# pp_sys.c:217:38: warning: implicit declaration of function 'eaccess' [-Wimplicit-function-declaration]
+# ../../config.h:1041:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
+=dev-lang/perl-5.24.1-r1 nostricter
 =dev-lang/rust-1.17 nonetworksandbox
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
 ~dev-libs/boehm-gc-7.4.2 fcommon nostricter
