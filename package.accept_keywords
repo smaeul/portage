@@ -13,6 +13,7 @@ x11-misc/j4-dmenu-desktop::smaeul **
 # These packages have no stable version, so at least one version must be
 # accepted in order to install the package at all.
 app-laptop/tpacpi-bat ~amd64
+app-misc/ddcutil ~amd64
 app-mobilephone/heimdall ~amd64
 dev-go/go-bindata ~amd64
 dev-java/icedtea ~amd64
@@ -106,8 +107,6 @@ sys-libs/tevent ~amd64
 ~dev-vcs/git-2.12.1 ~amd64
 # Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
-# Required for firefox 52
-=media-libs/harfbuzz-1.3.4 ~amd64
 # Required to fix fcommon
 ~media-video/mpv-0.22.0 ~amd64
 # Required to fix warnings
@@ -120,14 +119,10 @@ sys-libs/tevent ~amd64
 ~net-misc/socat-1.7.3.2 ~amd64
 # Does not fix fcommon
 ~net-print/cups-filters-1.13.3 ~amd64
-# Required to fix stricter
-~sys-apps/ethtool-4.8 ~amd64
 # Required for musl
 ~sys-apps/iproute2-4.10.0 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64
-# Required for sanity?
-~sys-devel/gcc-5.4.0 ~amd64
 # Required for patches
 ~sys-devel/gdb-7.12 ~amd64
 # This is old anyway
