@@ -99,6 +99,8 @@ sys-libs/tevent ~amd64
 =dev-libs/libnl-3.3.0* ~amd64
 # Required for firefox 52
 =dev-libs/nss-3.30 ~amd64
+# Required for project
+=dev-python/flask-0.12* ~amd64
 # Required for catalyst
 =dev-python/pydecomp-9999 **
 # Required for catalyst
