@@ -13,6 +13,7 @@ dev-python/numpy PYTHON_TARGETS: python2_7
 dev-python/pillow PYTHON_TARGETS: python2_7
 dev-python/ply PYTHON_TARGETS: python2_7
 dev-python/pycairo PYTHON_TARGETS: python2_7
+dev-python/pyparsing PYTHON_TARGETS: python2_7
 dev-python/setuptools PYTHON_TARGETS: python2_7
 dev-python/simplejson PYTHON_TARGETS: python2_7
 dev-python/six PYTHON_TARGETS: python2_7

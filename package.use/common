@@ -48,7 +48,9 @@ dev-java/icedtea-web nsplugin
 dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
 dev-lang/python readline
 dev-lang/rust local-bootstrap
+dev-libs/c-blosc hdf5
 dev-ml/lablgtk -opengl
+dev-python/numpy lapack
 dev-python/pypax -ptpax
 dev-scheme/guile -deprecated
 dev-util/cargo local-bootstrap
@@ -80,6 +82,7 @@ net-print/cups -usb
 net-print/cups-filters pdf
 net-wireless/hostapd -wps
 net-wireless/wpa_supplicant ap -hs2-0 readline
+sci-libs/hdf5 -hl
 sys-apps/busybox savedconfig
 sys-apps/elfix -ptpax
 sys-apps/flashrom -atavia -buspirate_spi -drkaiser -ft2232_spi -gfxnvidia -it8212 -ogp_spi -pickit2_spi -pony_spi -satasii tools -usbblaster_spi
@@ -90,7 +93,7 @@ sys-apps/util-linux -cramfs -ncurses
 sys-devel/binutils cxx
 sys-devel/clang default-compiler-rt default-libcxx xml
 sys-devel/clang-runtime libcxx -sanitize
-sys-devel/gcc -vtv
+sys-devel/gcc fortran -vtv
 sys-devel/gdb python
 sys-fs/cryptsetup -gcrypt -libressl nettle
 sys-fs/lvm2 -thin
