@@ -1,0 +1,21 @@
+diff --git ddcutil-0.7.1/src/util/debug_util.c
+index 2789b61..3f113e6 100644
+--- ddcutil-0.7.1/src/util/debug_util.c.orig
++++ ddcutil-0.7.1/src/util/debug_util.c
+@@ -21,6 +21,7 @@
+  * </endcopyright>
+  */
+ 
++#ifdef __GLIBC__
+ #include <execinfo.h>
+ #include <stdbool.h>
+ #include <stdio.h>
+@@ -117,3 +118,8 @@ void show_backtrace(int stack_adjust)
+       free(strings);
+    }
+ }
++#else
++void show_backtrace(int stack_adjust)
++{
++}
++#endif
