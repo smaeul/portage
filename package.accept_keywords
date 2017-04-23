@@ -97,8 +97,6 @@ sys-libs/tevent ~amd64
 ~dev-libs/bglibs-2.03 ~amd64
 # Required for musl
 =dev-libs/libnl-3.3.0* ~amd64
-# Required for firefox 52
-=dev-libs/nss-3.30 ~amd64
 # Required for project
 =dev-python/flask-0.12* ~amd64
 # Required for catalyst

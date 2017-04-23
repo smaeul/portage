@@ -27,7 +27,7 @@
 # jarfile.c:786:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:787:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:788:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=dev-libs/nss-3.30 nostricter
+=dev-libs/nss-3.29.5 nostricter
 # pandas/tslib.c:23160:17: warning: implicit declaration of function 'cmp_pandas_datetimestruct' [-Wimplicit-function-declaration]
 =dev-python/pandas-0.16.2 nostricter
 =dev-util/cargo-0.16.0 nonetworksandbox

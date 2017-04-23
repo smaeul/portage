@@ -25,6 +25,8 @@ media-libs/libpng apng
 media-libs/libvpx postproc svc
 # Required by flent
 net-analyzer/netperf demo
+# Required for libressl
+net-libs/nodejs bundled-ssl
 # Required by chromium
 sys-libs/zlib minizip
 # Required by LEDE/OpenWRT image builder

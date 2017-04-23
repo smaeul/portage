@@ -1,0 +1,29 @@
+diff --git node-v6.9.4/deps/uv/src/unix/fsevents.c
+index d331a13..db59159 100644
+--- node-v6.9.4/deps/uv/src/unix/fsevents.c.orig
++++ node-v6.9.4/deps/uv/src/unix/fsevents.c
+@@ -634,7 +634,7 @@ static int uv__fsevents_loop_init(uv_loop_t* loop) {
+     attr = NULL;
+ 
+   if (attr != NULL)
+-    if (pthread_attr_setstacksize(attr, 4 * PTHREAD_STACK_MIN))
++    if (pthread_attr_setstacksize(attr, 4 * PTHREAD_STACK_MIN))
+       abort();
+ 
+   loop->cf_state = state;
+diff --git node-v6.9.4/src/node.cc
+index ce39cb4..efa0c85 100644
+--- node-v6.9.4/src/node.cc.orig
++++ node-v6.9.4/src/node.cc
+@@ -4006,9 +4006,9 @@ static int RegisterDebugSignalHandler() {
+   // Don't shrink the thread's stack on FreeBSD.  Said platform decided to
+   // follow the pthreads specification to the letter rather than in spirit:
+   // https://lists.freebsd.org/pipermail/freebsd-current/2014-March/048885.html
+-#ifndef __FreeBSD__
++#ifdef __GLIBC__
+   CHECK_EQ(0, pthread_attr_setstacksize(&attr, PTHREAD_STACK_MIN));
+-#endif  // __FreeBSD__
++#endif  // __GLIBC__
+   CHECK_EQ(0, pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED));
+   sigset_t sigmask;
+   sigfillset(&sigmask);

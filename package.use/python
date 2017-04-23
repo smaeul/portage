@@ -1,7 +1,6 @@
 app-emulation/qemu PYTHON_TARGETS: python2_7
 app-text/asciidoc PYTHON_SINGLE_TARGET: python2_7 PYTHON_TARGETS: python2_7
 dev-java/javatoolkit PYTHON_TARGETS: python2_7
-dev-libs/libixion PYTHON_TARGETS: python2_7
 dev-python/beautifulsoup PYTHON_TARGETS: python2_7
 dev-python/certifi PYTHON_TARGETS: python2_7
 dev-python/html5lib PYTHON_TARGETS: python2_7
@@ -25,6 +24,6 @@ media-libs/lensfun PYTHON_TARGETS: python2_7
 media-tv/kodi PYTHON_TARGETS: python2_7
 net-mail/offlineimap PYTHON_TARGETS: python2_7
 net-misc/spice-gtk PYTHON_TARGETS: python2_7
+net-libs/nodejs PYTHON_TARGETS: python2_7
 net-p2p/transmission-remote-cli PYTHON_TARGETS: python2_7
 sys-devel/clang PYTHON_TARGETS: python2_7
-sys-devel/llvm PYTHON_TARGETS: python2_7
