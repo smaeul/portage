@@ -102,8 +102,8 @@
 =x11-base/xorg-server-1.19.2 fcommon
 # -Wl,--gc-sections breaks configure tests
 x11-libs/cairo nogcsections
-# gdk-pixbuf-2.36.5/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c:1357:16: warning: iteration 128u invokes undefined behavior [-Waggressive-loop-optimizations]
-=x11-libs/gdk-pixbuf-2.36.5 nostricter
+# gdk-pixbuf-2.36.6/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c:1357:16: warning: iteration 128u invokes undefined behavior [-Waggressive-loop-optimizations]
+=x11-libs/gdk-pixbuf-2.36.6 nostricter
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_a' will never be NULL [-Waddress]
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_b' will never be NULL [-Waddress]
 # modules/other/gail/gailtreeview.c:1470:28: warning: the comparison will always evaluate as 'true' for the address of 'iter_to_row' will never be NULL [-Waddress]
