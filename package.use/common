@@ -45,8 +45,6 @@ app-office/libreoffice java
 app-shells/bash -net
 dev-db/mariadb -openssl
 dev-db/sqlite -icu
-dev-java/icedtea nsplugin
-dev-java/icedtea-web nsplugin
 dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
 dev-lang/python readline
 dev-lang/rust local-bootstrap
