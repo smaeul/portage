@@ -18,6 +18,7 @@ app-mobilephone/heimdall ~amd64
 dev-go/go-bindata ~amd64
 dev-java/icedtea ~amd64
 dev-libs/libressl ~amd64
+dev-util/perf ~amd64
 net-analyzer/flent ~amd64
 net-firewall/nftables ~amd64
 net-vpn/wireguard ~amd64
