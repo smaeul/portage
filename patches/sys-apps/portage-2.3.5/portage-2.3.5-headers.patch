@@ -1,0 +1,12 @@
+diff --git portage-2.3.5/src/portage_util_file_copy_reflink_linux.c
+index b031d96..f3a5f86 100644
+--- portage-2.3.5/src/portage_util_file_copy_reflink_linux.c.orig
++++ portage-2.3.5/src/portage_util_file_copy_reflink_linux.c
+@@ -4,6 +4,7 @@
+ 
+ #include <Python.h>
+ #include <errno.h>
++#include <fcntl.h>
+ #include <stdlib.h>
+ #include <ctype.h>
+ #include <sys/sendfile.h>
