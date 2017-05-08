@@ -1,6 +1,7 @@
 app-emulation/qemu PYTHON_TARGETS: python2_7
 app-text/asciidoc PYTHON_SINGLE_TARGET: python2_7 PYTHON_TARGETS: python2_7
 dev-java/javatoolkit PYTHON_TARGETS: python2_7
+dev-python/appdirs PYTHON_TARGETS: python2_7
 dev-python/beautifulsoup PYTHON_TARGETS: python2_7
 dev-python/certifi PYTHON_TARGETS: python2_7
 dev-python/html5lib PYTHON_TARGETS: python2_7
@@ -9,6 +10,7 @@ dev-python/lxml PYTHON_TARGETS: python2_7
 dev-python/m2crypto PYTHON_TARGETS: python2_7
 dev-python/markupsafe PYTHON_TARGETS: python2_7
 dev-python/numpy PYTHON_TARGETS: python2_7
+dev-python/packaging PYTHON_TARGETS: python2_7
 dev-python/pillow PYTHON_TARGETS: python2_7
 dev-python/ply PYTHON_TARGETS: python2_7
 dev-python/pycairo PYTHON_TARGETS: python2_7
