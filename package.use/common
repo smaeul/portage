@@ -77,7 +77,7 @@ net-im/bitlbee -gnutls oscar twitter
 net-irc/weechat -charset
 net-libs/gnutls -crywrap -openssl
 net-misc/iputils -idn tracepath
-net-vpn/openvpn iproute2 -plugins
+net-vpn/openvpn iproute2 lz4
 net-misc/spice-gtk lz4 -pulseaudio usbredir
 net-print/cups -usb
 net-print/cups-filters pdf

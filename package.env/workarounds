@@ -1,6 +1,8 @@
 =app-arch/cpio-2.12-r1 fcommon
 ~app-arch/sharutils-4.14 fcommon
-=app-crypt/gnupg-2.1.18 fcommon
+# libcommon.a(libcommon_a-iobuf.o):(.bss.iobuf_debug_mode+0x0): multiple definition of `iobuf_debug_mode'
+# libcommon.a(libcommon_a-miscellaneous.o):(.bss.iobuf_debug_mode+0x0): first defined here
+=app-crypt/gnupg-2.1.20-r1 fcommon
 =app-crypt/pinentry-0.9.7-r1 ncurseswidechar
 # shash.gaa:49:3: warning: implicit declaration of function 'hash_license' [-Wimplicit-function-declaration]
 # shash.gaa:48:3: warning: implicit declaration of function 'hash_version' [-Wimplicit-function-declaration]
@@ -58,7 +60,13 @@
 # openldap-2.4.44/servers/slapd/back-ldap/bind.c:722:2: warning: implicit declaration of function 'slap_client_keepalive' [-Wimplicit-function-declaration]
 # openldap-2.4.44/servers/slapd/back-meta/conn.c:424:2: warning: implicit declaration of function 'slap_client_keepalive' [-Wimplicit-function-declaration]
 =net-nds/openldap-2.4.44 nostricter
-=net-print/cups-filters-1.13.3-r2 fcommon
+# foomatic_rip-options.o:(.bss.postpipe+0x0): multiple definition of `postpipe'
+# foomatic_rip-foomaticrip.o:(.bss.postpipe+0x0): first defined here
+# foomatic_rip-options.o:(.bss.cupsfilter+0x0): multiple definition of `cupsfilter'
+# foomatic_rip-foomaticrip.o:(.bss.cupsfilter+0x0): first defined here
+# foomatic_rip-options.o:(.bss.printer_model+0x0): multiple definition of `printer_model'
+# foomatic_rip-foomaticrip.o:(.bss.printer_model+0x0): first defined here
+=net-print/cups-filters-1.14.0 fcommon
 # passes CFLAGS (not CXXFLAGS) to g++, plus 53x -Wimplicit-function-declaration
 =sci-libs/scipy-0.16.1 exceptions nostricter
 # libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]

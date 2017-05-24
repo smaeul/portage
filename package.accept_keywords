@@ -109,7 +109,7 @@ sys-libs/tevent ~amd64
 # Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
 # Required to fix fcommon
-~media-video/mpv-0.22.0 ~amd64
+~media-video/mpv-0.25.0 ~amd64
 # Required to fix warnings
 =net-analyzer/netperf-2.7.0-r2 ~amd64
 # Required for musl (res_randomid)
@@ -119,7 +119,7 @@ sys-libs/tevent ~amd64
 # Required for libressl
 ~net-misc/socat-1.7.3.2 ~amd64
 # Does not fix fcommon
-~net-print/cups-filters-1.13.3 ~amd64
+~net-print/cups-filters-1.14.0 ~amd64
 # Required for musl
 ~sys-apps/iproute2-4.10.0 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
