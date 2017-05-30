@@ -87,7 +87,7 @@ net-wireless/wpa_supplicant ap -hs2-0 readline
 sci-libs/hdf5 -hl
 sys-apps/busybox savedconfig
 sys-apps/elfix -ptpax
-sys-apps/flashrom -atavia -buspirate_spi -drkaiser -ft2232_spi -gfxnvidia -it8212 -ogp_spi -pickit2_spi -pony_spi -satasii tools -usbblaster_spi
+sys-apps/flashrom -atapromise -atavia -buspirate_spi -drkaiser -ft2232_spi -gfxnvidia -it8212 -ogp_spi -pickit2_spi -pony_spi -satasii tools -usbblaster_spi -wiki
 sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns

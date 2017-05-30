@@ -19,6 +19,7 @@ dev-go/go-bindata ~amd64
 dev-java/icedtea ~amd64
 dev-libs/libressl ~amd64
 dev-util/perf ~amd64
+media-tv/gtk-v4l ~amd64
 net-analyzer/flent ~amd64
 net-firewall/nftables ~amd64
 net-vpn/wireguard ~amd64
@@ -40,7 +41,6 @@ net-misc/unison ~amd64
 net-misc/youtube-dl ~amd64
 sys-libs/musl ~amd64
 sys-power/powertop ~amd64
-www-client/firefox ~amd64
 x11-drivers/xf86-video-intel ~amd64
 
 # llvm and friends
@@ -121,7 +121,7 @@ sys-libs/tevent ~amd64
 # Does not fix fcommon
 ~net-print/cups-filters-1.14.0 ~amd64
 # Required for musl
-~sys-apps/iproute2-4.10.0 ~amd64
+~sys-apps/iproute2-4.11.0 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64
 # Required for patches

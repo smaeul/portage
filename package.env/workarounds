@@ -38,6 +38,7 @@
 # extension/internal/image-resolution.cpp:179:25: warning: null argument where non-null required (argument 1) [-Wnonnull]
 =media-gfx/inkscape-0.91-r3 nostricter
 =media-libs/freeglut-3.0.0 fcommon
+=media-libs/libv4l-1.10.1 fcommon
 =media-sound/ncmpcpp-0.7.7 ncurseswidechar
 # lib/libdvd/libdvdread/src/md5.c:107:3: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # lib/libdvd/libdvdread/src/md5.c:108:3: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
@@ -72,7 +73,7 @@
 # libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]
 =sys-apps/acl-2.2.52-r1 nostricter
 # actual bug: ipmroute.c and ipxfrm.c both define 'filter'
-=sys-apps/iproute2-4.10.0 fcommon
+=sys-apps/iproute2-4.11.0 fcommon
 =sys-apps/dtc-1.4.1 fcommon
 =sys-apps/kbd-2.0.3 fcommon
 =sys-apps/memtester-4.3.0 fcommon

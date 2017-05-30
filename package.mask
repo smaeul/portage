@@ -3,3 +3,4 @@ sys-apps/openrc
 sys-kernel/linux-headers::gentoo
 >=sys-kernel/vanilla-sources-4.10.0
 sys-libs/libunwind
+>=www-client/firefox-53.0.0
