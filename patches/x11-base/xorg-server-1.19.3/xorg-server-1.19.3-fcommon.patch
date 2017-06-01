@@ -1,0 +1,38 @@
+diff --git xorg-server-1.19.3/test/misc.c
+index 66330a1..069aac9 100644
+--- xorg-server-1.19.3/test/misc.c.orig
++++ xorg-server-1.19.3/test/misc.c
+@@ -31,7 +31,7 @@
+ #include "dix.h"
+ #include "dixstruct.h"
+ 
+-ScreenInfo screenInfo;
++extern ScreenInfo screenInfo;
+ 
+ static void
+ dix_version_compare(void)
+diff --git xorg-server-1.19.3/test/xi2/protocol-common.c
+index 9265ba3..7d83f81 100644
+--- xorg-server-1.19.3/test/xi2/protocol-common.c.orig
++++ xorg-server-1.19.3/test/xi2/protocol-common.c
+@@ -43,6 +43,7 @@ WindowRec window;
+ static ClientRec server_client;
+ 
+ void *global_userdata;
++void (*reply_handler) (ClientPtr client, int len, char *data, void *userdata);
+ 
+ static void
+ fake_init_sprite(DeviceIntPtr dev)
+diff --git xorg-server-1.19.3/test/xi2/protocol-common.h
+index f850478..d4ccb4e 100644
+--- xorg-server-1.19.3/test/xi2/protocol-common.h.orig
++++ xorg-server-1.19.3/test/xi2/protocol-common.h
+@@ -97,7 +97,7 @@ extern void *global_userdata;
+  * The reply handler called from WriteToClient. Set this handler if you need
+  * to check the reply values.
+  */
+-void (*reply_handler) (ClientPtr client, int len, char *data, void *userdata);
++extern void (*reply_handler) (ClientPtr client, int len, char *data, void *userdata);
+ 
+ /**
+  * The default screen used for the windows. Initialized by init_simple().

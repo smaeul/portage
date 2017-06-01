@@ -9,7 +9,7 @@
 # shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
 # shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
 =app-crypt/shash-0.2.6-r2 nostricter
-=dev-java/icedtea-3.3.0 fcommon
+=dev-java/icedtea-3.4.0 fcommon
 # -Wl,--gc-sections breaks use of ld -r
 =dev-lang/ocaml-4.04.0 fcommon nogcsections
 # config.h:1041:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
@@ -52,7 +52,6 @@
 =media-video/ffmpeg-3.2.4 nostricter
 =net-firewall/nftables-0.7 fcommon
 =net-analyzer/iftop-1.0_pre4 fcommon
-=net-libs/libtirpc-1.0.1 fcommon
 =net-misc/iperf-3.1.3 gnusource
 =net-misc/openntpd-6.0_p1 fcommon
 # openldap-2.4.44/libraries/libldap/open.c:251:7: warning: implicit declaration of function 'ldap_is_ldapc_url' [-Wimplicit-function-declaration]
@@ -104,7 +103,6 @@
 =sys-libs/libcxxabi-4.0.0 nostricter
 =sys-power/iasl-20160729 fcommon
 =sys-process/htop-2.0.2 fcommon
-=x11-base/xorg-server-1.19.2 fcommon
 # -Wl,--gc-sections breaks configure tests
 x11-libs/cairo nogcsections
 # gdk-pixbuf-2.36.6/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c:1357:16: warning: iteration 128u invokes undefined behavior [-Waggressive-loop-optimizations]

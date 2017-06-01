@@ -70,6 +70,7 @@ media-sound/pulseaudio alsa -asyncns -glib
 media-tv/kodi css -samba
 media-video/ffmpeg libsoxr network openssl
 media-video/mpv drm -dvd egl -enca -luajit -uchardet
+net-analyzer/nmap ncat nping
 net-dns/bind-tools -idn urandom
 net-fs/samba -cups
 net-im/bitlbee -gnutls oscar twitter
