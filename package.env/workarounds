@@ -34,14 +34,6 @@
 =media-libs/freeglut-3.0.0 fcommon
 =media-libs/libv4l-1.10.1 fcommon
 =media-sound/ncmpcpp-0.7.7 ncurseswidechar
-# lib/libdvd/libdvdread/src/md5.c:107:3: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# lib/libdvd/libdvdread/src/md5.c:108:3: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# lib/libdvd/libdvdread/src/nav_print.c:39:3: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# libdcr.c:2124:30: warning: iteration 386u invokes undefined behavior [-Waggressive-loop-optimizations]
-# libdcr.c:2115:16: warning: iteration 386u invokes undefined behavior [-Waggressive-loop-optimizations]
-# libdcr.c:5720:20: warning: iteration 3u invokes undefined behavior [-Waggressive-loop-optimizations]
-# libdcr.c:6462:20: warning: iteration 3u invokes undefined behavior [-Waggressive-loop-optimizations]
-=media-tv/kodi-16.1 nostricter
 # src/libavcodec/vaapi_encode_h265.c:305:49: warning: array subscript is above array bounds [-Warray-bounds]
 # src/libswresample/rematrix.c:376:47: warning: iteration 64u invokes undefined behavior [-Waggressive-loop-optimizations]
 =media-video/ffmpeg-3.2.4 nostricter

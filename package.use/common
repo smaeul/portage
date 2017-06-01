@@ -11,8 +11,6 @@ dev-lang/python xml
 dev-libs/boost icu nls
 # Required by chromium
 dev-libs/libxml2 icu
-# Required by kodi
-dev-libs/libpcre cxx
 # Required by reportlab
 dev-python/pillow tiff
 # Required by inkscape[imagemagick]
@@ -67,7 +65,6 @@ media-libs/mesa gles2 -llvm
 media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
 media-sound/pulseaudio alsa -asyncns -glib
-media-tv/kodi css -samba
 media-video/ffmpeg libsoxr network openssl
 media-video/mpv drm -dvd egl -enca -luajit -uchardet
 net-analyzer/nmap ncat nping
