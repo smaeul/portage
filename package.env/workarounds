@@ -1,5 +1,4 @@
 =app-arch/cpio-2.12-r1 fcommon
-~app-arch/sharutils-4.14 fcommon
 # libcommon.a(libcommon_a-iobuf.o):(.bss.iobuf_debug_mode+0x0): multiple definition of `iobuf_debug_mode'
 # libcommon.a(libcommon_a-miscellaneous.o):(.bss.iobuf_debug_mode+0x0): first defined here
 =app-crypt/gnupg-2.1.20-r1 fcommon
@@ -16,7 +15,6 @@
 # pp_sys.c:217:38: warning: implicit declaration of function 'eaccess' [-Wimplicit-function-declaration]
 # ../../config.h:1041:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
 =dev-lang/perl-5.24.1-r1 nostricter
-=dev-lang/rust-1.17 nonetworksandbox
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
 ~dev-libs/boehm-gc-7.4.2 fcommon nostricter
 # jarfile.c:692:9: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
@@ -30,8 +28,6 @@
 # jarfile.c:787:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:788:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 =dev-libs/nss-3.29.5 nostricter
-=dev-util/cargo-0.16.0 nonetworksandbox
-=dev-util/lttng-ust-2.7.1 fcommon
 ~mail-mta/opensmtpd-6.0.2_p1 fcommon
 # extension/internal/image-resolution.cpp:179:25: warning: null argument where non-null required (argument 1) [-Wnonnull]
 =media-gfx/inkscape-0.91-r3 nostricter
@@ -46,7 +42,6 @@
 # libdcr.c:5720:20: warning: iteration 3u invokes undefined behavior [-Waggressive-loop-optimizations]
 # libdcr.c:6462:20: warning: iteration 3u invokes undefined behavior [-Waggressive-loop-optimizations]
 =media-tv/kodi-16.1 nostricter
-=media-video/mpv-0.9.2-r1 fcommon
 # src/libavcodec/vaapi_encode_h265.c:305:49: warning: array subscript is above array bounds [-Warray-bounds]
 # src/libswresample/rematrix.c:376:47: warning: iteration 64u invokes undefined behavior [-Waggressive-loop-optimizations]
 =media-video/ffmpeg-3.2.4 nostricter
@@ -67,9 +62,9 @@
 =net-print/cups-filters-1.14.0 fcommon
 # libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]
 =sys-apps/acl-2.2.52-r1 nostricter
+=sys-apps/dtc-1.4.1 fcommon
 # actual bug: ipmroute.c and ipxfrm.c both define 'filter'
 =sys-apps/iproute2-4.11.0 fcommon
-=sys-apps/dtc-1.4.1 fcommon
 =sys-apps/kbd-2.0.3 fcommon
 =sys-apps/memtester-4.3.0 fcommon
 # dbprintf.c:24:9: warning: implicit declaration of function 'vdbprintf' [-Wimplicit-function-declaration]
@@ -97,7 +92,6 @@
 # dis.h:131:29: warning: implicit declaration of function 'Fetch' [-Wimplicit-function-declaration]
 =sys-devel/dev86-0.16.19 nostricter
 ~sys-fs/squashfs-tools-4.3 fcommon
-=sys-libs/gdbm-1.11-r99 fcommon
 # libcxxabi-4.0.0.src/src/fallback_malloc.cpp:69:72: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # libcxxabi-4.0.0.src/src/fallback_malloc.cpp:79:30: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 =sys-libs/libcxxabi-4.0.0 nostricter
@@ -111,6 +105,4 @@ x11-libs/cairo nogcsections
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_b' will never be NULL [-Waddress]
 # modules/other/gail/gailtreeview.c:1470:28: warning: the comparison will always evaluate as 'true' for the address of 'iter_to_row' will never be NULL [-Waddress]
 =x11-libs/gtk+-2.24.31-r1 nostricter
-# libdrm-2.4.70/xf86drmMode.c:891:15: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=x11-libs/libdrm-2.4.70 nostricter
 =x11-wm/i3-4.13-r1 fcommon
