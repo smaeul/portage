@@ -34,7 +34,6 @@ www-apps/gitea ~amd64
 # These packages have a stable version, but either it is too out of date to be
 # useful, or I need the latest version for compatibility with other software.
 app-misc/ca-certificates ~amd64
-dev-util/android-sdk-update-manager ~amd64
 dev-util/android-studio ~amd64
 net-irc/weechat ~amd64
 net-misc/unison ~amd64
@@ -51,7 +50,6 @@ sys-devel/clang-runtime ~amd64
 sys-devel/lld ~amd64
 sys-devel/llvm ~amd64
 sys-libs/compiler-rt ~amd64
-sys-libs/compiler-rt-sanitizers ~amd64
 sys-libs/libcxx ~amd64
 sys-libs/libcxxabi ~amd64
 sys-libs/libomp ~amd64
@@ -104,8 +102,6 @@ sys-libs/tevent ~amd64
 =dev-python/pydecomp-9999 **
 # Required for catalyst
 ~dev-python/snakeoil-0.7.1 ~amd64
-# Not needed anymore, but avoid downgrading
-~dev-vcs/git-2.12.1 ~amd64
 # Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
 # Required to fix fcommon

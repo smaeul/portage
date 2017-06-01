@@ -32,7 +32,6 @@ sys-libs/zlib static-libs
 # Required by x11-wm/i3
 x11-libs/libxcb xkb
 
-app-accessibility/speech-dispatcher -espeak
 app-arch/libarchive -e2fsprogs
 app-arch/p7zip rar
 app-crypt/gnupg readline
@@ -46,12 +45,9 @@ dev-db/mariadb -openssl
 dev-db/sqlite -icu
 dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
 dev-lang/python readline
-dev-lang/rust local-bootstrap
 dev-libs/libevent -ssl
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
-dev-scheme/guile -deprecated
-dev-util/cargo local-bootstrap
 dev-util/cmake system-jsoncpp
 dev-vcs/git perl
 mail-client/nail -ssl
@@ -78,7 +74,6 @@ net-vpn/openvpn iproute2 lz4
 net-misc/spice-gtk lz4 -pulseaudio usbredir
 net-print/cups -usb
 net-print/cups-filters pdf
-net-wireless/hostapd -wps
 net-wireless/wpa_supplicant ap -hs2-0 readline
 sys-apps/busybox savedconfig
 sys-apps/elfix -ptpax
@@ -103,7 +98,6 @@ sys-libs/ncurses:5 tinfo
 sys-power/nut -ssl -ups_drivers_* ups_drivers_usbhid-ups
 www-client/chromium -hangouts suid system-ffmpeg -tcmalloc
 www-client/firefox -gmp-autoupdate gtk2 -jemalloc system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
-www-plugins/chrome-binary-plugins flash -widevine
 x11-base/xorg-server glamor
 x11-misc/slock savedconfig
 x11-libs/gtk+ -vim-syntax
