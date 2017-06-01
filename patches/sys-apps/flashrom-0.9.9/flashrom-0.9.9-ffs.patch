@@ -1,0 +1,13 @@
+diff --git flashrom-build/spi.c.orig flashrom-build/spi.c
+index 894f73f..04947ad 100644
+--- flashrom-build/spi.c.orig
++++ flashrom-build/spi.c
+@@ -30,6 +30,8 @@
+ #include "programmer.h"
+ #include "spi.h"
+ 
++#define ffs(x) ((x) ? __builtin_ffs(x) : 0)
++
+ int spi_send_command(struct flashctx *flash, unsigned int writecnt,
+ 		     unsigned int readcnt, const unsigned char *writearr,
+ 		     unsigned char *readarr)

@@ -117,6 +117,8 @@ sys-libs/tevent ~amd64
 # Does not fix fcommon
 ~net-print/cups-filters-1.14.0 ~amd64
 # Required for musl
+~sys-apps/flashrom-0.9.9 ~amd64
+# Required for musl
 ~sys-apps/iproute2-4.11.0 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64
