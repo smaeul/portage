@@ -14,7 +14,7 @@
 # config.h:1041:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
 # pp_sys.c:217:38: warning: implicit declaration of function 'eaccess' [-Wimplicit-function-declaration]
 # ../../config.h:1041:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
-=dev-lang/perl-5.24.1-r1 nostricter
+=dev-lang/perl-5.24.1-r2 nostricter
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
 ~dev-libs/boehm-gc-7.4.2 fcommon nostricter
 # jarfile.c:692:9: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
@@ -28,6 +28,7 @@
 # jarfile.c:787:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:788:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 =dev-libs/nss-3.29.5 nostricter
+=dev-util/perf-4.9.13 fcommon
 ~mail-mta/opensmtpd-6.0.2_p1 fcommon
 # extension/internal/image-resolution.cpp:179:25: warning: null argument where non-null required (argument 1) [-Wnonnull]
 =media-gfx/inkscape-0.91-r3 nostricter

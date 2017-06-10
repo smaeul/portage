@@ -56,7 +56,7 @@ sys-libs/libomp ~amd64
 sys-libs/llvm-libunwind ~amd64
 
 # rust and friends
-dev-lang/rust ~amd64
+=dev-lang/rust-1*::smaeul ~amd64
 dev-util/cargo ~amd64
 dev-util/rustfmt ~amd64
 virtual/rust ~amd64
@@ -123,6 +123,6 @@ sys-libs/tevent ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64
 # Required for patches
-~sys-devel/gdb-7.12 ~amd64
+~sys-devel/gdb-7.12.1 ~amd64
 # This is old anyway
 ~sys-process/bcron-0.11 ~amd64
