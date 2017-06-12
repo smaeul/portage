@@ -60,7 +60,7 @@ media-libs/libcanberra -gtk3 -sound -udev
 media-libs/mesa gles2 -llvm
 media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
-media-sound/pulseaudio alsa -asyncns -glib
+media-sound/pulseaudio alsa -asyncns
 media-video/ffmpeg libsoxr network openssl
 media-video/mpv drm -dvd egl -enca -luajit -uchardet
 net-analyzer/nmap ncat nping
@@ -71,7 +71,7 @@ net-irc/weechat -charset
 net-libs/gnutls -crywrap -openssl
 net-misc/iputils -idn tracepath
 net-vpn/openvpn iproute2 lz4
-net-misc/spice-gtk lz4 -pulseaudio usbredir
+net-misc/spice-gtk lz4 usbredir
 net-print/cups -usb
 net-print/cups-filters pdf
 net-wireless/wpa_supplicant ap -hs2-0 readline

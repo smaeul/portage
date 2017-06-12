@@ -1,6 +1,7 @@
 app-editors/nano
 dev-util/pkgconfig
 mail-client/mailx
+>=net-misc/spice-gtk-0.32
 sys-apps/openrc
 sys-kernel/linux-headers::gentoo
 >=sys-kernel/vanilla-sources-4.10.0

@@ -24,7 +24,6 @@ media-gfx/uniconvertor PYTHON_TARGETS: python2_7
 media-libs/lensfun PYTHON_TARGETS: python2_7
 net-fs/samba PYTHON_TARGETS: python2_7
 net-mail/offlineimap PYTHON_TARGETS: python2_7
-net-misc/spice-gtk PYTHON_TARGETS: python2_7
 net-libs/nodejs PYTHON_TARGETS: python2_7
 net-p2p/transmission-remote-cli PYTHON_TARGETS: python2_7
 sys-devel/clang PYTHON_TARGETS: python2_7
