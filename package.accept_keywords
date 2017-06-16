@@ -1,6 +1,7 @@
 # I personally maintain or control versions of these packages, so keywords
 # are irrelevant, since they are updated manually anyway.
 dev-dotnet/coreclr::smaeul **
+dev-util/android-tools::smaeul **
 dev-lang/zig::smaeul **
 sys-firmware/ovmf-bin::smaeul **
 sys-fs/zfs::smaeul **
