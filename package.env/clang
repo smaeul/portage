@@ -1,0 +1,2 @@
+# Required to avoid libgcc_s dependency
+sys-libs/libcxx clang
