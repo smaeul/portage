@@ -51,7 +51,7 @@ dev-python/pypax -ptpax
 dev-util/cmake system-jsoncpp
 dev-vcs/git perl
 mail-client/nail -ssl
-mail-client/thunderbird -crypt -ffmpeg -gstreamer -jemalloc3 jit system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+mail-client/thunderbird -crypt gtk2 -jemalloc system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/noto cjk
 media-gfx/imagemagick pango raw webp
 media-libs/imlib2 -mp3
