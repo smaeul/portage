@@ -19,6 +19,7 @@ app-mobilephone/heimdall ~amd64
 dev-go/go-bindata ~amd64
 dev-java/icedtea ~amd64
 dev-libs/libressl ~amd64
+dev-util/dwarves ~amd64
 dev-util/perf ~amd64
 media-tv/gtk-v4l ~amd64
 net-analyzer/flent ~amd64
@@ -29,6 +30,7 @@ net-p2p/transmission-remote-cli ~amd64
 sci-misc/boinc ~amd64
 sys-boot/systemd-boot ~amd64
 sys-kernel/vanilla-sources ~amd64
+sys-libs/obstack-standalone ~amd64
 sys-power/acpi_call ~amd64
 www-apps/gitea ~amd64
 
@@ -95,6 +97,8 @@ sys-libs/tevent ~amd64
 ~app-portage/portage-utils-0.64 ~amd64
 # Required for newer bcron
 ~dev-libs/bglibs-2.03 ~amd64
+# Required for musl
+~dev-libs/elfutils-0.169 ~amd64
 # Required for musl
 =dev-libs/libnl-3.3.0* ~amd64
 # Required for project

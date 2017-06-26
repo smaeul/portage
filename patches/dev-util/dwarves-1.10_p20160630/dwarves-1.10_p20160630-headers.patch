@@ -1,0 +1,22 @@
+--- dwarves-1.10_p20160630/dwarves.c.orig
++++ dwarves-1.10_p20160630/dwarves.c
+@@ -16,6 +16,7 @@
+ #include <fcntl.h>
+ #include <fnmatch.h>
+ #include <libelf.h>
++#include <limits.h>
+ #include <search.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+diff --git dwarves-1.10_p20160630/hash.h
+index d3aa416..a984a67 100644
+--- dwarves-1.10_p20160630/hash.h.orig
++++ dwarves-1.10_p20160630/hash.h
+@@ -15,6 +15,7 @@
+  */
+ 
+ #include <stdint.h>
++#include <sys/user.h>
+ 
+ /* 2^31 + 2^29 - 2^25 + 2^22 - 2^19 - 2^16 + 1 */
+ #define GOLDEN_RATIO_PRIME_32 0x9e370001UL

@@ -1,0 +1,13 @@
+--- dwarves-1.10_p20160630/dutil.h.orig
++++ dwarves-1.10_p20160630/dutil.h
+@@ -20,6 +20,10 @@
+ 
+ #define BITS_PER_LONG __BITS_PER_LONG
+ 
++#ifndef __always_inline
++#define __always_inline inline __attribute__ ((always_inline))
++#endif
++
+ #ifndef __unused
+ #define __unused __attribute__ ((unused))
+ #endif
