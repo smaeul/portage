@@ -1,0 +1,13 @@
+diff --git rxtx-2.2pre2/configure.in
+index 65d0a74..9b0b955 100755
+--- rxtx-2.2pre2/configure.in.orig
++++ rxtx-2.2pre2/configure.in
+@@ -12690,7 +12690,7 @@ fi
+ Linux)
+ 	LDFLAGS=$LDFLAGS" -lpthread"
+ 	#check_kernel_headers
+-	check_java_headers
++	#check_java_headers
+ 	CFLAGS=$CFLAGS" -D__need_timespec"
+ 	case $JAVA_VERSION in
+ 
