@@ -10,7 +10,8 @@
 =app-crypt/shash-0.2.6-r2 nostricter
 =dev-java/icedtea-3.4.0 fcommon
 # -Wl,--gc-sections breaks use of ld -r
-=dev-lang/ocaml-4.04.0 fcommon nogcsections
+dev-lang/ocaml nogcsections
+=dev-lang/ocaml-4.04.2 fcommon
 # config.h:1041:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
 # pp_sys.c:217:38: warning: implicit declaration of function 'eaccess' [-Wimplicit-function-declaration]
 # ../../config.h:1041:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
