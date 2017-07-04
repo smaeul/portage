@@ -42,6 +42,7 @@ dev-lang/ocaml nogcsections
 =media-video/ffmpeg-3.2.4 nostricter
 =net-firewall/nftables-0.7 fcommon
 =net-analyzer/iftop-1.0_pre4 fcommon
+=net-misc/freerdp-9999 fcommon
 =net-misc/iperf-3.1.3 gnusource
 =net-misc/openntpd-6.0_p1 fcommon
 # openldap-2.4.44/libraries/libldap/open.c:251:7: warning: implicit declaration of function 'ldap_is_ldapc_url' [-Wimplicit-function-declaration]

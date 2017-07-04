@@ -13,5 +13,6 @@ media-libs/freetype X
 media-libs/imlib2 X
 media-libs/libepoxy X
 media-video/mpv X
+net-misc/freerdp X
 net-misc/unison gtk
 x11-libs/* X

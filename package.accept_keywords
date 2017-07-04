@@ -85,6 +85,7 @@ sys-libs/tevent ~amd64
 # These packages are either only available as git repositories, or have
 # significant features added/changed/fixed since their latest release.
 =dev-util/catalyst-9999 **
+=net-misc/freerdp-9999 **
 =sys-kernel/linux-firmware-99999999 **
 =x11-misc/compton-9999 **
 
