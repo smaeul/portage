@@ -46,12 +46,12 @@ sys-power/powertop ~amd64
 x11-drivers/xf86-video-intel ~amd64
 
 # llvm and friends
-app-vim/llvm-vim ~amd64
 dev-util/lldb ~amd64
 sys-devel/clang ~amd64
 sys-devel/clang-runtime ~amd64
 sys-devel/lld ~amd64
 sys-devel/llvm ~amd64
+sys-devel/llvm-common ~amd64
 sys-libs/compiler-rt ~amd64
 sys-libs/libcxx ~amd64
 sys-libs/libcxxabi ~amd64

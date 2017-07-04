@@ -88,7 +88,7 @@
 ~sys-fs/squashfs-tools-4.3 fcommon
 # libcxxabi-4.0.0.src/src/fallback_malloc.cpp:69:72: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # libcxxabi-4.0.0.src/src/fallback_malloc.cpp:79:30: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=sys-libs/libcxxabi-4.0.0 nostricter
+=sys-libs/libcxxabi-4.0.1 nostricter
 =sys-power/iasl-20160729 fcommon
 =sys-process/htop-2.0.2 fcommon
 # -Wl,--gc-sections breaks configure tests
