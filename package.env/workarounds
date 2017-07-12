@@ -8,6 +8,7 @@
 # shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
 # shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
 =app-crypt/shash-0.2.6-r2 nostricter
+=dev-db/mariadb-10.1.24 fcommon
 =dev-java/icedtea-3.4.0 fcommon
 # -Wl,--gc-sections breaks use of ld -r
 dev-lang/ocaml nogcsections
@@ -44,6 +45,7 @@ dev-lang/ocaml nogcsections
 =net-analyzer/iftop-1.0_pre4 fcommon
 =net-misc/freerdp-9999 fcommon
 =net-misc/iperf-3.1.3 gnusource
+=net-misc/iputils-20161105 fcommon
 =net-misc/openntpd-6.0_p1 fcommon
 # openldap-2.4.44/libraries/libldap/open.c:251:7: warning: implicit declaration of function 'ldap_is_ldapc_url' [-Wimplicit-function-declaration]
 # openldap-2.4.44/servers/slapd/back-ldap/bind.c:722:2: warning: implicit declaration of function 'slap_client_keepalive' [-Wimplicit-function-declaration]
