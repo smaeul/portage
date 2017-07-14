@@ -1,1 +1,2 @@
 cross-arm-linux-musleabihf/* cross-arm-linux-musleabihf.conf
+cross-*/musl cross-generic.conf
