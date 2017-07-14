@@ -1,0 +1,3 @@
+cross-arm-linux-musleabihf/binutils -multitarget
+cross-arm-linux-musleabihf/gcc -openmp
+cross-arm-linux-musleabihf/gdb -multitarget
