@@ -1,0 +1,3 @@
+cross-*/binutils -multitarget
+cross-*/gcc -openmp -sanitize -vtv
+cross-*/gdb -multitarget
