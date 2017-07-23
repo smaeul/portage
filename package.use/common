@@ -45,6 +45,7 @@ dev-db/mariadb -openssl
 dev-db/sqlite -icu
 dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
 dev-lang/python readline
+dev-lang/rust system-llvm
 dev-libs/libevent -ssl
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
