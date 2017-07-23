@@ -32,6 +32,10 @@ dev-lang/ocaml nogcsections
 =dev-libs/nss-3.29.5 nostricter
 =dev-util/android-tools-9999 fcommon
 =dev-util/perf-4.9.13 fcommon
+# wind.c:603:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# wind.c:604:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+# libr/bin/format/pe/pe.c:84:5: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+=dev-util/radare2-1.4.0 nostricter
 ~mail-mta/opensmtpd-6.0.2_p1 fcommon
 # extension/internal/image-resolution.cpp:179:25: warning: null argument where non-null required (argument 1) [-Wnonnull]
 =media-gfx/inkscape-0.91-r3 nostricter

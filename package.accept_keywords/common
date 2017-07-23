@@ -21,6 +21,7 @@ dev-java/icedtea ~amd64
 dev-libs/libressl ~amd64
 dev-util/dwarves ~amd64
 dev-util/perf ~amd64
+dev-util/radare2 ~amd64
 media-tv/gtk-v4l ~amd64
 net-analyzer/flent ~amd64
 net-firewall/nftables ~amd64
