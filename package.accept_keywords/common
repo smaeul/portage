@@ -130,7 +130,7 @@ sys-libs/tevent ~amd64
 # Required for libressl
 ~net-misc/socat-1.7.3.2 ~amd64
 # Does not fix fcommon
-~net-print/cups-filters-1.14.0 ~amd64
+~net-print/cups-filters-1.15.0 ~amd64
 # Required for musl
 ~sys-apps/flashrom-0.9.9 ~amd64
 # Required for musl

@@ -61,7 +61,7 @@ dev-lang/ocaml nogcsections
 # foomatic_rip-foomaticrip.o:(.bss.cupsfilter+0x0): first defined here
 # foomatic_rip-options.o:(.bss.printer_model+0x0): multiple definition of `printer_model'
 # foomatic_rip-foomaticrip.o:(.bss.printer_model+0x0): first defined here
-=net-print/cups-filters-1.14.0 fcommon
+=net-print/cups-filters-1.15.0 fcommon
 # libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]
 =sys-apps/acl-2.2.52-r1 nostricter
 =sys-apps/dtc-1.4.1 fcommon
