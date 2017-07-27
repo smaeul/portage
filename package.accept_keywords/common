@@ -13,12 +13,15 @@ x11-misc/j4-dmenu-desktop::smaeul **
 
 # These packages have no stable version, so at least one version must be
 # accepted in order to install the package at all.
+app-editors/vis ~amd64
 app-laptop/tpacpi-bat ~amd64
 app-misc/ddcutil ~amd64
 app-mobilephone/heimdall ~amd64
 dev-go/go-bindata ~amd64
 dev-java/icedtea ~amd64
 dev-libs/libressl ~amd64
+dev-libs/libtermkey ~amd64
+dev-libs/unibilium ~amd64
 dev-util/dwarves ~amd64
 dev-util/perf ~amd64
 dev-util/radare2 ~amd64
@@ -33,6 +36,7 @@ sys-boot/systemd-boot ~amd64
 sys-kernel/vanilla-sources ~amd64
 sys-libs/obstack-standalone ~amd64
 sys-power/acpi_call ~amd64
+sys-power/brightnessctl ~amd64
 www-apps/gitea ~amd64
 
 # These packages have a stable version, but either it is too out of date to be
