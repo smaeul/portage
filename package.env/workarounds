@@ -11,6 +11,8 @@
 =dev-db/mariadb-10.1.24 fcommon
 =dev-java/icedtea-3.5.1 fcommon
 # -Wl,--gc-sections breaks use of ld -r
+dev-lang/ghc nogcsections
+# -Wl,--gc-sections breaks use of ld -r
 dev-lang/ocaml nogcsections
 =dev-lang/ocaml-4.04.2 fcommon
 # config.h:1041:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]

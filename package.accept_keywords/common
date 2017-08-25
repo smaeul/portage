@@ -40,6 +40,7 @@ www-apps/gitea ~amd64
 # These packages have a stable version, but either it is too out of date to be
 # useful, or I need the latest version for compatibility with other software.
 app-misc/ca-certificates ~amd64
+dev-lang/ghc ~amd64
 dev-util/android-studio ~amd64
 net-irc/weechat ~amd64
 net-misc/unison ~amd64
