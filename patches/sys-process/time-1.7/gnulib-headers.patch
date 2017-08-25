@@ -1,7 +1,7 @@
-diff --git feh-2.9.3/src/getopt.c feh-fixed/src/getopt.c
+diff --git time-1.7/getopt.c time-1.7/getopt.c
 index d212b3a..4d49d92 100644
---- feh-2.9.3/src/getopt.c
-+++ feh-fixed/src/getopt.c
+--- time-1.7/getopt.c
++++ time-1.7/getopt.c
 @@ -64,6 +64,9 @@
  #include <unistd.h>
  #endif				/* GNU C library.  */

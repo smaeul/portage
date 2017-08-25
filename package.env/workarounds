@@ -9,7 +9,7 @@
 # shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
 =app-crypt/shash-0.2.6-r2 nostricter
 =dev-db/mariadb-10.1.24 fcommon
-=dev-java/icedtea-3.4.0 fcommon
+=dev-java/icedtea-3.5.1 fcommon
 # -Wl,--gc-sections breaks use of ld -r
 dev-lang/ocaml nogcsections
 =dev-lang/ocaml-4.04.2 fcommon
@@ -35,7 +35,7 @@ dev-lang/ocaml nogcsections
 # wind.c:603:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # wind.c:604:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # libr/bin/format/pe/pe.c:84:5: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=dev-util/radare2-1.4.0 nostricter
+=dev-util/radare2-1.4.0-r1 nostricter
 ~mail-mta/opensmtpd-6.0.2_p1 fcommon
 # extension/internal/image-resolution.cpp:179:25: warning: null argument where non-null required (argument 1) [-Wnonnull]
 =media-gfx/inkscape-0.91-r3 nostricter
@@ -66,7 +66,7 @@ dev-lang/ocaml nogcsections
 =sys-apps/acl-2.2.52-r1 nostricter
 =sys-apps/dtc-1.4.1 fcommon
 # actual bug: ipmroute.c and ipxfrm.c both define 'filter'
-=sys-apps/iproute2-4.11.0 fcommon
+=sys-apps/iproute2-4.12.0 fcommon
 =sys-apps/kbd-2.0.3 fcommon
 =sys-apps/memtester-4.3.0 fcommon
 # dbprintf.c:24:9: warning: implicit declaration of function 'vdbprintf' [-Wimplicit-function-declaration]
@@ -97,6 +97,10 @@ dev-lang/ocaml nogcsections
 # libcxxabi-4.0.0.src/src/fallback_malloc.cpp:69:72: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # libcxxabi-4.0.0.src/src/fallback_malloc.cpp:79:30: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 =sys-libs/libcxxabi-4.0.1 nostricter
+# ncurses/tinfo/parse_entry.c:520:29: warning: array subscript is below array bounds [-Warray-bounds]
+# ncurses/tinfo/parse_entry.c:522:34: warning: array subscript is below array bounds [-Warray-bounds]
+# Possibly false-positive
+=sys-libs/ncurses-6.0-r1 nostricter
 =sys-power/iasl-20160729 fcommon
 =sys-process/htop-2.0.2 fcommon
 # -Wl,--gc-sections breaks configure tests

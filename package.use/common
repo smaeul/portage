@@ -46,6 +46,7 @@ dev-db/sqlite -icu
 dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
 dev-lang/python readline
 dev-lang/rust system-llvm
+dev-libs/capstone python
 dev-libs/libevent -ssl
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
@@ -59,11 +60,13 @@ media-libs/imlib2 -mp3
 media-libs/libass -enca
 media-libs/libcanberra -gtk3 -sound -udev
 media-libs/mesa gles2 -llvm
+media-libs/openh264 -plugin
 media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
 media-sound/pulseaudio alsa -asyncns
 media-video/ffmpeg libsoxr network openssl
 media-video/mpv drm -dvd egl -enca -luajit -uchardet
+net-analyzer/flent -plots
 net-analyzer/nmap ncat nping
 net-dns/bind-tools -idn urandom
 net-fs/samba -cups
@@ -91,6 +94,7 @@ sys-devel/gcc -vtv
 sys-devel/gdb python
 sys-fs/cryptsetup -gcrypt -libressl nettle
 sys-fs/lvm2 -thin
+sys-fs/zfs -rootfs
 sys-kernel/vanilla-sources symlink
 sys-kernel/linux-firmware savedconfig
 sys-libs/ldb -ldap

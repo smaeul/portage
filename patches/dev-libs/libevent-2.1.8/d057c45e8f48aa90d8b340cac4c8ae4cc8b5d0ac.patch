@@ -17,15 +17,6 @@ diff --git a/openssl-compat.h b/openssl-compat.h
 index 69afc71..0f2dcb7 100644
 --- a/openssl-compat.h
 +++ b/openssl-compat.h
-@@ -1,7 +1,7 @@
- #ifndef OPENSSL_COMPAT_H
- #define OPENSSL_COMPAT_H
- 
--#if OPENSSL_VERSION_NUMBER < 0x10100000L
-+#if (OPENSSL_VERSION_NUMBER < 0x10100000L) || defined(LIBRESSL_VERSION_NUMBER)
- 
- static inline BIO_METHOD *BIO_meth_new(int type, const char *name)
- {
 @@ -30,6 +30,6 @@ static inline BIO_METHOD *BIO_meth_new(int type, const char *name)
  
  #define TLS_method SSLv23_method

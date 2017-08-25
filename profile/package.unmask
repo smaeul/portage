@@ -1,5 +1,5 @@
 dev-libs/elfutils
 >=net-fs/samba-4.3.0
 ~net-misc/iputils-20161105
-=sys-libs/ldb-1.1*
+<sys-libs/ldb-1.1.30
 >=sys-libs/tevent-0.9.30

@@ -4,9 +4,6 @@ dev-dotnet/coreclr::smaeul **
 dev-util/android-tools::smaeul **
 dev-lang/zig::smaeul **
 sys-firmware/ovmf-bin::smaeul **
-sys-fs/zfs::smaeul **
-sys-fs/zfs-kmod::smaeul **
-sys-kernel/spl::smaeul **
 sys-kernel/vanilla-kernel::smaeul **
 x11-misc/i3status-mpd::smaeul **
 x11-misc/j4-dmenu-desktop::smaeul **
@@ -19,6 +16,7 @@ app-misc/ddcutil ~amd64
 app-mobilephone/heimdall ~amd64
 dev-go/go-bindata ~amd64
 dev-java/icedtea ~amd64
+dev-libs/capstone ~amd64
 dev-libs/libressl ~amd64
 dev-libs/libtermkey ~amd64
 dev-libs/unibilium ~amd64
@@ -46,7 +44,10 @@ dev-util/android-studio ~amd64
 net-irc/weechat ~amd64
 net-misc/unison ~amd64
 net-misc/youtube-dl ~amd64
-sys-libs/musl ~amd64
+sys-devel/gcc:6.4.0 ~amd64
+sys-fs/zfs ~amd64
+sys-fs/zfs-kmod ~amd64
+sys-kernel/spl ~amd64
 sys-power/powertop ~amd64
 x11-drivers/xf86-video-intel ~amd64
 
@@ -90,8 +91,8 @@ sys-libs/tevent ~amd64
 # These packages are either only available as git repositories, or have
 # significant features added/changed/fixed since their latest release.
 =dev-util/catalyst-9999 **
-=net-misc/freerdp-9999 **
 =sys-kernel/linux-firmware-99999999 **
+=sys-libs/musl-9999 **
 =x11-misc/compton-9999 **
 
 # The following packages have significant features or bugfixes in an unstable
@@ -125,6 +126,8 @@ sys-libs/tevent ~amd64
 ~net-libs/libasr-1.0.2.201602131606 ~amd64
 # Required for nftables 0.7
 ~net-libs/libnftnl-1.0.7 ~amd64
+# Required for libressl
+=net-misc/freerdp-9999 **
 # Required for wireguard
 ~net-misc/iputils-20161105 ~amd64
 # Required for libressl
@@ -134,7 +137,7 @@ sys-libs/tevent ~amd64
 # Required for musl
 ~sys-apps/flashrom-0.9.9 ~amd64
 # Required for musl
-~sys-apps/iproute2-4.11.0 ~amd64
+~sys-apps/iproute2-4.12.0 ~amd64
 # Required for /lib/gentoo/functions.sh and therefore openrc removal
 ~sys-devel/gcc-config-1.8 ~amd64
 # Required for patches
