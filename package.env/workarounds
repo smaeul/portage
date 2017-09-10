@@ -8,7 +8,7 @@
 # shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
 # shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
 =app-crypt/shash-0.2.6-r2 nostricter
-=dev-db/mariadb-10.1.24 fcommon
+=dev-db/mariadb-10.1.26 fcommon
 =dev-java/icedtea-3.5.1 fcommon
 # -Wl,--gc-sections breaks use of ld -r
 dev-lang/ghc nogcsections
@@ -45,10 +45,9 @@ dev-lang/ocaml nogcsections
 =media-libs/libv4l-1.10.1 fcommon
 =media-sound/ncmpcpp-0.7.7 ncurseswidechar
 # src/libavcodec/vaapi_encode_h265.c:305:49: warning: array subscript is above array bounds [-Warray-bounds]
-# src/libswresample/rematrix.c:376:47: warning: iteration 64u invokes undefined behavior [-Waggressive-loop-optimizations]
-=media-video/ffmpeg-3.2.4 nostricter
+=media-video/ffmpeg-3.3.3 nostricter
 =net-firewall/nftables-0.7 fcommon
-=net-analyzer/iftop-1.0_pre4 fcommon
+=net-analyzer/iftop-1.0_pre4-r2 fcommon
 =net-misc/freerdp-9999 fcommon
 =net-misc/iperf-3.1.3 gnusource
 =net-misc/iputils-20161105 fcommon
@@ -68,7 +67,7 @@ dev-lang/ocaml nogcsections
 =sys-apps/acl-2.2.52-r1 nostricter
 =sys-apps/dtc-1.4.1 fcommon
 # actual bug: ipmroute.c and ipxfrm.c both define 'filter'
-=sys-apps/iproute2-4.12.0 fcommon
+=sys-apps/iproute2-4.13.0 fcommon
 =sys-apps/kbd-2.0.3 fcommon
 =sys-apps/memtester-4.3.0 fcommon
 # dbprintf.c:24:9: warning: implicit declaration of function 'vdbprintf' [-Wimplicit-function-declaration]
@@ -107,8 +106,8 @@ dev-lang/ocaml nogcsections
 =sys-process/htop-2.0.2 fcommon
 # -Wl,--gc-sections breaks configure tests
 x11-libs/cairo nogcsections
-# gdk-pixbuf-2.36.6/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c:1357:16: warning: iteration 128u invokes undefined behavior [-Waggressive-loop-optimizations]
-=x11-libs/gdk-pixbuf-2.36.6 nostricter
+# gdk-pixbuf-2.36.9/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c:1357:16: warning: iteration 128 invokes undefined behavior [-Waggressive-loop-optimizations]
+=x11-libs/gdk-pixbuf-2.36.9 nostricter
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_a' will never be NULL [-Waddress]
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_b' will never be NULL [-Waddress]
 # modules/other/gail/gailtreeview.c:1470:28: warning: the comparison will always evaluate as 'true' for the address of 'iter_to_row' will never be NULL [-Waddress]
