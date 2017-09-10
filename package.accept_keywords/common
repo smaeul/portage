@@ -103,6 +103,14 @@ sys-libs/tevent ~amd64
 =app-emulation/runc-1.0.0* ~amd64
 # Cleans up /etc/portage
 ~app-portage/portage-utils-0.64 ~amd64
+# Required for GHC 8
+=dev-haskell/cabal-1.24.2.0 ~amd64
+# Required for GHC 8
+=dev-haskell/quickcheck-2.9.2 ~amd64
+# Required for GHC 8
+=dev-haskell/quickcheck-io-0.1.4 ~amd64
+# Required for GHC 8
+=dev-haskell/transformers-0.5.2.0 ~amd64
 # Required for newer bcron
 ~dev-libs/bglibs-2.03 ~amd64
 # Required for musl
