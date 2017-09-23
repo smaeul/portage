@@ -144,6 +144,8 @@ sys-libs/tevent ~amd64
 ~net-misc/socat-1.7.3.2 ~amd64
 # Does not fix fcommon
 ~net-print/cups-filters-1.17.7 ~amd64
+# Required for u-boot master
+~sys-apps/dtc-1.4.4 ~amd64
 # Required for musl
 ~sys-apps/flashrom-0.9.9 ~amd64
 # Required for musl
