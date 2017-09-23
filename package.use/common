@@ -70,6 +70,7 @@ media-video/mpv drm -dvd egl -enca -luajit -uchardet
 net-analyzer/flent -plots
 net-analyzer/nmap ncat nping
 net-dns/bind-tools -idn urandom
+net-dns/dnsmasq tftp
 net-fs/samba -cups
 net-im/bitlbee -gnutls oscar twitter
 net-irc/weechat -charset

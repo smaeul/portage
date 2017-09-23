@@ -1,0 +1,42 @@
+diff --git acme-client-portable-0.1.16/extern.h
+index cd1cad2..57d6d47 100644
+--- acme-client-portable-0.1.16/extern.h.orig
++++ acme-client-portable-0.1.16/extern.h
+@@ -260,12 +260,12 @@ int		 sandbox_before(void);
+ /*
+  * Should we print debugging messages?
+  */
+-int		 verbose;
++extern int	 verbose;
+ 
+ /*
+  * What component is the process within (COMP__MAX for none)?
+  */
+-enum comp	 proccomp;
++extern enum comp proccomp;
+ 
+ __END_DECLS
+ 
+diff --git acme-client-portable-0.1.16/main.c
+index 56b4f8b..6f7ad25 100644
+--- acme-client-portable-0.1.16/main.c.orig
++++ acme-client-portable-0.1.16/main.c
+@@ -40,6 +40,9 @@
+ #define WWW_DIR "/var/www/acme"
+ #define PRIVKEY_FILE "privkey.pem"
+ 
++int verbose;
++enum comp proccomp;
++
+ /*
+  * XXX: I arbitrarily choose a starting descriptor and hope that we
+  * haven't opened up til this one.
+@@ -151,8 +154,6 @@ main(int argc, char *argv[])
+ 			  backup = 0, build_certdir, build_ssldir, 
+ 			  build_acctdir, expand = 0, ocsp = 0;
+ 	pid_t		  pids[COMP__MAX];
+-	extern int	  verbose;
+-	extern enum comp  proccomp;
+ 	size_t		  i, j, altsz, ne, newargsz;
+ 
+ 	/*

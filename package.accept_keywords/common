@@ -10,6 +10,7 @@ x11-misc/j4-dmenu-desktop::smaeul **
 
 # These packages have no stable version, so at least one version must be
 # accepted in order to install the package at all.
+app-crypt/acme-client ~amd64
 app-editors/vis ~amd64
 app-laptop/tpacpi-bat ~amd64
 app-misc/ddcutil ~amd64
@@ -127,8 +128,6 @@ sys-libs/tevent ~amd64
 ~dev-util/cmocka-1.1.1 ~amd64
 # Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
-# Required for libressl
-=media-video/ffmpeg-3.3.3 ~amd64
 # Required to fix fcommon
 ~media-video/mpv-0.25.0 ~amd64
 # Required to fix warnings
@@ -144,7 +143,7 @@ sys-libs/tevent ~amd64
 # Required for libressl
 ~net-misc/socat-1.7.3.2 ~amd64
 # Does not fix fcommon
-~net-print/cups-filters-1.15.0 ~amd64
+~net-print/cups-filters-1.17.7 ~amd64
 # Required for musl
 ~sys-apps/flashrom-0.9.9 ~amd64
 # Required for musl
