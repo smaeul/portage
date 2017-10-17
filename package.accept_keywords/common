@@ -100,6 +100,8 @@ sys-libs/tevent ~amd64
 # The following packages have significant features or bugfixes in an unstable
 # version. These entries should be removed once that version is stabilized.
 #
+# Required for samba 4.7
+=app-crypt/mit-krb5-1.15.2 ~amd64
 # Required for musl (headers)
 =app-emulation/runc-1.0.0* ~amd64
 # Cleans up /etc/portage
@@ -128,14 +130,16 @@ sys-libs/tevent ~amd64
 ~dev-util/cmocka-1.1.1 ~amd64
 # Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
+# Required for libressl
+media-video/ffmpeg::libressl ~amd64
 # Required to fix fcommon
 ~media-video/mpv-0.25.0 ~amd64
 # Required to fix warnings
 =net-analyzer/netperf-2.7.0-r2 ~amd64
 # Required for musl (res_randomid)
 ~net-libs/libasr-1.0.2.201602131606 ~amd64
-# Required for nftables 0.7
-~net-libs/libnftnl-1.0.7 ~amd64
+# Required for nftables 0.8
+~net-libs/libnftnl-1.0.8 ~amd64
 # Required for libressl
 =net-misc/freerdp-9999 **
 # Required for wireguard
@@ -143,7 +147,7 @@ sys-libs/tevent ~amd64
 # Required for libressl
 ~net-misc/socat-1.7.3.2 ~amd64
 # Does not fix fcommon
-~net-print/cups-filters-1.17.7 ~amd64
+~net-print/cups-filters-1.17.9 ~amd64
 # Required for u-boot master
 ~sys-apps/dtc-1.4.4 ~amd64
 # Required for musl

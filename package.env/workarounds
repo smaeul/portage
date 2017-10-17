@@ -44,8 +44,8 @@ dev-lang/ocaml nogcsections
 =media-libs/freeglut-3.0.0 fcommon
 =media-libs/libv4l-1.10.1 fcommon
 =media-sound/ncmpcpp-0.7.7 ncurseswidechar
-# src/libavcodec/vaapi_encode_h265.c:305:49: warning: array subscript is above array bounds [-Warray-bounds]
-=media-video/ffmpeg-3.3.3 nostricter
+# src/libavcodec/vaapi_encode_h265.c:304:49: warning: array subscript is above array bounds [-Warray-bounds]
+=media-video/ffmpeg-3.4 nostricter
 =net-firewall/nftables-0.7 fcommon
 =net-analyzer/iftop-1.0_pre4-r2 fcommon
 =net-misc/freerdp-9999 fcommon
@@ -62,7 +62,7 @@ dev-lang/ocaml nogcsections
 # foomatic_rip-foomaticrip.o:(.bss.cupsfilter+0x0): first defined here
 # foomatic_rip-options.o:(.bss.printer_model+0x0): multiple definition of `printer_model'
 # foomatic_rip-foomaticrip.o:(.bss.printer_model+0x0): first defined here
-=net-print/cups-filters-1.17.7 fcommon
+=net-print/cups-filters-1.17.9 fcommon
 # libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]
 =sys-apps/acl-2.2.52-r1 nostricter
 =sys-apps/dtc-1.4.4 fcommon
