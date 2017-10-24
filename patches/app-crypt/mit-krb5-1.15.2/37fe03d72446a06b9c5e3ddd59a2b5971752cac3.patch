@@ -1,0 +1,50 @@
+From 37fe03d72446a06b9c5e3ddd59a2b5971752cac3 Mon Sep 17 00:00:00 2001
+From: Bernard Spil <brnrd@FreeBSD.org>
+Date: Sun, 12 Feb 2017 14:00:52 +0100
+Subject: [PATCH] plugins/preauth/pkinit Fix build with LibreSSL
+
+  - LibreSSL defines OPENSSL_VERSION_NUMBER 0x20000000L
+  - Add check for LIBRESSL_VERSION_NUMBER for checks >= 1.1.0
+
+See also HardenedBSD/hardenedbsd-ports@fc7b1529a02f3569f13e7a0d54ffbe952390361b
+See also https://bugs.freebsd.org/217027
+---
+ src/plugins/preauth/pkinit/pkinit_crypto_openssl.c | 4 ++--
+ src/plugins/preauth/pkinit/pkinit_crypto_openssl.h | 2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/plugins/preauth/pkinit/pkinit_crypto_openssl.c b/plugins/preauth/pkinit/pkinit_crypto_openssl.c
+index 2ea2a4928b..103918c9b1 100644
+--- a/plugins/preauth/pkinit/pkinit_crypto_openssl.c
++++ b/plugins/preauth/pkinit/pkinit_crypto_openssl.c
+@@ -187,7 +187,7 @@ pkinit_pkcs11_code_to_text(int err);
+     (*_x509_pp) = PKCS7_cert_from_signer_info(_p7,_si)
+ #endif
+ 
+-#if OPENSSL_VERSION_NUMBER < 0x10100000L
++#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
+ 
+ /* 1.1 standardizes constructor and destructor names, renaming
+  * EVP_MD_CTX_{create,destroy} and deprecating ASN1_STRING_data. */
+@@ -3061,7 +3061,7 @@ pkinit_encode_dh_params(const BIGNUM *p, const BIGNUM *g, const BIGNUM *q,
+     return retval;
+ }
+ 
+-#if OPENSSL_VERSION_NUMBER >= 0x10100000L
++#if OPENSSL_VERSION_NUMBER >= 0x10100000L && !defined(LIBRESSL_VERSION_NUMBER)
+ 
+ /*
+  * We need to decode DomainParameters from RFC 3279 section 2.3.3.  We would
+diff --git a/plugins/preauth/pkinit/pkinit_crypto_openssl.h b/plugins/preauth/pkinit/pkinit_crypto_openssl.h
+index 2fe357c5e7..1e32cc8e78 100644
+--- a/plugins/preauth/pkinit/pkinit_crypto_openssl.h
++++ b/plugins/preauth/pkinit/pkinit_crypto_openssl.h
+@@ -46,7 +46,7 @@
+ #include <openssl/asn1.h>
+ #include <openssl/pem.h>
+ 
+-#if OPENSSL_VERSION_NUMBER >= 0x10100000L
++#if OPENSSL_VERSION_NUMBER >= 0x10100000L && !defined(LIBRESSL_VERSION_NUMBER)
+ #include <openssl/asn1t.h>
+ #else
+ #include <openssl/asn1_mac.h>
