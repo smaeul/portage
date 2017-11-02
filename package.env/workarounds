@@ -1,14 +1,14 @@
 =app-arch/cpio-2.12-r1 fcommon
 # libcommon.a(libcommon_a-iobuf.o):(.bss.iobuf_debug_mode+0x0): multiple definition of `iobuf_debug_mode'
 # libcommon.a(libcommon_a-miscellaneous.o):(.bss.iobuf_debug_mode+0x0): first defined here
-=app-crypt/gnupg-2.1.20-r1 fcommon
+=app-crypt/gnupg-2.2.0 fcommon
 =app-crypt/pinentry-0.9.7-r1 ncurseswidechar
 # shash.gaa:49:3: warning: implicit declaration of function 'hash_license' [-Wimplicit-function-declaration]
 # shash.gaa:48:3: warning: implicit declaration of function 'hash_version' [-Wimplicit-function-declaration]
 # shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
 # shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
 =app-crypt/shash-0.2.6-r2 nostricter
-=dev-db/mariadb-10.1.26 fcommon
+=dev-db/mariadb-10.1.26-r1 fcommon
 =dev-java/icedtea-3.5.1 fcommon
 # -Wl,--gc-sections breaks use of ld -r
 dev-lang/ghc nogcsections
@@ -70,6 +70,8 @@ dev-lang/ocaml nogcsections
 =sys-apps/iproute2-4.13.0 fcommon
 =sys-apps/kbd-2.0.3 fcommon
 =sys-apps/memtester-4.3.0 fcommon
+# syslinux-6.04-pre1/com32/lib/syslinux/debug.c:91:5: warning: incompatible implicit declaration of built-in function 'printf'
+=sys-boot/syslinux-6.04_pre1 fcommon nostricter
 # dbprintf.c:24:9: warning: implicit declaration of function 'vdbprintf' [-Wimplicit-function-declaration]
 # dbprintf.c:30:60: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
 # dbprintf.c:110:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]

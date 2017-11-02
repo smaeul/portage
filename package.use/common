@@ -25,6 +25,8 @@ media-libs/libvpx postproc svc
 net-analyzer/netperf demo
 # Required for libressl
 net-libs/nodejs bundled-ssl
+# Required by bitcoind
+sys-libs/db cxx
 # Required by chromium
 sys-libs/zlib minizip
 # Required by LEDE/OpenWRT image builder
@@ -45,9 +47,10 @@ dev-db/mariadb -openssl
 dev-db/sqlite -icu
 dev-lang/ghc ghcbootstrap
 dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
-dev-lang/python readline
+dev-lang/python readline berkdb
 dev-lang/rust system-llvm
 dev-libs/capstone python
+dev-libs/leveldb -tcmalloc
 dev-libs/libevent -ssl
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
