@@ -9,7 +9,7 @@
 # shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
 =app-crypt/shash-0.2.6-r2 nostricter
 =dev-db/mariadb-10.1.26-r1 fcommon
-=dev-java/icedtea-3.5.1 fcommon
+=dev-java/icedtea-3.6.0 fcommon
 # -Wl,--gc-sections breaks use of ld -r
 dev-lang/ghc nogcsections
 # -Wl,--gc-sections breaks use of ld -r

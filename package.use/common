@@ -47,7 +47,7 @@ dev-db/mariadb -openssl
 dev-db/sqlite -icu
 dev-lang/ghc ghcbootstrap
 dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
-dev-lang/python readline berkdb
+dev-lang/python berkdb readline
 dev-lang/rust system-llvm
 dev-libs/capstone python
 dev-libs/leveldb -tcmalloc

@@ -96,7 +96,6 @@ sys-libs/tevent ~amd64
 =dev-util/catalyst-9999 **
 =dev-util/uncrustify-9999 **
 =sys-kernel/linux-firmware-99999999 **
-=sys-libs/musl-9999 **
 =x11-misc/compton-9999 **
 
 # The following packages have significant features or bugfixes in an unstable
