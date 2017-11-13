@@ -11,6 +11,7 @@ x11-misc/j4-dmenu-desktop::smaeul **
 # These packages have no stable version, so at least one version must be
 # accepted in order to install the package at all.
 app-crypt/acme-client ~amd64
+app-crypt/keybase ~amd64
 app-editors/vis ~amd64
 app-laptop/tpacpi-bat ~amd64
 app-misc/ddcutil ~amd64
@@ -115,6 +116,8 @@ sys-libs/tevent ~amd64
 =dev-haskell/quickcheck-io-0.1.4 ~amd64
 # Required for GHC 8
 =dev-haskell/transformers-0.5.2.0 ~amd64
+# Several useful bugfixes
+~app-misc/tmux-2.6 ~amd64
 # Required for newer bcron
 ~dev-libs/bglibs-2.03 ~amd64
 # Required for musl
