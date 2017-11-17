@@ -43,7 +43,6 @@ www-apps/gitea ~amd64
 # These packages have a stable version, but either it is too out of date to be
 # useful, or I need the latest version for compatibility with other software.
 app-misc/ca-certificates ~amd64
-dev-lang/ghc ~amd64
 dev-util/android-studio ~amd64
 net-irc/weechat ~amd64
 net-misc/unison ~amd64
@@ -52,7 +51,6 @@ sys-devel/gcc:6.4.0 ~amd64
 sys-fs/zfs ~amd64
 sys-fs/zfs-kmod ~amd64
 sys-kernel/spl ~amd64
-sys-power/powertop ~amd64
 x11-drivers/xf86-video-intel ~amd64
 
 # llvm and friends
@@ -102,28 +100,12 @@ sys-libs/tevent ~amd64
 # The following packages have significant features or bugfixes in an unstable
 # version. These entries should be removed once that version is stabilized.
 #
-# Required for samba 4.7
-=app-crypt/mit-krb5-1.15.2 ~amd64
 # Required for musl (headers)
 =app-emulation/runc-1.0.0* ~amd64
-# Cleans up /etc/portage
-~app-portage/portage-utils-0.64 ~amd64
-# Required for GHC 8
-=dev-haskell/cabal-1.24.2.0 ~amd64
-# Required for GHC 8
-=dev-haskell/quickcheck-2.9.2 ~amd64
-# Required for GHC 8
-=dev-haskell/quickcheck-io-0.1.4 ~amd64
-# Required for GHC 8
-=dev-haskell/transformers-0.5.2.0 ~amd64
 # Several useful bugfixes
 ~app-misc/tmux-2.6 ~amd64
 # Required for newer bcron
 ~dev-libs/bglibs-2.03 ~amd64
-# Required for musl
-~dev-libs/elfutils-0.169 ~amd64
-# Required for musl
-=dev-libs/libnl-3.3.0* ~amd64
 # Required for project
 =dev-python/flask-0.12* ~amd64
 # Required for catalyst
@@ -136,8 +118,6 @@ sys-libs/tevent ~amd64
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
 # Required for libressl
 media-video/ffmpeg::libressl ~amd64
-# Required to fix fcommon
-~media-video/mpv-0.25.0 ~amd64
 # Required to fix warnings
 =net-analyzer/netperf-2.7.0-r2 ~amd64
 # Required for musl (res_randomid)
@@ -148,8 +128,6 @@ media-video/ffmpeg::libressl ~amd64
 =net-misc/freerdp-9999 **
 # Required for wireguard
 ~net-misc/iputils-20161105 ~amd64
-# Required for libressl
-~net-misc/socat-1.7.3.2 ~amd64
 # Does not fix fcommon
 ~net-print/cups-filters-1.17.9 ~amd64
 # Required for u-boot master
@@ -158,9 +136,5 @@ media-video/ffmpeg::libressl ~amd64
 ~sys-apps/flashrom-0.9.9 ~amd64
 # Required for musl
 ~sys-apps/iproute2-4.14.0 ~amd64
-# Required for /lib/gentoo/functions.sh and therefore openrc removal
-~sys-devel/gcc-config-1.8 ~amd64
-# Required for patches
-~sys-devel/gdb-7.12.1 ~amd64
 # This is old anyway
 ~sys-process/bcron-0.11 ~amd64
