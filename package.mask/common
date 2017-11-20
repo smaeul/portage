@@ -1,6 +1,7 @@
 app-editors/nano
 dev-util/pkgconfig
 mail-client/mailx
+net-libs/nodejs::gentoo
 >=net-misc/spice-gtk-0.32
 sys-apps/iproute2::gentoo
 sys-apps/openrc

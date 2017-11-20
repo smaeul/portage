@@ -1,4 +1,6 @@
 # These USE changes are necessary to fulfill a dependency from another package.
+# Required by libreoffice
+app-crypt/gpgme cxx
 # Required by cups-filters
 app-text/poppler cxx
 # Required by xdg-utils
@@ -11,6 +13,8 @@ dev-lang/python xml
 dev-libs/boost icu nls
 # Required by chromium
 dev-libs/libxml2 icu
+# Required by libreoffice
+dev-libs/xmlsec nss
 # Required by reportlab
 dev-python/pillow tiff
 # Required by inkscape[imagemagick]
