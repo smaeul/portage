@@ -49,6 +49,7 @@ app-office/libreoffice java
 app-shells/bash -net
 dev-db/mariadb -openssl
 dev-db/sqlite -icu
+dev-haskell/cryptonite support_blake2_sse support_pclmuldq
 dev-lang/ghc ghcbootstrap
 dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
 dev-lang/python berkdb readline
