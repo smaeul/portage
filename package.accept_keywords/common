@@ -135,6 +135,6 @@ media-video/ffmpeg::libressl ~amd64
 # Required for musl
 ~sys-apps/flashrom-0.9.9 ~amd64
 # Required for musl
-~sys-apps/iproute2-4.14.0 ~amd64
+~sys-apps/iproute2-4.14.1 ~amd64
 # This is old anyway
 ~sys-process/bcron-0.11 ~amd64
