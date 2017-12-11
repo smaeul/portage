@@ -48,7 +48,6 @@ dev-util/android-studio ~amd64
 net-irc/weechat ~amd64
 net-misc/unison ~amd64
 net-misc/youtube-dl ~amd64
-sys-devel/gcc:6.4.0 ~amd64
 sys-fs/zfs ~amd64
 sys-fs/zfs-kmod ~amd64
 sys-kernel/spl ~amd64
