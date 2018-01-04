@@ -2,13 +2,13 @@
 # libcommon.a(libcommon_a-iobuf.o):(.bss.iobuf_debug_mode+0x0): multiple definition of `iobuf_debug_mode'
 # libcommon.a(libcommon_a-miscellaneous.o):(.bss.iobuf_debug_mode+0x0): first defined here
 =app-crypt/gnupg-2.2.0 fcommon
-=app-crypt/pinentry-0.9.7-r1 ncurseswidechar
 # shash.gaa:49:3: warning: implicit declaration of function 'hash_license' [-Wimplicit-function-declaration]
 # shash.gaa:48:3: warning: implicit declaration of function 'hash_version' [-Wimplicit-function-declaration]
 # shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
 # shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
 =app-crypt/shash-0.2.6-r2 nostricter
-=dev-db/mariadb-10.1.26-r1 fcommon
+=app-text/aspell-0.60.7_rc1 ncurseswidechar
+=dev-db/mariadb-10.1.29 fcommon
 dev-haskell/cipher-aes maes
 dev-haskell/cryptonite maes
 =dev-haskell/hslua-0.3.6.1 nogcsections
@@ -18,10 +18,6 @@ dev-lang/ghc nogcsections
 # -Wl,--gc-sections breaks use of ld -r
 dev-lang/ocaml nogcsections
 =dev-lang/ocaml-4.04.2 fcommon
-# config.h:1041:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
-# pp_sys.c:217:38: warning: implicit declaration of function 'eaccess' [-Wimplicit-function-declaration]
-# ../../config.h:1041:27: warning: implicit declaration of function 'gcvt' [-Wimplicit-function-declaration]
-=dev-lang/perl-5.24.1-r2 nostricter
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
 ~dev-libs/boehm-gc-7.4.2 fcommon nostricter
 # jarfile.c:692:9: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
@@ -37,23 +33,16 @@ dev-lang/ocaml nogcsections
 =dev-libs/nss-3.29.5 nostricter
 =dev-util/android-tools-9999 fcommon
 =dev-util/perf-4.9.13 fcommon
-# wind.c:603:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# wind.c:604:2: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# libr/bin/format/pe/pe.c:84:5: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=dev-util/radare2-1.4.0-r1 nostricter
 ~mail-mta/opensmtpd-6.0.2_p1 fcommon
 # extension/internal/image-resolution.cpp:179:25: warning: null argument where non-null required (argument 1) [-Wnonnull]
 =media-gfx/inkscape-0.91-r3 nostricter
 =media-libs/freeglut-3.0.0 fcommon
-=media-libs/libv4l-1.10.1 fcommon
 =media-sound/ncmpcpp-0.7.7 ncurseswidechar
 # src/libavcodec/vaapi_encode_h265.c:304:49: warning: array subscript is above array bounds [-Warray-bounds]
-=media-video/ffmpeg-3.4 nostricter
-=net-firewall/nftables-0.7 fcommon
+=media-video/ffmpeg-3.4.1 nostricter
 =net-analyzer/iftop-1.0_pre4-r2 fcommon
 =net-misc/freerdp-9999 fcommon
 =net-misc/iperf-3.1.3 gnusource
-=net-misc/iputils-20161105 fcommon
 =net-misc/openntpd-6.0_p1 fcommon
 # openldap-2.4.44/libraries/libldap/open.c:251:7: warning: implicit declaration of function 'ldap_is_ldapc_url' [-Wimplicit-function-declaration]
 # openldap-2.4.44/servers/slapd/back-ldap/bind.c:722:2: warning: implicit declaration of function 'slap_client_keepalive' [-Wimplicit-function-declaration]
@@ -75,34 +64,7 @@ dev-lang/ocaml nogcsections
 =sys-apps/memtester-4.3.0 fcommon
 # syslinux-6.04-pre1/com32/lib/syslinux/debug.c:91:5: warning: incompatible implicit declaration of built-in function 'printf'
 =sys-boot/syslinux-6.04_pre1 fcommon nostricter
-# dbprintf.c:24:9: warning: implicit declaration of function 'vdbprintf' [-Wimplicit-function-declaration]
-# dbprintf.c:30:60: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
-# dbprintf.c:110:13: warning: implicit declaration of function 'strlen' [-Wimplicit-function-declaration]
-# dbprintf.c:110:13: warning: incompatible implicit declaration of built-in function 'strlen'
-# makeboot.c:208:19: warning: implicit declaration of function 'set_superfield' [-Wimplicit-function-declaration]
-# makeboot.c:216:24: warning: implicit declaration of function 'Usage' [-Wimplicit-function-declaration]
-# makeboot.c:248:4: warning: implicit declaration of function 'open_disk' [-Wimplicit-function-declaration]
-# makeboot.c:249:8: warning: implicit declaration of function 'read_sector' [-Wimplicit-function-declaration]
-# makeboot.c:262:10: warning: implicit declaration of function 'check_msdos' [-Wimplicit-function-declaration]
-# makeboot.c:266:22: warning: implicit declaration of function 'check_simpledos' [-Wimplicit-function-declaration]
-# makeboot.c:269:7: warning: implicit declaration of function 'check_tar' [-Wimplicit-function-declaration]
-# makeboot.c:272:7: warning: implicit declaration of function 'check_zapped' [-Wimplicit-function-declaration]
-# makeboot.c:275:7: warning: implicit declaration of function 'check_mbr' [-Wimplicit-function-declaration]
-# makeboot.c:304:7: warning: implicit declaration of function 'copy_tarblock' [-Wimplicit-function-declaration]
-# makeboot.c:308:7: warning: implicit declaration of function 'copy_mbr' [-Wimplicit-function-declaration]
-# makeboot.c:325:7: warning: implicit declaration of function 'copy_superfields' [-Wimplicit-function-declaration]
-# makeboot.c:333:10: warning: implicit declaration of function 'save_super' [-Wimplicit-function-declaration]
-# makeboot.c:335:10: warning: implicit declaration of function 'print_super' [-Wimplicit-function-declaration]
-# makeboot.c:339:10: warning: implicit declaration of function 'close_disk' [-Wimplicit-function-declaration]
-# makeboot.c:348:7: warning: implicit declaration of function 'set_dosname' [-Wimplicit-function-declaration]
-# makeboot.c:351:7: warning: implicit declaration of function 'set_asciz' [-Wimplicit-function-declaration]
-# makeboot.c:359:7: warning: implicit declaration of function 'write_sector' [-Wimplicit-function-declaration]
-# dis.h:131:29: warning: implicit declaration of function 'Fetch' [-Wimplicit-function-declaration]
-=sys-devel/dev86-0.16.19 nostricter
 ~sys-fs/squashfs-tools-4.3 fcommon
-# libcxxabi-4.0.0.src/src/fallback_malloc.cpp:69:72: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-# libcxxabi-4.0.0.src/src/fallback_malloc.cpp:79:30: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
-=sys-libs/libcxxabi-4.0.1 nostricter
 # ncurses/tinfo/parse_entry.c:520:29: warning: array subscript is below array bounds [-Warray-bounds]
 # ncurses/tinfo/parse_entry.c:522:34: warning: array subscript is below array bounds [-Warray-bounds]
 # Possibly false-positive
