@@ -1,7 +1,7 @@
 =app-arch/cpio-2.12-r1 fcommon
 # libcommon.a(libcommon_a-iobuf.o):(.bss.iobuf_debug_mode+0x0): multiple definition of `iobuf_debug_mode'
 # libcommon.a(libcommon_a-miscellaneous.o):(.bss.iobuf_debug_mode+0x0): first defined here
-=app-crypt/gnupg-2.2.0 fcommon
+=app-crypt/gnupg-2.2.4 fcommon
 # shash.gaa:49:3: warning: implicit declaration of function 'hash_license' [-Wimplicit-function-declaration]
 # shash.gaa:48:3: warning: implicit declaration of function 'hash_version' [-Wimplicit-function-declaration]
 # shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
@@ -57,7 +57,7 @@ dev-lang/ocaml nogcsections
 =net-print/cups-filters-1.17.9 fcommon
 # libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]
 =sys-apps/acl-2.2.52-r1 nostricter
-=sys-apps/dtc-1.4.4 fcommon
+=sys-apps/dtc-1.4.4-r1 fcommon
 # actual bug: ipmroute.c and ipxfrm.c both define 'filter'
 ~sys-apps/iproute2-4.14.1 fcommon
 =sys-apps/kbd-2.0.3 fcommon

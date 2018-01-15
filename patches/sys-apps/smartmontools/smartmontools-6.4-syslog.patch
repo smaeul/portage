@@ -21,13 +21,14 @@ index 98c8ca4..7b41784 100644
  static void PrintOut(int priority, const char *fmt, ...)
                       __attribute_format_printf(2, 3);
  
-@@ -1192,27 +1188,6 @@ static void reset_warning_mail(const dev_config & cfg, dev_state & state, int wh
+@@ -1192,28 +1188,6 @@ static void reset_warning_mail(const dev_config & cfg, dev_state & state, int wh
    state.must_write = true;
  }
  
 -#ifndef _WIN32
 -
 -// Output multiple lines via separate syslog(3) calls.
+-__attribute_format_printf(2, 0)
 -static void vsyslog_lines(int priority, const char * fmt, va_list ap)
 -{
 -  char buf[512+EBUFLEN]; // enough space for exec cmd output in MailWarning()
