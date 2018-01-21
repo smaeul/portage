@@ -1,0 +1,145 @@
+commit 2d8c130b2e86ba5a23ad109904acef9211de491b
+Author: Samuel Holland <samuel@sholland.org>
+Date:   Sun Jan 21 17:27:42 2018 -0600
+
+    Revert "Adopt UT test 60020"
+    
+    This reverts commit 9ad37b97b251cfa83dfe6720315c39de9899435d.
+
+diff --git a/src/combine.cpp b/src/combine.cpp
+index 7d72d92a..0a6068c2 100644
+--- a/src/combine.cpp
++++ b/src/combine.cpp
+@@ -1992,13 +1992,6 @@ static void mark_function_return_type(chunk_t *fname, chunk_t *start, c_token_t
+          pc = chunk_get_prev_ncnl(pc);
+       }
+ 
+-      // Changing words to types into tuple return types in CS.
+-      bool is_return_tuple = false;
+-      if (pc != nullptr && pc->type == CT_PAREN_CLOSE)
+-      {
+-         first           = chunk_skip_to_match_rev(pc);
+-         is_return_tuple = true;
+-      }
+       pc = first;
+       while (pc != nullptr)
+       {
+@@ -2008,12 +2001,7 @@ static void mark_function_return_type(chunk_t *fname, chunk_t *start, c_token_t
+          {
+             set_chunk_parent(pc, parent_type);
+          }
+-         chunk_t *prev = chunk_get_prev_ncnl(pc);
+-         if (  !is_return_tuple || pc->type != CT_WORD
+-            || (prev != nullptr && prev->type != CT_TYPE))
+-         {
+-            make_type(pc);
+-         }
++         make_type(pc);
+          if (pc == start)
+          {
+             break;
+@@ -4363,29 +4351,6 @@ static void mark_function(chunk_t *pc)
+                  prev->text(), get_token_name(prev->type));
+          isa_def = false;
+       }
+-
+-      // Fixes issue #1266, identification of a tuple return type in CS.
+-      if (  !isa_def
+-         && prev != nullptr
+-         && prev->type == CT_PAREN_CLOSE
+-         && chunk_get_next_ncnl(prev) == pc)
+-      {
+-         tmp = chunk_skip_to_match_rev(prev);
+-         while (tmp != prev)
+-         {
+-            if (tmp->type == CT_COMMA && tmp->level == prev->level + 1)
+-            {
+-#ifdef DEBUG
+-               LOG_FMT(LFCN, "%s(%d):", __func__, __LINE__);
+-#endif
+-               LOG_FMT(LFCN, " -- overriding call due to tuple return type -- %s [%s]\n",
+-                       prev->text(), get_token_name(prev->type));
+-               isa_def = true;
+-               break;
+-            }
+-            tmp = chunk_get_next_ncnl(tmp);
+-         }
+-      }
+       if (isa_def)
+       {
+          set_chunk_type(pc, CT_FUNC_DEF);
+diff --git a/tests/c-sharp.test b/tests/c-sharp.test
+index 2688f665..80fdbfad 100644
+--- a/tests/c-sharp.test
++++ b/tests/c-sharp.test
+@@ -109,7 +109,6 @@
+ 60013  UNI-13955.cfg                        cs/UNI-13955.cs
+ 60016  UNI-11662.cfg                        cs/UNI-11662.cs
+ 60019  empty.cfg                            cs/UNI-18780.cs
+-60020  UNI-18829.cfg                        cs/UNI-18829.cs
+ 60024  U15-Cs.cfg                           cs/UNI-19644.cs
+ 60026  UNI-19895.cfg                        cs/UNI-19895.cs
+ 60033  UNI-21730.cfg                        cs/UNI-21730.cs
+diff --git a/tests/config/UNI-18829.cfg b/tests/config/UNI-18829.cfg
+deleted file mode 100644
+index d65f6b27..00000000
+--- a/tests/config/UNI-18829.cfg
++++ /dev/null
+@@ -1,3 +0,0 @@
+-indent_columns                  = 4
+-nl_end_of_file                  = force
+-nl_end_of_file_min              = 1
+diff --git a/tests/input/cs/UNI-18829.cs b/tests/input/cs/UNI-18829.cs
+deleted file mode 100755
+index 62c9f8fb..00000000
+--- a/tests/input/cs/UNI-18829.cs
++++ /dev/null
+@@ -1,22 +0,0 @@
+-// It shouldn't detele the space after the tuple definition
+-public static (bool updated, Warnings warnings) UpdateIncludesInFile(
+-    string fileToUpdate, string oldIncludeFile, string newIncludeFile)
+-{
+-    // ...
+-}
+-
+-// It shouldn't detele the space after the tuple definition
+-public static (int, string) UpdateIncludesInFile(
+-    string fileToUpdate, string oldIncludeFile, string newIncludeFile)
+-{
+-    // ...
+-}
+-
+-// It shouldn't detele the space after the tuple definition and updated, warnings should be tokenized as types
+-public static (updated, warnings) UpdateIncludesInFile(
+-    string fileToUpdate, string oldIncludeFile, string newIncludeFile)
+-{
+-    // ...
+-}
+-
+-
+diff --git a/tests/output/cs/60020-UNI-18829.cs b/tests/output/cs/60020-UNI-18829.cs
+deleted file mode 100644
+index a72ca87b..00000000
+--- a/tests/output/cs/60020-UNI-18829.cs
++++ /dev/null
+@@ -1,20 +0,0 @@
+-// It shouldn't detele the space after the tuple definition
+-public static (bool updated, Warnings warnings) UpdateIncludesInFile(
+-    string fileToUpdate, string oldIncludeFile, string newIncludeFile)
+-{
+-    // ...
+-}
+-
+-// It shouldn't detele the space after the tuple definition
+-public static (int, string) UpdateIncludesInFile(
+-    string fileToUpdate, string oldIncludeFile, string newIncludeFile)
+-{
+-    // ...
+-}
+-
+-// It shouldn't detele the space after the tuple definition and updated, warnings should be tokenized as types
+-public static (updated, warnings) UpdateIncludesInFile(
+-    string fileToUpdate, string oldIncludeFile, string newIncludeFile)
+-{
+-    // ...
+-}
