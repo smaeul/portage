@@ -3,6 +3,7 @@
 dev-util/android-tools::smaeul **
 dev-lang/zig::smaeul **
 sys-kernel/vanilla-kernel::smaeul **
+sys-libs/gcompat::smaeul **
 x11-misc/i3status-mpd::smaeul **
 x11-misc/j4-dmenu-desktop::smaeul **
 
