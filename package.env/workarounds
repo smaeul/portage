@@ -57,7 +57,7 @@ dev-lang/ocaml nogcsections
 =net-print/cups-filters-1.17.9 fcommon
 # libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]
 =sys-apps/acl-2.2.52-r1 nostricter
-=sys-apps/dtc-1.4.4-r1 fcommon
+=sys-apps/dtc-1.4.4 fcommon
 # actual bug: ipmroute.c and ipxfrm.c both define 'filter'
 ~sys-apps/iproute2-4.14.1 fcommon
 =sys-apps/kbd-2.0.3 fcommon
@@ -73,8 +73,8 @@ dev-lang/ocaml nogcsections
 =sys-process/htop-2.0.2 fcommon
 # -Wl,--gc-sections breaks configure tests
 x11-libs/cairo nogcsections
-# gdk-pixbuf-2.36.10/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c:1357:16: warning: iteration 128 invokes undefined behavior [-Waggressive-loop-optimizations]
-~x11-libs/gdk-pixbuf-2.36.10 nostricter
+# gdk-pixbuf-2.36.11/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c:1357:16: warning: iteration 128 invokes undefined behavior [-Waggressive-loop-optimizations]
+~x11-libs/gdk-pixbuf-2.36.11 nostricter
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_a' will never be NULL [-Waddress]
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_b' will never be NULL [-Waddress]
 # modules/other/gail/gailtreeview.c:1470:28: warning: the comparison will always evaluate as 'true' for the address of 'iter_to_row' will never be NULL [-Waddress]

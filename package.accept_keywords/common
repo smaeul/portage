@@ -1,9 +1,7 @@
 # I personally maintain or control versions of these packages, so keywords
 # are irrelevant, since they are updated manually anyway.
-dev-dotnet/coreclr::smaeul **
 dev-util/android-tools::smaeul **
 dev-lang/zig::smaeul **
-sys-firmware/ovmf-bin::smaeul **
 sys-kernel/vanilla-kernel::smaeul **
 x11-misc/i3status-mpd::smaeul **
 x11-misc/j4-dmenu-desktop::smaeul **
@@ -28,7 +26,6 @@ dev-util/perf ~amd64
 dev-util/radare2 ~amd64
 media-tv/gtk-v4l ~amd64
 net-analyzer/flent ~amd64
-net-firewall/nftables ~amd64
 net-vpn/wireguard ~amd64
 net-p2p/syncthing ~amd64
 net-p2p/transmission-remote-cli ~amd64
@@ -109,8 +106,6 @@ sys-libs/tevent ~amd64
 ~dev-libs/bglibs-2.03 ~amd64
 # Keyworded in ::gentoo
 =dev-libs/elfutils-0.170-r1::musl ~amd64
-# Required for project
-=dev-python/flask-0.12* ~amd64
 # Required for catalyst
 =dev-python/pydecomp-9999 **
 # Required for samba
@@ -123,21 +118,11 @@ media-video/ffmpeg::libressl ~amd64
 =net-analyzer/netperf-2.7.0-r2 ~amd64
 # Required for musl (res_randomid)
 ~net-libs/libasr-1.0.2.201602131606 ~amd64
-# Required for nftables 0.8
-~net-libs/libnftnl-1.0.8 ~amd64
 # Required for libressl
 =net-misc/freerdp-9999 **
-# Required for wireguard
-~net-misc/iputils-20161105 ~amd64
-# Does not fix fcommon
-~net-print/cups-filters-1.17.9 ~amd64
-# Required for u-boot master
-~sys-apps/dtc-1.4.4 ~amd64
+# Required for musl
+=sys-apps/iucode_tool-2.2 ~amd64
 # Required for musl
 ~sys-apps/flashrom-0.9.9 ~amd64
-# Required for musl
-~sys-apps/iproute2-4.14.1 ~amd64
-# Keyworded in ::gentoo
-=sys-libs/efivar-31::musl ~amd64
 # This is old anyway
 ~sys-process/bcron-0.11 ~amd64
