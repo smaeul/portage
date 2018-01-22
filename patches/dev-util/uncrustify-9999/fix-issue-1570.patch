@@ -1,0 +1,14 @@
+diff --git i/src/combine.cpp w/src/combine.cpp
+index 7d72d92a..2d0ca42b 100644
+--- i/src/combine.cpp
++++ w/src/combine.cpp
+@@ -1994,7 +1994,8 @@ static void mark_function_return_type(chunk_t *fname, chunk_t *start, c_token_t
+ 
+       // Changing words to types into tuple return types in CS.
+       bool is_return_tuple = false;
+-      if (pc != nullptr && pc->type == CT_PAREN_CLOSE)
++      if ((cpd.lang_flags & lang_flag_e::LANG_CS) != 0
++          && chunk_is_token(pc, CT_PAREN_CLOSE))
+       {
+          first           = chunk_skip_to_match_rev(pc);
+          is_return_tuple = true;

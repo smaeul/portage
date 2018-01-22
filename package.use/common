@@ -102,6 +102,7 @@ sys-devel/clang default-compiler-rt default-libcxx xml
 sys-devel/clang-runtime libcxx -sanitize
 sys-devel/gcc -vtv
 sys-devel/gdb python
+sys-firmware/intel-microcode initramfs
 sys-fs/cryptsetup -gcrypt -libressl nettle
 sys-fs/lvm2 -thin
 sys-fs/zfs -rootfs
