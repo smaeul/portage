@@ -1,0 +1,22 @@
+diff --git ddcutil-0.8.6/src/util/debug_util.c
+--- ddcutil-0.8.6/src/util/debug_util.c.orig
++++ ddcutil-0.8.6/src/util/debug_util.c
+@@ -26,6 +26,7 @@
+  */
+ 
+ /** \cond */
++#ifdef __GLIBC__
+ #include <execinfo.h>
+ #include <glib-2.0/glib.h>
+ #include <stdbool.h>
+@@ -120,5 +121,8 @@ void show_backtrace(int stack_adjust)
+       g_ptr_array_free(callstack, true);
+    }
+ }
+-
+-
++#else
++void show_backtrace(int stack_adjust)
++{
++}
++#endif

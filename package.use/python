@@ -21,6 +21,7 @@ dev-python/six PYTHON_TARGETS: python2_7
 dev-util/dwarves PYTHON_TARGETS: python2_7
 dev-util/lldb PYTHON_TARGETS: python2_7
 media-gfx/inkscape PYTHON_TARGETS: python2_7
+media-gfx/scour PYTHON_TARGETS: python2_7
 media-gfx/uniconvertor PYTHON_TARGETS: python2_7
 media-libs/lensfun PYTHON_TARGETS: python2_7
 net-fs/samba PYTHON_TARGETS: python2_7

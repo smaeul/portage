@@ -81,7 +81,7 @@ net-dns/bind-tools -idn urandom
 net-dns/dnsmasq tftp
 net-fs/samba -cups
 net-im/bitlbee -gnutls oscar twitter
-net-irc/weechat -charset
+net-irc/weechat -charset python
 net-libs/gnutls -crywrap -openssl
 net-misc/iputils -idn tracepath
 net-vpn/openvpn iproute2 lz4

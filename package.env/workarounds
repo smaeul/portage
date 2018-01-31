@@ -60,7 +60,9 @@ dev-lang/ocaml nogcsections
 =sys-apps/dtc-1.4.4 fcommon
 # actual bug: ipmroute.c and ipxfrm.c both define 'filter'
 ~sys-apps/iproute2-4.14.1 fcommon
-=sys-apps/kbd-2.0.3 fcommon
+# libfont.a(kdmapop.o):(.bss.progname+0x0): multiple definition of `progname'
+# setfont.o:(.bss.progname+0x0): first defined here
+=sys-apps/kbd-2.0.4 fcommon
 =sys-apps/memtester-4.3.0 fcommon
 # syslinux-6.04-pre1/com32/lib/syslinux/debug.c:91:5: warning: incompatible implicit declaration of built-in function 'printf'
 =sys-boot/syslinux-6.04_pre1 fcommon nostricter
