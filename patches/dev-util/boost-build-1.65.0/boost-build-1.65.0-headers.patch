@@ -1,0 +1,44 @@
+diff --git src/engine/debugger.c.orig src/engine/debugger.c
+index 802f262..ad09b83 100644
+--- src/engine/debugger.c.orig
++++ src/engine/debugger.c
+@@ -12,6 +12,7 @@
+ #include "cwd.h"
+ #include "function.h"
+ #include <assert.h>
++#include <ctype.h>
+ #include <stdarg.h>
+ #include <stdlib.h>
+ #include <stdio.h>
+@@ -26,6 +27,7 @@
+ #else
+ #include <errno.h>
+ #include <sys/wait.h>
++#include <unistd.h>
+ #endif
+ 
+ #undef debug_on_enter_function
+diff --git src/engine/jam.c.orig src/engine/jam.c
+index cfe701e..8488026 100644
+--- src/engine/jam.c.orig
++++ src/engine/jam.c
+@@ -105,6 +105,7 @@
+ #include "compile.h"
+ #include "constants.h"
+ #include "debugger.h"
++#include "execcmd.h"
+ #include "filesys.h"
+ #include "function.h"
+ #include "hcache.h"
+diff --git src/engine/make.c.orig src/engine/make.c
+index 638c8b7..22f88fc 100644
+--- src/engine/make.c.orig
++++ src/engine/make.c
+@@ -33,6 +33,7 @@
+ #include "make.h"
+ 
+ #include "command.h"
++#include "execcmd.h"
+ #ifdef OPT_HEADER_CACHE_EXT
+ # include "hcache.h"
+ #endif
