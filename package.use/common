@@ -11,6 +11,12 @@ dev-db/sqlite secure-delete
 dev-lang/python xml
 # Required by ncmpcpp
 dev-libs/boost icu nls
+# Required for static Haskell
+dev-libs/gmp static-libs
+# Required for static Haskell
+dev-libs/libffi static-libs
+# Required by qtcore
+dev-libs/libpcre pcre16
 # Required by chromium
 dev-libs/libxml2 icu
 # Required by libreoffice
@@ -60,7 +66,7 @@ dev-libs/libevent -ssl
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
 dev-util/cmake system-jsoncpp
-dev-vcs/git perl
+dev-vcs/git -pcre-jit perl
 mail-client/nail -ssl
 mail-client/thunderbird -crypt gtk2 -jemalloc system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/noto cjk
@@ -84,6 +90,7 @@ net-im/bitlbee -gnutls oscar twitter
 net-irc/weechat -charset python
 net-libs/gnutls -crywrap -openssl
 net-misc/iputils -idn tracepath
+net-misc/socat readline
 net-vpn/openvpn iproute2 lz4
 net-misc/freerdp -usb
 net-misc/spice-gtk lz4 usbredir
@@ -113,7 +120,7 @@ sys-libs/libcxx libcxxabi -libcxxrt libunwind
 sys-libs/libcxxabi libunwind
 sys-libs/ncurses:5 tinfo
 sys-power/nut -ssl -ups_drivers_* ups_drivers_usbhid-ups
-www-client/chromium -gtk3 -hangouts system-ffmpeg -tcmalloc
+www-client/chromium -atk -gtk3 -hangouts system-ffmpeg -tcmalloc
 www-client/firefox -gmp-autoupdate gtk2 -jemalloc system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 x11-base/xorg-server glamor
 x11-misc/slock savedconfig

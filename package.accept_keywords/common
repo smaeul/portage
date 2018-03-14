@@ -42,6 +42,9 @@ www-apps/gitea ~amd64
 # These packages have a stable version, but either it is too out of date to be
 # useful, or I need the latest version for compatibility with other software.
 app-misc/ca-certificates ~amd64
+app-office/libreoffice ~amd64
+app-office/libreoffice-l10n ~amd64
+dev-lang/mono ~amd64
 dev-util/android-studio ~amd64
 net-irc/weechat ~amd64
 net-misc/openntpd ~amd64
@@ -103,10 +106,18 @@ sys-libs/tevent ~amd64
 =app-emulation/runc-1.0.0* ~amd64
 # Several useful bugfixes
 ~app-misc/tmux-2.6 ~amd64
+# Required by libreoffice
+=app-text/libepubgen-0.1.0 ~amd64
+# Required by libreoffice
+=app-text/libqxp-0.0.1 ~amd64
 # Required for newer bcron
 ~dev-libs/bglibs-2.03 ~amd64
 # Keyworded in ::gentoo
 =dev-libs/elfutils-0.170-r1::musl ~amd64
+# Required by libreoffice
+=dev-libs/libixion-0.13.0 ~amd64
+# Required by libreoffice
+=dev-libs/liborcus-0.13.4 ~amd64
 # Required for catalyst
 =dev-python/pydecomp-9999 **
 # Required for samba

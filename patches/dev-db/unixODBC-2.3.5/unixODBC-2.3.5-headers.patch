@@ -1,0 +1,12 @@
+diff --git unixODBC-2.3.5/DriverManager/SQLGetDiagFieldW.c
+index 33206a9..8d4fd79 100644
+--- unixODBC-2.3.5/DriverManager/SQLGetDiagFieldW.c.orig
++++ unixODBC-2.3.5/DriverManager/SQLGetDiagFieldW.c
+@@ -92,6 +92,7 @@
+  **********************************************************************/
+ 
+ #include <config.h>
++#include <wchar.h>
+ #include "drivermanager.h"
+ 
+ static char const rcsid[]= "$RCSfile: SQLGetDiagFieldW.c,v $";

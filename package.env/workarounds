@@ -1,7 +1,7 @@
 =app-arch/cpio-2.12-r1 fcommon
 # libcommon.a(libcommon_a-iobuf.o):(.bss.iobuf_debug_mode+0x0): multiple definition of `iobuf_debug_mode'
 # libcommon.a(libcommon_a-miscellaneous.o):(.bss.iobuf_debug_mode+0x0): first defined here
-=app-crypt/gnupg-2.2.4 fcommon
+=app-crypt/gnupg-2.2.4-r2 fcommon
 # shash.gaa:49:3: warning: implicit declaration of function 'hash_license' [-Wimplicit-function-declaration]
 # shash.gaa:48:3: warning: implicit declaration of function 'hash_version' [-Wimplicit-function-declaration]
 # shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
@@ -39,7 +39,7 @@ dev-lang/ocaml nogcsections
 =media-libs/freeglut-3.0.0 fcommon
 =media-sound/ncmpcpp-0.7.7 ncurseswidechar
 # src/libavcodec/vaapi_encode_h265.c:304:49: warning: array subscript is above array bounds [-Warray-bounds]
-=media-video/ffmpeg-3.4.1 nostricter
+=media-video/ffmpeg-3.4.2 nostricter
 =net-analyzer/iftop-1.0_pre4-r2 fcommon
 =net-misc/freerdp-9999 fcommon
 =net-misc/iperf-3.1.3 gnusource
