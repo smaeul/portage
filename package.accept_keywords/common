@@ -21,12 +21,14 @@ dev-libs/capstone ~amd64
 dev-libs/libressl ~amd64
 dev-libs/libtermkey ~amd64
 dev-libs/unibilium ~amd64
+dev-python/pycryptodome ~amd64
 dev-python/snakeoil ~amd64
 dev-util/dwarves ~amd64
 dev-util/perf ~amd64
 dev-util/radare2 ~amd64
 media-tv/gtk-v4l ~amd64
 net-analyzer/flent ~amd64
+net-misc/streamlink ~amd64
 net-vpn/wireguard ~amd64
 net-p2p/syncthing ~amd64
 net-p2p/transmission-remote-cli ~amd64

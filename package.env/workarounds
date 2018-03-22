@@ -12,7 +12,7 @@
 dev-haskell/cipher-aes maes
 dev-haskell/cryptonite maes
 =dev-haskell/hslua-0.3.6.1 nogcsections
-=dev-java/icedtea-3.6.0 fcommon
+=dev-java/icedtea-3.7.0 fcommon
 # -Wl,--gc-sections breaks use of ld -r
 dev-lang/ghc nogcsections
 # -Wl,--gc-sections breaks use of ld -r
