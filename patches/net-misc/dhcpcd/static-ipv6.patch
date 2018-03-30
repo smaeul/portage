@@ -1,6 +1,6 @@
-diff -ur dhcpcd-6.11.3/ipv6.c dhcpcd-fixed/ipv6.c
---- dhcpcd-6.11.3/ipv6.c	2016-08-15 05:53:49.000000000 -0500
-+++ dhcpcd-fixed/ipv6.c 2016-09-30 21:16:33.880308732 -0500
+diff -ur dhcpcd-6.11.3/src/ipv6.c dhcpcd-fixed/src/ipv6.c
+--- dhcpcd-6.11.3/src/ipv6.c	2016-08-15 05:53:49.000000000 -0500
++++ dhcpcd-fixed/src/ipv6.c 2016-09-30 21:16:33.880308732 -0500
 @@ -1575,7 +1575,7 @@
  		    ifp->options->req_prefix_len);
  		if (ia == NULL)

@@ -1,0 +1,12 @@
+diff --git a/src/logerr.c.orig b/src/logerr.c
+index 6117c66..4c2143a 100644
+--- a/src/logerr.c.orig
++++ b/src/logerr.c
+@@ -152,6 +152,7 @@ vlogprintf_r(struct logctx *ctx, FILE *stream, const char *fmt, va_list args)
+ 	va_copy(a, args);
+ 	vfprintf(stream, fmt, a);
+ 	fputc('\n', stream);
++	fflush(stream);
+ 	va_end(a);
+ }
+ 
