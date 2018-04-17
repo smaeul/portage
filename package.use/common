@@ -54,6 +54,7 @@ app-eselect/eselect-php fpm
 app-office/libreoffice java
 app-shells/bash -net
 dev-db/mariadb -openssl
+dev-db/postgresql readline
 dev-db/sqlite -icu
 dev-haskell/cryptonite support_blake2_sse support_pclmuldq
 dev-lang/ghc ghcbootstrap

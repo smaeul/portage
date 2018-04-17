@@ -36,6 +36,7 @@ sci-misc/boinc ~amd64
 sys-apps/linux-misc-apps ~amd64
 sys-apps/ripgrep ~amd64
 sys-boot/systemd-boot ~amd64
+sys-devel/slibtool ~amd64
 sys-kernel/vanilla-sources ~amd64
 sys-libs/obstack-standalone ~amd64
 sys-power/acpi_call ~amd64
@@ -61,6 +62,7 @@ x11-drivers/xf86-video-intel ~amd64
 # llvm and friends
 dev-util/lldb ~amd64
 sys-devel/clang ~amd64
+sys-devel/clang-common ~amd64
 sys-devel/clang-runtime ~amd64
 sys-devel/lld ~amd64
 sys-devel/llvm ~amd64
