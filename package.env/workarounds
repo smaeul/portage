@@ -8,7 +8,9 @@
 # shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
 =app-crypt/shash-0.2.6-r2 nostricter
 =app-text/aspell-0.60.7_rc1 ncurseswidechar
-=dev-db/mariadb-10.1.29 fcommon
+# CMakeFiles/mbstream.dir/xbstream.c.o:(.bss.datasink_buffer+0x0): multiple definition of `datasink_buffer'
+# CMakeFiles/mbstream.dir/ds_buffer.c.o:(.data.rel.local.datasink_buffer+0x0): first defined here
+=dev-db/mariadb-10.1.31-r1 fcommon
 dev-haskell/cipher-aes maes
 dev-haskell/cryptonite maes
 =dev-haskell/hslua-0.3.6.1 nogcsections
