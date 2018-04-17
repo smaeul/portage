@@ -1,7 +1,0 @@
-*/* -libressl
-*/* -video_cards_i915
-*/* -video_cards_i965
-*/* -video_cards_intel
-net-misc/curl -curl_ssl_libressl
->=sys-devel/llvm-3.9.0 -lldb
-www-client/chromium -system-ffmpeg

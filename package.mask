@@ -1,10 +1,8 @@
 app-editors/nano
 dev-util/pkgconfig
 mail-client/mailx
-net-libs/nodejs::gentoo
 >=net-misc/spice-gtk-0.32
 sys-apps/iproute2::gentoo
 sys-apps/openrc
 sys-kernel/linux-headers::gentoo
-sys-libs/libunwind
 >=www-client/firefox-53.0.0

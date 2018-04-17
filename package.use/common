@@ -33,8 +33,6 @@ media-libs/libpng apng
 media-libs/libvpx postproc svc
 # Required by flent
 net-analyzer/netperf demo
-# Required for libressl
-net-libs/nodejs bundled-ssl
 # Required by bitcoind
 sys-libs/db cxx
 # Required by chromium
@@ -47,13 +45,13 @@ x11-libs/libxcb xkb
 app-arch/libarchive -e2fsprogs
 app-arch/p7zip rar
 app-crypt/gnupg readline
+app-crypt/rhash openssl
 app-editors/vim python
 app-emulation/spice lz4
 app-emulation/qemu -curl -jpeg -ncurses numa -opengl -png -pulseaudio spice usb usbredir -vnc
 app-eselect/eselect-php fpm
 app-office/libreoffice java
 app-shells/bash -net
-dev-db/mariadb -openssl
 dev-db/postgresql readline
 dev-db/sqlite -icu
 dev-haskell/cryptonite support_blake2_sse support_pclmuldq
@@ -63,12 +61,11 @@ dev-lang/python berkdb readline
 dev-lang/rust system-llvm
 dev-libs/capstone python
 dev-libs/leveldb -tcmalloc
-dev-libs/libevent -ssl
+dev-libs/openssl -sslv3
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
 dev-util/cmake system-jsoncpp
 dev-vcs/git -pcre-jit perl
-mail-client/nail -ssl
 mail-client/thunderbird -crypt gtk2 -jemalloc system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/noto cjk
 media-gfx/imagemagick pango raw webp
@@ -111,7 +108,7 @@ sys-devel/clang-runtime libcxx -sanitize
 sys-devel/gcc -vtv
 sys-devel/gdb python
 sys-firmware/intel-microcode initramfs
-sys-fs/cryptsetup -gcrypt -libressl nettle
+sys-fs/cryptsetup -gcrypt nettle
 sys-fs/lvm2 -thin
 sys-fs/zfs -rootfs
 sys-kernel/vanilla-sources symlink
@@ -120,7 +117,7 @@ sys-libs/ldb -ldap
 sys-libs/libcxx libcxxabi -libcxxrt libunwind
 sys-libs/libcxxabi libunwind
 sys-libs/ncurses:5 tinfo
-sys-power/nut -ssl -ups_drivers_* ups_drivers_usbhid-ups
+sys-power/nut -ups_drivers_* ups_drivers_usbhid-ups
 www-client/chromium -atk -gtk3 -hangouts system-ffmpeg -tcmalloc
 www-client/firefox -gmp-autoupdate gtk2 -jemalloc system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 x11-base/xorg-server glamor

@@ -1,5 +1,4 @@
 dev-lang/execline static static-libs
-dev-libs/libressl static-libs
 dev-libs/skalibs static-libs
 net-dns/s6-dns static static-libs
 net-misc/s6-networking static static-libs

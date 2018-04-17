@@ -1,3 +1,0 @@
-cross-aarch64-linux-musl/* cross-aarch64-linux-musl.conf
-cross-arm-linux-musleabihf/* cross-arm-linux-musleabihf.conf
-cross-*/musl cross-generic.conf
