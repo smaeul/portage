@@ -1,1 +1,2 @@
+*/* -video_cards_i965
 www-client/chromium -system-ffmpeg

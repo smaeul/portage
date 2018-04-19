@@ -34,6 +34,9 @@ dev-lang/ocaml nogcsections
 # jarfile.c:788:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 =dev-libs/nss-3.29.5 nostricter
 =dev-util/android-tools-9999 fcommon
+# ../snprintf/.libs/libustsnprintf.a(libustsnprintf_la-core.o):(.bss.ust_loglevel+0x0): multiple definition of `ust_loglevel'
+# .libs/ustctl.o:(.bss.ust_loglevel+0x0): first defined here
+=dev-util/lttng-ust-2.7.1 fcommon
 =dev-util/perf-4.9.13 fcommon
 ~mail-mta/opensmtpd-6.0.2_p1 fcommon
 # extension/internal/image-resolution.cpp:179:25: warning: null argument where non-null required (argument 1) [-Wnonnull]
@@ -43,6 +46,9 @@ dev-lang/ocaml nogcsections
 # src/libavcodec/vaapi_encode_h265.c:304:49: warning: array subscript is above array bounds [-Warray-bounds]
 =media-video/ffmpeg-3.3.6 nostricter
 =net-analyzer/iftop-1.0_pre4-r2 fcommon
+# CMakeFiles/ssh_shared.dir/external/ge25519.c.o:(.rodata.crypto_sign_ed25519_ref_ge25519_base+0x0): multiple definition of `crypto_sign_ed25519_ref_ge25519_base'
+# CMakeFiles/ssh_shared.dir/external/ed25519.c.o:(.bss.crypto_sign_ed25519_ref_ge25519_base+0x0): first defined here
+=net-libs/libssh-0.7.4 fcommon
 =net-misc/freerdp-9999 fcommon
 =net-misc/iperf-3.1.3 gnusource
 =net-misc/openntpd-6.2_p3 fcommon
@@ -69,6 +75,9 @@ dev-lang/ocaml nogcsections
 # syslinux-6.04-pre1/com32/lib/syslinux/debug.c:91:5: warning: incompatible implicit declaration of built-in function 'printf'
 =sys-boot/syslinux-6.04_pre1 fcommon nostricter
 ~sys-fs/squashfs-tools-4.3 fcommon
+# x86_64/.libs/Linit.o:(.bss._U_dyn_info_list+0x0): multiple definition of `_U_dyn_info_list'
+# mi/.libs/dyn-info-list.o:(.bss._U_dyn_info_list+0x0): first defined here
+=sys-libs/libunwind-1.2.1 fcommon
 # ncurses/tinfo/parse_entry.c:520:29: warning: array subscript is below array bounds [-Warray-bounds]
 # ncurses/tinfo/parse_entry.c:522:34: warning: array subscript is below array bounds [-Warray-bounds]
 # Possibly false-positive

@@ -103,8 +103,8 @@ sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
 sys-apps/util-linux -cramfs -ncurses
 sys-devel/binutils cxx
-sys-devel/clang default-compiler-rt default-libcxx xml
-sys-devel/clang-runtime libcxx -sanitize
+sys-devel/clang xml
+sys-devel/clang-runtime compiler-rt libcxx -sanitize
 sys-devel/gcc -vtv
 sys-devel/gdb python
 sys-firmware/intel-microcode initramfs
