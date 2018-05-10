@@ -19,7 +19,7 @@ dev-haskell/cryptonite maes
 dev-lang/ghc nogcsections
 # -Wl,--gc-sections breaks use of ld -r
 dev-lang/ocaml nogcsections
-=dev-lang/ocaml-4.04.2 fcommon
+=dev-lang/ocaml-4.04.2-r1 fcommon
 # dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
 ~dev-libs/boehm-gc-7.4.2 fcommon nostricter
 # jarfile.c:692:9: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
@@ -37,7 +37,13 @@ dev-lang/ocaml nogcsections
 # ../snprintf/.libs/libustsnprintf.a(libustsnprintf_la-core.o):(.bss.ust_loglevel+0x0): multiple definition of `ust_loglevel'
 # .libs/ustctl.o:(.bss.ust_loglevel+0x0): first defined here
 =dev-util/lttng-ust-2.7.1 fcommon
-=dev-util/perf-4.9.13 fcommon
+# bench/futex-lock-pi.o:/tmp/portage/dev-util/perf-4.14.33/work/linux-4.14/tools/perf/bench/futex-lock-pi.c:37: multiple definition of `end'
+# bench/futex-hash.o:/tmp/portage/dev-util/perf-4.14.33/work/linux-4.14/tools/perf/bench/futex-hash.c:38: first defined here
+# bench/futex-lock-pi.o:/tmp/portage/dev-util/perf-4.14.33/work/linux-4.14/tools/perf/bench/futex-lock-pi.c:37: multiple definition of `start'
+# bench/futex-hash.o:/tmp/portage/dev-util/perf-4.14.33/work/linux-4.14/tools/perf/bench/futex-hash.c:38: first defined here
+# bench/futex-lock-pi.o:/tmp/portage/dev-util/perf-4.14.33/work/linux-4.14/tools/perf/bench/futex-lock-pi.c:37: multiple definition of `runtime'
+# bench/futex-hash.o:/tmp/portage/dev-util/perf-4.14.33/work/linux-4.14/tools/perf/bench/futex-hash.c:38: first defined here
+=dev-util/perf-4.14.33 fcommon
 ~mail-mta/opensmtpd-6.0.2_p1 fcommon
 # extension/internal/image-resolution.cpp:179:25: warning: null argument where non-null required (argument 1) [-Wnonnull]
 =media-gfx/inkscape-0.91-r3 nostricter
@@ -86,8 +92,8 @@ dev-lang/ocaml nogcsections
 =sys-process/htop-2.0.2 fcommon
 # -Wl,--gc-sections breaks configure tests
 x11-libs/cairo nogcsections
-# gdk-pixbuf-2.36.11/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c:1357:16: warning: iteration 128 invokes undefined behavior [-Waggressive-loop-optimizations]
-~x11-libs/gdk-pixbuf-2.36.11 nostricter
+# gdk-pixbuf-2.36.12/contrib/gdk-pixbuf-xlib/gdk-pixbuf-xlibrgb.c:1357:16: warning: iteration 128 invokes undefined behavior [-Waggressive-loop-optimizations]
+~x11-libs/gdk-pixbuf-2.36.12 nostricter
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_a' will never be NULL [-Waddress]
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_b' will never be NULL [-Waddress]
 # modules/other/gail/gailtreeview.c:1470:28: warning: the comparison will always evaluate as 'true' for the address of 'iter_to_row' will never be NULL [-Waddress]
