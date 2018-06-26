@@ -1,0 +1,12 @@
+diff --git sane-frontends-1.0.14/lib/getopt.c sane-frontends-1.0.14/lib/getopt.c
+--- sane-frontends-1.0.14/lib/getopt.c
++++ sane-frontends-1.0.14/lib/getopt.c
+@@ -67,6 +67,8 @@
+ #include <unistd.h>
+ #endif	/* GNU C library.  */
+ 
++#include <string.h>
++
+ #ifdef VMS
+ #include <unixlib.h>
+ #if HAVE_STRING_H - 0
