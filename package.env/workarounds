@@ -1,7 +1,7 @@
 =app-arch/cpio-2.12-r1 fcommon
 # libcommon.a(libcommon_a-iobuf.o):(.bss.iobuf_debug_mode+0x0): multiple definition of `iobuf_debug_mode'
 # libcommon.a(libcommon_a-miscellaneous.o):(.bss.iobuf_debug_mode+0x0): first defined here
-=app-crypt/gnupg-2.2.4-r2 fcommon
+=app-crypt/gnupg-2.2.8 fcommon
 # shash.gaa:49:3: warning: implicit declaration of function 'hash_license' [-Wimplicit-function-declaration]
 # shash.gaa:48:3: warning: implicit declaration of function 'hash_version' [-Wimplicit-function-declaration]
 # shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]

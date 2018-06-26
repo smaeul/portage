@@ -18,8 +18,6 @@ app-mobilephone/heimdall ~amd64
 dev-go/go-bindata ~amd64
 dev-java/icedtea ~amd64
 dev-libs/capstone ~amd64
-dev-libs/libtermkey ~amd64
-dev-libs/unibilium ~amd64
 dev-python/pycryptodome ~amd64
 dev-python/snakeoil ~amd64
 dev-util/dwarves ~amd64
@@ -28,8 +26,8 @@ dev-util/radare2 ~amd64
 media-tv/gtk-v4l ~amd64
 net-analyzer/flent ~amd64
 net-misc/streamlink ~amd64
+net-misc/unison ~amd64
 net-vpn/wireguard ~amd64
-net-p2p/syncthing ~amd64
 net-p2p/transmission-remote-cli ~amd64
 sci-misc/boinc ~amd64
 sys-apps/linux-misc-apps ~amd64
@@ -37,7 +35,6 @@ sys-apps/ripgrep ~amd64
 sys-boot/systemd-boot ~amd64
 sys-devel/slibtool ~amd64
 sys-kernel/vanilla-sources ~amd64
-sys-libs/obstack-standalone ~amd64
 sys-power/acpi_call ~amd64
 sys-power/brightnessctl ~amd64
 www-apps/gitea ~amd64
@@ -48,15 +45,13 @@ app-misc/ca-certificates ~amd64
 app-office/libreoffice ~amd64
 app-office/libreoffice-l10n ~amd64
 dev-lang/mono ~amd64
-dev-util/android-studio ~amd64
 net-irc/weechat ~amd64
 net-misc/openntpd ~amd64
-net-misc/unison ~amd64
 net-misc/youtube-dl ~amd64
+net-p2p/syncthing ~amd64
 sys-fs/zfs ~amd64
 sys-fs/zfs-kmod ~amd64
 sys-kernel/spl ~amd64
-x11-drivers/xf86-video-intel ~amd64
 
 # llvm and friends
 dev-util/lldb ~amd64
@@ -107,37 +102,17 @@ sys-libs/tevent ~amd64
 # The following packages have significant features or bugfixes in an unstable
 # version. These entries should be removed once that version is stabilized.
 #
-# Required for musl (headers)
-=app-emulation/runc-1.0.0* ~amd64
-# Several useful bugfixes
-~app-misc/tmux-2.6 ~amd64
-# Required by libreoffice
-=app-text/libepubgen-0.1.0 ~amd64
-# Required by libreoffice
-=app-text/libqxp-0.0.1 ~amd64
 # Required for newer bcron
 ~dev-libs/bglibs-2.03 ~amd64
-# Keyworded in ::gentoo
-=dev-libs/elfutils-0.170-r1::musl ~amd64
-# Required by libreoffice
-=dev-libs/libixion-0.13.0 ~amd64
-# Required by libreoffice
-=dev-libs/liborcus-0.13.4 ~amd64
 # Required for catalyst
 =dev-python/pydecomp-9999 **
-# Required for samba
-~dev-util/cmocka-1.1.1 ~amd64
 # Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
 # Required to fix warnings
 =net-analyzer/netperf-2.7.0-r2 ~amd64
 # Required for musl (res_randomid)
 ~net-libs/libasr-1.0.2.201602131606 ~amd64
-# Required for samba 4.8
-=net-libs/rpcsvc-proto-1.3.1 ~amd64
-# Required for musl
-=sys-apps/iucode_tool-2.2 ~amd64
-# Required for musl
-~sys-apps/flashrom-0.9.9 ~amd64
+# IFD support
+~sys-apps/flashrom-1.0.0 ~amd64
 # This is old anyway
 ~sys-process/bcron-0.11 ~amd64

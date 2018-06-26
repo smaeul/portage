@@ -1,0 +1,70 @@
+From 9be4ed5d89ecca80123311a4ec73781e5cc97a9c Mon Sep 17 00:00:00 2001
+From: Rich Felker <dalias@aerifal.cx>
+Date: Fri, 27 Apr 2018 11:22:39 -0400
+Subject: getopt_long_only: don't prefix-match long-options that match short
+ ones
+
+for getopt_long, partial (prefix) matches of long options always begin
+with "--" and thus can never be ambiguous with a short option. for
+getopt_long_only, though, a single-character option can match both a
+short option and as a prefix for a long option. in this case, we
+wrongly interpreted it as a prefix for the long option.
+
+introduce a new pass, only in long-only mode, to check the prefix
+match against short options before accepting it. the only reason
+there's a slightly nontrivial loop being introduced rather than strchr
+is that our getopt already supports multibyte short options, and
+getopt_long_long should handle them consistently. a temp buffer and
+strstr could have been used, but the code to set it up would be just
+as large as what's introduced here and it would unnecessarily pull in
+relatively large code for strstr.
+---
+ src/misc/getopt_long.c | 17 +++++++++++++++--
+ 1 file changed, 15 insertions(+), 2 deletions(-)
+
+diff --git a/src/misc/getopt_long.c b/src/misc/getopt_long.c
+index 008b747..ddcef94 100644
+--- a/src/misc/getopt_long.c
++++ b/src/misc/getopt_long.c
+@@ -1,5 +1,7 @@
+ #define _GNU_SOURCE
+ #include <stddef.h>
++#include <stdlib.h>
++#include <limits.h>
+ #include <getopt.h>
+ #include <stdio.h>
+ #include <string.h>
+@@ -58,10 +60,10 @@ static int __getopt_long_core(int argc, char *const *argv, const char *optstring
+ 	{
+ 		int colon = optstring[optstring[0]=='+'||optstring[0]=='-']==':';
+ 		int i, cnt, match;
+-		char *arg, *opt;
++		char *arg, *opt, *start = argv[optind]+1;
+ 		for (cnt=i=0; longopts[i].name; i++) {
+ 			const char *name = longopts[i].name;
+-			opt = argv[optind]+1;
++			opt = start;
+ 			if (*opt == '-') opt++;
+ 			while (*opt && *opt != '=' && *opt == *name)
+ 				name++, opt++;
+@@ -74,6 +76,17 @@ static int __getopt_long_core(int argc, char *const *argv, const char *optstring
+ 			}
+ 			cnt++;
+ 		}
++		if (cnt==1 && longonly && arg-start == mblen(start, MB_LEN_MAX)) {
++			int l = arg-start;
++			for (i=0; optstring[i]; i++) {
++				int j;
++				for (j=0; j<l && start[j]==optstring[i+j]; j++);
++				if (j==l) {
++					cnt++;
++					break;
++				}
++			}
++		}
+ 		if (cnt==1) {
+ 			i = match;
+ 			opt = arg;
+-- 
+cgit v0.11.2
+
