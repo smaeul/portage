@@ -1,6 +1,7 @@
 app-emulation/qemu PYTHON_TARGETS: python2_7
 app-text/asciidoc PYTHON_SINGLE_TARGET: python2_7 PYTHON_TARGETS: python2_7
 dev-java/javatoolkit PYTHON_TARGETS: python2_7
+dev-libs/libxml2 PYTHON_TARGETS: python2_7
 dev-python/beautifulsoup PYTHON_TARGETS: python2_7
 dev-python/certifi PYTHON_TARGETS: python2_7
 dev-python/html5lib PYTHON_TARGETS: python2_7
@@ -14,6 +15,7 @@ dev-python/simplejson PYTHON_TARGETS: python2_7
 dev-python/six PYTHON_TARGETS: python2_7
 dev-util/dwarves PYTHON_TARGETS: python2_7
 dev-util/lldb PYTHON_TARGETS: python2_7
+dev-util/systemtap PYTHON_TARGETS: python2_7
 media-gfx/inkscape PYTHON_TARGETS: python2_7
 media-gfx/scour PYTHON_TARGETS: python2_7
 media-gfx/uniconvertor PYTHON_TARGETS: python2_7

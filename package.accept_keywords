@@ -107,12 +107,14 @@ sys-libs/tevent ~amd64
 # Required for catalyst
 =dev-python/pydecomp-9999 **
 # Required for musl
+=dev-util/systemtap-2.9::musl ~amd64
+# Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
 # Required to fix warnings
 =net-analyzer/netperf-2.7.0-r2 ~amd64
 # Required for musl (res_randomid)
 ~net-libs/libasr-1.0.2.201602131606 ~amd64
 # IFD support
-~sys-apps/flashrom-1.0.0 ~amd64
+~sys-apps/flashrom-1.0 ~amd64
 # This is old anyway
 ~sys-process/bcron-0.11 ~amd64
