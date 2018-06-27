@@ -107,8 +107,6 @@ sys-libs/tevent ~amd64
 # Required for catalyst
 =dev-python/pydecomp-9999 **
 # Required for musl
-=dev-util/systemtap-2.9::musl ~amd64
-# Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
 # Required to fix warnings
 =net-analyzer/netperf-2.7.0-r2 ~amd64

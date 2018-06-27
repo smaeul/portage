@@ -1,6 +1,5 @@
 app-editors/nano
 dev-util/pkgconfig
-dev-util/systemtap::gentoo
 mail-client/mailx
 >=net-misc/spice-gtk-0.32
 sys-apps/iproute2::gentoo
