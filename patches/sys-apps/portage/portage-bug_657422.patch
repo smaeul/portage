@@ -1,0 +1,33 @@
+From 2710f9ab525e7c726c2ffb027e242dbdf31cfe76 Mon Sep 17 00:00:00 2001
+From: Zac Medico <zmedico@gentoo.org>
+Date: Tue, 26 Jun 2018 13:14:09 -0700
+Subject: binarytree._merge_pkgindex_header: deduplicate values (bug 657422)
+
+Deduplicate values of implicit IUSE variables, in order to
+prevent them from growing without bound, triggering "[Errno 7]
+Argument list too long" errors as reported in bug 657422.
+
+Fixes: cab78dba98c4 ("emerge --usepkgonly: propagate implicit IUSE and USE_EXPAND (bug 640318)")
+Bug: https://bugs.gentoo.org/657422
+---
+ pym/portage/dbapi/bintree.py | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/pym/portage/dbapi/bintree.py b/pym/portage/dbapi/bintree.py
+index 269a7b2..9c2d877 100644
+--- a/pym/portage/dbapi/bintree.py
++++ b/pym/portage/dbapi/bintree.py
+@@ -1320,7 +1320,9 @@ class binarytree(object):
+ 		for k, v in iter_iuse_vars(src):
+ 			v_before = dest.get(k)
+ 			if v_before is not None:
+-				v = v_before + ' ' + v
++				merged_values = set(v_before.split())
++				merged_values.update(v.split())
++				v = ' '.join(sorted(merged_values))
+ 			dest[k] = v
+ 
+ 		if 'ARCH' not in dest and 'ARCH' in src:
+-- 
+cgit v1.1
+

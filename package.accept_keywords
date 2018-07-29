@@ -9,21 +9,16 @@ x11-misc/j4-dmenu-desktop::smaeul **
 
 # These packages have no stable version, so at least one version must be
 # accepted in order to install the package at all.
-app-crypt/acme-tiny ~amd64
-app-crypt/keybase ~amd64
 app-editors/vis ~amd64
-app-laptop/tpacpi-bat ~amd64
 app-misc/ddcutil ~amd64
 app-mobilephone/heimdall ~amd64
 dev-go/go-bindata ~amd64
 dev-java/icedtea ~amd64
 dev-libs/capstone ~amd64
 dev-python/pycryptodome ~amd64
-dev-python/snakeoil ~amd64
 dev-util/dwarves ~amd64
 dev-util/perf ~amd64
 dev-util/radare2 ~amd64
-media-tv/gtk-v4l ~amd64
 net-analyzer/flent ~amd64
 net-misc/streamlink ~amd64
 net-misc/unison ~amd64
@@ -32,10 +27,8 @@ net-p2p/transmission-remote-cli ~amd64
 sci-misc/boinc ~amd64
 sys-apps/linux-misc-apps ~amd64
 sys-apps/ripgrep ~amd64
-sys-boot/systemd-boot ~amd64
 sys-devel/slibtool ~amd64
 sys-kernel/vanilla-sources ~amd64
-sys-power/acpi_call ~amd64
 sys-power/brightnessctl ~amd64
 www-apps/gitea ~amd64
 
@@ -68,8 +61,8 @@ sys-libs/libomp ~amd64
 sys-libs/llvm-libunwind ~amd64
 
 # rust and friends
-=dev-lang/rust-1*::smaeul ~amd64
-dev-util/cargo ~amd64
+dev-lang/rust::smaeul ~amd64
+dev-util/cargo::smaeul ~amd64
 dev-util/rustfmt ~amd64
 virtual/rust ~amd64
 
@@ -93,7 +86,6 @@ sys-libs/tevent ~amd64
 
 # These packages are either only available as git repositories, or have
 # significant features added/changed/fixed since their latest release.
-=dev-util/catalyst-9999 **
 =dev-util/uncrustify-9999 **
 =net-misc/freerdp-9999 **
 =sys-kernel/linux-firmware-99999999 **
@@ -104,8 +96,6 @@ sys-libs/tevent ~amd64
 #
 # Required for newer bcron
 ~dev-libs/bglibs-2.03 ~amd64
-# Required for catalyst
-=dev-python/pydecomp-9999 **
 # Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
 # Required to fix warnings

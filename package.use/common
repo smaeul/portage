@@ -21,8 +21,6 @@ dev-libs/libpcre2 pcre16
 dev-libs/libxml2 icu
 # Required by libreoffice
 dev-libs/xmlsec nss
-# Required by reportlab
-dev-python/pillow tiff
 # Required by inkscape[imagemagick]
 media-gfx/imagemagick cxx
 # Required by thunderbird
@@ -68,10 +66,9 @@ dev-util/cmake system-jsoncpp
 dev-vcs/git -pcre-jit perl
 mail-client/thunderbird -crypt gtk2 -jemalloc system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/noto cjk
-media-gfx/imagemagick pango raw webp
+media-gfx/imagemagick pango webp
 media-libs/imlib2 -mp3
 media-libs/libass -enca
-media-libs/libcanberra -gtk3 -sound -udev
 media-libs/mesa gles2 -llvm
 media-libs/openh264 -plugin
 media-plugins/alsa-plugins -ffmpeg
@@ -88,6 +85,7 @@ net-im/bitlbee -gnutls oscar twitter
 net-irc/weechat -charset python
 net-libs/gnutls -crywrap -openssl
 net-misc/iputils -idn tracepath
+net-misc/s6-networking -ssl
 net-misc/socat readline
 net-vpn/openvpn iproute2 lz4
 net-misc/freerdp -usb

@@ -2,11 +2,6 @@
 # libcommon.a(libcommon_a-iobuf.o):(.bss.iobuf_debug_mode+0x0): multiple definition of `iobuf_debug_mode'
 # libcommon.a(libcommon_a-miscellaneous.o):(.bss.iobuf_debug_mode+0x0): first defined here
 =app-crypt/gnupg-2.2.8 fcommon
-# shash.gaa:49:3: warning: implicit declaration of function 'hash_license' [-Wimplicit-function-declaration]
-# shash.gaa:48:3: warning: implicit declaration of function 'hash_version' [-Wimplicit-function-declaration]
-# shash.gaa:46:3: warning: implicit declaration of function 'list_keygen_algorithms' [-Wimplicit-function-declaration]
-# shash.gaa:40:3: warning: implicit declaration of function 'hash_list' [-Wimplicit-function-declaration]
-=app-crypt/shash-0.2.6-r2 nostricter
 =app-text/aspell-0.60.7_rc1 ncurseswidechar
 # CMakeFiles/mbstream.dir/xbstream.c.o:(.bss.datasink_buffer+0x0): multiple definition of `datasink_buffer'
 # CMakeFiles/mbstream.dir/ds_buffer.c.o:(.data.rel.local.datasink_buffer+0x0): first defined here
@@ -19,8 +14,6 @@ dev-lang/ghc nogcsections
 # -Wl,--gc-sections breaks use of ld -r
 dev-lang/ocaml nogcsections
 =dev-lang/ocaml-4.04.2-r1 fcommon
-# dyn_load.c:563:29: warning: the comparison will always evaluate as 'false' for the address of 'dl_iterate_phdr' will never be NULL [-Waddress]
-~dev-libs/boehm-gc-7.4.2 fcommon nostricter
 # jarfile.c:692:9: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:696:13: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:697:13: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
@@ -32,10 +25,10 @@ dev-lang/ocaml nogcsections
 # jarfile.c:787:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:788:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 =dev-libs/nss-3.29.5 nostricter
+# in configuration tests:
+# timer_createXXXXXXXX.c:2:5: warning: implicit declaration of function 'timer_create' [-Wimplicit-function-declaration]
+=dev-python/pyzmq-16.0.2 nostricter
 =dev-util/android-tools-9999 fcommon
-# ../snprintf/.libs/libustsnprintf.a(libustsnprintf_la-core.o):(.bss.ust_loglevel+0x0): multiple definition of `ust_loglevel'
-# .libs/ustctl.o:(.bss.ust_loglevel+0x0): first defined here
-=dev-util/lttng-ust-2.7.1 fcommon
 # bench/futex-lock-pi.o:/tmp/portage/dev-util/perf-4.14.33/work/linux-4.14/tools/perf/bench/futex-lock-pi.c:37: multiple definition of `end'
 # bench/futex-hash.o:/tmp/portage/dev-util/perf-4.14.33/work/linux-4.14/tools/perf/bench/futex-hash.c:38: first defined here
 # bench/futex-lock-pi.o:/tmp/portage/dev-util/perf-4.14.33/work/linux-4.14/tools/perf/bench/futex-lock-pi.c:37: multiple definition of `start'
@@ -44,8 +37,6 @@ dev-lang/ocaml nogcsections
 # bench/futex-hash.o:/tmp/portage/dev-util/perf-4.14.33/work/linux-4.14/tools/perf/bench/futex-hash.c:38: first defined here
 =dev-util/perf-4.14.33 fcommon
 ~mail-mta/opensmtpd-6.0.2_p1 fcommon
-# extension/internal/image-resolution.cpp:179:25: warning: null argument where non-null required (argument 1) [-Wnonnull]
-=media-gfx/inkscape-0.91-r3 nostricter
 =media-libs/freeglut-3.0.0 fcommon
 =media-sound/ncmpcpp-0.7.7 ncurseswidechar
 # src/libavcodec/vaapi_encode_h265.c:304:49: warning: array subscript is above array bounds [-Warray-bounds]
@@ -80,13 +71,6 @@ dev-lang/ocaml nogcsections
 # syslinux-6.04-pre1/com32/lib/syslinux/debug.c:91:5: warning: incompatible implicit declaration of built-in function 'printf'
 =sys-boot/syslinux-6.04_pre1 fcommon nostricter
 ~sys-fs/squashfs-tools-4.3 fcommon
-# x86_64/.libs/Linit.o:(.bss._U_dyn_info_list+0x0): multiple definition of `_U_dyn_info_list'
-# mi/.libs/dyn-info-list.o:(.bss._U_dyn_info_list+0x0): first defined here
-=sys-libs/libunwind-1.2.1 fcommon
-# ncurses/tinfo/parse_entry.c:520:29: warning: array subscript is below array bounds [-Warray-bounds]
-# ncurses/tinfo/parse_entry.c:522:34: warning: array subscript is below array bounds [-Warray-bounds]
-# Possibly false-positive
-=sys-libs/ncurses-6.0-r1 nostricter
 =sys-power/iasl-20160729 fcommon
 =sys-process/htop-2.0.2 fcommon
 # -Wl,--gc-sections breaks configure tests
@@ -96,5 +80,5 @@ x11-libs/cairo nogcsections
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_a' will never be NULL [-Waddress]
 # gtk/gtkliststore.c:35:45: warning: the comparison will always evaluate as 'true' for the address of 'iter_b' will never be NULL [-Waddress]
 # modules/other/gail/gailtreeview.c:1470:28: warning: the comparison will always evaluate as 'true' for the address of 'iter_to_row' will never be NULL [-Waddress]
-=x11-libs/gtk+-2.24.31-r1 nostricter
+=x11-libs/gtk+-2.24.32 nostricter
 =x11-wm/i3-4.13-r1 fcommon
