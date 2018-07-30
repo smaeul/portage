@@ -9,7 +9,6 @@ x11-misc/j4-dmenu-desktop::smaeul **
 
 # These packages have no stable version, so at least one version must be
 # accepted in order to install the package at all.
-app-admin/salt ~amd64
 app-editors/vis ~amd64
 app-misc/ddcutil ~amd64
 app-mobilephone/heimdall ~amd64

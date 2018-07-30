@@ -3,9 +3,6 @@
 # libcommon.a(libcommon_a-miscellaneous.o):(.bss.iobuf_debug_mode+0x0): first defined here
 =app-crypt/gnupg-2.2.8 fcommon
 =app-text/aspell-0.60.7_rc1 ncurseswidechar
-# CMakeFiles/mbstream.dir/xbstream.c.o:(.bss.datasink_buffer+0x0): multiple definition of `datasink_buffer'
-# CMakeFiles/mbstream.dir/ds_buffer.c.o:(.data.rel.local.datasink_buffer+0x0): first defined here
-=dev-db/mariadb-10.1.31-r1 fcommon
 dev-haskell/cipher-aes maes
 dev-haskell/cryptonite maes
 =dev-haskell/hslua-0.3.6.1 nogcsections
@@ -25,9 +22,6 @@ dev-lang/ocaml nogcsections
 # jarfile.c:787:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 # jarfile.c:788:20: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
 =dev-libs/nss-3.29.5 nostricter
-# in configuration tests:
-# timer_createXXXXXXXX.c:2:5: warning: implicit declaration of function 'timer_create' [-Wimplicit-function-declaration]
-=dev-python/pyzmq-16.0.2 nostricter
 =dev-util/android-tools-9999 fcommon
 # bench/futex-lock-pi.o:/tmp/portage/dev-util/perf-4.14.33/work/linux-4.14/tools/perf/bench/futex-lock-pi.c:37: multiple definition of `end'
 # bench/futex-hash.o:/tmp/portage/dev-util/perf-4.14.33/work/linux-4.14/tools/perf/bench/futex-hash.c:38: first defined here
