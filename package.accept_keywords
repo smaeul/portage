@@ -98,6 +98,8 @@ sys-libs/tevent ~amd64
 ~dev-libs/bglibs-2.03 ~amd64
 # Required for musl
 ~mail-mta/opensmtpd-6.0.2_p1 ~amd64
+# Required for chromium
+~media-video/ffmpeg-4.0.2 ~amd64
 # Required to fix warnings
 =net-analyzer/netperf-2.7.0-r2 ~amd64
 # Required for musl (res_randomid)

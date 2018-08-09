@@ -23,6 +23,8 @@ dev-libs/libxml2 icu
 dev-libs/xmlsec nss
 # Required by inkscape[imagemagick]
 media-gfx/imagemagick cxx
+# Required for ffmpeg-4
+media-libs/gegl -ffmpeg
 # Required by thunderbird
 media-libs/harfbuzz icu
 # Required by chromium
