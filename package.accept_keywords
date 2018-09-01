@@ -10,6 +10,7 @@ x11-misc/j4-dmenu-desktop::smaeul **
 # These packages have no stable version, so at least one version must be
 # accepted in order to install the package at all.
 app-editors/vis ~amd64
+app-eselect/eselect-unison ~amd64
 app-misc/ddcutil ~amd64
 app-mobilephone/heimdall ~amd64
 dev-go/go-bindata ~amd64
@@ -21,7 +22,7 @@ dev-util/perf ~amd64
 dev-util/radare2 ~amd64
 net-analyzer/flent ~amd64
 net-misc/streamlink ~amd64
-net-misc/unison ~amd64
+net-misc/unison:2.48 ~amd64
 net-vpn/wireguard ~amd64
 net-p2p/transmission-remote-cli ~amd64
 sci-misc/boinc ~amd64

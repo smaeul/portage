@@ -32,6 +32,11 @@ dev-lang/ocaml nogcsections
 =dev-util/perf-4.14.33 fcommon
 ~mail-mta/opensmtpd-6.0.2_p1 fcommon
 =media-libs/freeglut-3.0.0 fcommon
+# tools/tools_aubinator_error_decode-gen_batch_decoder.o:(.bss.disasm+0x0): multiple definition of `disasm'
+# tools/tools_aubinator_error_decode-aubinator_error_decode.o:(.bss.disasm+0x0): first defined here
+# common/.libs/libintel_common.a(common_libintel_common_la-gen_decoder.o):(.bss.disasm+0x0): multiple definition of `disasm'
+# tools/tools_aubinator_error_decode-aubinator_error_decode.o:(.bss.disasm+0x0): first defined here
+=media-libs/mesa-18.1.6 fcommon
 =media-sound/ncmpcpp-0.7.7 ncurseswidechar
 # src/libavcodec/vaapi_encode_h265.c:304:49: warning: array subscript is above array bounds [-Warray-bounds]
 =media-video/ffmpeg-3.3.6 nostricter
