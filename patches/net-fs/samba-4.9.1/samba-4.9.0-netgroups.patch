@@ -1,0 +1,13 @@
+diff --git samba-4.9.0/source3/wscript
+index bcdfc17..cfa0228 100644
+--- samba-4.9.0/source3/wscript.orig
++++ samba-4.9.0/source3/wscript
+@@ -600,7 +600,7 @@ msg.msg_accrightslen = sizeof(fd);
+                                 headers='unistd.h sys/types.h dirent.h',
+                                 define='HAVE_DIRENT_D_OFF')
+ 
+-    if (conf.CONFIG_SET('HAVE_YP_GET_DEFAULT_DOMAIN')):
++    if (conf.CONFIG_SET('HAVE_YP_GET_DEFAULT_DOMAIN') and conf.CHECK_FUNCS('innetgr')):
+            conf.DEFINE('HAVE_NETGROUP', '1')
+ 
+     # Look for CUPS

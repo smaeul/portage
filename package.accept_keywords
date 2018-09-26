@@ -13,6 +13,7 @@ app-editors/vis ~amd64
 app-eselect/eselect-unison ~amd64
 app-misc/ddcutil ~amd64
 app-mobilephone/heimdall ~amd64
+app-text/libnumbertext ~amd64
 dev-go/go-bindata ~amd64
 dev-java/icedtea ~amd64
 dev-libs/capstone ~amd64

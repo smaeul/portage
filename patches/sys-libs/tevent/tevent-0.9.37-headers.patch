@@ -1,0 +1,12 @@
+diff --git tevent-0.9.37/tevent.h
+index aa6fe0d..39a42a0 100644
+--- tevent-0.9.37/tevent.h.orig
++++ tevent-0.9.37/tevent.h
+@@ -32,6 +32,7 @@
+ #include <talloc.h>
+ #include <sys/time.h>
+ #include <stdbool.h>
++#include <unistd.h>
+ 
+ struct tevent_context;
+ struct tevent_ops;

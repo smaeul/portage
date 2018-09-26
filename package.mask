@@ -4,5 +4,7 @@ mail-client/mailx
 >=net-misc/spice-gtk-0.32
 sys-apps/iproute2::gentoo
 sys-apps/openrc
+sys-fs/zfs-kmod::gentoo
 sys-kernel/linux-headers::gentoo
+sys-kernel/spl::gentoo
 >=www-client/firefox-53.0.0

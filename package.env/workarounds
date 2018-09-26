@@ -57,12 +57,15 @@ dev-lang/ocaml nogcsections
 # foomatic_rip-foomaticrip.o:(.bss.cupsfilter+0x0): first defined here
 # foomatic_rip-options.o:(.bss.printer_model+0x0): multiple definition of `printer_model'
 # foomatic_rip-foomaticrip.o:(.bss.printer_model+0x0): first defined here
-=net-print/cups-filters-1.17.9 fcommon
+=net-print/cups-filters-1.20.4 fcommon
 # libobj.h:43:11: warning: the address of 'entry_obj' will always evaluate as 'true' [-Waddress]
 =sys-apps/acl-2.2.52-r1 nostricter
 =sys-apps/dtc-1.4.4 fcommon
-# actual bug: ipmroute.c and ipxfrm.c both define 'filter'
-~sys-apps/iproute2-4.14.1 fcommon
+# ipxfrm.o:(.bss.filter+0x0): multiple definition of `filter'
+# ipmroute.o:(.bss.filter+0x0): first defined here
+# xfrm_monitor.o:(.bss.listen_all_nsid+0x0): multiple definition of `listen_all_nsid'
+# ipmonitor.o:(.bss.listen_all_nsid+0x0): first defined here
+~sys-apps/iproute2-4.17.0 fcommon
 # libfont.a(kdmapop.o):(.bss.progname+0x0): multiple definition of `progname'
 # setfont.o:(.bss.progname+0x0): first defined here
 =sys-apps/kbd-2.0.4 fcommon
