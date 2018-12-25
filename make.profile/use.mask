@@ -1,0 +1,16 @@
+-abi_ppc_32
+-abi_ppc_64
+-multilib
+-ppc
+-ppc64
+
+-altivec
+-big-endian
+-cpu_flags_ppc_altivec
+-cpu_flags_ppc_vsx
+-cpu_flags_ppc_vsx2
+-cpu_flags_ppc_vsx3
+-ppcsha1
+-power8
+
+-ada

@@ -1,1 +1,2 @@
 EXTRA_ECONF="$EXTRA_ECONF --enable-multiarch --with-linker-hash-style=both"
+EXTRA_ECONF="$EXTRA_ECONF --disable-decimal-float --enable-secureplt --with-abi=elfv2 --with-cpu=power9 --with-long-double-64 --with-long-double-format=ieee"

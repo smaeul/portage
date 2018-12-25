@@ -1,0 +1,3 @@
+dev-lang/rust ABI_PPC: 32
+sys-libs/libssp_nonshared ABI_PPC: 32
+sys-libs/musl ABI_PPC: 32
