@@ -118,7 +118,7 @@ sys-apps/coreutils hostname
 sys-apps/debianutils -installkernel
 sys-apps/dtc yaml
 sys-apps/elfix -ptpax
-sys-apps/flashrom -* internal linux-mtd linux-spi tools
+sys-apps/flashrom -* linux-mtd linux-spi
 sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
