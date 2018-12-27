@@ -1,0 +1,32 @@
+From 7461c660235d5114e15b862034945f133c372fb0 Mon Sep 17 00:00:00 2001
+From: Mathieu Bridon <bochecha@daitauha.fr>
+Date: Thu, 9 Aug 2018 10:27:19 +0200
+Subject: [PATCH 04/27] python: Use the right function for the job
+
+The code was just reimplementing itertools.combinations_with_replacement
+in a less efficient way.
+
+This does change the order of the results slightly, but it should be ok.
+
+Signed-off-by: Mathieu Bridon <bochecha@daitauha.fr>
+Reviewed-by: Dylan Baker <dylan@pnwbakers.com>
+---
+ src/compiler/nir/nir_opt_algebraic.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/compiler/nir/nir_opt_algebraic.py b/src/compiler/nir/nir_opt_algebraic.py
+index 19526d86d4..c141a68a06 100644
+--- a/src/compiler/nir/nir_opt_algebraic.py
++++ b/src/compiler/nir/nir_opt_algebraic.py
+@@ -642,7 +642,7 @@ optimizations = [
+ 
+ invert = OrderedDict([('feq', 'fne'), ('fne', 'feq'), ('fge', 'flt'), ('flt', 'fge')])
+ 
+-for left, right in list(itertools.combinations(invert.keys(), 2)) + zip(invert.keys(), invert.keys()):
++for left, right in itertools.combinations_with_replacement(invert.keys(), 2):
+    optimizations.append((('inot', ('ior(is_used_once)', (left, a, b), (right, c, d))),
+                          ('iand', (invert[left], a, b), (invert[right], c, d))))
+    optimizations.append((('inot', ('iand(is_used_once)', (left, a, b), (right, c, d))),
+-- 
+2.18.1
+

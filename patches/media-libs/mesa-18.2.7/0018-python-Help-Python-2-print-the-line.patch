@@ -1,0 +1,29 @@
+From e76e78398226b68ceb657838a856236567c1e395 Mon Sep 17 00:00:00 2001
+From: Mathieu Bridon <bochecha@daitauha.fr>
+Date: Fri, 17 Aug 2018 09:33:02 -0600
+Subject: [PATCH 18/27] python: Help Python 2 print the line
+
+Reviewed-by: Jose Fonseca <jfonseca@vmware>
+---
+ src/util/xmlpool/gen_xmlpool.py | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/util/xmlpool/gen_xmlpool.py b/src/util/xmlpool/gen_xmlpool.py
+index 327709c7f8..64e631f74c 100644
+--- a/src/util/xmlpool/gen_xmlpool.py
++++ b/src/util/xmlpool/gen_xmlpool.py
+@@ -218,6 +218,11 @@ for line in template:
+         assert len(descMatches) == 0
+         descMatches = [matchDESC_BEGIN]
+     else:
++        # In Python 2, stdout expects encoded byte strings, or else it will
++        # encode them with the ascii 'codec'
++        if sys.version_info.major == 2:
++           line = line.encode('utf-8')
++
+         print(line, end='')
+ 
+ template.close()
+-- 
+2.18.1
+

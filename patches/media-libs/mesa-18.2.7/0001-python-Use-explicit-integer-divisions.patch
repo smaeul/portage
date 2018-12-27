@@ -1,0 +1,218 @@
+From 2bfac1e614fcade2f20afd1066e6d470c65a1cd9 Mon Sep 17 00:00:00 2001
+From: Mathieu Bridon <bochecha@daitauha.fr>
+Date: Wed, 25 Jul 2018 11:53:54 +0200
+Subject: [PATCH 01/27] python: Use explicit integer divisions
+
+In Python 2, divisions of integers return an integer:
+
+    >>> 32 / 4
+    8
+
+In Python 3 though, they return floats:
+
+    >>> 32 / 4
+    8.0
+
+However, Python 3 has an explicit integer division operator:
+
+    >>> 32 // 4
+    8
+
+That operator exists on Python >= 2.2, so let's use it everywhere to
+make the scripts compatible with both Python 2 and 3.
+
+In addition, using __future__.division tells Python 2 to behave the same
+way as Python 3, which helps ensure the scripts produce the same output
+in both versions of Python.
+
+Signed-off-by: Mathieu Bridon <bochecha@daitauha.fr>
+Reviewed-by: Eric Engestrom <eric.engestrom@intel.com> (v2)
+Reviewed-by: Dylan Baker <dylan@pnwbakers.com>
+---
+ src/gallium/auxiliary/util/u_format_pack.py  | 4 ++--
+ src/gallium/auxiliary/util/u_format_parse.py | 7 +++++--
+ src/mapi/glapi/gen/glX_proto_send.py         | 4 ++--
+ src/mesa/main/format_info.py                 | 4 ++--
+ src/mesa/main/format_pack.py                 | 8 ++++----
+ src/mesa/main/format_unpack.py               | 8 ++++----
+ 6 files changed, 19 insertions(+), 16 deletions(-)
+
+diff --git a/src/gallium/auxiliary/util/u_format_pack.py b/src/gallium/auxiliary/util/u_format_pack.py
+index 7a952a48b3..ad2e49281f 100644
+--- a/src/gallium/auxiliary/util/u_format_pack.py
++++ b/src/gallium/auxiliary/util/u_format_pack.py
+@@ -36,7 +36,7 @@
+ '''
+ 
+ 
+-from __future__ import print_function
++from __future__ import division, print_function
+ 
+ from u_format_parse import *
+ 
+@@ -240,7 +240,7 @@ def value_to_native(type, value):
+             return truncate_mantissa(value, 23)
+         return value
+     if type.type == FIXED:
+-        return int(value * (1 << (type.size/2)))
++        return int(value * (1 << (type.size // 2)))
+     if not type.norm:
+         return int(value)
+     if type.type == UNSIGNED:
+diff --git a/src/gallium/auxiliary/util/u_format_parse.py b/src/gallium/auxiliary/util/u_format_parse.py
+index c0456f6d15..d3874cd895 100644
+--- a/src/gallium/auxiliary/util/u_format_parse.py
++++ b/src/gallium/auxiliary/util/u_format_parse.py
+@@ -29,6 +29,9 @@
+ '''
+ 
+ 
++from __future__ import division
++
++
+ VOID, UNSIGNED, SIGNED, FIXED, FLOAT = range(5)
+ 
+ SWIZZLE_X, SWIZZLE_Y, SWIZZLE_Z, SWIZZLE_W, SWIZZLE_0, SWIZZLE_1, SWIZZLE_NONE, = range(7)
+@@ -76,7 +79,7 @@ class Channel:
+         if self.type == FLOAT:
+             return VERY_LARGE
+         if self.type == FIXED:
+-            return (1 << (self.size/2)) - 1
++            return (1 << (self.size // 2)) - 1
+         if self.norm:
+             return 1
+         if self.type == UNSIGNED:
+@@ -90,7 +93,7 @@ class Channel:
+         if self.type == FLOAT:
+             return -VERY_LARGE
+         if self.type == FIXED:
+-            return -(1 << (self.size/2))
++            return -(1 << (self.size // 2))
+         if self.type == UNSIGNED:
+             return 0
+         if self.norm:
+diff --git a/src/mapi/glapi/gen/glX_proto_send.py b/src/mapi/glapi/gen/glX_proto_send.py
+index a920ecc012..03067d8a3c 100644
+--- a/src/mapi/glapi/gen/glX_proto_send.py
++++ b/src/mapi/glapi/gen/glX_proto_send.py
+@@ -26,7 +26,7 @@
+ #    Ian Romanick <idr@us.ibm.com>
+ #    Jeremy Kolb <jkolb@brandeis.edu>
+ 
+-from __future__ import print_function
++from __future__ import division, print_function
+ 
+ import argparse
+ 
+@@ -809,7 +809,7 @@ generic_%u_byte( GLint rop, const void * ptr )
+                     # Dividing by the array size (1 for
+                     # non-arrays) gives us this.
+ 
+-                    s = p.size() / p.get_element_count()
++                    s = p.size() // p.get_element_count()
+                     print("       %s __glXReadReply(dpy, %s, %s, %s);" % (return_str, s, p.name, aa))
+                     got_reply = 1
+ 
+diff --git a/src/mesa/main/format_info.py b/src/mesa/main/format_info.py
+index bbecaa2451..00e27b3fba 100644
+--- a/src/mesa/main/format_info.py
++++ b/src/mesa/main/format_info.py
+@@ -21,7 +21,7 @@
+ # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ # SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ 
+-from __future__ import print_function
++from __future__ import division, print_function
+ 
+ import format_parser as parser
+ import sys
+@@ -198,7 +198,7 @@ for fmat in formats:
+       chan = fmat.array_element()
+       norm = chan.norm or chan.type == parser.FLOAT
+       print('      .ArrayFormat = MESA_ARRAY_FORMAT({0}),'.format(', '.join([
+-         str(chan.size / 8),
++         str(chan.size // 8),
+          str(int(chan.sign)),
+          str(int(chan.type == parser.FLOAT)),
+          str(int(norm)),
+diff --git a/src/mesa/main/format_pack.py b/src/mesa/main/format_pack.py
+index d3c8d24acd..0b9e0d424d 100644
+--- a/src/mesa/main/format_pack.py
++++ b/src/mesa/main/format_pack.py
+@@ -356,7 +356,7 @@ _mesa_pack_ubyte_rgba_row(mesa_format format, GLuint n,
+    case ${f.name}:
+       for (i = 0; i < n; ++i) {
+          pack_ubyte_${f.short_name()}(src[i], d);
+-         d += ${f.block_size() / 8};
++         d += ${f.block_size() // 8};
+       }
+       break;
+ %endfor
+@@ -388,7 +388,7 @@ _mesa_pack_uint_rgba_row(mesa_format format, GLuint n,
+    case ${f.name}:
+       for (i = 0; i < n; ++i) {
+          pack_uint_${f.short_name()}(src[i], d);
+-         d += ${f.block_size() / 8};
++         d += ${f.block_size() // 8};
+       }
+       break;
+ %endfor
+@@ -418,7 +418,7 @@ _mesa_pack_float_rgba_row(mesa_format format, GLuint n,
+    case ${f.name}:
+       for (i = 0; i < n; ++i) {
+          pack_float_${f.short_name()}(src[i], d);
+-         d += ${f.block_size() / 8};
++         d += ${f.block_size() // 8};
+       }
+       break;
+ %endfor
+@@ -1000,6 +1000,6 @@ _mesa_pack_colormask(mesa_format format, const GLubyte colorMask[4], void *dst)
+ }
+ """
+ 
+-template = Template(string);
++template = Template(string, future_imports=['division']);
+ 
+ print(template.render(argv = argv[0:]))
+diff --git a/src/mesa/main/format_unpack.py b/src/mesa/main/format_unpack.py
+index 286c08e621..c254b74149 100644
+--- a/src/mesa/main/format_unpack.py
++++ b/src/mesa/main/format_unpack.py
+@@ -322,7 +322,7 @@ _mesa_unpack_rgba_row(mesa_format format, GLuint n,
+    case ${f.name}:
+       for (i = 0; i < n; ++i) {
+          unpack_float_${f.short_name()}(s, dst[i]);
+-         s += ${f.block_size() / 8};
++         s += ${f.block_size() // 8};
+       }
+       break;
+ %endfor
+@@ -355,7 +355,7 @@ _mesa_unpack_ubyte_rgba_row(mesa_format format, GLuint n,
+    case ${f.name}:
+       for (i = 0; i < n; ++i) {
+          unpack_ubyte_${f.short_name()}(s, dst[i]);
+-         s += ${f.block_size() / 8};
++         s += ${f.block_size() // 8};
+       }
+       break;
+ %endfor
+@@ -397,7 +397,7 @@ _mesa_unpack_uint_rgba_row(mesa_format format, GLuint n,
+    case ${f.name}:
+       for (i = 0; i < n; ++i) {
+          unpack_int_${f.short_name()}(s, dst[i]);
+-         s += ${f.block_size() / 8};
++         s += ${f.block_size() // 8};
+       }
+       break;
+ %endfor
+@@ -890,6 +890,6 @@ _mesa_unpack_depth_stencil_row(mesa_format format, GLuint n,
+ }
+ """
+ 
+-template = Template(string);
++template = Template(string, future_imports=['division']);
+ 
+ print(template.render(argv = argv[0:]))
+-- 
+2.18.1
+

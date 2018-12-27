@@ -77,7 +77,7 @@ media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
 media-sound/pulseaudio alsa -asyncns
 media-video/ffmpeg libsoxr network ssh openssl
-media-video/mpv drm -dvd egl -enca -luajit -uchardet
+media-video/mpv cli drm -dvd egl -enca -luajit -uchardet
 net-analyzer/flent -plots
 net-analyzer/nmap ncat nping
 net-dns/bind-tools -idn urandom

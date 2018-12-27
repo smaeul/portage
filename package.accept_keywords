@@ -39,6 +39,7 @@ www-apps/gitea ~amd64
 app-misc/ca-certificates ~amd64
 app-office/libreoffice ~amd64
 app-office/libreoffice-l10n ~amd64
+dev-lang/go ~amd64
 dev-lang/mono ~amd64
 net-irc/weechat ~amd64
 net-misc/openntpd ~amd64

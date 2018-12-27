@@ -1,0 +1,87 @@
+From 817bd772edd6466046d7b6e890940bc412946155 Mon Sep 17 00:00:00 2001
+From: Mathieu Bridon <bochecha@daitauha.fr>
+Date: Thu, 9 Aug 2018 10:27:18 +0200
+Subject: [PATCH 10/27] python: Fix inequality comparisons
+
+On Python 3, executing `foo != bar` will first try to call
+foo.__ne__(bar), and fallback on the opposite result of foo.__eq__(bar).
+
+Python 2 does not do that.
+
+As a result, those __eq__ methods were never called, when we were
+testing for inequality.
+
+Expliclty adding the __ne__ methods fixes this issue, in a way that is
+compatible with both Python 2 and 3.
+
+However, this means the __eq__ methods are now called when testing for
+`foo != None`, so they need to be guarded correctly.
+
+Signed-off-by: Mathieu Bridon <bochecha@daitauha.fr>
+Reviewed-by: Dylan Baker <dylan@pnwbakers.com>
+---
+ src/amd/vulkan/vk_format_parse.py            | 6 ++++++
+ src/gallium/auxiliary/util/u_format_parse.py | 6 ++++++
+ src/mesa/main/format_parser.py               | 6 ++++++
+ 3 files changed, 18 insertions(+)
+
+diff --git a/src/amd/vulkan/vk_format_parse.py b/src/amd/vulkan/vk_format_parse.py
+index 00cf1adf5a..ba730388a7 100644
+--- a/src/amd/vulkan/vk_format_parse.py
++++ b/src/amd/vulkan/vk_format_parse.py
+@@ -73,8 +73,14 @@ class Channel:
+         return s
+ 
+     def __eq__(self, other):
++        if other is None:
++            return False
++
+         return self.type == other.type and self.norm == other.norm and self.pure == other.pure and self.size == other.size and self.scaled == other.scaled
+ 
++    def __ne__(self, other):
++        return not self == other
++
+     def max(self):
+         '''Maximum representable number.'''
+         if self.type == FLOAT:
+diff --git a/src/gallium/auxiliary/util/u_format_parse.py b/src/gallium/auxiliary/util/u_format_parse.py
+index d3874cd895..48cc012cd2 100644
+--- a/src/gallium/auxiliary/util/u_format_parse.py
++++ b/src/gallium/auxiliary/util/u_format_parse.py
+@@ -72,8 +72,14 @@ class Channel:
+         return s
+ 
+     def __eq__(self, other):
++        if other is None:
++            return False
++
+         return self.type == other.type and self.norm == other.norm and self.pure == other.pure and self.size == other.size
+ 
++    def __ne__(self, other):
++        return not self == other
++
+     def max(self):
+         '''Maximum representable number.'''
+         if self.type == FLOAT:
+diff --git a/src/mesa/main/format_parser.py b/src/mesa/main/format_parser.py
+index 3321ad33ff..c0d73c9d22 100644
+--- a/src/mesa/main/format_parser.py
++++ b/src/mesa/main/format_parser.py
+@@ -61,8 +61,14 @@ class Channel:
+       return s
+ 
+    def __eq__(self, other):
++      if other is None:
++         return False
++
+       return self.type == other.type and self.norm == other.norm and self.size == other.size
+ 
++   def __ne__(self, other):
++      return not self.__eq__(other)
++
+    def max(self):
+       """Returns the maximum representable number."""
+       if self.type == FLOAT:
+-- 
+2.18.1
+

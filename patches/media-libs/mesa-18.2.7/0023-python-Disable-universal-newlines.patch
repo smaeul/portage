@@ -1,0 +1,49 @@
+From 7f207e115fb6c8d83d9bd0b9aacd55240117fda5 Mon Sep 17 00:00:00 2001
+From: Mathieu Bridon <bochecha@daitauha.fr>
+Date: Fri, 17 Aug 2018 21:32:17 +0200
+Subject: [PATCH 23/27] python: Disable universal newlines
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+We are testing the behaviour of a tool, for different input files, each
+one using a different newline sequence. ('\n' on UNIX, '\r\n' on
+Windows, …)
+
+Unfortunately, when opening a file in text mode, Python 3 will by
+default enable the "universal newlines" mode, which means it replaces
+all the known newline sequences by '\n'.
+
+This (usually useful) behaviour breaks the tests, which are specifically
+trying to handle files with newline sequences different from '\n'.
+
+Disabling the universal newlines mode fixes the tests.
+
+However, to keep the script compatible with both Python 2 and 3, we must
+use the io.open() function instead of the open() builtin, as the latter
+only knows about the `newline` argument on Python 3.
+
+Reviewed-by: Dylan Baker <dylan@pnwbakers.com>
+---
+ src/compiler/glsl/glcpp/tests/glcpp_test.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/src/compiler/glsl/glcpp/tests/glcpp_test.py b/src/compiler/glsl/glcpp/tests/glcpp_test.py
+index 8c613cdf6e..b024300522 100644
+--- a/src/compiler/glsl/glcpp/tests/glcpp_test.py
++++ b/src/compiler/glsl/glcpp/tests/glcpp_test.py
+@@ -45,7 +45,10 @@ def arg_parser():
+ 
+ def parse_test_file(filename, nl_format):
+     """Check for any special arguments and return them as a list."""
+-    with open(filename) as f:
++    # Disable "universal newlines" mode; we can't directly use `nl_format` as
++    # the `newline` argument, because the "bizarro" test uses something Python
++    # considers invalid.
++    with io.open(filename, newline='') as f:
+         for l in f.read().split(nl_format):
+             if 'glcpp-args:' in l:
+                 return l.split('glcpp-args:')[1].strip().split()
+-- 
+2.18.1
+

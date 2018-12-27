@@ -1,0 +1,130 @@
+diff --git xorg-server-1.20.3/test/xi2/protocol-xigetselectedevents.c.orig xorg-server-1.20.3/test/xi2/protocol-xigetselectedevents.c
+index 9a0fac5..b141002 100644
+--- xorg-server-1.20.3/test/xi2/protocol-xigetselectedevents.c.orig
++++ xorg-server-1.20.3/test/xi2/protocol-xigetselectedevents.c
+@@ -60,7 +60,7 @@ static struct {
+     int mask_len;
+ } test_data;
+ 
+-ClientRec client_window;
++extern ClientRec client_window;
+ 
+ /* AddResource is called from XISetSEventMask, we don't need this */
+ Bool
+diff --git xorg-server-1.20.3/test/xi2/protocol-xiquerypointer.c.orig xorg-server-1.20.3/test/xi2/protocol-xiquerypointer.c
+index ed75d79..0f5a2b5 100644
+--- xorg-server-1.20.3/test/xi2/protocol-xiquerypointer.c.orig
++++ xorg-server-1.20.3/test/xi2/protocol-xiquerypointer.c
+@@ -41,7 +41,7 @@
+ 
+ #include "protocol-common.h"
+ 
+-ClientRec client_window;
++extern ClientRec client_window;
+ static ClientRec client_request;
+ static void reply_XIQueryPointer_data(ClientPtr client, int len,
+                                       char *data, void *closure);
+diff --git xorg-server-1.20.3/test/xi2/protocol-xipassivegrabdevice.c.orig xorg-server-1.20.3/test/xi2/protocol-xipassivegrabdevice.c
+index c703a1e..142bcec 100644
+--- xorg-server-1.20.3/test/xi2/protocol-xipassivegrabdevice.c.orig
++++ xorg-server-1.20.3/test/xi2/protocol-xipassivegrabdevice.c
+@@ -41,7 +41,7 @@
+ 
+ #include "protocol-common.h"
+ 
+-ClientRec client_window;
++extern ClientRec client_window;
+ static ClientRec client_request;
+ 
+ #define N_MODS 7
+diff --git xorg-server-1.20.3/test/xi2/protocol-xiselectevents.c.orig xorg-server-1.20.3/test/xi2/protocol-xiselectevents.c
+index f136c23..06050ad 100644
+--- xorg-server-1.20.3/test/xi2/protocol-xiselectevents.c.orig
++++ xorg-server-1.20.3/test/xi2/protocol-xiselectevents.c
+@@ -62,7 +62,7 @@
+ 
+ static unsigned char *data[4096 * 20];  /* the request data buffer */
+ 
+-ClientRec client_window;
++extern ClientRec client_window;
+ 
+ int
+ __real_XISetEventMask(DeviceIntPtr dev, WindowPtr win, ClientPtr client,
+diff --git xorg-server-1.20.3/test/xi2/protocol-xiqueryversion.c.orig xorg-server-1.20.3/test/xi2/protocol-xiqueryversion.c
+index 3ce758f..c7ddbfc 100644
+--- xorg-server-1.20.3/test/xi2/protocol-xiqueryversion.c.orig
++++ xorg-server-1.20.3/test/xi2/protocol-xiqueryversion.c
+@@ -58,7 +58,7 @@ struct test_data {
+     int minor_expected;
+ };
+ 
+-ClientRec client_window;
++extern ClientRec client_window;
+ 
+ static void
+ reply_XIQueryVersion(ClientPtr client, int len, char *data, void *closure)
+diff --git xorg-server-1.20.3/test/xi2/protocol-xisetclientpointer.c.orig xorg-server-1.20.3/test/xi2/protocol-xisetclientpointer.c
+index 6584bb9..ddc9f00 100644
+--- xorg-server-1.20.3/test/xi2/protocol-xisetclientpointer.c.orig
++++ xorg-server-1.20.3/test/xi2/protocol-xisetclientpointer.c
+@@ -48,7 +48,7 @@
+ 
+ #include "protocol-common.h"
+ 
+-ClientRec client_window;
++extern ClientRec client_window;
+ static ClientRec client_request;
+ 
+ static void
+diff --git xorg-server-1.20.3/test/xi2/protocol-xiwarppointer.c.orig xorg-server-1.20.3/test/xi2/protocol-xiwarppointer.c
+index 8484d54..e5c2f31 100644
+--- xorg-server-1.20.3/test/xi2/protocol-xiwarppointer.c.orig
++++ xorg-server-1.20.3/test/xi2/protocol-xiwarppointer.c
+@@ -44,7 +44,7 @@
+ static int expected_x = SPRITE_X;
+ static int expected_y = SPRITE_Y;
+ 
+-ClientRec client_window;
++extern ClientRec client_window;
+ 
+ /**
+  * This function overrides the one in the screen rec.
+diff --git xorg-server-1.20.3/test/xi2/protocol-xiquerydevice.c.orig xorg-server-1.20.3/test/xi2/protocol-xiquerydevice.c
+index a068038..6ee8a80 100644
+--- xorg-server-1.20.3/test/xi2/protocol-xiquerydevice.c.orig
++++ xorg-server-1.20.3/test/xi2/protocol-xiquerydevice.c
+@@ -54,7 +54,7 @@ struct test_data {
+     int num_devices_in_reply;
+ };
+ 
+-ClientRec client_window;
++extern ClientRec client_window;
+ 
+ static void reply_XIQueryDevice_data(ClientPtr client, int len, char *data,
+                                      void *closure);
+diff --git xorg-server-1.20.3/test/xi2/protocol-xigetclientpointer.c.orig xorg-server-1.20.3/test/xi2/protocol-xigetclientpointer.c
+index 9c38bd7..244e843 100644
+--- xorg-server-1.20.3/test/xi2/protocol-xigetclientpointer.c.orig
++++ xorg-server-1.20.3/test/xi2/protocol-xigetclientpointer.c
+@@ -46,7 +46,7 @@ static struct {
+     int win;
+ } test_data;
+ 
+-ClientRec client_window;
++extern ClientRec client_window;
+ static ClientRec client_request;
+ 
+ static void
+diff --git xorg-server-1.20.3/test/xi1/protocol-xchangedevicecontrol.c.orig xorg-server-1.20.3/test/xi1/protocol-xchangedevicecontrol.c
+index 57a15c4..54f1f67 100644
+--- xorg-server-1.20.3/test/xi1/protocol-xchangedevicecontrol.c.orig
++++ xorg-server-1.20.3/test/xi1/protocol-xchangedevicecontrol.c
+@@ -37,7 +37,7 @@
+ 
+ #include "protocol-common.h"
+ 
+-ClientRec client_window;
++extern ClientRec client_window;
+ static ClientRec client_request;
+ 
+ static void

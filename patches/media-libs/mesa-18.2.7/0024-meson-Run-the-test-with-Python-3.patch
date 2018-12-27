@@ -1,0 +1,54 @@
+From c3c8abee31793cd8fbd4a4c9257f04af622b4ac2 Mon Sep 17 00:00:00 2001
+From: Mathieu Bridon <bochecha@daitauha.fr>
+Date: Fri, 17 Aug 2018 21:32:18 +0200
+Subject: [PATCH 24/27] meson: Run the test with Python 3
+
+This is a patch from me and a patch from Mathieu Bridon squashed
+together.
+
+Signed-off-by: Dylan Baker <dylan@pnwbakers.com>
+Reviewed-by: Dylan Baker <dylan@pnwbakers.com>
+Reviewed-by: Mathieu Bridon <bochecha@daitauha.fr>
+---
+ src/compiler/glsl/glcpp/meson.build | 2 +-
+ src/compiler/glsl/tests/meson.build | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/compiler/glsl/glcpp/meson.build b/src/compiler/glsl/glcpp/meson.build
+index 287da35006..769406f533 100644
+--- a/src/compiler/glsl/glcpp/meson.build
++++ b/src/compiler/glsl/glcpp/meson.build
+@@ -64,7 +64,7 @@ if with_tests
+   foreach m : modes
+     test(
+       'glcpp test (@0@)'.format(m),
+-      prog_python2,
++      prog_python,
+       args : [
+         join_paths(meson.current_source_dir(), 'tests/glcpp_test.py'),
+         glcpp, join_paths(meson.current_source_dir(), 'tests'),
+diff --git a/src/compiler/glsl/tests/meson.build b/src/compiler/glsl/tests/meson.build
+index 821760e962..2a41e30a28 100644
+--- a/src/compiler/glsl/tests/meson.build
++++ b/src/compiler/glsl/tests/meson.build
+@@ -85,7 +85,7 @@ test(
+ 
+ test(
+   'glsl compiler warnings',
+-  prog_python2,
++  prog_python,
+   args : [
+     join_paths(meson.current_source_dir(), 'warnings_test.py'),
+     '--glsl-compiler', glsl_compiler,
+@@ -96,7 +96,7 @@ test(
+ )
+ test(
+   'glsl optimization',
+-  prog_python2,
++  prog_python,
+   args : [
+     join_paths(meson.current_source_dir(), 'optimization_test.py'),
+     '--test-runner', glsl_test
+-- 
+2.18.1
+

@@ -1,0 +1,42 @@
+From d7b5e6d5c6e172d867489b39bece3bc35d092ad5 Mon Sep 17 00:00:00 2001
+From: Mathieu Bridon <bochecha@daitauha.fr>
+Date: Thu, 9 Aug 2018 10:27:24 +0200
+Subject: [PATCH 09/27] python: Simplify list sorting
+
+Instead of copying the list, then sorting the copy in-place, we can just
+get a new sorted copy directly.
+
+Signed-off-by: Mathieu Bridon <bochecha@daitauha.fr>
+Reviewed-by: Eric Engestrom <eric.engestrom@intel.com>
+Reviewed-by: Dylan Baker <dylan@pnwbakers.com>
+---
+ src/mapi/mapi_abi.py | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/src/mapi/mapi_abi.py b/src/mapi/mapi_abi.py
+index d4c48ec430..dc48fa5935 100644
+--- a/src/mapi/mapi_abi.py
++++ b/src/mapi/mapi_abi.py
+@@ -291,8 +291,7 @@ class ABIPrinter(object):
+         self.entries = entries
+ 
+         # sort entries by their names
+-        self.entries_sorted_by_names = self.entries[:]
+-        self.entries_sorted_by_names.sort(key=attrgetter('name'))
++        self.entries_sorted_by_names = sorted(self.entries, key=attrgetter('name'))
+ 
+         self.indent = ' ' * 3
+         self.noop_warn = 'noop_warn'
+@@ -441,8 +440,7 @@ class ABIPrinter(object):
+     def c_stub_string_pool(self):
+         """Return the string pool for use by stubs."""
+         # sort entries by their names
+-        sorted_entries = self.entries[:]
+-        sorted_entries.sort(key=attrgetter('name'))
++        sorted_entries = sorted(self.entries, key=attrgetter('name'))
+ 
+         pool = []
+         offsets = {}
+-- 
+2.18.1
+

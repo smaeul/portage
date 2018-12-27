@@ -6,6 +6,10 @@ dev-python/lxml PYTHON_TARGETS: python2_7
 dev-python/certifi PYTHON_TARGETS: python2_7
 # Required by net-wireless/crda
 dev-python/m2crypto PYTHON_TARGETS: python2_7
+# Required by media-libs/mesa
+dev-python/mako PYTHON_TARGETS: python2_7
+# Required by dev-python/mako
+dev-python/markupsafe PYTHON_TARGETS: python2_7
 # Required by media-gfx/inkscape
 dev-python/numpy PYTHON_TARGETS: python2_7
 # Required by media-gfx/scour

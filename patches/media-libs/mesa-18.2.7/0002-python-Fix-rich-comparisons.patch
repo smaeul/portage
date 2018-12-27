@@ -1,0 +1,100 @@
+From ac2875ede00995599a7647b58cf720d6073c2412 Mon Sep 17 00:00:00 2001
+From: Mathieu Bridon <bochecha@daitauha.fr>
+Date: Tue, 17 Jul 2018 22:57:39 +0200
+Subject: [PATCH 02/27] python: Fix rich comparisons
+
+Python 3 doesn't call objects __cmp__() methods any more to compare
+them. Instead, it requires implementing the rich comparison methods
+explicitly: __eq__(), __ne(), __lt__(), __le__(), __gt__() and __ge__().
+
+Fortunately Python 2 also supports those.
+
+This commit only implements the comparison methods which are actually
+used by the build scripts.
+
+Signed-off-by: Mathieu Bridon <bochecha@daitauha.fr>
+Reviewed-by: Dylan Baker <dylan@pnwbakers.com>
+---
+ src/amd/vulkan/radv_extensions.py  |  5 +++--
+ src/intel/vulkan/anv_extensions.py |  5 +++--
+ src/mapi/mapi_abi.py               | 15 +++++++--------
+ 3 files changed, 13 insertions(+), 12 deletions(-)
+
+diff --git a/src/amd/vulkan/radv_extensions.py b/src/amd/vulkan/radv_extensions.py
+index 028d10f5fa..fa35aabd3b 100644
+--- a/src/amd/vulkan/radv_extensions.py
++++ b/src/amd/vulkan/radv_extensions.py
+@@ -147,14 +147,15 @@ class VkVersion:
+         patch = self.patch if self.patch is not None else 0
+         return (self.major << 22) | (self.minor << 12) | patch
+ 
+-    def __cmp__(self, other):
++    def __gt__(self, other):
+         # If only one of them has a patch version, "ignore" it by making
+         # other's patch version match self.
+         if (self.patch is None) != (other.patch is None):
+             other = copy.copy(other)
+             other.patch = self.patch
+ 
+-        return self.__int_ver().__cmp__(other.__int_ver())
++        return self.__int_ver() > other.__int_ver()
++
+ 
+ MAX_API_VERSION = VkVersion(MAX_API_VERSION)
+ 
+diff --git a/src/intel/vulkan/anv_extensions.py b/src/intel/vulkan/anv_extensions.py
+index 7da7888b7d..7d3ff920cb 100644
+--- a/src/intel/vulkan/anv_extensions.py
++++ b/src/intel/vulkan/anv_extensions.py
+@@ -160,14 +160,15 @@ class VkVersion:
+         patch = self.patch if self.patch is not None else 0
+         return (self.major << 22) | (self.minor << 12) | patch
+ 
+-    def __cmp__(self, other):
++    def __gt__(self, other):
+         # If only one of them has a patch version, "ignore" it by making
+         # other's patch version match self.
+         if (self.patch is None) != (other.patch is None):
+             other = copy.copy(other)
+             other.patch = self.patch
+ 
+-        return self.__int_ver().__cmp__(other.__int_ver())
++        return self.__int_ver() > other.__int_ver()
++
+ 
+ 
+ MAX_API_VERSION = VkVersion('0.0.0')
+diff --git a/src/mapi/mapi_abi.py b/src/mapi/mapi_abi.py
+index be1d15d922..e4ce2b6caf 100644
+--- a/src/mapi/mapi_abi.py
++++ b/src/mapi/mapi_abi.py
+@@ -121,19 +121,18 @@ class ABIEntry(object):
+     def __str__(self):
+         return self.c_prototype()
+ 
+-    def __cmp__(self, other):
++    def __lt__(self, other):
+         # compare slot, alias, and then name
+-        res = cmp(self.slot, other.slot)
+-        if not res:
++        if self.slot == other.slot:
+             if not self.alias:
+-                res = -1
++                return True
+             elif not other.alias:
+-                res = 1
++                return False
+ 
+-            if not res:
+-                res = cmp(self.name, other.name)
++            return self.name < other.name
++
++        return self.slot < other.slot
+ 
+-        return res
+ 
+ def abi_parse_xml(xml):
+     """Parse a GLAPI XML file for ABI entries."""
+-- 
+2.18.1
+

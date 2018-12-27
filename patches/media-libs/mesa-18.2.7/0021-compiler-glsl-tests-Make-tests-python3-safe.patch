@@ -1,0 +1,86 @@
+From 573240171ec9efebe3c83b43927e16ab34b48d49 Mon Sep 17 00:00:00 2001
+From: Dylan Baker <dylan@pnwbakers.com>
+Date: Thu, 16 Aug 2018 14:17:24 -0700
+Subject: [PATCH 21/27] compiler/glsl/tests: Make tests python3 safe
+
+v2: - explicitly decode the output of subprocesses
+    - handle bytes and string types consistently rather than relying on
+      python 2's coercion for bytes and ignoring them in python 3
+v3: - explicitly set encode as well as decode
+    - python 2.7 and 3.x `bytes` instead of defining an alias
+
+Reviewed-by: Mathieu Bridon <bochecha@daitauha.fr>
+---
+ src/compiler/glsl/tests/lower_jump_cases.py  |  2 +-
+ src/compiler/glsl/tests/optimization_test.py |  4 +++-
+ src/compiler/glsl/tests/sexps.py             | 11 +++++++++--
+ 3 files changed, 13 insertions(+), 4 deletions(-)
+
+diff --git a/src/compiler/glsl/tests/lower_jump_cases.py b/src/compiler/glsl/tests/lower_jump_cases.py
+index b50ab73479..1977f3a9b4 100644
+--- a/src/compiler/glsl/tests/lower_jump_cases.py
++++ b/src/compiler/glsl/tests/lower_jump_cases.py
+@@ -54,7 +54,7 @@ def make_test_case(f_name, ret_type, body):
+                     else:
+                         make_declarations(s, already_declared)
+     make_declarations(body)
+-    return declarations.values() + \
++    return list(declarations.values()) + \
+         [['function', f_name, ['signature', ret_type, ['parameters'], body]]]
+ 
+ 
+diff --git a/src/compiler/glsl/tests/optimization_test.py b/src/compiler/glsl/tests/optimization_test.py
+index f8518a168e..15ca3216f4 100644
+--- a/src/compiler/glsl/tests/optimization_test.py
++++ b/src/compiler/glsl/tests/optimization_test.py
+@@ -70,7 +70,9 @@ def main():
+                 stdout=subprocess.PIPE,
+                 stderr=subprocess.PIPE,
+                 stdin=subprocess.PIPE)
+-            out, err = proc.communicate(source)
++            out, err = proc.communicate(source.encode('utf-8'))
++            out = out.decode('utf-8')
++            err = err.decode('utf-8')
+             if err:
+                 print('FAIL')
+                 print('Unexpected output on stderr: {}'.format(err),
+diff --git a/src/compiler/glsl/tests/sexps.py b/src/compiler/glsl/tests/sexps.py
+index a714af8d23..7939b42f9a 100644
+--- a/src/compiler/glsl/tests/sexps.py
++++ b/src/compiler/glsl/tests/sexps.py
+@@ -28,6 +28,11 @@
+ # as ['constant', 'float', ['1.000000']].
+ 
+ import re
++import sys
++if sys.version_info >= (3, 0, 0):
++    STRING_TYPE = str
++else:
++    STRING_TYPE = unicode
+ 
+ def check_sexp(sexp):
+     """Verify that the argument is a proper sexp.
+@@ -39,7 +44,7 @@ def check_sexp(sexp):
+     if isinstance(sexp, list):
+         for s in sexp:
+             check_sexp(s)
+-    elif not isinstance(sexp, basestring):
++    elif not isinstance(sexp, (STRING_TYPE, bytes)):
+         raise Exception('Not a sexp: {0!r}'.format(sexp))
+ 
+ def parse_sexp(sexp):
+@@ -70,8 +75,10 @@ def sexp_to_string(sexp):
+     """Convert a sexp, represented as nested lists containing strings,
+     into a single string of the form parseable by mesa.
+     """
+-    if isinstance(sexp, basestring):
++    if isinstance(sexp, STRING_TYPE):
+         return sexp
++    if isinstance(sexp, bytes):
++        return sexp.encode('utf-8')
+     assert isinstance(sexp, list)
+     result = ''
+     for s in sexp:
+-- 
+2.18.1
+

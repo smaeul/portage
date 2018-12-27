@@ -1,0 +1,105 @@
+diff --git mesa-18.2.1/src/gallium/drivers/radeon/radeon_vce.h.orig mesa-18.2.1/src/gallium/drivers/radeon/radeon_vce.h
+index cf625e6..c95603c 100644
+--- mesa-18.2.1/src/gallium/drivers/radeon/radeon_vce.h.orig
++++ mesa-18.2.1/src/gallium/drivers/radeon/radeon_vce.h
+@@ -438,8 +438,8 @@ void si_vce_50_init(struct rvce_encoder *enc);
+ void si_vce_52_init(struct rvce_encoder *enc);
+ 
+ /* version specific function for getting parameters */
+-void (*si_get_pic_param)(struct rvce_encoder *enc,
+-                      struct pipe_h264_enc_picture_desc *pic);
++extern void (*si_get_pic_param)(struct rvce_encoder *enc,
++                                struct pipe_h264_enc_picture_desc *pic);
+ 
+ /* get parameters for vce 40.2.2 */
+ void si_vce_40_2_2_get_param(struct rvce_encoder *enc,
+diff --git mesa-18.2.1/src/gallium/drivers/radeon/radeon_vce.c.orig mesa-18.2.1/src/gallium/drivers/radeon/radeon_vce.c
+index 8972253..9d866dd 100644
+--- mesa-18.2.1/src/gallium/drivers/radeon/radeon_vce.c.orig
++++ mesa-18.2.1/src/gallium/drivers/radeon/radeon_vce.c
+@@ -48,6 +48,9 @@
+ #define FW_52_8_3 ((52 << 24) | (8 << 16) | (3 << 8))
+ #define FW_53 (53 << 24)
+ 
++void (*si_get_pic_param)(struct rvce_encoder *enc,
++                         struct pipe_h264_enc_picture_desc *pic);
++
+ /**
+  * flush commands to the hardware
+  */
+diff --git mesa-18.2.1/src/gallium/drivers/r600/radeon_vce.c.orig mesa-18.2.1/src/gallium/drivers/r600/radeon_vce.c
+index e49e5aa..6e5e6ef 100644
+--- mesa-18.2.1/src/gallium/drivers/r600/radeon_vce.c.orig
++++ mesa-18.2.1/src/gallium/drivers/r600/radeon_vce.c
+@@ -54,6 +54,9 @@
+ #define FW_52_8_3 ((52 << 24) | (8 << 16) | (3 << 8))
+ #define FW_53 (53 << 24)
+ 
++void (*get_pic_param)(struct rvce_encoder *enc,
++                      struct pipe_h264_enc_picture_desc *pic);
++
+ /**
+  * flush commands to the hardware
+  */
+diff --git mesa-18.2.1/src/gallium/drivers/r600/radeon_vce.h.orig mesa-18.2.1/src/gallium/drivers/r600/radeon_vce.h
+index 71f0287..37d4837 100644
+--- mesa-18.2.1/src/gallium/drivers/r600/radeon_vce.h.orig
++++ mesa-18.2.1/src/gallium/drivers/r600/radeon_vce.h
+@@ -444,8 +444,8 @@ void radeon_vce_50_init(struct rvce_encoder *enc);
+ void radeon_vce_52_init(struct rvce_encoder *enc);
+ 
+ /* version specific function for getting parameters */
+-void (*get_pic_param)(struct rvce_encoder *enc,
+-                      struct pipe_h264_enc_picture_desc *pic);
++extern void (*get_pic_param)(struct rvce_encoder *enc,
++                             struct pipe_h264_enc_picture_desc *pic);
+ 
+ /* get parameters for vce 40.2.2 */
+ void radeon_vce_40_2_2_get_param(struct rvce_encoder *enc,
+diff --git mesa-18.2.1/src/mesa/drivers/dri/r200/radeon_debug.c.orig mesa-18.2.1/src/mesa/drivers/dri/r200/radeon_debug.c
+index 91f86a9..f69aec1 100644
+--- mesa-18.2.1/src/mesa/drivers/dri/r200/radeon_debug.c.orig
++++ mesa-18.2.1/src/mesa/drivers/dri/r200/radeon_debug.c
+@@ -57,13 +57,13 @@ static const struct debug_control debug_control[] = {
+ 	{NULL, 0}
+ };
+ 
+-radeon_debug_type_t radeon_enabled_debug_types;
++radeon_debug_type_t r200_enabled_debug_types;
+ 
+ void radeon_init_debug(void)
+ {
+-	radeon_enabled_debug_types = parse_debug_string(getenv("RADEON_DEBUG"), debug_control);
++	r200_enabled_debug_types = parse_debug_string(getenv("RADEON_DEBUG"), debug_control);
+ 
+-	radeon_enabled_debug_types |= RADEON_GENERAL;
++	r200_enabled_debug_types |= RADEON_GENERAL;
+ }
+ 
+ void _radeon_debug_add_indent(void)
+diff --git mesa-18.2.1/src/mesa/drivers/dri/r200/radeon_debug.h.orig mesa-18.2.1/src/mesa/drivers/dri/r200/radeon_debug.h
+index df2f1ab..e48ca4e 100644
+--- mesa-18.2.1/src/mesa/drivers/dri/r200/radeon_debug.h.orig
++++ mesa-18.2.1/src/mesa/drivers/dri/r200/radeon_debug.h
+@@ -81,18 +81,18 @@ struct radeon_debug {
+        char indent[RADEON_MAX_INDENT];
+ };
+ 
+-extern radeon_debug_type_t radeon_enabled_debug_types;
++extern radeon_debug_type_t r200_enabled_debug_types;
+ 
+ /**
+  * Compabibility layer for old debug code
+  **/
+-#define RADEON_DEBUG radeon_enabled_debug_types
++#define RADEON_DEBUG r200_enabled_debug_types
+ 
+ static inline int radeon_is_debug_enabled(const radeon_debug_type_t type,
+ 	   const radeon_debug_level_t level)
+ {
+        return RADEON_DEBUG_LEVEL >= level
+-		&& (type & radeon_enabled_debug_types);
++		&& (type & r200_enabled_debug_types);
+ }
+ 
+ extern void _radeon_print(const radeon_debug_type_t type,

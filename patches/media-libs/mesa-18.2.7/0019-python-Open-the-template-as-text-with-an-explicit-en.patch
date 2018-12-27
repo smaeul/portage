@@ -1,0 +1,54 @@
+From d2fadce52cfb956f89a5413b33fe98dbd6892f84 Mon Sep 17 00:00:00 2001
+From: Mathieu Bridon <bochecha@daitauha.fr>
+Date: Fri, 17 Aug 2018 09:16:00 -0600
+Subject: [PATCH 19/27] python: Open the template as text, with an explicit
+ encoding
+
+In commit bd27203f4d808763ac24ac94eb677cacf3e7cb99 we changed this to
+open in binary mode, to then explicitly decode the lines with the right
+encoding.
+
+Unfortunately, that broke the build on Windows, where the template file
+can have '\r\n' as line terminators: opening in binary mode would keep
+those terminators and break the regexp.
+
+We need to go back to text mode, where the "universal newlines" mode
+takes care of this.
+
+However, to fix the initial issue, let's specify the encoding explicitly
+when opening the file, and make sure it is open in text mode, so we only
+get unicode strings.
+
+Reviewed-by: Jose Fonseca <jfonseca@vmware>
+---
+ src/util/xmlpool/gen_xmlpool.py | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/src/util/xmlpool/gen_xmlpool.py b/src/util/xmlpool/gen_xmlpool.py
+index 64e631f74c..56a67bcab5 100644
+--- a/src/util/xmlpool/gen_xmlpool.py
++++ b/src/util/xmlpool/gen_xmlpool.py
+@@ -9,6 +9,7 @@
+ 
+ from __future__ import print_function
+ 
++import io
+ import sys
+ import gettext
+ import re
+@@ -187,11 +188,9 @@ print("/***********************************************************************\
+ 
+ # Process the options template and generate options.h with all
+ # translations.
+-template = open (template_header_path, "rb")
++template = io.open (template_header_path, mode="rt", encoding='utf-8')
+ descMatches = []
+ for line in template:
+-    line = line.decode('utf-8')
+-
+     if len(descMatches) > 0:
+         matchENUM     = reENUM    .match (line)
+         matchDESC_END = reDESC_END.match (line)
+-- 
+2.18.1
+

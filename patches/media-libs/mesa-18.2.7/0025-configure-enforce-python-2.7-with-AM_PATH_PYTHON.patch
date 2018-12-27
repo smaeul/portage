@@ -1,0 +1,63 @@
+From d28f4c1fdcba9f258683babe15bfeaab177a8777 Mon Sep 17 00:00:00 2001
+From: Emil Velikov <emil.velikov@collabora.com>
+Date: Thu, 16 Aug 2018 13:40:21 +0100
+Subject: [PATCH 25/27] configure: enforce python 2.7 with AM_PATH_PYTHON
+
+Currently we use AC_CHECK_PROGS looking for python2.7, python2 and
+finally python. That is due to the varying names used across the
+different OS.
+
+Use the handy AM_PATH_PYTHON which finds the correct name and checks for
+the version.
+
+Note: python2.7 has been an unofficial requirement for quite some time.
+Update the docs to reflect that.
+
+Cc: Dylan Baker <dylan@pnwbakers.com>
+Signed-off-by: Emil Velikov <emil.velikov@collabora.com>
+---
+ configure.ac      | 7 +++++--
+ docs/install.html | 2 +-
+ 2 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 864dcae8e3..3a5f146485 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -125,7 +125,10 @@ AC_PROG_GREP
+ AC_PROG_NM
+ AM_PROG_AS
+ AX_CHECK_GNU_MAKE
+-AC_CHECK_PROGS([PYTHON2], [python2.7 python2 python])
++AM_PATH_PYTHON([2.7],, [:])
++PYTHON2=$PYTHON
++AC_SUBST([PYTHON2])
++
+ AC_PROG_SED
+ AC_PROG_MKDIR_P
+ 
+@@ -157,7 +160,7 @@ fi
+ 
+ AX_CHECK_PYTHON_MAKO_MODULE($PYTHON_MAKO_REQUIRED)
+ 
+-if test -z "$PYTHON2"; then
++if test "$PYTHON2" = ":"; then
+     if test ! -f "$srcdir/src/util/format_srgb.c"; then
+         AC_MSG_ERROR([Python not found - unable to generate sources])
+     fi
+diff --git a/docs/install.html b/docs/install.html
+index 5493da054c..d3c53d174a 100644
+--- a/docs/install.html
++++ b/docs/install.html
+@@ -72,7 +72,7 @@ you think you've spotted a bug let developers know by filing a
+ 
+ <ul>
+ <li><a href="https://www.python.org/">Python</a> - Python is required.
+-Version 2.6.4 or later should work.
++Version 2.7 or later should work.
+ </li>
+ <li><a href="http://www.makotemplates.org/">Python Mako module</a> -
+ Python Mako module is required. Version 0.8.0 or later should work.
+-- 
+2.18.1
+

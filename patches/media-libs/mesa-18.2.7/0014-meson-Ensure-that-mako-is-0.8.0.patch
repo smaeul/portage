@@ -1,0 +1,40 @@
+From ec024bea3a8e84e56ec212e8e852a3e26d1bdc9f Mon Sep 17 00:00:00 2001
+From: Dylan Baker <dylan@pnwbakers.com>
+Date: Tue, 14 Aug 2018 09:31:41 -0700
+Subject: [PATCH 14/27] meson: Ensure that mako is >= 0.8.0
+
+It's what autotools has required for a long time.
+
+v3: - Use distutils.version.StrictVersion instead of comparing strings
+
+Reviewed-by: Eric Engestrom <eric.engestrom@intel.com>
+Reviewed-by: Jose Fonseca <jfonseca@vmware.com>
+---
+ meson.build | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 20cdc32bb4..223ff55405 100644
+--- a/meson.build
++++ b/meson.build
+@@ -698,9 +698,15 @@ if with_platform_haiku
+ endif
+ 
+ prog_python = find_program('python3')
+-has_mako = run_command(prog_python, '-c', 'import mako')
++has_mako = run_command(
++  prog_python, '-c',
++  '''
++from distutils.version import StrictVersion
++import mako
++assert StrictVersion(mako.__version__) > StrictVersion("0.8.0")
++  ''')
+ if has_mako.returncode() != 0
+-  error('Python (3.x) mako module required to build mesa.')
++  error('Python (3.x) mako module >= 0.8.0 required to build mesa.')
+ endif
+ 
+ if cc.get_id() == 'gcc' and cc.version().version_compare('< 4.4.6')
+-- 
+2.18.1
+
