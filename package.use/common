@@ -7,50 +7,48 @@ app-text/poppler cxx
 app-text/xmlto text
 # Required by thunderbird
 dev-db/sqlite secure-delete
-# Required by gentoolkit
-dev-lang/python xml
 # Required by ncmpcpp
-dev-libs/boost icu nls
+dev-libs/boost nls
 # Required for static Haskell
 dev-libs/gmp static-libs
 # Required for static Haskell
 dev-libs/libffi static-libs
 # Required by qtcore
 dev-libs/libpcre2 pcre16
-# Required by chromium
-dev-libs/libxml2 icu
+# app-crypt/mhash is broken
+dev-libs/rasqal -crypt
 # Required by libreoffice
 dev-libs/xmlsec nss
 # Required by inkscape[imagemagick]
 media-gfx/imagemagick cxx
 # Required for ffmpeg-4
 media-libs/gegl -ffmpeg
-# Required by thunderbird
-media-libs/harfbuzz icu
 # Required by chromium
 media-libs/libpng apng
 # Required by thunderbird (postproc) and chromium (svc)
 media-libs/libvpx postproc svc
+# Required for USE=test
+media-libs/soxr examples
 # Required by flent
 net-analyzer/netperf demo
+# Required for USE=test
+net-libs/libnftnl json
 # Required by bitcoind
 sys-libs/db cxx
 # Required by chromium
 sys-libs/zlib minizip
-# Required by LEDE/OpenWRT image builder
-sys-libs/zlib static-libs
 # Required by x11-wm/i3
 x11-libs/libxcb xkb
 
-app-arch/libarchive -e2fsprogs
 app-arch/p7zip rar
 app-crypt/gnupg readline
 app-crypt/rhash openssl
 app-editors/vim python
 app-emulation/spice lz4
-app-emulation/qemu -curl -jpeg -ncurses numa -opengl -png -pulseaudio spice usb usbredir -vnc
+app-emulation/qemu -curl -jpeg -ncurses numa -opengl -png -pulseaudio spice usb -vnc
 app-eselect/eselect-php fpm
-app-office/libreoffice java
+app-office/ledger python
+app-office/libreoffice gtk2
 app-shells/bash -net
 dev-db/postgresql readline
 dev-db/sqlite -icu
@@ -58,69 +56,65 @@ dev-haskell/cryptonite support_blake2_sse support_pclmuldq
 dev-lang/ghc ghcbootstrap
 dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
 dev-lang/python berkdb readline
-dev-lang/rust system-llvm
+dev-lang/rust cargo clippy rls rustfmt system-llvm
 dev-libs/capstone python
-dev-libs/leveldb -tcmalloc
 dev-libs/openssl -sslv3
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
 dev-util/cmake system-jsoncpp
 dev-vcs/git -pcre-jit perl
-mail-client/thunderbird -crypt gtk2 -jemalloc system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+mail-client/thunderbird -crypt gtk2 system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/noto cjk
-media-gfx/imagemagick pango webp
+media-gfx/imagemagick pango
 media-libs/imlib2 -mp3
 media-libs/libass -enca
-media-libs/mesa gles2 -llvm
+media-libs/mesa gles2 osmesa xa
 media-libs/openh264 -plugin
 media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
 media-sound/pulseaudio alsa -asyncns
-media-video/ffmpeg libsoxr network ssh openssl
-media-video/mpv cli drm -dvd egl -enca -luajit -uchardet
+media-video/ffmpeg libsoxr network openssl
+media-video/mpv cli drm -dvd egl -enca -uchardet
 net-analyzer/flent -plots
 net-analyzer/nmap ncat nping
-net-dns/bind-tools -idn urandom
+net-dns/bind-tools urandom
 net-dns/dnsmasq tftp
 net-fs/samba -cups
 net-im/bitlbee -gnutls oscar twitter
-net-irc/weechat -charset python
+net-irc/weechat -charset -fset python
 net-libs/gnutls -crywrap -openssl
-net-misc/iputils -idn tracepath
+net-misc/iputils tracepath
 net-misc/s6-networking -ssl
 net-misc/socat readline
-net-vpn/openvpn iproute2 lz4
 net-misc/freerdp -usb
-net-misc/spice-gtk lz4 usbredir
+net-misc/spice-gtk lz4
 net-print/cups -usb
-net-print/cups-filters pdf
+net-print/cups-filters pclm
 net-wireless/wpa_supplicant ap -hs2-0 readline
 sys-apps/busybox savedconfig
 sys-apps/elfix -ptpax
-sys-apps/flashrom -atapromise -atavia -buspirate_spi -drkaiser -ft2232_spi -gfxnvidia -it8212 -ogp_spi -pickit2_spi -pony_spi -satasii tools -usbblaster_spi -wiki
+sys-apps/flashrom -* internal linux_spi tools
 sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
 sys-apps/util-linux -cramfs -ncurses
 sys-devel/binutils cxx
-sys-devel/clang xml
 sys-devel/clang-runtime compiler-rt libcxx -sanitize
 sys-devel/gcc -vtv
 sys-devel/gdb python
 sys-firmware/intel-microcode initramfs
 sys-fs/cryptsetup -gcrypt nettle
 sys-fs/lvm2 -thin
-sys-fs/zfs -rootfs
-sys-kernel/vanilla-sources symlink
+sys-fs/zfs kernel-builtin -rootfs
 sys-kernel/linux-firmware savedconfig
 sys-libs/ldb -ldap
 sys-libs/libcxx libcxxabi -libcxxrt libunwind
 sys-libs/libcxxabi libunwind
 sys-libs/ncurses:5 tinfo
 sys-power/nut -ups_drivers_* ups_drivers_usbhid-ups
-www-client/chromium -atk -gtk3 -hangouts system-ffmpeg -tcmalloc
-www-client/firefox -gmp-autoupdate gtk2 -jemalloc system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
-x11-base/xorg-server glamor
-x11-misc/slock savedconfig
+www-client/chromium -atk -gtk3 -hangouts system-ffmpeg
+www-client/firefox -gmp-autoupdate gtk2 system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+x11-base/xorg-server glamor xvfb
+x11-libs/cairo -glib
 x11-libs/gtk+ -vim-syntax
 x11-terms/rxvt-unicode 256-color alt-font-width iso14755 secondary-wheel unicode3 -vanilla wcwidth

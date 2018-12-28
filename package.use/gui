@@ -5,7 +5,6 @@ dev-lang/ocaml X
 # Required by x11-wm/i3
 x11-libs/cairo xcb
 
-app-office/libreoffice gtk2
 app-text/mupdf X
 dev-java/icedtea gtk
 media-gfx/sane-frontends gtk

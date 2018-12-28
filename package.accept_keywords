@@ -14,10 +14,8 @@ app-eselect/eselect-unison ~amd64
 app-misc/ddcutil ~amd64
 app-mobilephone/heimdall ~amd64
 app-text/libnumbertext ~amd64
-dev-go/go-bindata ~amd64
 dev-java/icedtea ~amd64
 dev-libs/capstone ~amd64
-dev-python/pycryptodome ~amd64
 dev-util/dwarves ~amd64
 dev-util/perf ~amd64
 dev-util/radare2 ~amd64
@@ -28,7 +26,7 @@ net-vpn/wireguard ~amd64
 net-p2p/transmission-remote-cli ~amd64
 sci-misc/boinc ~amd64
 sys-apps/linux-misc-apps ~amd64
-sys-apps/ripgrep ~amd64
+sys-block/sedutil ~amd64
 sys-devel/slibtool ~amd64
 sys-kernel/vanilla-sources ~amd64
 sys-power/brightnessctl ~amd64
@@ -42,15 +40,17 @@ app-office/libreoffice-l10n ~amd64
 dev-lang/go ~amd64
 dev-lang/mono ~amd64
 net-irc/weechat ~amd64
-net-misc/openntpd ~amd64
 net-misc/youtube-dl ~amd64
 net-p2p/syncthing ~amd64
+sys-apps/flashrom ~amd64
+sys-devel/gcc ~amd64
 sys-fs/zfs ~amd64
 sys-fs/zfs-kmod ~amd64
 sys-kernel/spl ~amd64
 
 # llvm and friends
 dev-util/lldb ~amd64
+dev-python/lit ~amd64
 sys-devel/clang ~amd64
 sys-devel/clang-common ~amd64
 sys-devel/clang-runtime ~amd64
@@ -65,8 +65,6 @@ sys-libs/llvm-libunwind ~amd64
 
 # rust and friends
 dev-lang/rust::smaeul ~amd64
-dev-util/cargo::smaeul ~amd64
-dev-util/rustfmt ~amd64
 virtual/rust ~amd64
 
 # s6 and friends
@@ -92,22 +90,32 @@ sys-libs/tevent ~amd64
 =dev-util/uncrustify-9999 **
 =net-misc/freerdp-9999 **
 =sys-kernel/linux-firmware-99999999 **
+=sys-libs/musl-9999 **
 =x11-misc/compton-9999 **
 
 # The following packages have significant features or bugfixes in an unstable
 # version. These entries should be removed once that version is stabilized.
 #
+# Required to build
+~app-arch/sharutils-4.15.2 ~amd64
+# Required for python3
+~app-emulation/qemu-3.1.0 ~amd64
 # Required for newer bcron
 ~dev-libs/bglibs-2.03 ~amd64
-# Required for musl
-~mail-mta/opensmtpd-6.0.2_p1 ~amd64
+# Closest to the fixed version
+~dev-libs/libffi-3.3_rc0 ~amd64
+# Required to pass tests
+~dev-libs/libunistring-0.9.10 ~amd64
+# Required for parallel compilation
+<dev-libs/openssl-1.1.1 ~amd64
+# Required to pass tests
+~dev-util/strace-4.26 ~amd64
 # Required for chromium
-~media-video/ffmpeg-4.0.2 ~amd64
-# Required to fix warnings
-=net-analyzer/netperf-2.7.0-r2 ~amd64
-# Required for musl (res_randomid)
-~net-libs/libasr-1.0.2.201602131606 ~amd64
-# IFD support
-~sys-apps/flashrom-1.0 ~amd64
+~media-video/ffmpeg-4.1 ~amd64
+# Required for OpenSSL 1.1
+~net-misc/openssh-7.9_p1 ~amd64
+# Fixes a bunch of bugs on ppc64
+~sys-devel/binutils-2.31.1 ~amd64
+~sys-libs/binutils-libs-2.31.1 ~amd64
 # This is old anyway
 ~sys-process/bcron-0.11 ~amd64
