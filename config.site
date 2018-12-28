@@ -1,0 +1,3 @@
+# Load the cache, but don't tell configure where it is, to keep configure
+# from overwriting it.
+. "${PORTAGE_CONFIGROOT}/etc/portage/config.cache"
