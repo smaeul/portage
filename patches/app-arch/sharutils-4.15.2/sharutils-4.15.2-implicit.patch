@@ -1,0 +1,52 @@
+--- sharutils-4.15.2/src/shar.c
++++ sharutils-4.15.2/src/shar.c
+@@ -60,6 +60,10 @@ static const char cright_years_z[] =
+ #include "xgetcwd.h"
+ #include "scribble.h"
+ 
++#if HAVE_LIBINTL_H
++#include <libintl.h>
++#endif
++
+ #if HAVE_LOCALE_H
+ #else
+ # define setlocale(Category, Locale)
+--- sharutils-4.15.2/src/unshar.c
++++ sharutils-4.15.2/src/unshar.c
+@@ -45,6 +45,10 @@
+ # define GET_PAGE_SIZE  8192
+ #endif
+ 
++#if HAVE_LIBINTL_H
++#include <libintl.h>
++#endif
++
+ #ifndef HAVE_LOCALE_H
+ # define setlocale(Category, Locale)
+ #endif
+--- sharutils-4.15.2/src/uudecode.c
++++ sharutils-4.15.2/src/uudecode.c
+@@ -56,6 +56,10 @@ static char const cright_years_z[] =
+ #include "uudecode-opts.h"
+ #include "liballoca.h"
+ 
++#if HAVE_LIBINTL_H
++#include <libintl.h>
++#endif
++
+ #if HAVE_LOCALE_H
+ #else
+ # define setlocale(Category, Locale)
+--- sharutils-4.15.2/src/uuencode.c
++++ sharutils-4.15.2/src/uuencode.c
+@@ -64,6 +64,10 @@ static const char cright_years_z[] =
+ #define  UUENCODE_C  1
+ #include "uuencode-opts.h"
+ 
++#if HAVE_LIBINTL_H
++#include <libintl.h>
++#endif
++
+ #if HAVE_LOCALE_H
+ #else
+ # define setlocale(Category, Locale)

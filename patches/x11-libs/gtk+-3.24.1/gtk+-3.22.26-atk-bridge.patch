@@ -1,5 +1,3 @@
-diff --git a/config.h.in b/config.h.in
-index 89a55e7..8858b24 100644
 --- a/config.h.in
 +++ b/config.h.in
 @@ -10,6 +10,9 @@
@@ -12,8 +10,6 @@ index 89a55e7..8858b24 100644
  /* Define to 1 if you have the `bind_textdomain_codeset' function. */
  #undef HAVE_BIND_TEXTDOMAIN_CODESET
 
-diff --git a/configure.ac b/configure.ac
-index d6bd260..5c5cf62 100644
 --- a/configure.ac
 +++ b/configure.ac
 @@ -1393,8 +1393,11 @@ AC_SUBST(GDK_DEP_CFLAGS)
@@ -29,8 +25,6 @@ index d6bd260..5c5cf62 100644
  else
     ATK_PACKAGES="atk"
  fi
-diff --git a/gtk/a11y/gtkaccessibility.c b/gtk/a11y/gtkaccessibility.c
-index 7f0e520..542f36e 100644
 --- a/gtk/a11y/gtkaccessibility.c
 +++ b/gtk/a11y/gtkaccessibility.c
 @@ -38,8 +38,10 @@

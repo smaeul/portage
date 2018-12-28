@@ -1,6 +1,4 @@
-diff --git ddcutil-0.8.4/src/util/edid.h
-index 90f67f9..bebfe5e 100644
---- ddcutil-0.8.4/src/util/edid.h.orig
+--- ddcutil-0.8.4/src/util/edid.h
 +++ ddcutil-0.8.4/src/util/edid.h
 @@ -68,7 +68,7 @@ struct {
     char         marker[4];                                    ///< always "EDID"

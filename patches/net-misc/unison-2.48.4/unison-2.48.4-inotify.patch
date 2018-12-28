@@ -1,5 +1,3 @@
-diff --git src/fsmonitor/linux/inotify_stubs.c src-fixed/fsmonitor/linux/inotify_stubs.c
-index d432cea..f1af028 100644
 --- src/fsmonitor/linux/inotify_stubs.c
 +++ src-fixed/fsmonitor/linux/inotify_stubs.c
 @@ -29,7 +29,7 @@

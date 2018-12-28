@@ -1,4 +1,3 @@
-diff --git sane-frontends-1.0.14/lib/getopt.c sane-frontends-1.0.14/lib/getopt.c
 --- sane-frontends-1.0.14/lib/getopt.c
 +++ sane-frontends-1.0.14/lib/getopt.c
 @@ -67,6 +67,8 @@

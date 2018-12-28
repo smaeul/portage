@@ -1,0 +1,106 @@
+From 6ef3727a86583d1ae60f1b2083c84aa6b2c6c541 Mon Sep 17 00:00:00 2001
+From: Felix Lechner <felix.lechner@lease-up.com>
+Date: Sun, 22 Oct 2017 06:13:23 -0700
+Subject: [PATCH] On architectures where the type (time_t) resolves to (ulong),
+ command line arguments to 'dsn' are not processed correctly. The (void)
+ pointer passed to lib/cli++/main.cc is cast to (unsigned int) instead of
+ (ulong). On 64-bit little endian architectures such as amd64 this is not
+ readily apparent as long as the higher bits were initialized, but it causes
+ grave errors on big-endian architectures such as Debian's powerpc or s390x.
+
+This patch processes the timestamps given on the command line
+correctly.
+---
+ lib/cli++/cli++.h     |  2 +-
+ lib/cli++/main.cc     | 17 ++++++++++-------
+ lib/config_readint.cc |  6 ++++--
+ src/dsn.cc            |  6 +++---
+ 4 files changed, 18 insertions(+), 13 deletions(-)
+
+diff --git a/lib/cli++/cli++.h b/lib/cli++/cli++.h
+index 681ff3d..3dfeb14 100644
+--- a/lib/cli++/cli++.h
++++ b/lib/cli++/cli++.h
+@@ -18,7 +18,7 @@ struct cli_option
+ {
+   char ch;
+   const char* name;
+-  enum { flag, counter, integer, string, stringlist, uinteger } type;
++  enum { flag, counter, integer, string, stringlist, ulong } type;
+   int flag_value;
+   void* dataptr;
+   const char* helpstr;
+diff --git a/lib/cli++/main.cc b/lib/cli++/main.cc
+index 8fd4dba..4b1c462 100644
+--- a/lib/cli++/main.cc
++++ b/lib/cli++/main.cc
+@@ -184,14 +184,17 @@ int cli_option::set(const char* arg)
+     *(int*)dataptr += flag_value;
+     return 0;
+   case integer:
+-    *(int*)dataptr = strtol(arg, &endptr, 10);
+-    if(*endptr) {
+-      ferr << argv0 << ": invalid integer: " << arg << endl;
+-      return -1;
++    {
++      long longresult = strtol(arg, &endptr, 10);
++      if(*endptr || longresult < INT_MIN || longresult > INT_MAX) {
++        ferr << argv0 << ": invalid integer: " << arg << endl;
++        return -1;
++      }
++      *(int*)dataptr = (int) longresult;
++      return 1;
+     }
+-    return 1;
+-  case uinteger:
+-    *(unsigned*)dataptr = strtoul(arg, &endptr, 10);
++  case ulong:
++    *(unsigned long*)dataptr = strtoul(arg, &endptr, 10);
+     if(*endptr) {
+       ferr << argv0 << ": invalid unsigned integer: " << arg << endl;
+       return -1;
+diff --git a/lib/config_readint.cc b/lib/config_readint.cc
+index 603915e..d422073 100644
+--- a/lib/config_readint.cc
++++ b/lib/config_readint.cc
+@@ -21,6 +21,7 @@
+ 
+ #include "config.h"
+ #include <stdlib.h>
++#include <limits.h>
+ #include "defines.h"
+ #include "configio.h"
+ #include "fdbuf/fdbuf.h"
+@@ -31,6 +32,7 @@ bool config_readint(const char* filename, int& result)
+   if(!config_read(filename, tmp))
+     return false;
+   char* endptr;
+-  result = strtol(tmp.c_str(), &endptr, 10);
+-  return endptr > tmp.c_str();
++  long longresult = strtol(tmp.c_str(), &endptr, 10);
++  result = (int) longresult;
++  return endptr > tmp.c_str() && longresult >= INT_MIN && longresult <= INT_MAX;
+ }
+diff --git a/src/dsn.cc b/src/dsn.cc
+index 531567e..c1fc72a 100644
+--- a/src/dsn.cc
++++ b/src/dsn.cc
+@@ -67,15 +67,15 @@ cli_option cli_options[] = {
+     "Diagnostic code message", 0 },
+   { 0, "envelope-id", cli_option::string, 0, &opt_envelope_id,
+     "Original envelope ID", 0 },
+-  { 0, "last-attempt", cli_option::uinteger, 0, &opt_last_attempt,
++  { 0, "last-attempt", cli_option::ulong, 0, &opt_last_attempt,
+     "UNIX timestamp of the last attempt",
+     "access time on the input message" },
+-  { 0, "orig-timestamp", cli_option::uinteger, 0, &opt_timestamp,
++  { 0, "orig-timestamp", cli_option::ulong, 0, &opt_timestamp,
+     "UNIX timestamp on the original message",
+     "ctime on the input message" },
+   { 0, "remote", cli_option::string, 0, &opt_remote,
+     "Name of remote server", 0 },
+-  { 0, "retry-until", cli_option::uinteger, 0, &opt_retry_until,
++  { 0, "retry-until", cli_option::ulong, 0, &opt_retry_until,
+     "UNIX timestamp of the (future) final attempt", 0 },
+   { 0, "max-lines", cli_option::integer, 0, &opt_lines,
+     "Maximum number of lines of the original message to copy", "none" },

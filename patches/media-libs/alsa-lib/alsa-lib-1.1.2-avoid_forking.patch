@@ -1,6 +1,4 @@
-diff --git alsa-lib-1.1.2/src/userfile.c
-index 72779da..3d515ab 100644
---- alsa-lib-1.1.2/src/userfile.c.orig
+--- alsa-lib-1.1.2/src/userfile.c
 +++ alsa-lib-1.1.2/src/userfile.c
 @@ -41,6 +41,10 @@ int snd_user_file(const char *file, char **result)
  	int err;

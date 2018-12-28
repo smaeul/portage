@@ -1,5 +1,3 @@
-diff --git numactl-2.0.11/syscall.c numactl-fixed/syscall.c
-index 4589b85..7d366e8 100644
 --- numactl-2.0.11/syscall.c
 +++ numactl-fixed/syscall.c
 @@ -115,7 +115,8 @@

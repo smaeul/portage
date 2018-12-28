@@ -1,0 +1,11 @@
+--- sandbox-2.13/headers.h
++++ sandbox-2.13/headers.h
+@@ -134,7 +134,7 @@
+ #ifdef HAVE_SYS_TYPES_H
+ # include <sys/types.h>
+ #endif
+-#ifdef HAVE_SYS_USER_H
++#if 0
+ # include <sys/user.h>
+ #endif
+ #ifdef HAVE_SYS_UIO_H

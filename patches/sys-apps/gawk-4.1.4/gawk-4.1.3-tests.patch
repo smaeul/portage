@@ -1,0 +1,12 @@
+- strerror() difference
+--- gawk-4.1.4/test/testext.ok
++++ gawk-4.1.4/test/_testext
+@@ -21,7 +21,7 @@ var_test: sym_update of ARGC failed - correctly
+ var_test: sym_update("testvar") succeeded
+ var_test() returned 1, test_var = 42
+ 
+-test_errno() returned 1, ERRNO = No child processes
++test_errno() returned 1, ERRNO = No child process
+ 
+ length of test_array is 10, should be 10
+ test_array_size: incoming size is 10

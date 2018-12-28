@@ -1,0 +1,11 @@
+--- llvm-7.0.0.src/lib/Support/Triple.cpp
++++ llvm-7.0.0.src/lib/Support/Triple.cpp
+@@ -933,7 +933,7 @@ std::string Triple::normalize(StringRef Str) {
+   // Stick the corrected components back together to form the normalized string.
+   std::string Normalized;
+   for (unsigned i = 0, e = Components.size(); i != e; ++i) {
+-    if (i) Normalized += '-';
++    if (i && !Components[i].empty()) Normalized += '-';
+     Normalized += Components[i];
+   }
+   return Normalized;

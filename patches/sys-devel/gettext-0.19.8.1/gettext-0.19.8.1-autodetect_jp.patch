@@ -1,0 +1,22 @@
+--- gettext-0.19.8.1/gettext-tools/gnulib-lib/striconveha.c
++++ gettext-0.19.8.1/gettext-tools/gnulib-lib/striconveha.c
+@@ -57,7 +57,7 @@ static const char * const autodetect_jp_try[] =
+      come out wrong, and people would condemn EUC-JP and Unix, which
+      would not be good.
+      Finally try SHIFT_JIS.  */
+-  "ISO-2022-JP-2", "EUC-JP", "SHIFT_JIS",
++  "ISO-2022-JP", "EUC-JP", "SHIFT_JIS",
+   NULL
+ };
+ static const char * const autodetect_kr_try[] =
+--- gettext-0.19.8.1/gettext-tools/libgettextpo/striconveha.c
++++ gettext-0.19.8.1/gettext-tools/libgettextpo/striconveha.c
+@@ -57,7 +57,7 @@ static const char * const autodetect_jp_try[] =
+      come out wrong, and people would condemn EUC-JP and Unix, which
+      would not be good.
+      Finally try SHIFT_JIS.  */
+-  "ISO-2022-JP-2", "EUC-JP", "SHIFT_JIS",
++  "ISO-2022-JP", "EUC-JP", "SHIFT_JIS",
+   NULL
+ };
+ static const char * const autodetect_kr_try[] =

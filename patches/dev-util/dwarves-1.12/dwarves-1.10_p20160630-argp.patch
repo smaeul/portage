@@ -1,4 +1,4 @@
---- dwarves-1.10_p20160630/CMakeLists.txt.orig
+--- dwarves-1.10_p20160630/CMakeLists.txt
 +++ dwarves-1.10_p20160630/CMakeLists.txt
 @@ -53,43 +53,43 @@ target_link_libraries(dwarves_reorganize dwarves)
  

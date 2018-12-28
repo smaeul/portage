@@ -1,5 +1,4 @@
-diff --git libtirpc-1.0.1/src/svc_raw.c.orig libtirpc-1.0.1/src/svc_raw.c
---- libtirpc-1.0.1/src/svc_raw.c.orig
+--- libtirpc-1.0.1/src/svc_raw.c
 +++ libtirpc-1.0.1/src/svc_raw.c
 @@ -43,6 +43,7 @@
  #include <sys/types.h>

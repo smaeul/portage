@@ -1,6 +1,4 @@
-diff --git libnsl-1.2.0/src/nisplus/nis_domain_of.c
-index d48bd6b..c297f29 100644
---- libnsl-1.2.0/src/nisplus/nis_domain_of.c.orig
+--- libnsl-1.2.0/src/nisplus/nis_domain_of.c
 +++ libnsl-1.2.0/src/nisplus/nis_domain_of.c
 @@ -22,6 +22,8 @@
  

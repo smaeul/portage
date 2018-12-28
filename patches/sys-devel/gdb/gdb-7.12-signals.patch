@@ -1,5 +1,3 @@
-diff --git gdb-7.12/gdb/common/signals.c gdb-fixed/gdb/common/signals.c
-index f84935d..413ff1d 100644
 --- gdb-7.12/gdb/common/signals.c
 +++ gdb-fixed/gdb/common/signals.c
 @@ -31,6 +31,13 @@ struct gdbarch;

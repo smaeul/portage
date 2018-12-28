@@ -1,5 +1,3 @@
-diff --git netperf-2.7.0/src/nettest_omni.c
-index d4221a8..b7dcf01 100644
 --- netperf-2.7.0/src/nettest_omni.c
 +++ netperf-2.7.0/src/nettest_omni.c
 @@ -456,7 +456,7 @@ static int client_port_max = 65535;

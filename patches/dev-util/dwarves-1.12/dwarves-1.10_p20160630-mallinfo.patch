@@ -1,4 +1,4 @@
---- dwarves-1.10_p20160630/dtagnames.c.orig
+--- dwarves-1.10_p20160630/dtagnames.c
 +++ dwarves-1.10_p20160630/dtagnames.c
 @@ -16,9 +16,11 @@
  

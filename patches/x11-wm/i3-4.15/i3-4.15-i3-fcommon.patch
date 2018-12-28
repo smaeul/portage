@@ -1,0 +1,22 @@
+--- i3-4.15/src/x.c
++++ i3-4.15/src/x.c
+@@ -14,7 +14,7 @@
+ #define MAX(x, y) ((x) > (y) ? (x) : (y))
+ #endif
+ 
+-xcb_window_t ewmh_window;
++extern xcb_window_t ewmh_window;
+ 
+ /* Stores the X11 window ID of the currently focused window */
+ xcb_window_t focused_id = XCB_NONE;
+--- i3-4.15/src/main.c
++++ i3-4.15/src/main.c
+@@ -62,7 +62,7 @@ xcb_window_t root;
+  * pixmaps. Will use 32 bit depth and an appropriate visual, if available,
+  * otherwise the root window’s default (usually 24 bit TrueColor). */
+ uint8_t root_depth;
+-xcb_visualtype_t *visual_type;
++extern xcb_visualtype_t *visual_type;
+ xcb_colormap_t colormap;
+ 
+ struct ev_loop *main_loop;

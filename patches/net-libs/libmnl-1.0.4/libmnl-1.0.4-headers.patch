@@ -1,0 +1,10 @@
+--- libmnl-1.0.4/examples/netfilter/nfct-daemon.c
++++ libmnl-1.0.4/examples/netfilter/nfct-daemon.c
+@@ -13,6 +13,7 @@
+ #include <netinet/in.h>
+ #include <inttypes.h>
+ #include <errno.h>
++#include <sys/select.h>
+ 
+ #include <libmnl/libmnl.h>
+ #include <linux/netlink.h>

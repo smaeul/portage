@@ -1,5 +1,3 @@
-diff --git iperf-3.0.12/src/cjson.h iperf-fixed/src/cjson.h
-index fb8cd3b..69cd272 100644
 --- iperf-3.0.12/src/cjson.h
 +++ iperf-fixed/src/cjson.h
 @@ -23,6 +23,8 @@
@@ -11,8 +9,6 @@ index fb8cd3b..69cd272 100644
  #ifdef __cplusplus
  extern "C"
  {
-diff --git iperf-3.1.3/src/iperf_util.h iperf-fixed/src/iperf_util.h
-index e422a11..2f5f7db 100644
 --- iperf-3.1.3/src/iperf_util.h
 +++ iperf-fixed/src/iperf_util.h
 @@ -28,6 +28,7 @@
@@ -23,8 +19,6 @@ index e422a11..2f5f7db 100644
  #include <sys/select.h>
  
  void make_cookie(char *);
-diff --git iperf-3.0.12/src/timer.h iperf-fixed/src/timer.h
-index 0f9c5eb..9b22b7f 100644
 --- iperf-3.0.12/src/timer.h
 +++ iperf-fixed/src/timer.h
 @@ -30,6 +30,7 @@

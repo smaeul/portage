@@ -1,6 +1,4 @@
-diff --git ddcutil-0.8.6/src/base/core.h
-index 1e96afc..38292ba 100644
---- ddcutil-0.8.6/src/base/core.h.orig
+--- ddcutil-0.8.6/src/base/core.h
 +++ ddcutil-0.8.6/src/base/core.h
 @@ -327,8 +327,8 @@ void program_logic_error(
   *  Reports an error in program logic.

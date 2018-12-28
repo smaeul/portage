@@ -1,0 +1,110 @@
+--- i3-4.13/i3bar/include/common.h
++++ i3-fixed/i3bar/include/common.h
+@@ -17,7 +17,7 @@
+ 
+ typedef struct rect_t rect;
+ 
+-struct ev_loop *main_loop;
++extern struct ev_loop *main_loop;
+ 
+ struct rect_t {
+     int x;
+--- i3-4.13/i3bar/include/configuration.h
++++ i3-fixed/i3bar/include/configuration.h
+@@ -62,7 +62,7 @@ typedef struct config_t {
+            S_SHOW = 1 } hidden_state;
+ } config_t;
+ 
+-config_t config;
++extern config_t config;
+ 
+ /**
+  * Start parsing the received bar configuration JSON string
+--- i3-4.13/i3bar/include/outputs.h
++++ i3-fixed/i3bar/include/outputs.h
+@@ -19,7 +19,7 @@
+ typedef struct i3_output i3_output;
+ 
+ SLIST_HEAD(outputs_head, i3_output);
+-struct outputs_head* outputs;
++extern struct outputs_head* outputs;
+ 
+ /*
+  * Start parsing the received JSON string
+--- i3-4.13/i3bar/include/xcb.h
++++ i3-fixed/i3bar/include/xcb.h
+@@ -53,7 +53,7 @@ struct xcb_color_strings_t {
+ typedef struct xcb_colors_t xcb_colors_t;
+ 
+ /* Cached width of the custom separator if one was set */
+-int separator_symbol_width;
++extern int separator_symbol_width;
+ 
+ /*
+  * Early initialization of the connection to X11: Everything which does not
+--- i3-4.13/i3bar/src/config.c
++++ i3-fixed/i3bar/src/config.c
+@@ -19,6 +19,7 @@
+ 
+ #include <X11/Xlib.h>
+ 
++config_t config;
+ static char *cur_key;
+ static bool parsing_bindings;
+ static bool parsing_tray_outputs;
+--- i3-4.13/i3bar/src/main.c
++++ i3-fixed/i3bar/src/main.c
+@@ -17,6 +17,8 @@
+ #include <getopt.h>
+ #include <glob.h>
+ 
++struct ev_loop *main_loop;
++
+ /*
+  * Having verboselog(), errorlog() and debuglog() is necessary when using libi3.
+  *
+--- i3-4.13/i3bar/src/outputs.c
++++ i3-fixed/i3bar/src/outputs.c
+@@ -17,6 +17,8 @@
+ #include <yajl/yajl_parse.h>
+ #include <yajl/yajl_version.h>
+ 
++struct outputs_head* outputs;
++
+ /* A datatype to pass through the callbacks to save the state */
+ struct outputs_json_params {
+     struct outputs_head *outputs;
+--- i3-4.13/i3bar/src/xcb.c
++++ i3-fixed/i3bar/src/xcb.c
+@@ -77,6 +77,9 @@ xcb_colormap_t colormap;
+ /* Overall height of the bar (based on font size) */
+ int bar_height;
+ 
++/* Cached width of the custom separator if one was set */
++int separator_symbol_width;
++
+ /* These are only relevant for XKB, which we only need for grabbing modifiers */
+ int xkb_base;
+ int mod_pressed = 0;
+--- i3-4.15/i3bar/include/common.h
++++ i3-4.15/i3bar/include/common.h
+@@ -78,7 +78,7 @@ struct status_block {
+     blocks;
+ };
+ 
+-TAILQ_HEAD(statusline_head, status_block)
++extern TAILQ_HEAD(statusline_head, status_block)
+ statusline_head;
+ 
+ #include "child.h"
+--- i3-4.15/i3bar/src/xcb.c
++++ i3-4.15/i3bar/src/xcb.c
+@@ -70,7 +70,7 @@ static i3Font font;
+ /* Icon size (based on font size) */
+ int icon_size;
+ 
+-xcb_visualtype_t *visual_type;
++extern xcb_visualtype_t *visual_type;
+ uint8_t depth;
+ xcb_colormap_t colormap;
+ 

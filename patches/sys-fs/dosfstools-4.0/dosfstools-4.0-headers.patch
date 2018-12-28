@@ -1,5 +1,3 @@
-diff --git dosfstools-4.0/src/device_info.c dosfstools-fixed/src/device_info.c
-index f5d11ac..7a3ef9b 100644
 --- dosfstools-4.0/src/device_info.c
 +++ dosfstools-fixed/src/device_info.c
 @@ -40,6 +40,7 @@

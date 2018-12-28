@@ -1,5 +1,3 @@
-diff --git smartmontools-6.4/smartd.cpp smartmontools-fixed/smartd.cpp
-index 98c8ca4..7b41784 100644
 --- smartmontools-6.4/smartd.cpp
 +++ smartmontools-fixed/smartd.cpp
 @@ -163,9 +162,6 @@ static std::string warning_script;
@@ -161,8 +159,6 @@ index 98c8ca4..7b41784 100644
        break;
      case 'd':
        // enable debug mode
-diff --git smartmontools-6.4/utility.cpp smartmontools-fixed/utility.cpp
-index ee6aadb..a94fe0f 100644
 --- smartmontools-6.4/utility.cpp
 +++ smartmontools-fixed/utility.cpp
 @@ -221,6 +221,13 @@ void FixGlibcTimeZoneBug(){

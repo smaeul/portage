@@ -1,0 +1,31 @@
+--- ocaml-4.04.2/asmcomp/emitaux.ml
++++ ocaml-4.04.2/asmcomp/emitaux.ml
+@@ -205,6 +205,7 @@ let emit_frames a =
+     | None -> a.efa_word 0
+     end
+   in
++  a.efa_align Arch.size_addr;
+   a.efa_word (List.length !frame_descriptors);
+   List.iter emit_frame !frame_descriptors;
+   Label_table.iter emit_debuginfo debuginfos;
+--- ocaml-4.04.2/asmcomp/power/emit.mlp
++++ ocaml-4.04.2/asmcomp/power/emit.mlp
+@@ -1200,7 +1200,7 @@ let end_assembly() =
+   `{emit_symbol lbl_end}:\n`;
+   `	{emit_string datag}	0\n`;
+   (* Emit the frame descriptors *)
+-  emit_string rodata_space;
++  emit_string data_space;
+   let lbl = Compilenv.make_symbol (Some "frametable") in
+   declare_global_data lbl;
+   `{emit_symbol lbl}:\n`;
+--- ocaml-4.04.2/asmrun/power.S
++++ ocaml-4.04.2/asmrun/power.S
+@@ -642,6 +642,7 @@ caml_system__code_end:
+ /* Frame table */
+ 
+         .section ".data"
++        .align  wordalign
+         .globl  caml_system__frametable
+         .type   caml_system__frametable, @object
+ caml_system__frametable:

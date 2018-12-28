@@ -1,6 +1,4 @@
-diff --git src/engine/debugger.c.orig src/engine/debugger.c
-index 802f262..ad09b83 100644
---- src/engine/debugger.c.orig
+--- src/engine/debugger.c
 +++ src/engine/debugger.c
 @@ -12,6 +12,7 @@
  #include "cwd.h"
@@ -18,9 +16,7 @@ index 802f262..ad09b83 100644
  #endif
  
  #undef debug_on_enter_function
-diff --git src/engine/jam.c.orig src/engine/jam.c
-index cfe701e..8488026 100644
---- src/engine/jam.c.orig
+--- src/engine/jam.c
 +++ src/engine/jam.c
 @@ -105,6 +105,7 @@
  #include "compile.h"
@@ -30,9 +26,7 @@ index cfe701e..8488026 100644
  #include "filesys.h"
  #include "function.h"
  #include "hcache.h"
-diff --git src/engine/make.c.orig src/engine/make.c
-index 638c8b7..22f88fc 100644
---- src/engine/make.c.orig
+--- src/engine/make.c
 +++ src/engine/make.c
 @@ -33,6 +33,7 @@
  #include "make.h"

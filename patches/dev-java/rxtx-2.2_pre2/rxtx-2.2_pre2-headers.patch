@@ -1,6 +1,4 @@
-diff --git rxtx-2.2pre2/./src/fuserImp.c
-index 7ccdd00..aac5803 100644
---- rxtx-2.2pre2/./src/fuserImp.c.orig
+--- rxtx-2.2pre2/./src/fuserImp.c
 +++ rxtx-2.2pre2/./src/fuserImp.c
 @@ -28,6 +28,7 @@ is provided "as is" and without any express or implied warranties.
  #include <stdio.h>

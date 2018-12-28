@@ -1,0 +1,12 @@
+- this doesn't actually fix the UB, but it silences the warning
+--- tcl8.6.8/generic/tclExecute.c
++++ tcl8.6.8/generic/tclExecute.c
+@@ -2014,7 +2014,7 @@ ArgumentBCEnter(
+  *----------------------------------------------------------------------
+  */
+ #define	bcFramePtr	(&TD->cmdFrame)
+-#define	initCatchTop	((ptrdiff_t *) (&TD->stack[-1]))
++#define	initCatchTop	((ptrdiff_t *) (TD->stack - 1))
+ #define	initTosPtr	((Tcl_Obj **) (initCatchTop+codePtr->maxExceptDepth))
+ #define esPtr		(iPtr->execEnvPtr->execStackPtr)
+ 

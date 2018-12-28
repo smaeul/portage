@@ -1,6 +1,4 @@
-diff --git samba-4.5.3/nsswitch/wins.c
-index 19d3c5b..81229ea 100644
---- samba-4.5.3/nsswitch/wins.c.orig
+--- samba-4.5.3/nsswitch/wins.c
 +++ samba-4.5.3/nsswitch/wins.c
 @@ -39,6 +39,14 @@ static pthread_mutex_t wins_nss_mutex = PTHREAD_MUTEX_INITIALIZER;
  #define INADDRSZ 4

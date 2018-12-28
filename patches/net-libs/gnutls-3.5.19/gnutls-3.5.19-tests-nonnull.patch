@@ -1,0 +1,38 @@
+--- gnutls-3.5.19/tests/str-unicode.c
++++ gnutls-3.5.19/tests/str-unicode.c
+@@ -35,14 +35,15 @@
+ static void fname(void **glob_state) \
+ { \
+ 	gnutls_datum_t out; \
++	char *expected = normalized; \
+ 	int ret = gnutls_utf8_password_normalize((uint8_t*)password, strlen(password), &out, 0); \
+-	if (normalized == NULL) { /* expect failure */ \
++	if (expected == NULL) { /* expect failure */ \
+ 		assert_int_not_equal(ret, 0); \
+ 		return; \
+ 	} else { \
+ 		assert_int_equal(ret, 0); \
+ 	} \
+-	assert_int_equal(strcmp((char*)out.data, (char*)normalized), 0); \
++	assert_int_equal(strcmp((char*)out.data, expected), 0); \
+ 	gnutls_free(out.data); \
+ }
+ 
+@@ -50,14 +51,15 @@ static void fname(void **glob_state) \
+ static void inv_##fname(void **glob_state) \
+ { \
+ 	gnutls_datum_t out; \
++	char *expected = normalized; \
+ 	int ret = gnutls_utf8_password_normalize((uint8_t*)password, strlen(password), &out, GNUTLS_UTF8_IGNORE_ERRS); \
+-	if (normalized == NULL) { \
++	if (expected == NULL) { \
+ 		assert_int_not_equal(ret, 0); \
+ 		return; \
+ 	} else { \
+ 		assert_int_equal(ret, 0); \
+ 	} \
+-	assert_int_equal(strcmp((char*)out.data, (char*)normalized), 0); \
++	assert_int_equal(strcmp((char*)out.data, expected), 0); \
+ 	gnutls_free(out.data); \
+ }
+ 

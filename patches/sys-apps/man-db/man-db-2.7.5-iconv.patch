@@ -1,5 +1,3 @@
-diff --git man-db-2.7.5/src/man.c man-db-fixed/src/man.c
-index bea684f..df5f5cb 100644
 --- man-db-2.7.5/src/man.c
 +++ man-db-fixed/src/man.c
 @@ -1503,11 +1503,9 @@ static void add_output_iconv (pipeline *p,
@@ -15,8 +13,6 @@ index bea684f..df5f5cb 100644
  	}
  }
  
-diff --git man-db-2.7.5/src/manconv.c man-db-fixed/src/manconv.c
-index cae9b67..48b7a81 100644
 --- man-db-2.7.5/src/manconv.c
 +++ man-db-fixed/src/manconv.c
 @@ -106,10 +106,9 @@ static int try_iconv (pipeline *p, const char *try_from_code, const char *to,
@@ -33,8 +29,6 @@ index cae9b67..48b7a81 100644
  	int ret = 0;
  
  	debug ("trying encoding %s -> %s\n", try_from_code, try_to_code);
-diff --git man-db-2.7.5/src/manconv_client.c man-db-fixed/src/manconv_client.c
-index 2949c75..7805f90 100644
 --- man-db-2.7.5/src/manconv_client.c
 +++ man-db-fixed/src/manconv_client.c
 @@ -131,7 +131,7 @@ void add_manconv (pipeline *p, const char *source, const char *target)
@@ -46,8 +40,6 @@ index 2949c75..7805f90 100644
  	/* informational only; no shell quoting concerns */
  	name = appendstr (name, " -t ", codes->to, NULL);
  	if (quiet >= 2)
-diff --git man-db-2.7.5/src/manconv_main.c man-db-fixed/src/manconv_main.c
-index 166a2b8..4e700e9 100644
 --- man-db-2.7.5/src/manconv_main.c
 +++ man-db-fixed/src/manconv_main.c
 @@ -105,9 +105,6 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
@@ -60,8 +52,6 @@ index 166a2b8..4e700e9 100644
  			return 0;
  		case 'd':
  			debug_level = 1;
-diff --git man-db-2.7.5/src/whatis.c man-db-fixed/src/whatis.c
-index 39aa093..0a25c92 100644
 --- man-db-2.7.5/src/whatis.c
 +++ man-db-fixed/src/whatis.c
 @@ -948,7 +948,7 @@ int main (int argc, char *argv[])

@@ -1,0 +1,11 @@
+--- camlp4-4.04-1/Makefile
++++ camlp4-4.04-1/Makefile
+@@ -21,7 +21,7 @@ all: byte native
+ 
+ .PHONY: install
+ install:
+-	env DESTDIR=$(DESTDIR) ./build/install.sh
++	env DESTDIR=$(DESTDIR) BINDIR=$(BINDIR) LIBDIR=$(LIBDIR) ./build/install.sh
+ 
+ .PHONY: install-META
+ install-META: camlp4/META

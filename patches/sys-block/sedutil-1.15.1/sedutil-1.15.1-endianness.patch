@@ -1,0 +1,35 @@
+--- sedutil-1.15.1/Common/DtaEndianFixup.h
++++ sedutil-1.15.1/Common/DtaEndianFixup.h
+@@ -28,22 +28,28 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
+  * I've never had much luck when the winsock headers get in the mix
+  */
+ //
+-//TODO: add a test on the endianess of the system and define
+-//  empty macros if the system is big endian
+ #pragma once
+-#ifdef __gnu_linux__
++#ifdef __linux__
+ #include <endian.h>
+ #if __BYTE_ORDER != __LITTLE_ENDIAN
+-#error This code does not support big endian architectures
++#define SWAP16(x) (x)
++#define SWAP32(x) (x)
++#define SWAP64(x) (x)
+ #endif
+ #endif
+ /** change the "endianess" of a 16bit field */
++#ifndef SWAP16
+ #define SWAP16(x) ((uint16_t) ((x & 0x00ff) << 8) | ((x & 0xff00) >> 8))
++#endif
+ /** change the "endianess" of a 32bit field */
++#ifndef SWAP32
+ #define SWAP32(x) ((uint32_t) (((x) & 0x000000ff) << 24) | (((x) & 0x0000ff00) << 8) \
+ 	                        | (((x) & 0x00ff0000) >> 8) | (((x) & 0xff000000) >> 24))
++#endif
+ /** change the "endianess" of a 64bit field */
++#ifndef SWAP64
+ #define SWAP64(x) (uint64_t) \
+ 	((uint64_t) (SWAP32((x & 0x00000000ffffffff)) << 32) | \
+ 	((uint64_t) (SWAP32((x >> 32))) )    \
+ 	)
++#endif

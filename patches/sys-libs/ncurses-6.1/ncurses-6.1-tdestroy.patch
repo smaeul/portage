@@ -1,0 +1,10 @@
+--- ncurses-6.1/test/picsmap.c
++++ ncurses-6.1/test/picsmap.c
+@@ -60,6 +60,7 @@
+ #endif
+ 
+ #if HAVE_TSEARCH
++#define _GNU_SOURCE
+ #include <search.h>
+ #endif
+ 

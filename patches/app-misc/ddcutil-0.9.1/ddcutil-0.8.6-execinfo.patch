@@ -1,5 +1,4 @@
-diff --git ddcutil-0.8.6/src/util/debug_util.c
---- ddcutil-0.8.6/src/util/debug_util.c.orig
+--- ddcutil-0.8.6/src/util/debug_util.c
 +++ ddcutil-0.8.6/src/util/debug_util.c
 @@ -26,6 +26,7 @@
   */

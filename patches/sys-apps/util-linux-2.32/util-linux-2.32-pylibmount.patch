@@ -1,0 +1,112 @@
+From 7f3ddbaadbad86fdb5f453e3dc414a7a5fbb259b Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sat, 5 May 2018 04:17:34 +0000
+Subject: [PATCH 2/2] pylibmount: Fix compatibility with Python 3.2+
+
+As of Python 3, PySys_WriteStdout truncates output at 1000 characters.
+This causes the parse-mtab test to fail. PySys_FormatStdout, introduced
+in Python 3.2, is suggested as a replacement that does not truncate its
+output. Use it when available, and only use conversion specifiers
+common between the two functions.
+
+Addresses: https://github.com/karelzak/util-linux/issues/489
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ libmount/python/fs.c | 50 ++++++++++++++++++++++++--------------------
+ 1 file changed, 27 insertions(+), 23 deletions(-)
+
+diff --git a/libmount/python/fs.c b/libmount/python/fs.c
+index d6490d248..f351094eb 100644
+--- a/libmount/python/fs.c
++++ b/libmount/python/fs.c
+@@ -30,6 +30,10 @@
+ 
+ #define Fs_HELP "Fs(source=None, root=None, target=None, fstype=None, options=None, attributes=None, freq=0, passno=0)"
+ 
++#if PY_VERSION_HEX < 0x030200F0
++#define PySys_FormatStdout PySys_WriteStdout
++#endif
++
+ static PyMemberDef Fs_members[] = {
+ 	{NULL}
+ };
+@@ -66,53 +70,53 @@ static PyObject *Fs_get_devno(FsObject *self)
+ #define Fs_print_debug_HELP "print_debug()\n\n"
+ static PyObject *Fs_print_debug(FsObject *self)
+ {
+-	PySys_WriteStdout("------ fs: %p\n", self->fs);
+-	PySys_WriteStdout("source: %s\n", mnt_fs_get_source(self->fs));
+-	PySys_WriteStdout("target: %s\n", mnt_fs_get_target(self->fs));
+-	PySys_WriteStdout("fstype: %s\n", mnt_fs_get_fstype(self->fs));
++	PySys_FormatStdout("------ fs: %p\n", self->fs);
++	PySys_FormatStdout("source: %s\n", mnt_fs_get_source(self->fs));
++	PySys_FormatStdout("target: %s\n", mnt_fs_get_target(self->fs));
++	PySys_FormatStdout("fstype: %s\n", mnt_fs_get_fstype(self->fs));
+ 
+ 	if (mnt_fs_get_options(self->fs))
+-		PySys_WriteStdout("optstr: %s\n", mnt_fs_get_options(self->fs));
++		PySys_FormatStdout("optstr: %s\n", mnt_fs_get_options(self->fs));
+ 	if (mnt_fs_get_vfs_options(self->fs))
+-		PySys_WriteStdout("VFS-optstr: %s\n", mnt_fs_get_vfs_options(self->fs));
++		PySys_FormatStdout("VFS-optstr: %s\n", mnt_fs_get_vfs_options(self->fs));
+ 	if (mnt_fs_get_fs_options(self->fs))
+-		PySys_WriteStdout("FS-opstr: %s\n", mnt_fs_get_fs_options(self->fs));
++		PySys_FormatStdout("FS-opstr: %s\n", mnt_fs_get_fs_options(self->fs));
+ 	if (mnt_fs_get_user_options(self->fs))
+-		PySys_WriteStdout("user-optstr: %s\n", mnt_fs_get_user_options(self->fs));
++		PySys_FormatStdout("user-optstr: %s\n", mnt_fs_get_user_options(self->fs));
+ 	if (mnt_fs_get_optional_fields(self->fs))
+-		PySys_WriteStdout("optional-fields: '%s'\n", mnt_fs_get_optional_fields(self->fs));
++		PySys_FormatStdout("optional-fields: '%s'\n", mnt_fs_get_optional_fields(self->fs));
+ 	if (mnt_fs_get_attributes(self->fs))
+-		PySys_WriteStdout("attributes: %s\n", mnt_fs_get_attributes(self->fs));
++		PySys_FormatStdout("attributes: %s\n", mnt_fs_get_attributes(self->fs));
+ 
+ 	if (mnt_fs_get_root(self->fs))
+-		PySys_WriteStdout("root:   %s\n", mnt_fs_get_root(self->fs));
++		PySys_FormatStdout("root:   %s\n", mnt_fs_get_root(self->fs));
+ 
+ 	if (mnt_fs_get_swaptype(self->fs))
+-		PySys_WriteStdout("swaptype: %s\n", mnt_fs_get_swaptype(self->fs));
++		PySys_FormatStdout("swaptype: %s\n", mnt_fs_get_swaptype(self->fs));
+ 	if (mnt_fs_get_size(self->fs))
+-		PySys_WriteStdout("size: %jd\n", mnt_fs_get_size(self->fs));
++		PySys_FormatStdout("size: %lld\n", (long long) mnt_fs_get_size(self->fs));
+ 	if (mnt_fs_get_usedsize(self->fs))
+-		PySys_WriteStdout("usedsize: %jd\n", mnt_fs_get_usedsize(self->fs));
++		PySys_FormatStdout("usedsize: %lld\n", (long long) mnt_fs_get_usedsize(self->fs));
+ 	if (mnt_fs_get_priority(self->fs))
+-		PySys_WriteStdout("priority: %d\n", mnt_fs_get_priority(self->fs));
++		PySys_FormatStdout("priority: %d\n", mnt_fs_get_priority(self->fs));
+ 
+ 	if (mnt_fs_get_bindsrc(self->fs))
+-		PySys_WriteStdout("bindsrc: %s\n", mnt_fs_get_bindsrc(self->fs));
++		PySys_FormatStdout("bindsrc: %s\n", mnt_fs_get_bindsrc(self->fs));
+ 	if (mnt_fs_get_freq(self->fs))
+-		PySys_WriteStdout("freq:   %d\n", mnt_fs_get_freq(self->fs));
++		PySys_FormatStdout("freq:   %d\n", mnt_fs_get_freq(self->fs));
+ 	if (mnt_fs_get_passno(self->fs))
+-		PySys_WriteStdout("pass:   %d\n", mnt_fs_get_passno(self->fs));
++		PySys_FormatStdout("pass:   %d\n", mnt_fs_get_passno(self->fs));
+ 	if (mnt_fs_get_id(self->fs))
+-		PySys_WriteStdout("id:     %d\n", mnt_fs_get_id(self->fs));
++		PySys_FormatStdout("id:     %d\n", mnt_fs_get_id(self->fs));
+ 	if (mnt_fs_get_parent_id(self->fs))
+-		PySys_WriteStdout("parent: %d\n", mnt_fs_get_parent_id(self->fs));
++		PySys_FormatStdout("parent: %d\n", mnt_fs_get_parent_id(self->fs));
+ 	if (mnt_fs_get_devno(self->fs))
+-		PySys_WriteStdout("devno:  %d:%d\n", major(mnt_fs_get_devno(self->fs)),
++		PySys_FormatStdout("devno:  %d:%d\n", major(mnt_fs_get_devno(self->fs)),
+ 						minor(mnt_fs_get_devno(self->fs)));
+ 	if (mnt_fs_get_tid(self->fs))
+-		PySys_WriteStdout("tid:    %d\n", mnt_fs_get_tid(self->fs));
++		PySys_FormatStdout("tid:    %d\n", mnt_fs_get_tid(self->fs));
+ 	if (mnt_fs_get_comment(self->fs))
+-		PySys_WriteStdout("comment: '%s'\n", mnt_fs_get_comment(self->fs));
++		PySys_FormatStdout("comment: '%s'\n", mnt_fs_get_comment(self->fs));
+ 	return UL_IncRef(self);
+ }
+ /*
+-- 
+2.17.0
+

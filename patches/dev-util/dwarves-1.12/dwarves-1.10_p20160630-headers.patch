@@ -1,4 +1,4 @@
---- dwarves-1.10_p20160630/dwarves.c.orig
+--- dwarves-1.10_p20160630/dwarves.c
 +++ dwarves-1.10_p20160630/dwarves.c
 @@ -16,6 +16,7 @@
  #include <fcntl.h>
@@ -8,9 +8,7 @@
  #include <search.h>
  #include <stdio.h>
  #include <stdlib.h>
-diff --git dwarves-1.10_p20160630/hash.h
-index d3aa416..a984a67 100644
---- dwarves-1.10_p20160630/hash.h.orig
+--- dwarves-1.10_p20160630/hash.h
 +++ dwarves-1.10_p20160630/hash.h
 @@ -15,6 +15,7 @@
   */

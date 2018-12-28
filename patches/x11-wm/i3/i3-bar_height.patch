@@ -1,6 +1,4 @@
-diff --git i3-4.13/i3bar/src/xcb.c
-index 2e4e5ee..8e608a9 100644
---- i3-4.13/i3bar/src/xcb.c.orig
+--- i3-4.13/i3bar/src/xcb.c
 +++ i3-4.13/i3bar/src/xcb.c
 @@ -126,7 +126,7 @@ struct xcb_colors_t colors;
  static const int ws_hoff_px = 4;

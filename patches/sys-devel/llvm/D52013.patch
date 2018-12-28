@@ -1,0 +1,23 @@
+--- llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
++++ llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
+@@ -199,6 +199,10 @@
+   case Triple::ppc64le:
+     return PPCTargetMachine::PPC_ABI_ELFv2;
+   case Triple::ppc64:
++    // musl uses ELFv2 ABI on both endians.
++    if (TT.getEnvironment() == Triple::Musl)
++      return PPCTargetMachine::PPC_ABI_ELFv2;
++
+     return PPCTargetMachine::PPC_ABI_ELFv1;
+   default:
+     return PPCTargetMachine::PPC_ABI_UNKNOWN;
+--- llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
++++ llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
+@@ -1,6 +1,7 @@
+ ; RUN: llc -verify-machineinstrs -mtriple=powerpc64-unknown-linux-gnu < %s | FileCheck %s -check-prefix=CHECK-ELFv1
+ ; RUN: llc -verify-machineinstrs -mtriple=powerpc64-unknown-linux-gnu -target-abi elfv1 < %s | FileCheck %s -check-prefix=CHECK-ELFv1
+ ; RUN: llc -verify-machineinstrs -mtriple=powerpc64-unknown-linux-gnu -target-abi elfv2 < %s | FileCheck %s -check-prefix=CHECK-ELFv2
++; RUN: llc -verify-machineinstrs -mtriple=powerpc64-unknown-linux-musl < %s | FileCheck %s -check-prefix=CHECK-ELFv2
+ ; RUN: llc -verify-machineinstrs -mtriple=powerpc64le-unknown-linux-gnu < %s | FileCheck %s -check-prefix=CHECK-ELFv2
+ ; RUN: llc -verify-machineinstrs -mtriple=powerpc64le-unknown-linux-gnu -target-abi elfv1 < %s | FileCheck %s -check-prefix=CHECK-ELFv1
+ ; RUN: llc -verify-machineinstrs -mtriple=powerpc64le-unknown-linux-gnu -target-abi elfv2 < %s | FileCheck %s -check-prefix=CHECK-ELFv2

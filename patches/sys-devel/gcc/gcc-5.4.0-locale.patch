@@ -1,5 +1,4 @@
-diff --git gcc-5.4.0/libstdc++-v3/config/locale/generic/c_locale.cc.orig gcc-5.4.0/libstdc++-v3/config/locale/generic/c_locale.cc
---- gcc-5.4.0/libstdc++-v3/config/locale/generic/c_locale.cc.orig
+--- gcc-5.4.0/libstdc++-v3/config/locale/generic/c_locale.cc
 +++ gcc-5.4.0/libstdc++-v3/config/locale/generic/c_locale.cc
 @@ -213,9 +213,6 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
      // Currently, the generic model only supports the "C" locale.

@@ -1,4 +1,4 @@
---- dwarves-1.10_p20160630/dwarves_fprintf.c.orig
+--- dwarves-1.10_p20160630/dwarves_fprintf.c
 +++ dwarves-1.10_p20160630/dwarves_fprintf.c
 @@ -1699,12 +1699,7 @@ void cus__print_error_msg(const char *progname, const struct cus *cus,
  void dwarves__fprintf_init(uint16_t user_cacheline_size)

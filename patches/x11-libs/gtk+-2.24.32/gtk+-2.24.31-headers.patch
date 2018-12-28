@@ -1,5 +1,3 @@
-diff --git gtk+-2.24.31/modules/other/gail/tests/ferret.c gtk+-fixed/modules/other/gail/tests/ferret.c
-index fb66199..d8fb598 100644
 --- gtk+-2.24.31/modules/other/gail/tests/ferret.c
 +++ gtk+-fixed/modules/other/gail/tests/ferret.c
 @@ -13,6 +13,7 @@

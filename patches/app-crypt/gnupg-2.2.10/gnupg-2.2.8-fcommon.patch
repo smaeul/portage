@@ -1,6 +1,4 @@
-diff --git gnupg-2.2.8/common/iobuf.h.orig gnupg-2.2.8/common/iobuf.h
-index 22e02da..07c968d 100644
---- gnupg-2.2.8/common/iobuf.h.orig
+--- gnupg-2.2.8/common/iobuf.h
 +++ gnupg-2.2.8/common/iobuf.h
 @@ -250,7 +250,7 @@ struct iobuf_struct
  };
@@ -11,9 +9,7 @@ index 22e02da..07c968d 100644
  #define EXTERN_UNLESS_MAIN_MODULE extern
  #else
  #define EXTERN_UNLESS_MAIN_MODULE
-diff --git gnupg-2.2.8/common/t-iobuf.c.orig gnupg-2.2.8/common/t-iobuf.c
-index bdeab99..2d07a29 100644
---- gnupg-2.2.8/common/t-iobuf.c.orig
+--- gnupg-2.2.8/common/t-iobuf.c
 +++ gnupg-2.2.8/common/t-iobuf.c
 @@ -4,6 +4,7 @@
  #include <assert.h>
@@ -23,9 +19,7 @@ index bdeab99..2d07a29 100644
  #include "iobuf.h"
  #include "stringhelp.h"
  
-diff --git gnupg-2.2.8/g10/options.h.orig gnupg-2.2.8/g10/options.h
-index 6c67265..928f3b6 100644
---- gnupg-2.2.8/g10/options.h.orig
+--- gnupg-2.2.8/g10/options.h
 +++ gnupg-2.2.8/g10/options.h
 @@ -31,8 +31,7 @@
  #include "../common/compliance.h"
@@ -37,9 +31,7 @@ index 6c67265..928f3b6 100644
  #define EXTERN_UNLESS_MAIN_MODULE extern
  #else
  #define EXTERN_UNLESS_MAIN_MODULE
-diff --git gnupg-2.2.8/sm/gpgsm.c.orig gnupg-2.2.8/sm/gpgsm.c
-index da1783d..61e5a6b 100644
---- gnupg-2.2.8/sm/gpgsm.c.orig
+--- gnupg-2.2.8/sm/gpgsm.c
 +++ gnupg-2.2.8/sm/gpgsm.c
 @@ -28,6 +28,7 @@
  #include <fcntl.h>
@@ -49,9 +41,7 @@ index da1783d..61e5a6b 100644
  #include "gpgsm.h"
  #include <gcrypt.h>
  #include <assuan.h> /* malloc hooks */
-diff --git gnupg-2.2.8/sm/gpgsm.h.orig gnupg-2.2.8/sm/gpgsm.h
-index 325948a..f55b55c 100644
---- gnupg-2.2.8/sm/gpgsm.h.orig
+--- gnupg-2.2.8/sm/gpgsm.h
 +++ gnupg-2.2.8/sm/gpgsm.h
 @@ -51,7 +51,16 @@ struct keyserver_spec
  };
@@ -70,9 +60,7 @@ index 325948a..f55b55c 100644
  struct
  {
    unsigned int debug; /* debug flags (DBG_foo_VALUE) */
-diff --git gnupg-2.2.8/agent/agent.h.orig gnupg-2.2.8/agent/agent.h
-index cf50d92..1ed912b 100644
---- gnupg-2.2.8/agent/agent.h.orig
+--- gnupg-2.2.8/agent/agent.h
 +++ gnupg-2.2.8/agent/agent.h
 @@ -54,7 +54,16 @@
  #define MAX_PASSPHRASE_LEN 255
@@ -92,9 +80,7 @@ index cf50d92..1ed912b 100644
  struct
  {
    unsigned int debug;  /* Debug flags (DBG_foo_VALUE) */
-diff --git gnupg-2.2.8/agent/gpg-agent.c.orig gnupg-2.2.8/agent/gpg-agent.c
-index 1fdc94d..4ee8d9e 100644
---- gnupg-2.2.8/agent/gpg-agent.c.orig
+--- gnupg-2.2.8/agent/gpg-agent.c
 +++ gnupg-2.2.8/agent/gpg-agent.c
 @@ -50,6 +50,7 @@
  #include <npth.h>
@@ -104,9 +90,7 @@ index 1fdc94d..4ee8d9e 100644
  #include "agent.h"
  #include <assuan.h> /* Malloc hooks  and socket wrappers. */
  
-diff --git gnupg-2.2.8/agent/protect-tool.c.orig gnupg-2.2.8/agent/protect-tool.c
-index ec7b476..3bba5c6 100644
---- gnupg-2.2.8/agent/protect-tool.c.orig
+--- gnupg-2.2.8/agent/protect-tool.c
 +++ gnupg-2.2.8/agent/protect-tool.c
 @@ -38,6 +38,7 @@
  #include <fcntl.h> /* for setmode() */
@@ -116,9 +100,7 @@ index ec7b476..3bba5c6 100644
  #include "agent.h"
  #include "../common/i18n.h"
  #include "../common/get-passphrase.h"
-diff --git gnupg-2.2.8/agent/preset-passphrase.c.orig gnupg-2.2.8/agent/preset-passphrase.c
-index 7a9ea1b..3b40259 100644
---- gnupg-2.2.8/agent/preset-passphrase.c.orig
+--- gnupg-2.2.8/agent/preset-passphrase.c
 +++ gnupg-2.2.8/agent/preset-passphrase.c
 @@ -44,6 +44,7 @@
  # include <windows.h>  /* To initialize the sockets.  fixme */
@@ -128,9 +110,7 @@ index 7a9ea1b..3b40259 100644
  #include "agent.h"
  #include "../common/simple-pwquery.h"
  #include "../common/i18n.h"
-diff --git gnupg-2.2.8/agent/t-protect.c.orig gnupg-2.2.8/agent/t-protect.c
-index d17c193..88b5525 100644
---- gnupg-2.2.8/agent/t-protect.c.orig
+--- gnupg-2.2.8/agent/t-protect.c
 +++ gnupg-2.2.8/agent/t-protect.c
 @@ -23,6 +23,7 @@
  #include <stdlib.h>
@@ -140,9 +120,7 @@ index d17c193..88b5525 100644
  #include "agent.h"
  
  
-diff --git gnupg-2.2.8/scd/scdaemon.h.orig gnupg-2.2.8/scd/scdaemon.h
-index 4797f3d..f34d6c0 100644
---- gnupg-2.2.8/scd/scdaemon.h.orig
+--- gnupg-2.2.8/scd/scdaemon.h
 +++ gnupg-2.2.8/scd/scdaemon.h
 @@ -43,7 +43,16 @@
  
@@ -162,9 +140,7 @@ index 4797f3d..f34d6c0 100644
  struct
  {
    unsigned int debug; /* Debug flags (DBG_foo_VALUE). */
-diff --git gnupg-2.2.8/scd/scdaemon.c.orig gnupg-2.2.8/scd/scdaemon.c
-index 8f8a026..59a3dd9 100644
---- gnupg-2.2.8/scd/scdaemon.c.orig
+--- gnupg-2.2.8/scd/scdaemon.c
 +++ gnupg-2.2.8/scd/scdaemon.c
 @@ -38,6 +38,7 @@
  #include <npth.h>
@@ -174,9 +150,7 @@ index 8f8a026..59a3dd9 100644
  #include "scdaemon.h"
  #include <ksba.h>
  #include <gcrypt.h>
-diff --git gnupg-2.2.8/dirmngr/dirmngr.h.orig gnupg-2.2.8/dirmngr/dirmngr.h
-index 5189f93..e201734 100644
---- gnupg-2.2.8/dirmngr/dirmngr.h.orig
+--- gnupg-2.2.8/dirmngr/dirmngr.h
 +++ gnupg-2.2.8/dirmngr/dirmngr.h
 @@ -74,7 +74,16 @@ struct fingerprint_list_s
  };
@@ -196,9 +170,7 @@ index 5189f93..e201734 100644
  struct
  {
    unsigned int debug; /* debug flags (DBG_foo_VALUE) */
-diff --git gnupg-2.2.8/dirmngr/dirmngr.c.orig gnupg-2.2.8/dirmngr/dirmngr.c
-index 31f8e0f..70880dc 100644
---- gnupg-2.2.8/dirmngr/dirmngr.c.orig
+--- gnupg-2.2.8/dirmngr/dirmngr.c
 +++ gnupg-2.2.8/dirmngr/dirmngr.c
 @@ -56,6 +56,7 @@
  
@@ -208,9 +180,7 @@ index 31f8e0f..70880dc 100644
  #include "dirmngr.h"
  
  #include <assuan.h>
-diff --git gnupg-2.2.8/tools/gpgtar.h.orig gnupg-2.2.8/tools/gpgtar.h
-index 8cbe80b..4f67961 100644
---- gnupg-2.2.8/tools/gpgtar.h.orig
+--- gnupg-2.2.8/tools/gpgtar.h
 +++ gnupg-2.2.8/tools/gpgtar.h
 @@ -23,7 +23,16 @@
  #include "../common/util.h"
@@ -230,9 +200,7 @@ index 8cbe80b..4f67961 100644
  struct
  {
    int verbose;
-diff --git gnupg-2.2.8/tools/gpgtar.c.orig gnupg-2.2.8/tools/gpgtar.c
-index 2757ab0..a0ccc4a 100644
---- gnupg-2.2.8/tools/gpgtar.c.orig
+--- gnupg-2.2.8/tools/gpgtar.c
 +++ gnupg-2.2.8/tools/gpgtar.c
 @@ -41,6 +41,7 @@
  #include "../common/init.h"
@@ -242,9 +210,7 @@ index 2757ab0..a0ccc4a 100644
  #include "gpgtar.h"
  
  
-diff --git gnupg-2.2.8/tools/gpg-wks.h.orig gnupg-2.2.8/tools/gpg-wks.h
-index 1b91b65..71be7ad 100644
---- gnupg-2.2.8/tools/gpg-wks.h.orig
+--- gnupg-2.2.8/tools/gpg-wks.h
 +++ gnupg-2.2.8/tools/gpg-wks.h
 @@ -29,7 +29,16 @@
  #define WKS_DRAFT_VERSION 3
@@ -264,9 +230,7 @@ index 1b91b65..71be7ad 100644
  struct
  {
    int verbose;
-diff --git gnupg-2.2.8/tools/gpg-wks-client.c.orig gnupg-2.2.8/tools/gpg-wks-client.c
-index 73945ff..f48b116 100644
---- gnupg-2.2.8/tools/gpg-wks-client.c.orig
+--- gnupg-2.2.8/tools/gpg-wks-client.c
 +++ gnupg-2.2.8/tools/gpg-wks-client.c
 @@ -37,6 +37,7 @@
  #include "call-dirmngr.h"
@@ -276,9 +240,7 @@ index 73945ff..f48b116 100644
  #include "gpg-wks.h"
  
  
-diff --git gnupg-2.2.8/tools/gpgconf.h.orig gnupg-2.2.8/tools/gpgconf.h
-index 8a061ef..ef72aa6 100644
---- gnupg-2.2.8/tools/gpgconf.h.orig
+--- gnupg-2.2.8/tools/gpgconf.h
 +++ gnupg-2.2.8/tools/gpgconf.h
 @@ -22,7 +22,16 @@
  
@@ -298,9 +260,7 @@ index 8a061ef..ef72aa6 100644
  struct
  {
    int verbose;		/* Verbosity level.  */
-diff --git gnupg-2.2.8/tools/gpgconf.c.orig gnupg-2.2.8/tools/gpgconf.c
-index 59085d8..1f73e6f 100644
---- gnupg-2.2.8/tools/gpgconf.c.orig
+--- gnupg-2.2.8/tools/gpgconf.c
 +++ gnupg-2.2.8/tools/gpgconf.c
 @@ -25,6 +25,7 @@
  #include <string.h>

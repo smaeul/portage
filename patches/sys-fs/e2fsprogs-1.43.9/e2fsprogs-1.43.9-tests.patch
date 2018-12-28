@@ -1,0 +1,34 @@
+--- e2fsprogs-1.43.9/tests/f_detect_junk/expect
++++ e2fsprogs-1.43.9/tests/f_detect_junk.log
+@@ -12,8 +12,8 @@ is corrupt, and you might try running e2fsck with an alternate superblock:
+     e2fsck -b 32768 <device>
+ 
+ *** debugfs
+-test.img: Bad magic number in super-block while opening filesystem
+ Checksum errors in superblock!  Retrying...
++test.img: Bad magic number in super-block while opening filesystem
+ *** tune2fs
+ ../misc/tune2fs: Bad magic number in super-block while trying to open test.img
+ *** mke2fs
+--- e2fsprogs-1.43.9/tests/f_detect_xfs/expect
++++ e2fsprogs-1.43.9/tests/f_detect_xfs.log
+@@ -13,8 +13,8 @@ is corrupt, and you might try running e2fsck with an alternate superblock:
+ 
+ test.img contains a xfs file system labelled 'test_filsys'
+ *** debugfs
+-test.img: Bad magic number in super-block while opening filesystem
+ Checksum errors in superblock!  Retrying...
++test.img: Bad magic number in super-block while opening filesystem
+ test.img contains a xfs file system labelled 'test_filsys'
+ *** tune2fs
+ ../misc/tune2fs: Bad magic number in super-block while trying to open test.img
+--- e2fsprogs-1.43.9/debugfs/debugfs.c
++++ e2fsprogs-1.43.9/debugfs/debugfs.c
+@@ -179,6 +179,7 @@ try_open_again:
+ 	if (retval && !(open_flags & EXT2_FLAG_IGNORE_CSUM_ERRORS)) {
+ 		open_flags |= EXT2_FLAG_IGNORE_CSUM_ERRORS;
+ 		printf("Checksum errors in superblock!  Retrying...\n");
++		fflush(stdout);
+ 		goto try_open_again;
+ 	}
+ 	if (retval) {

@@ -1,0 +1,11 @@
+--- cmocka-1.1.1/include/cmocka.h
++++ cmocka-1.1.1/include/cmocka.h
+@@ -16,6 +16,8 @@
+ #ifndef CMOCKA_H_
+ #define CMOCKA_H_
+ 
++#include <sys/reg.h>
++
+ #ifdef _WIN32
+ # ifdef _MSC_VER
+ 

@@ -1,0 +1,122 @@
+--- cfe-7.0.0.src/lib/Driver/ToolChains/Linux.cpp
++++ cfe-7.0.0.src/lib/Driver/ToolChains/Linux.cpp
+@@ -59,6 +59,12 @@ static std::string getMultiarchTriple(const Driver &D,
+   case llvm::Triple::thumb:
+     if (IsAndroid) {
+       return "arm-linux-androideabi";
++    } else if (TargetEnvironment == llvm::Triple::MuslEABIHF) {
++      if (D.getVFS().exists(SysRoot + "/lib/arm-linux-musleabihf"))
++        return "arm-linux-musleabihf";
++    } else if (TargetEnvironment == llvm::Triple::MuslEABI) {
++      if (D.getVFS().exists(SysRoot + "/lib/arm-linux-musleabi"))
++        return "arm-linux-musleabi";
+     } else if (TargetEnvironment == llvm::Triple::GNUEABIHF) {
+       if (D.getVFS().exists(SysRoot + "/lib/arm-linux-gnueabihf"))
+         return "arm-linux-gnueabihf";
+@@ -69,7 +75,13 @@ static std::string getMultiarchTriple(const Driver &D,
+     break;
+   case llvm::Triple::armeb:
+   case llvm::Triple::thumbeb:
+-    if (TargetEnvironment == llvm::Triple::GNUEABIHF) {
++    if (TargetEnvironment == llvm::Triple::MuslEABIHF) {
++      if (D.getVFS().exists(SysRoot + "/lib/armeb-linux-musleabihf"))
++        return "armeb-linux-musleabihf";
++    } else if (TargetEnvironment == llvm::Triple::MuslEABI) {
++      if (D.getVFS().exists(SysRoot + "/lib/armeb-linux-musleabi"))
++        return "armeb-linux-musleabi";
++    } else if (TargetEnvironment == llvm::Triple::GNUEABIHF) {
+       if (D.getVFS().exists(SysRoot + "/lib/armeb-linux-gnueabihf"))
+         return "armeb-linux-gnueabihf";
+     } else {
+@@ -82,6 +94,8 @@ static std::string getMultiarchTriple(const Driver &D,
+       return "i686-linux-android";
+     if (D.getVFS().exists(SysRoot + "/lib/i386-linux-gnu"))
+       return "i386-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/i386-linux-musl"))
++      return "i386-linux-musl";
+     break;
+   case llvm::Triple::x86_64:
+     if (IsAndroid)
+@@ -90,32 +104,44 @@ static std::string getMultiarchTriple(const Driver &D,
+     if (TargetEnvironment != llvm::Triple::GNUX32 &&
+         D.getVFS().exists(SysRoot + "/lib/x86_64-linux-gnu"))
+       return "x86_64-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/x86_64-linux-musl"))
++      return "x86_64-linux-musl";
+     break;
+   case llvm::Triple::aarch64:
+     if (IsAndroid)
+       return "aarch64-linux-android";
+     if (D.getVFS().exists(SysRoot + "/lib/aarch64-linux-gnu"))
+       return "aarch64-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/aarch64-linux-musl"))
++      return "aarch64-linux-musl";
+     break;
+   case llvm::Triple::aarch64_be:
+     if (D.getVFS().exists(SysRoot + "/lib/aarch64_be-linux-gnu"))
+       return "aarch64_be-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/aarch64_be-linux-musl"))
++      return "aarch64_be-linux-musl";
+     break;
+   case llvm::Triple::mips:
+     if (D.getVFS().exists(SysRoot + "/lib/mips-linux-gnu"))
+       return "mips-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/mips-linux-musl"))
++      return "mips-linux-musl";
+     break;
+   case llvm::Triple::mipsel:
+     if (IsAndroid)
+       return "mipsel-linux-android";
+     if (D.getVFS().exists(SysRoot + "/lib/mipsel-linux-gnu"))
+       return "mipsel-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/mipsel-linux-musl"))
++      return "mipsel-linux-musl";
+     break;
+   case llvm::Triple::mips64:
+     if (D.getVFS().exists(SysRoot + "/lib/mips64-linux-gnu"))
+       return "mips64-linux-gnu";
+     if (D.getVFS().exists(SysRoot + "/lib/mips64-linux-gnuabi64"))
+       return "mips64-linux-gnuabi64";
++    if (D.getVFS().exists(SysRoot + "/lib/mips64-linux-musl"))
++      return "mips64-linux-musl";
+     break;
+   case llvm::Triple::mips64el:
+     if (IsAndroid)
+@@ -124,20 +150,28 @@ static std::string getMultiarchTriple(const Driver &D,
+       return "mips64el-linux-gnu";
+     if (D.getVFS().exists(SysRoot + "/lib/mips64el-linux-gnuabi64"))
+       return "mips64el-linux-gnuabi64";
++    if (D.getVFS().exists(SysRoot + "/lib/mips64el-linux-musl"))
++      return "mips64el-linux-musl";
+     break;
+   case llvm::Triple::ppc:
+     if (D.getVFS().exists(SysRoot + "/lib/powerpc-linux-gnuspe"))
+       return "powerpc-linux-gnuspe";
+     if (D.getVFS().exists(SysRoot + "/lib/powerpc-linux-gnu"))
+       return "powerpc-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/powerpc-linux-musl"))
++      return "powerpc-linux-musl";
+     break;
+   case llvm::Triple::ppc64:
+     if (D.getVFS().exists(SysRoot + "/lib/powerpc64-linux-gnu"))
+       return "powerpc64-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/powerpc64-linux-musl"))
++      return "powerpc64-linux-musl";
+     break;
+   case llvm::Triple::ppc64le:
+     if (D.getVFS().exists(SysRoot + "/lib/powerpc64le-linux-gnu"))
+       return "powerpc64le-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/powerpc64le-linux-musl"))
++      return "powerpc64le-linux-musl";
+     break;
+   case llvm::Triple::sparc:
+     if (D.getVFS().exists(SysRoot + "/lib/sparc-linux-gnu"))
+@@ -150,6 +184,8 @@ static std::string getMultiarchTriple(const Driver &D,
+   case llvm::Triple::systemz:
+     if (D.getVFS().exists(SysRoot + "/lib/s390x-linux-gnu"))
+       return "s390x-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/s390x-linux-musl"))
++      return "s390x-linux-musl";
+     break;
+   }
+   return TargetTriple.str();

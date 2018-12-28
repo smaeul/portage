@@ -1,5 +1,3 @@
-diff --git gawk-4.1.3/getopt.c gawk-fixed/getopt.c
-index 4de0b9a..285abe6 100644
 --- gawk-4.1.3/getopt.c
 +++ gawk-fixed/getopt.c
 @@ -54,21 +54,9 @@

@@ -1,4 +1,3 @@
-diff --git alsa-plugins-1.1.1/arcam-av/arcam_av.c alsa-plugins-fixed/arcam-av/arcam_av.c
 --- alsa-plugins-1.1.1/arcam-av/arcam_av.c
 +++ alsa-plugins-fixed/arcam-av/arcam_av.c
 @@ -27,6 +27,7 @@

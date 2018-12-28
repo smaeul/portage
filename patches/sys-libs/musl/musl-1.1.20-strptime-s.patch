@@ -1,0 +1,34 @@
+--- a/src/time/strptime.c
++++ b/src/time/strptime.c
+@@ -5,6 +5,9 @@
+ #include <stddef.h>
+ #include <string.h>
+ #include <strings.h>
++#include "time_impl.h"
++
++struct tm *__localtime_r(const time_t *restrict, struct tm *restrict);
+ 
+ char *strptime(const char *restrict s, const char *restrict f, struct tm *restrict tm)
+ {
+@@ -119,6 +122,18 @@ char *strptime(const char *restrict s, const char *restrict f, struct tm *restri
+ 			min = 0;
+ 			range = 61;
+ 			goto numeric_range;
++		case 's':
++			if (!isdigit(*s)) return 0;
++			unsigned long long secs = 0, new_secs;
++			const unsigned long long max_time = (1ULL<<8*sizeof(time_t)-1)-1;
++			do {
++				new_secs = secs*10 + (*s-'0');
++				if (new_secs < secs || new_secs > max_time) return 0;
++				secs = new_secs;
++			} while(isdigit(*++s));
++			time_t t = secs;
++			if (!__localtime_r(&t, tm)) return 0;
++			break;
+ 		case 'T':
+ 			s = strptime(s, "%H:%M:%S", tm);
+ 			if (!s) return 0;
+-- 
+2.18.1
+

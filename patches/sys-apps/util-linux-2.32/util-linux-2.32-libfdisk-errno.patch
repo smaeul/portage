@@ -1,0 +1,64 @@
+From 68335f3a4b4700eb8fc61f6168a6810bcceefbf4 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sat, 5 May 2018 04:09:27 +0000
+Subject: [PATCH 1/2] libfdisk: Clear errno before processing files
+
+Otherwise, errno is left over from setting up color output when
+printing the banner. errno is then used in warn() when reporting
+failure to open/read/process a file, even if the failure did not
+itself set errno.
+
+This manifests in the error messsage reported at the terminal
+depending on the existence of terminal color configuration:
+
+$ ./fdisk -c=dos -u=cylinders -l oddinput.toosmall > /dev/null
+fdisk: cannot open oddinput.toosmall: Invalid argument
+$ ./fdisk -c=dos -u=cylinders -l oddinput.toosmall
+fdisk: cannot open oddinput.toosmall: No such file or directory
+$ mkdir -p ~/.config/terminal-colors.d
+$ ./fdisk -c=dos -u=cylinders -l oddinput.toosmall
+fdisk: cannot open oddinput.toosmall: Invalid argument
+
+Clear errno at the beginning of fdisk_assign_device() so it is at
+least consistent, even if not always descriptive.
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ libfdisk/src/context.c        | 3 ++-
+ tests/expected/fdisk/oddinput | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/libfdisk/src/context.c b/libfdisk/src/context.c
+index 779a9a889..c242aa6fe 100644
+--- a/libfdisk/src/context.c
++++ b/libfdisk/src/context.c
+@@ -606,6 +606,7 @@ int fdisk_assign_device(struct fdisk_context *cxt,
+ 
+ 	reset_context(cxt);
+ 
++	errno = 0;
+ 	fd = open(fname, (readonly ? O_RDONLY : O_RDWR ) | O_CLOEXEC);
+ 	if (fd < 0)
+ 		goto fail;
+@@ -642,7 +643,7 @@ int fdisk_assign_device(struct fdisk_context *cxt,
+ 	return 0;
+ fail:
+ 	{
+-		int rc = -errno;
++		int rc = errno ? -errno : -1;
+ 		if (fd >= 0)
+ 			close(fd);
+ 		DBG(CXT, ul_debugobj(cxt, "failed to assign device [rc=%d]", rc));
+diff --git a/tests/expected/fdisk/oddinput b/tests/expected/fdisk/oddinput
+index 2fccc6cd5..32cc0b4d4 100644
+--- a/tests/expected/fdisk/oddinput
++++ b/tests/expected/fdisk/oddinput
+@@ -8,4 +8,4 @@ I/O size (minimum/optimal): 512 bytes / 512 bytes
+ Nonexistent file
+ fdisk: cannot open _a_file_that_does_not_exist_: No such file or directory
+ Too small file
+-fdisk: cannot open oddinput.toosmall: Inappropriate ioctl for device
++fdisk: cannot open oddinput.toosmall: Invalid argument
+-- 
+2.17.0
+

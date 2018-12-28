@@ -1,4 +1,4 @@
---- dwarves-1.10_p20160630/dutil.h.orig
+--- dwarves-1.10_p20160630/dutil.h
 +++ dwarves-1.10_p20160630/dutil.h
 @@ -20,6 +20,10 @@
  

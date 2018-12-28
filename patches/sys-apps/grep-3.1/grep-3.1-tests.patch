@@ -1,0 +1,23 @@
+- known gnulib locale breakage
+--- grep-3.1/gnulib-tests/Makefile.in
++++ grep-3.1/gnulib-tests/Makefile.in
+@@ -137,7 +137,7 @@ TESTS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
+ 	test-isatty$(EXEEXT) test-isblank$(EXEEXT) \
+ 	test-iswblank$(EXEEXT) test-langinfo$(EXEEXT) \
+ 	test-limits-h$(EXEEXT) test-locale$(EXEEXT) \
+-	test-localeconv$(EXEEXT) test-localename$(EXEEXT) \
++	test-localeconv$(EXEEXT) \
+ 	test-lseek.sh test-lstat$(EXEEXT) test-malloc-gnu$(EXEEXT) \
+ 	test-malloca$(EXEEXT) test-mbscasecmp.sh test-mbsinit.sh \
+ 	test-mbsrtowcs1.sh test-mbsrtowcs2.sh test-mbsrtowcs3.sh \
+@@ -197,8 +197,8 @@ check_PROGRAMS = test-alignof$(EXEEXT) test-alloca-opt$(EXEEXT) \
+ 	test-isatty$(EXEEXT) test-isblank$(EXEEXT) \
+ 	test-iswblank$(EXEEXT) test-langinfo$(EXEEXT) \
+ 	test-limits-h$(EXEEXT) test-locale$(EXEEXT) \
+-	test-localeconv$(EXEEXT) test-localename$(EXEEXT) \
+-	test-lseek$(EXEEXT) test-lstat$(EXEEXT) \
++	test-localeconv$(EXEEXT) \
++	test-lseek$(EXEEXT) \
+ 	test-malloc-gnu$(EXEEXT) test-malloca$(EXEEXT) \
+ 	test-mbscasecmp$(EXEEXT) test-mbsinit$(EXEEXT) \
+ 	test-mbsrtowcs$(EXEEXT) test-mbsstr1$(EXEEXT) \

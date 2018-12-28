@@ -1,0 +1,33 @@
+- This works just well enough to pass the gettext test suite.
+--- a/src/locale/iconv.c
++++ b/src/locale/iconv.c
+@@ -345,14 +345,24 @@ size_t iconv(iconv_t cd, char **restrict in, size_t *restrict inb, char **restri
+ 			break;
+ 		case EUC_JP:
+ 			if (c < 128) break;
+-			l = 2;
+-			if (*inb < 2) goto starved;
++			l = c == 0x8f ? 3 : 2;
++			if (*inb < l) goto starved;
+ 			d = *((unsigned char *)*in + 1);
+ 			if (c==0x8e) {
+ 				c = d;
+ 				if (c-0xa1 > 0xdf-0xa1) goto ilseq;
+ 				c += 0xff61 - 0xa1;
+ 				break;
++			} else if (c==0x8f) {
++				c = d;
++				d = *((unsigned char *)*in + 2);
++				if (c-0xa1 > 0xfe - 0xa1) goto ilseq;
++				if (d-0xa1 > 0xfe - 0xa1) goto ilseq;
++				if ((c & ~0x1U) == 0xaa)
++					c = d + 0x19 + 0x20 * (c & 0x1);
++				else
++					c = 0xfffd;
++				break;
+ 			}
+ 			c -= 0xa1;
+ 			d -= 0xa1;
+-- 
+2.18.1
+

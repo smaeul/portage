@@ -1,6 +1,4 @@
-diff --git fping-3.13/src/fping.h
-index 2066173..025c64a 100644
---- fping-3.13/src/fping.h.orig
+--- fping-3.13/src/fping.h
 +++ fping-3.13/src/fping.h
 @@ -19,7 +19,7 @@
  void crash_and_burn( char *message );

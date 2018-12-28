@@ -1,0 +1,53 @@
+- Fails because it provides a POSIX TZ without DST rules
+- Not sure where the extra info comes from (vmess), but the warning is the same
+- musl reports the provided locale, even if no translation exists
+--- perl-5.24.3/cpan/Time-Piece/t/02core_dst.t
++++ perl-5.24.3/cpan/Time-Piece/t/02core_dst.t
+@@ -127,7 +127,7 @@ cmp_ok($t->month_last_day, '==', 31); # test more
+ SKIP: {
+ 	skip "Extra tests for Linux, BSD only.", 6 unless $is_linux or $is_mac or $is_bsd;
+ 
+-    local $ENV{TZ} = "EST5EDT4";
++    local $ENV{TZ} = "EST5EDT4,M3.2.0/2,M11.1.0/2";
+     Time::Piece::_tzset();
+     my $lt = localtime(1373371631); #2013-07-09T12:07:11
+     cmp_ok(scalar($lt->tzoffset), 'eq', '-14400');
+--- perl-5.24.3/t/lib/warnings/regexec
++++ perl-5.24.3/t/lib/warnings/regexec
+@@ -208,11 +208,11 @@ setlocale(&POSIX::LC_CTYPE, $utf8_locale);
+  "abc def" =~ /\b{wb}.*?/;
+  "abc def" =~ /\B{wb}.*?/;
+ EXPECT
+-Use of \b{} or \B{} for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale at - line 16.
+-Use of \b{} or \B{} for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale at - line 16.
+-Use of \b{} or \B{} for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale at - line 17.
+-Use of \b{} or \B{} for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale at - line 17.
+-Use of \b{} or \B{} for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale at - line 17.
++Use of \b{} or \B{} for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale at - line 16, <DATA> line 47.
++Use of \b{} or \B{} for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale at - line 16, <DATA> line 47.
++Use of \b{} or \B{} for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale at - line 17, <DATA> line 47.
++Use of \b{} or \B{} for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale at - line 17, <DATA> line 47.
++Use of \b{} or \B{} for non-UTF-8 locale is wrong.  Assuming a UTF-8 locale at - line 17, <DATA> line 47.
+ ########
+ # NAME (?[ ]) in non-UTF-8 locale
+ eval { require POSIX; POSIX->import("locale_h") };
+--- perl-5.24.3/lib/locale.t
++++ perl-5.24.3/lib/locale.t
+@@ -2353,17 +2353,6 @@ foreach $test_num ($first_locales_test_number..$final_locales_test_number) {
+ 
+ $test_num = $final_locales_test_number;
+ 
+-unless ( $^O =~ m!^(dragonfly|openbsd|bitrig|mirbsd)$! ) {
+-    # perl #115808
+-    use warnings;
+-    my $warned = 0;
+-    local $SIG{__WARN__} = sub {
+-        $warned = $_[0] =~ /uninitialized/;
+-    };
+-    my $z = "y" . setlocale(&POSIX::LC_ALL, "xyzzy");
+-    ok($warned, "variable set to setlocale(BAD LOCALE) is considered uninitialized");
+-}
+-
+ # Test that tainting and case changing works on utf8 strings.  These tests are
+ # placed last to avoid disturbing the hard-coded test numbers that existed at
+ # the time these were added above this in this file.

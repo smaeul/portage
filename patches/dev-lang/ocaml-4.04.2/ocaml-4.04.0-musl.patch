@@ -1,6 +1,4 @@
-diff --git ocaml-4.04.0/configure.orig ocaml-4.04.0/configure
-index f43893a..a0e8ebc 100755
---- ocaml-4.04.0/configure.orig
+--- ocaml-4.04.0/configure
 +++ ocaml-4.04.0/configure
 @@ -698,6 +698,7 @@ if test $with_sharedlibs = "yes"; then
        mkmaindll="$flexlink -maindll"

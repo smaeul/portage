@@ -1,0 +1,15 @@
+--- xfsprogs-4.17.0/io/mmap.c
++++ xfsprogs-4.17.0/io/mmap.c
+@@ -16,10 +16,10 @@
+  * Inc.,  51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  */
+ 
+-#include "command.h"
+-#include "input.h"
+ #include <sys/mman.h>
+ #include <signal.h>
++#include "command.h"
++#include "input.h"
+ #include "init.h"
+ #include "io.h"
+ 

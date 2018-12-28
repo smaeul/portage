@@ -1,5 +1,3 @@
-diff --git portage-2.3.1/bin/ebuild-helpers/keepdir portage-fixed/bin/ebuild-helpers/keepdir
-index e0c852d..9779880 100755
 --- portage-2.3.1/bin/ebuild-helpers/keepdir
 +++ portage-fixed/bin/ebuild-helpers/keepdir
 @@ -11,10 +11,5 @@ fi

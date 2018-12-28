@@ -1,0 +1,11 @@
+--- i3-4.15/i3bar/src/xcb.c
++++ i3-4.15/i3bar/src/xcb.c
+@@ -482,7 +482,7 @@ void handle_button(xcb_button_press_event_t *event) {
+     }
+ 
+     int32_t x = event->event_x >= 0 ? event->event_x : 0;
+-    int workspace_width = 0;
++    int workspace_width = logical_px(2);
+     i3_ws *cur_ws = NULL, *clicked_ws = NULL, *ws_walk;
+ 
+     TAILQ_FOREACH(ws_walk, walk->workspaces, tailq) {

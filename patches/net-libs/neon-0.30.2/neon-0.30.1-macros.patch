@@ -1,5 +1,3 @@
-diff --git neon-0.30.1/src/ne_socket.c neon-fixed/src/ne_socket.c
-index 370448d..258896f 100644
 --- neon-0.30.1/src/ne_socket.c
 +++ neon-fixed/src/ne_socket.c
 @@ -27,7 +27,7 @@

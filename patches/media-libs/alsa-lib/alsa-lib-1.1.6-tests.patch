@@ -1,0 +1,11 @@
+--- alsa-lib-1.1.6/test/Makefile.in
++++ alsa-lib-1.1.6/test/Makefile.in
+@@ -90,7 +90,7 @@ host_triplet = @host@
+ check_PROGRAMS = control$(EXEEXT) pcm$(EXEEXT) pcm_min$(EXEEXT) \
+ 	latency$(EXEEXT) seq$(EXEEXT) playmidi1$(EXEEXT) \
+ 	timer$(EXEEXT) rawmidi$(EXEEXT) midiloop$(EXEEXT) \
+-	oldapi$(EXEEXT) queue_timer$(EXEEXT) namehint$(EXEEXT) \
++	queue_timer$(EXEEXT) namehint$(EXEEXT) \
+ 	client_event_filter$(EXEEXT) chmap$(EXEEXT) \
+ 	audio_time$(EXEEXT) user-ctl-element-set$(EXEEXT) \
+ 	pcm-multi-thread$(EXEEXT)

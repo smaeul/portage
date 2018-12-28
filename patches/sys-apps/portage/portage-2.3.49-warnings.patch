@@ -1,0 +1,12 @@
+--- portage-2.3.49/bin/install-qa-check.d/90gcc-warnings
++++ portage-2.3.49/bin/install-qa-check.d/90gcc-warnings
+@@ -43,9 +43,6 @@ gcc_warn_check() {
+ 			'warning: .*NULL.*\[-Wpointer-arith\]'
+ 			# pointer to a function used in arithmetic and likes
+ 			'warning: .*function.*\[-Wpointer-arith\]'
+-			# the address of ... will never be NULL and likes
+-			# (uses of function refs & string constants in conditionals)
+-			'warning: .*\[-Waddress\]'
+ 			# outdated?
+ 			'warning: .*too few arguments for format'
+ 			# format ... expects a matching ... argument

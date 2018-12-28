@@ -1,5 +1,3 @@
-diff --git feh-2.9.3/src/getopt.c feh-fixed/src/getopt.c
-index d212b3a..4d49d92 100644
 --- feh-2.9.3/src/getopt.c
 +++ feh-fixed/src/getopt.c
 @@ -64,6 +64,8 @@

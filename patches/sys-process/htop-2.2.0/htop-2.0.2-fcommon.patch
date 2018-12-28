@@ -1,6 +1,4 @@
-diff --git htop-2.0.2/CRT.h.orig htop-2.0.2/CRT.h
-index fb82413..b910523 100644
---- htop-2.0.2/CRT.h.orig
+--- htop-2.0.2/CRT.h
 +++ htop-2.0.2/CRT.h
 @@ -132,7 +132,7 @@ extern const char **CRT_treeStr;
  

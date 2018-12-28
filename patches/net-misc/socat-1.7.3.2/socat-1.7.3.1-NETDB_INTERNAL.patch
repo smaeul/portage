@@ -1,5 +1,3 @@
-diff --git socat-1.7.3.1/xio-ip.c socat-fixed/xio-ip.c
-index 0c9141d..7a90e84 100644
 --- socat-1.7.3.1/xio-ip.c
 +++ socat-fixed/xio-ip.c
 @@ -384,7 +384,9 @@ int xiogetaddrinfo(const char *node, const char *service,
@@ -12,8 +10,6 @@ index 0c9141d..7a90e84 100644
  		hstrerror(h_errno));
  #if HAVE_RESOLV_H
  	 if (res_opts0 | res_opts1) {
-diff --git socat-1.7.3.1/xio-ip4.c socat-fixed/xio-ip4.c
-index 73d7d7a..82dbffb 100644
 --- socat-1.7.3.1/xio-ip4.c
 +++ socat-fixed/xio-ip4.c
 @@ -46,7 +46,9 @@ int xioparsenetwork_ip4(const char *rangename, struct xiorange *range) {
@@ -36,8 +32,6 @@ index 73d7d7a..82dbffb 100644
  		(char *)hstrerror(h_errno));
  	    free(rangename1);
  	 return STAT_NORETRY;
-diff --git socat-1.7.3.1/xio-proxy.c socat-fixed/xio-proxy.c
-index 63582cc..a4ae2c9 100644
 --- socat-1.7.3.1/xio-proxy.c
 +++ socat-fixed/xio-proxy.c
 @@ -246,7 +246,9 @@ int _xioopen_proxy_prepare(struct proxyvars *proxyvars, struct opt *opts,

@@ -1,6 +1,4 @@
-diff --git mesa-18.2.1/meson.build.orig mesa-18.2.1/meson.build
-index c79b9e7..fb5e49f 100644
---- mesa-18.2.1/meson.build.orig
+--- mesa-18.2.1/meson.build
 +++ mesa-18.2.1/meson.build
 @@ -322,7 +322,6 @@ if with_egl and not (with_platform_drm or with_platform_surfaceless)
    endif

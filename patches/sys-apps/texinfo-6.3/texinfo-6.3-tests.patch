@@ -1,0 +1,11 @@
+- Fails with --disable-nls, because the footer uses gettext
+--- texinfo-6.3/tp/tests/Makefile.in
++++ texinfo-6.3/tp/tests/Makefile.in
+@@ -1417,7 +1417,6 @@ one_test_files_generated_list = \
+      test_scripts/formatting_simplest_test_prefix_info.sh \
+      test_scripts/formatting_simplest_test_css.sh \
+      test_scripts/formatting_simplest_test_date_in_header.sh \
+-     test_scripts/formatting_documentlanguage_set_option.sh \
+      test_scripts/formatting_documentlanguage_set_unknown.sh \
+      test_scripts/formatting_documentlanguage_set_option_info.sh \
+      test_scripts/formatting_float_copying.sh \

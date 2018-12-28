@@ -1,0 +1,11 @@
+--- a/gas/config/tc-aarch64.c
++++ b/gas/config/tc-aarch64.c
+@@ -243,7 +243,7 @@ set_fatal_syntax_error (const char *error)
+ typedef struct
+ {
+   const char *template;
+-  unsigned long value;
++  uint32_t value;
+ } asm_barrier_opt;
+ 
+ typedef struct
