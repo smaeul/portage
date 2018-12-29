@@ -1,0 +1,13 @@
+--- xfsprogs-4.17.0/configure
++++ xfsprogs-4.17.0/configure
+@@ -11953,8 +11953,8 @@ esac
+ #
+ case $exec_prefix:$prefix in
+ NONE:NONE | NONE:/usr | /usr:*)
+-  root_sbindir='/sbin'
+-  root_libdir="/${base_libdir}"
++  root_sbindir='/usr/bin'
++  root_libdir="/usr/lib/${base_libdir}"
+   ;;
+ *)
+   root_sbindir="${sbindir}"
