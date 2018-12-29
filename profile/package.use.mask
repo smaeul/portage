@@ -13,6 +13,12 @@ dev-python/sphinx test
 media-gfx/graphite2 test
 # Depends on corefonts
 media-gfx/imagemagick test
+# Takes forever to run
+net-misc/youtube-dl test
+# Requires kernel support
+sys-apps/keyutils test
+# Not intended to be run
+sys-apps/util-linux test
 # Depends on python:2.7
 x11-apps/xauth test
 # Depends on dbus

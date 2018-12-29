@@ -99,6 +99,8 @@ sys-libs/tevent ~amd64
 #
 # Required to build
 ~app-arch/sharutils-4.15.2 ~amd64
+# Required for OpenSSL 1.1
+~app-crypt/sbsigntools-0.9.1 ~amd64
 # Required for python3
 ~app-emulation/qemu-3.1.0 ~amd64
 # Required for Python 3
