@@ -35,6 +35,8 @@ net-analyzer/netperf demo
 net-dns/ldns-utils examples
 # Required for USE=test
 net-libs/libnftnl json
+# Required by chromium
+net-libs/nodejs inspector
 # Required by bitcoind (cxx) and for USE=test (tcl)
 sys-libs/db cxx tcl
 # Required by chromium

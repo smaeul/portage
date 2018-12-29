@@ -1,3 +1,5 @@
+# Dependency removed by user patch
+app-accessibility/at-spi2-atk-9999
 # Provided by libarchive
 app-arch/cpio-9999
 # Provided by libarchive

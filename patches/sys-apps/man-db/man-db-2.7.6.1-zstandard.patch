@@ -126,7 +126,7 @@
 +fi
 +if test -n "$zstd"
 +then
-+	unzstd="$zstd -dc"
++	unzstd="$zstd -dcq"
 +fi
 +if test -n "$gzip" || test -n "$compress" || test -n "$bzip2" || test -n "$xz" || test -n "$lzip" || test -n "$lzma" || test -n "$zstd"
  then
