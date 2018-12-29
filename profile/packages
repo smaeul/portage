@@ -1,5 +1,5 @@
 *app-arch/libarchive
-*app-arch/lzip
+*app-arch/zstd
 -*app-arch/tar
 *dev-vcs/git
 *sys-libs/timezone-data

@@ -1,2 +1,4 @@
+dev-libs/elfutils
 <dev-libs/openssl-1.1.1
 >=media-video/ffmpeg-4.0
+virtual/libelf:0/1

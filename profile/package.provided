@@ -1,4 +1,12 @@
+# Provided by libarchive
 app-arch/cpio-9999
+# Provided by libarchive
 app-arch/tar-9999
+# Not needed with musl
+dev-libs/libbsd-9999
+# Obsolete
+net-wireless/crda-9999
+# Provided by s6
 sys-apps/ucspi-unix-9999
+# Not needed with s6
 sys-fs/udev-init-scripts-9999

@@ -65,6 +65,7 @@ sys-libs/llvm-libunwind ~amd64
 
 # rust and friends
 dev-lang/rust::smaeul ~amd64
+virtual/cargo ~amd64
 virtual/rust ~amd64
 
 # s6 and friends
@@ -100,6 +101,8 @@ sys-libs/tevent ~amd64
 ~app-arch/sharutils-4.15.2 ~amd64
 # Required for python3
 ~app-emulation/qemu-3.1.0 ~amd64
+# Required for Python 3
+~dev-java/javatoolkit-0.6.0 ~amd64
 # Required for newer bcron
 ~dev-libs/bglibs-2.03 ~amd64
 # Closest to the fixed version
@@ -110,6 +113,8 @@ sys-libs/tevent ~amd64
 <dev-libs/openssl-1.1.1 ~amd64
 # Required to pass tests
 ~dev-util/strace-4.26 ~amd64
+# Required for Python 3
+<media-libs/mesa-18.4 ~amd64
 # Required for chromium
 ~media-video/ffmpeg-4.1 ~amd64
 # Required for OpenSSL 1.1

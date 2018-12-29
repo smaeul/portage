@@ -1,26 +1,6 @@
 app-text/asciidoc PYTHON_SINGLE_TARGET: python2_7 PYTHON_TARGETS: python2_7
-dev-java/javatoolkit PYTHON_TARGETS: python2_7
-# Required by media-gfx/inkscape
-dev-python/lxml PYTHON_TARGETS: python2_7
-# Required by dev-python/setuptools
-dev-python/certifi PYTHON_TARGETS: python2_7
-# Required by net-wireless/crda
-dev-python/m2crypto PYTHON_TARGETS: python2_7
-# Required by media-libs/mesa
-dev-python/mako PYTHON_TARGETS: python2_7
-# Required by dev-python/mako
-dev-python/markupsafe PYTHON_TARGETS: python2_7
-# Required by media-gfx/inkscape
-dev-python/numpy PYTHON_TARGETS: python2_7
-# Required by media-gfx/scour
-dev-python/setuptools PYTHON_TARGETS: python2_7
-# Required by media-gfx/scour
-dev-python/six PYTHON_TARGETS: python2_7
 dev-util/dwarves PYTHON_TARGETS: python2_7
 dev-util/lldb PYTHON_TARGETS: python2_7
-media-gfx/inkscape PYTHON_TARGETS: python2_7
-# Required by media-gfx/inkscape
-media-gfx/scour PYTHON_TARGETS: python2_7
 net-fs/samba PYTHON_TARGETS: python2_7
 net-libs/nodejs PYTHON_TARGETS: python2_7
 net-p2p/transmission-remote-cli PYTHON_TARGETS: python2_7

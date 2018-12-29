@@ -1,2 +1,28 @@
-www-client/chromium -system-ffmpeg
 sys-fs/zfs -kernel-builtin
+www-client/chromium -system-ffmpeg
+
+# Depends on glib[utils]
+app-emulation/qemu test
+# Depends on python:2.7
+app-text/asciidoc test
+# Depends on dbus
+dev-libs/glib test
+# Depends on texlive
+dev-python/sphinx test
+# Depends on python:2.7
+media-gfx/graphite2 test
+# Depends on corefonts
+media-gfx/imagemagick test
+# Depends on python:2.7
+x11-apps/xauth test
+# Depends on dbus
+x11-libs/pango test
+# Depends on grep[pcre]
+x11-misc/i3status-mpd test
+
+# LLVM
+sys-devel/lld test
+sys-libs/compiler-rt test
+sys-libs/libcxx test
+sys-libs/libcxxabi test
+sys-libs/libomp test

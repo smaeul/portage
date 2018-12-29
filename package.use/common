@@ -13,10 +13,10 @@ dev-libs/boost nls
 dev-libs/gmp static-libs
 # Required for static Haskell
 dev-libs/libffi static-libs
-# Required by qtcore
-dev-libs/libpcre2 pcre16
+# Required by dev-libs/xmlsec
+dev-libs/nss utils
 # app-crypt/mhash is broken
-dev-libs/rasqal -crypt
+dev-libs/rasqal -mhash
 # Required by libreoffice
 dev-libs/xmlsec nss
 # Required by inkscape[imagemagick]
@@ -31,10 +31,12 @@ media-libs/libvpx postproc svc
 media-libs/soxr examples
 # Required by flent
 net-analyzer/netperf demo
+# Required by unbound[test]
+net-dns/ldns-utils examples
 # Required for USE=test
 net-libs/libnftnl json
-# Required by bitcoind
-sys-libs/db cxx
+# Required by bitcoind (cxx) and for USE=test (tcl)
+sys-libs/db cxx tcl
 # Required by chromium
 sys-libs/zlib minizip
 # Required by x11-wm/i3
@@ -47,7 +49,6 @@ app-editors/vim python
 app-emulation/spice lz4
 app-emulation/qemu -curl -jpeg -ncurses numa -opengl -png -pulseaudio spice usb -vnc
 app-eselect/eselect-php fpm
-app-office/ledger python
 app-office/libreoffice gtk2
 app-shells/bash -net
 dev-db/postgresql readline
@@ -115,6 +116,5 @@ sys-power/nut -ups_drivers_* ups_drivers_usbhid-ups
 www-client/chromium -atk -gtk3 -hangouts system-ffmpeg
 www-client/firefox -gmp-autoupdate gtk2 system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 x11-base/xorg-server glamor xvfb
-x11-libs/cairo -glib
 x11-libs/gtk+ -vim-syntax
 x11-terms/rxvt-unicode 256-color alt-font-width iso14755 secondary-wheel unicode3 -vanilla wcwidth
