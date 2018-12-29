@@ -7,6 +7,8 @@ app-emulation/qemu test
 app-text/asciidoc test
 # Depends on dbus
 dev-libs/glib test
+# Requires i3 to be running
+dev-perl/AnyEvent-I3 test
 # Depends on texlive
 dev-python/sphinx test
 # Depends on python:2.7
@@ -15,6 +17,8 @@ media-gfx/graphite2 test
 media-gfx/imagemagick test
 # Takes forever to run
 net-misc/youtube-dl test
+# See /usr/lib/go/src/runtime/race/README
+net-p2p/syncthing test
 # Requires kernel support
 sys-apps/keyutils test
 # Not intended to be run
@@ -27,8 +31,34 @@ x11-libs/pango test
 x11-misc/i3status-mpd test
 
 # LLVM
+sys-devel/clang test
 sys-devel/lld test
+sys-devel/llvm test
 sys-libs/compiler-rt test
 sys-libs/libcxx test
 sys-libs/libcxxabi test
 sys-libs/libomp test
+
+# Patched in the tree
+app-editors/vim test
+sys-process/numactl test
+
+# Probably not fixable
+app-text/docbook2X test
+
+# More python:2.7?
+dev-libs/jsoncpp test
+media-libs/harfbuzz test
+sys-devel/automake test
+sys-libs/db test
+
+# Should be fixable
+dev-lang/ocaml test
+dev-util/meson test
+dev-vcs/git test
+media-gfx/feh test
+media-libs/mesa test
+media-libs/openjpeg test
+sys-apps/coreutils test
+sys-devel/binutils test
+x11-misc/j4-dmenu-desktop test

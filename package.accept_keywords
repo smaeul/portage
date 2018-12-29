@@ -119,6 +119,8 @@ sys-libs/tevent ~amd64
 <media-libs/mesa-18.4 ~amd64
 # Required for chromium
 ~media-video/ffmpeg-4.1 ~amd64
+# Required for OpenSSL 1.1 (r2)
+~media-video/rtmpdump-2.4_p20161210 ~amd64
 # Required for OpenSSL 1.1
 ~net-misc/openssh-7.9_p1 ~amd64
 # Fixes a bunch of bugs on ppc64
