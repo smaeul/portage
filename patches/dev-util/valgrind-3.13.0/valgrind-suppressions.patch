@@ -1,0 +1,25 @@
+From https://code.foxkit.us/adelie/packages/blob/master/user/valgrind/suppressions.patch
+--- valgrind-3.13.0/configure.ac
++++ valgrind-3.13.0/configure.ac
+@@ -1034,7 +1034,7 @@
+      musl)
+ 	AC_MSG_RESULT(Musl)
+ 	AC_DEFINE([MUSL_LIBC], 1, [Define to 1 if you're using Musl libc])
+-	# no DEFAULT_SUPP file yet for musl libc.
++	DEFAULT_SUPP="musl.supp ${DEFAULT_SUPP}"
+ 	;;
+      2.0|2.1|*)
+ 	AC_MSG_RESULT([unsupported version ${GLIBC_VERSION}])
+--- /dev/null
++++ valgrind-3.13.0/musl.supp
+@@ -0,0 +1,10 @@
++# musl does not free `dso` structs allocated during linking on exit.
++{
++   musl:dynlinker
++   Memcheck:Leak
++   match-leak-kinds: reachable
++   fun:calloc
++   ...
++   fun:__dls3
++   obj:/lib/ld-musl-*
++}

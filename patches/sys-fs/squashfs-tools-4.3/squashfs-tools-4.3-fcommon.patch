@@ -1,0 +1,13 @@
+diff --git squashfs4.3/squashfs-tools/mksquashfs.h
+index 397e17c..538f84f 100644
+--- squashfs4.3/squashfs-tools/mksquashfs.h.orig
++++ squashfs4.3/squashfs-tools/mksquashfs.h
+@@ -132,7 +132,7 @@ struct append_file {
+ #define BLOCK_OFFSET 2
+ 
+ extern struct cache *reader_buffer, *fragment_buffer, *reserve_cache;
+-struct cache *bwriter_buffer, *fwriter_buffer;
++extern struct cache *bwriter_buffer, *fwriter_buffer;
+ extern struct queue *to_reader, *to_deflate, *to_writer, *from_writer,
+ 	*to_frag, *locked_fragment, *to_process_frag;
+ extern struct append_file **file_mapping;
