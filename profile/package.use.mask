@@ -17,7 +17,7 @@ media-gfx/graphite2 test
 media-gfx/imagemagick test
 # Takes forever to run
 net-misc/youtube-dl test
-# See /usr/lib/go/src/runtime/race/README
+# See /usr/lib/go/src/runtime/race/README (patched)
 net-p2p/syncthing test
 # Requires kernel support
 sys-apps/keyutils test

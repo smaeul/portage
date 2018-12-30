@@ -1,0 +1,39 @@
+diff --git a/tests.c.orig b/tests.c
+index be1b350..1fbae5c 100644
+--- a/tests.c.orig
++++ b/tests.c
+@@ -22,6 +22,16 @@
+ #include "sizes.h"
+ #include "memtester.h"
+ 
++static union {
++    unsigned char bytes[UL_LEN/8];
++    ul val;
++} mword8;
++
++static union {
++    unsigned short u16s[UL_LEN/16];
++    ul val;
++} mword16;
++
+ char progress[] = "-\\|/";
+ #define PROGRESSLEN 4
+ #define PROGRESSOFTEN 2500
+diff --git a/types.h.orig b/types.h
+index ad7ce73..dca7fc0 100644
+--- a/types.h.orig
++++ b/types.h
+@@ -24,13 +24,3 @@ struct test {
+     char *name;
+     int (*fp)();
+ };
+-
+-union {
+-    unsigned char bytes[UL_LEN/8];
+-    ul val;
+-} mword8;
+-
+-union {
+-    unsigned short u16s[UL_LEN/16];
+-    ul val;
+-} mword16;
