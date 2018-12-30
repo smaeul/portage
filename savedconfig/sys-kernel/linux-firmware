@@ -1,4 +1,9 @@
 # Remove files that shall not be installed from this list.
-iwlwifi-6000g2a-6.ucode
-iwlwifi-7260-17.ucode
-rtl_nic/rtl8168e-3.fw
+radeon/TAHITI_uvd.bin
+radeon/TAHITI_vce.bin
+radeon/pitcairn_ce.bin
+radeon/pitcairn_mc.bin
+radeon/pitcairn_me.bin
+radeon/pitcairn_pfp.bin
+radeon/pitcairn_rlc.bin
+radeon/pitcairn_smc.bin
