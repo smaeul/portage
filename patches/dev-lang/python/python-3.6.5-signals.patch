@@ -1,0 +1,11 @@
+--- Python-3.6.5/Lib/multiprocessing/resource_sharer.py
++++ Python-3.6.5/Lib/multiprocessing/resource_sharer.py
+@@ -136,7 +136,7 @@ class _ResourceSharer(object):
+ 
+     def _serve(self):
+         if hasattr(signal, 'pthread_sigmask'):
+-            signal.pthread_sigmask(signal.SIG_BLOCK, range(1, signal.NSIG))
++            signal.pthread_sigmask(signal.SIG_BLOCK, range(1, 32))
+         while 1:
+             try:
+                 with self._listener.accept() as conn:
