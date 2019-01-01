@@ -1,0 +1,12 @@
+https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=842446
+--- sbsigntools-0.9.1/tests/Makefile.am
++++ sbsigntools-0.9.1/tests/Makefile.am
+@@ -27,7 +27,7 @@ check_SCRIPTS = test-wrapper.sh
+ 		$(FORMAT) $^ $@
+ 
+ .$(OBJEXT).elf:
+-	$(LD) $(EFILDFLAGS) -nostdlib -L $(CRTPATH) -shared -Bsymbolic $(CRTPATH)/crt0-efi-$(EFI_ARCH).o -T elf_$(EFI_ARCH)_efi.lds $< -o $@ -lefi -lgnuefi
++	$(LD) $(EFILDFLAGS) -nostdlib -L $(CRTPATH) -shared -Bsymbolic $(CRTPATH)/crt0-efi-$(EFI_ARCH).o -T elf_$(EFI_ARCH)_efi.lds $< -o $@ -lefi -lgnuefi --hash-style sysv
+ 
+ AM_CFLAGS=-fpic -I/usr/include/efi -I/usr/include/efi/$(EFI_ARCH)
+ 

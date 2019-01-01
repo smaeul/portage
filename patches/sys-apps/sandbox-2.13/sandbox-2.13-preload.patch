@@ -1,6 +1,4 @@
-diff --git sandbox-2.13/libsbutil/get_sandbox_lib.c
-index b64a5ac..a8d9a00 100644
---- sandbox-2.13/libsbutil/get_sandbox_lib.c.orig
+--- sandbox-2.13/libsbutil/get_sandbox_lib.c
 +++ sandbox-2.13/libsbutil/get_sandbox_lib.c
 @@ -21,14 +21,5 @@
   */

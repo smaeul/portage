@@ -53,17 +53,15 @@ sys-devel/automake test
 sys-libs/db test
 
 # Should be fixable
-app-shells/zsh test
-dev-lang/ocaml test
 dev-lang/yasm test
+dev-libs/elfutils test
 dev-util/meson test
 dev-vcs/git test
 media-gfx/feh test
 media-libs/libvpx test
 media-libs/mesa test
 media-libs/openjpeg test
+net-nds/openldap test
 sys-apps/coreutils test
 sys-devel/binutils test
-sys-fs/e2fsprogs test
-sys-libs/libseccomp test
 x11-misc/j4-dmenu-desktop test

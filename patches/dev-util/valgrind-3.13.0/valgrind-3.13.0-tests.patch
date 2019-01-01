@@ -1,6 +1,4 @@
-diff --git valgrind-3.13.0/memcheck/tests/str_tester.c
-index 9f7790a..1888c80 100644
---- valgrind-3.13.0/memcheck/tests/str_tester.c.orig
+--- valgrind-3.13.0/memcheck/tests/str_tester.c
 +++ valgrind-3.13.0/memcheck/tests/str_tester.c
 @@ -504,7 +504,7 @@ test_strchrnul (void)
  #endif
@@ -20,9 +18,7 @@ index 9f7790a..1888c80 100644
    /* rawmemchr.  */
    test_rawmemchr ();
  # endif
-diff --git valgrind-3.13.0/memcheck/tests/linux/Makefile.am
-index d8a7d4d..223af17 100644
---- valgrind-3.13.0/memcheck/tests/linux/Makefile.am.orig
+--- valgrind-3.13.0/memcheck/tests/linux/Makefile.am
 +++ valgrind-3.13.0/memcheck/tests/linux/Makefile.am
 @@ -31,7 +31,6 @@ check_PROGRAMS = \
  	lsframe2 \
@@ -32,9 +28,7 @@ index d8a7d4d..223af17 100644
  	stack_switch \
  	syscalls-2007 \
  	syslog-syscall \
-diff --git valgrind-3.13.0/memcheck/tests/linux/sigqueue.c
-index d18bd72..cc1fb54 100644
---- valgrind-3.13.0/memcheck/tests/linux/sigqueue.c.orig
+--- valgrind-3.13.0/memcheck/tests/linux/sigqueue.c
 +++ valgrind-3.13.0/memcheck/tests/linux/sigqueue.c
 @@ -22,7 +22,7 @@ int main(int argc, char **argv)
      fprintf(stdout, "offsetof(siginfo_t, si_code)   = %zd\n",
@@ -45,9 +39,7 @@ index d18bd72..cc1fb54 100644
    }
    si = calloc(1, sz);
    si->si_signo = SIGWINCH;
-diff --git valgrind-3.13.0/memcheck/tests/amd64-linux/int3-amd64.c
-index 3a0fb0c..66dfa0b 100644
---- valgrind-3.13.0/memcheck/tests/amd64-linux/int3-amd64.c.orig
+--- valgrind-3.13.0/memcheck/tests/amd64-linux/int3-amd64.c
 +++ valgrind-3.13.0/memcheck/tests/amd64-linux/int3-amd64.c
 @@ -32,7 +32,7 @@ int main(void) {
     puts("main");
@@ -58,9 +50,7 @@ index 3a0fb0c..66dfa0b 100644
        "mov %%rdx, %0\n"
        "zz_int:\n"
        "int $3\n"
-diff --git valgrind-3.13.0/none/tests/pth_atfork1.c
-index 34201ef..f284112 100644
---- valgrind-3.13.0/none/tests/pth_atfork1.c.orig
+--- valgrind-3.13.0/none/tests/pth_atfork1.c
 +++ valgrind-3.13.0/none/tests/pth_atfork1.c
 @@ -18,7 +18,7 @@
     Boston, MA 02111-1307, USA.  */
@@ -80,9 +70,7 @@ index 34201ef..f284112 100644
  #include <string.h>  /* strerror */
  static void error (int status, int errnum, char* msg)
  {
-diff --git valgrind-3.13.0/helgrind/tests/tc20_verifywrap.c
-index c110000..e88a8b9 100644
---- valgrind-3.13.0/helgrind/tests/tc20_verifywrap.c.orig
+--- valgrind-3.13.0/helgrind/tests/tc20_verifywrap.c
 +++ valgrind-3.13.0/helgrind/tests/tc20_verifywrap.c
 @@ -20,7 +20,7 @@
  
@@ -93,9 +81,7 @@ index c110000..e88a8b9 100644
  /* Fake __GLIBC_PREREQ on Solaris. Pretend glibc >= 2.4. */
  # define __GLIBC_PREREQ
  #else
-diff --git valgrind-3.13.0/drd/tests/pth_detached3.c
-index c02eef1..f7618d2 100644
---- valgrind-3.13.0/drd/tests/pth_detached3.c.orig
+--- valgrind-3.13.0/drd/tests/pth_detached3.c
 +++ valgrind-3.13.0/drd/tests/pth_detached3.c
 @@ -21,7 +21,7 @@ int main(int argc, char** argv)
    pthread_detach(thread);

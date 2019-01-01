@@ -1,0 +1,33 @@
+From bea18a0e9ea5ff2063ca4900acad9995f40276eb Mon Sep 17 00:00:00 2001
+From: Sylvain Henry <hsyl20@gmail.com>
+Date: Sun, 18 Jun 2017 16:50:09 -0400
+Subject: [PATCH] Fix GCC 7 warning in the RTS
+
+Test Plan: validate
+
+Reviewers: austin, bgamari, erikd, simonmar
+
+Reviewed By: bgamari, simonmar
+
+Subscribers: rwbarton, thomie
+
+Differential Revision: https://phabricator.haskell.org/D3648
+---
+ rts/RtsFlags.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/rts/RtsFlags.c b/rts/RtsFlags.c
+index b51d644bdc7..73635cf456a 100644
+--- a/rts/RtsFlags.c
++++ b/rts/RtsFlags.c
+@@ -1559,6 +1559,10 @@ openStatsFile (char *filename,           // filename, or NULL
+         if (*filename != '\0') {  /* stats file specified */
+             f = fopen(filename,"w");
+         } else {
++            if (filename_fmt == NULL) {
++                errorBelch("Invalid stats filename format (NULL)\n");
++                return -1;
++            }
+             /* default <program>.<ext> */
+             char stats_filename[STATS_FILENAME_MAXLEN];
+             sprintf(stats_filename, filename_fmt, prog_name);

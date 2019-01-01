@@ -1,0 +1,20 @@
+--- findutils-4.6.0/tests/Makefile.in
++++ findutils-4.6.0/tests/Makefile.in
+@@ -127,7 +127,7 @@ TESTS = test-accept$(EXEEXT) test-alloca-opt$(EXEEXT) \
+ 	test-ftell.sh test-ftell2.sh test-ftell3$(EXEEXT) \
+ 	test-ftello.sh test-ftello2.sh test-ftello3$(EXEEXT) \
+ 	test-ftello4.sh test-ftruncate.sh test-fwrite$(EXEEXT) \
+-	test-getcwd-lgpl$(EXEEXT) test-getcwd.sh \
++	test-getcwd-lgpl$(EXEEXT) \
+ 	test-getdelim$(EXEEXT) test-getdtablesize$(EXEEXT) \
+ 	test-getgroups$(EXEEXT) test-gethostname$(EXEEXT) \
+ 	test-getline$(EXEEXT) test-getopt$(EXEEXT) \
+@@ -141,7 +141,7 @@ TESTS = test-accept$(EXEEXT) test-alloca-opt$(EXEEXT) \
+ 	test-isnanl-nolibm$(EXEEXT) test-iswblank$(EXEEXT) \
+ 	test-langinfo$(EXEEXT) test-listen$(EXEEXT) \
+ 	test-locale$(EXEEXT) test-localeconv$(EXEEXT) \
+-	test-localename$(EXEEXT) test-lock$(EXEEXT) test-lseek.sh \
++	test-lock$(EXEEXT) test-lseek.sh \
+ 	test-lstat$(EXEEXT) test-malloc-gnu$(EXEEXT) \
+ 	test-malloca$(EXEEXT) test-math$(EXEEXT) test-mbrtowc1.sh \
+ 	test-mbrtowc2.sh test-mbrtowc3.sh test-mbrtowc4.sh \

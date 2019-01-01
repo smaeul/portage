@@ -1,0 +1,40 @@
+--- syslinux-6.04-pre1/core/Makefile
++++ syslinux-6.04-pre1/core/Makefile
+@@ -53,13 +53,13 @@ SOBJ	 := $(subst $(SRC)/,,$(patsubst %.S,%.o,$(SSRC)))
+ # To make this compatible with the following $(filter-out), make sure
+ # we prefix everything with $(SRC)
+ CORE_PXE_CSRC = \
+-	$(addprefix $(SRC)/fs/pxe/, dhcp_option.c pxe.c tftp.c urlparse.c bios.c)
++	$(addprefix $(SRC)/fs/pxe/, dhcp_option.c pxe.c tcp.c tftp.c urlparse.c bios.c)
+ 
+ LPXELINUX_CSRC = $(CORE_PXE_CSRC) \
+ 	$(shell find $(SRC)/lwip -name '*.c' -print) \
+ 	$(addprefix $(SRC)/fs/pxe/, \
+ 		core.c dnsresolv.c ftp.c ftp_readdir.c gpxeurl.c http.c \
+-		http_readdir.c idle.c isr.c tcp.c)
++		http_readdir.c idle.c isr.c)
+ 
+ PXELINUX_CSRC = $(CORE_PXE_CSRC) \
+ 	$(shell find $(SRC)/legacynet -name '*.c' -print)
+--- syslinux-6.04-pre1/core/fs/pxe/pxe.h
++++ syslinux-6.04-pre1/core/fs/pxe/pxe.h
+@@ -265,7 +265,7 @@ void ftp_open(struct url_info *url, int flags, struct inode *inode,
+ int ftp_readdir(struct inode *inode, struct dirent *dirent);
+ 
+ /* tcp.c */
+-const struct pxe_conn_ops tcp_conn_ops;
++extern const struct pxe_conn_ops tcp_conn_ops;
+ 
+ extern void gpxe_init(void);
+ extern int pxe_init(bool quiet);
+--- syslinux-6.04-pre1/efi/Makefile
++++ syslinux-6.04-pre1/efi/Makefile
+@@ -38,7 +38,7 @@ CORE_OBJS = $(filter-out %hello.o %rawcon.o %plaincon.o %strcasecmp.o %bios.o \
+ 	$(FILTERED_OBJS),$(CORE_COBJ) $(CORE_SOBJ))
+ 
+ CORE_OBJS += $(addprefix $(OBJ)/../core/, \
+-	fs/pxe/pxe.o fs/pxe/tftp.o fs/pxe/urlparse.o fs/pxe/dhcp_option.o \
++	fs/pxe/pxe.o fs/pxe/tcp.o fs/pxe/tftp.o fs/pxe/urlparse.o fs/pxe/dhcp_option.o \
+ 	fs/pxe/ftp.o fs/pxe/ftp_readdir.o fs/pxe/http.o fs/pxe/http_readdir.o)
+ 
+ LIB_OBJS = $(addprefix $(objdir)/com32/lib/,$(CORELIBOBJS)) \

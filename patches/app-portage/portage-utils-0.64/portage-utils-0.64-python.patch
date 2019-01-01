@@ -1,6 +1,4 @@
-diff --git portage-utils-0.64/tests/atom_explode/atom-explode.py
-index d28aaed..f8c2c2f 100755
---- portage-utils-0.64/tests/atom_explode/atom-explode.py.orig
+--- portage-utils-0.64/tests/atom_explode/atom-explode.py
 +++ portage-utils-0.64/tests/atom_explode/atom-explode.py
 @@ -1,4 +1,4 @@
 -#!/usr/bin/python

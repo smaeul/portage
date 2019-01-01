@@ -1,6 +1,4 @@
-diff --git sandbox-2.13/headers.h.orig sandbox-2.13/headers.h
-index 4d4abf5..675f06b 100644
---- sandbox-2.13/headers.h.orig
+--- sandbox-2.13/headers.h
 +++ sandbox-2.13/headers.h
 @@ -149,7 +149,9 @@
  # define pt_all_user_regs FU_pt_all_user_regs

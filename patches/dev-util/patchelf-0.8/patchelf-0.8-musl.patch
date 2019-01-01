@@ -1,0 +1,16 @@
+musl walks the reverse deps of the dso when looking up rpath, so the rpath on
+main-scoped applies to libfoo-scoped.so, and running the program succeeds. This
+behavior is intentional.
+--- patchelf-0.8/tests/set-rpath-library.sh
++++ patchelf-0.8/tests/set-rpath-library.sh
+@@ -24,8 +24,8 @@ if test -z "$oldRPath"; then oldRPath="/oops"; fi
+ exitCode=0
+ (cd ${SCRATCH} && ./main-scoped) || exitCode=$?
+ 
+-if test "$exitCode" = 46; then
+-    echo "expected failure"
++if test "$exitCode" != 46; then
++    echo "bad exit code!"
+     exit 1
+ fi
+ 
