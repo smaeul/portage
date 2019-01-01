@@ -1,0 +1,12 @@
+diff --git cffi-1.11.4/c/test_c.py
+index 6717ee5..e50f2b1 100644
+--- cffi-1.11.4/c/test_c.py.old
++++ cffi-1.11.4/c/test_c.py
+@@ -86,7 +86,6 @@ def test_all_rtld_symbols():
+     if sys.platform.startswith("linux"):
+         RTLD_NODELETE
+         RTLD_NOLOAD
+-        RTLD_DEEPBIND
+ 
+ def test_new_primitive_type():
+     py.test.raises(KeyError, new_primitive_type, "foo")

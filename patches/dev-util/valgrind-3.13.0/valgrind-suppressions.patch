@@ -12,7 +12,7 @@ From https://code.foxkit.us/adelie/packages/blob/master/user/valgrind/suppressio
  	AC_MSG_RESULT([unsupported version ${GLIBC_VERSION}])
 --- /dev/null
 +++ valgrind-3.13.0/musl.supp
-@@ -0,0 +1,35 @@
+@@ -0,0 +1,50 @@
 +# musl does not free `dso` structs allocated during linking on exit.
 +{
 +   musl:dynlinker
@@ -22,6 +22,21 @@ From https://code.foxkit.us/adelie/packages/blob/master/user/valgrind/suppressio
 +   ...
 +   fun:__dls3
 +   obj:/lib/ld-musl-*
++}
++{
++  musl_HASZERO___stpcpy
++  Memcheck:Cond
++  fun:__stpcpy
++}
++{
++  musl_HASZERO___stpncpy
++  Memcheck:Cond
++  fun:__stpncpy
++}
++{
++  musl_HASZERO___strchrnul
++  Memcheck:Cond
++  fun:__strchrnul
 +}
 +{
 +  musl_HASZERO_stpcpy

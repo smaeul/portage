@@ -30,7 +30,7 @@ post_src_install() {
 
 	# INSTALL_MASK, but also for packages
 	for dir in /etc/{conf.d,init.d,portage,xinetd.d} {/usr,}/lib/systemd /usr/share/{bash-completion,locale}; do
-		test -d "${D}/${dir}" && rm -rf "${D}/${dir}"
+		rm -rf "${D}/${dir}"
 	done
 	for file in charset.alias; do
 		find "${D}" -name "$file" -exec rm -f {} +

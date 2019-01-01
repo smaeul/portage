@@ -1,0 +1,12 @@
+diff --git freerdp-9999/winpr/libwinpr/utils/test/CMakeLists.txt
+index 02ec09a..cf5d6a9 100644
+--- freerdp-9999/winpr/libwinpr/utils/test/CMakeLists.txt.orig
++++ freerdp-9999/winpr/libwinpr/utils/test/CMakeLists.txt
+@@ -9,7 +9,6 @@ set(${MODULE_PREFIX}_TESTS
+ 	TestVersion.c
+ 	TestImage.c
+ 	TestBipBuffer.c
+-	TestBacktrace.c
+ 	TestQueue.c
+ 	TestPrint.c
+ 	TestPubSub.c

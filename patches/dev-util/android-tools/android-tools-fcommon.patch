@@ -1,0 +1,30 @@
+diff --git android-tools-9999/core/liblog/logger.h
+index 246b33c..5e82e07 100644
+--- android-tools-9999/core/liblog/logger.h.orig
++++ android-tools-9999/core/liblog/logger.h
+@@ -150,14 +150,14 @@ struct android_log_transport_context {
+  * Usage case: search out transport contexts for all readers
+  */
+ 
+-LIBLOG_HIDDEN struct listnode __android_log_readers;
++extern LIBLOG_HIDDEN struct listnode __android_log_readers;
+ 
+ #if defined(_WIN32)
+ #define logger_list_rdlock()
+ #define logger_list_wrlock()
+ #define logger_list_unlock()
+ #else
+-LIBLOG_HIDDEN pthread_rwlock_t __android_log_readers_lock;
++extern LIBLOG_HIDDEN pthread_rwlock_t __android_log_readers_lock;
+ 
+ #define logger_list_rdlock() pthread_rwlock_rdlock(&__android_log_readers_lock)
+ #define logger_list_wrlock() pthread_rwlock_wrlock(&__android_log_readers_lock)
+@@ -193,7 +193,7 @@ LIBLOG_HIDDEN void __android_log_lock();
+ LIBLOG_HIDDEN int __android_log_trylock();
+ LIBLOG_HIDDEN void __android_log_unlock();
+ 
+-LIBLOG_HIDDEN int __android_log_transport;
++extern LIBLOG_HIDDEN int __android_log_transport;
+ 
+ __END_DECLS
+ 
