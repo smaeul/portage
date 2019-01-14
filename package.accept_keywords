@@ -16,10 +16,22 @@ app-mobilephone/heimdall ~amd64
 app-text/libnumbertext ~amd64
 dev-java/icedtea ~amd64
 dev-libs/capstone ~amd64
+dev-libs/libcss ~amd64
+dev-libs/libnsutils ~amd64
+dev-libs/libutf8proc ~amd64
+dev-libs/libwapcaplet ~amd64
+dev-libs/nsgenbind ~amd64
 dev-util/dwarves ~amd64
+dev-util/netsurf-buildsystem ~amd64
 dev-util/perf ~amd64
 dev-util/radare2 ~amd64
+media-libs/libnsbmp ~amd64
+media-libs/libnsgif ~amd64
+media-libs/libnspsl ~amd64
+media-libs/librosprite ~amd64
+media-libs/libsvgtiny ~amd64
 net-analyzer/flent ~amd64
+net-libs/libdom ~amd64
 net-misc/streamlink ~amd64
 net-misc/unison:2.48 ~amd64
 net-vpn/wireguard ~amd64
@@ -31,6 +43,7 @@ sys-devel/slibtool ~amd64
 sys-kernel/vanilla-sources ~amd64
 sys-power/brightnessctl ~amd64
 www-apps/gitea ~amd64
+www-client/netsurf ~amd64
 
 # These packages have a stable version, but either it is too out of date to be
 # useful, or I need the latest version for compatibility with other software.
@@ -113,6 +126,10 @@ sys-libs/tevent ~amd64
 ~dev-libs/libunistring-0.9.10 ~amd64
 # Required for parallel compilation
 <dev-libs/openssl-1.1.1 ~amd64
+# Required to pass tests
+>=dev-python/future-0.16.0-r1 ~amd64
+# Required to build on powerpc64
+>=dev-python/greenlet-0.4.14 ~amd64
 # Required to pass tests
 ~dev-util/strace-4.26 ~amd64
 # Required for Python 3

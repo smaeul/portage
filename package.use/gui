@@ -16,4 +16,5 @@ media-video/mpv X
 net-analyzer/wireshark qt5
 net-misc/freerdp X
 net-misc/unison gtk
+www-client/netsurf gtk
 x11-libs/* X

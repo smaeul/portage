@@ -51,10 +51,13 @@
  	sleep 1
  	port=$( head -n 1 $tmpdir/service/server-log )
  
-@@ -42,12 +42,6 @@ do
- 	echo "Testing host not found error with $p."
- 	error 2 protocol $p --host=this.host.can.not.exist 3<testmail
+@@ -39,15 +39,6 @@ do
  
+ 	stop server
+ 
+-	echo "Testing host not found error with $p."
+-	error 2 protocol $p --host=this.host.can.not.exist 3<testmail
+-
 -	echo "Testing connection refused error with $p."
 -	error 7 protocol $p -p $port --host=localhost 3<testmail
 -

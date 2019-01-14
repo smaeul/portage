@@ -1,0 +1,26 @@
+diff --git nsgenbind-0.6/src/nsgenbind-parser.y.orig nsgenbind-0.6/src/nsgenbind-parser.y
+index d73401e..683c15b 100644
+--- nsgenbind-0.6/src/nsgenbind-parser.y.orig
++++ nsgenbind-0.6/src/nsgenbind-parser.y
+@@ -91,7 +91,7 @@ typedef struct YYLTYPE {
+ #include "webidl-ast.h"
+ #include "nsgenbind-ast.h"
+ 
+-char *errtxt;
++static char *errtxt;
+ 
+ static void nsgenbind_error(YYLTYPE *locp,
+                             char *filename,
+diff --git nsgenbind-0.6/src/webidl-parser.y.orig nsgenbind-0.6/src/webidl-parser.y
+index 0e46b17..5fb991d 100644
+--- nsgenbind-0.6/src/webidl-parser.y.orig
++++ nsgenbind-0.6/src/webidl-parser.y
+@@ -32,7 +32,7 @@
+ 
+ #include "webidl-ast.h"
+ 
+-char *errtxt;
++static char *errtxt;
+ 
+ static void
+ webidl_error(YYLTYPE *locp, struct webidl_node **winbind_ast, const char *str)

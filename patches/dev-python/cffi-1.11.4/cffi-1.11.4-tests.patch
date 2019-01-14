@@ -1,3 +1,4 @@
+updates for musl
 diff --git cffi-1.11.4/c/test_c.py
 index 6717ee5..e50f2b1 100644
 --- cffi-1.11.4/c/test_c.py.old
@@ -10,3 +11,67 @@ index 6717ee5..e50f2b1 100644
  
  def test_new_primitive_type():
      py.test.raises(KeyError, new_primitive_type, "foo")
+--- cffi-1.11.4/testing/cffi0/test_function.py
++++ cffi-1.11.4/testing/cffi0/test_function.py
+@@ -13,7 +13,7 @@ except ImportError:
+     from io import StringIO
+ 
+ 
+-lib_m = 'm'
++lib_m = 'c'
+ if sys.platform == 'win32':
+     #there is a small chance this fails on Mingw via environ $CC
+     import distutils.ccompiler
+@@ -166,7 +166,7 @@ class TestFunction(object):
+                        b"hello, world!\n"
+                        b"hello, world2!\n"
+                        b"hello int 42 long 84 long long 168\n"
+-                       b"hello (nil)\n")
++                       b"hello 0\n")
+ 
+     def test_must_specify_type_of_vararg(self):
+         ffi = FFI(backend=self.Backend())
+--- cffi-1.11.4/testing/cffi0/test_parsing.py
++++ cffi-1.11.4/testing/cffi0/test_parsing.py
+@@ -74,7 +74,7 @@ class FakeFunction(object):
+         self.BType = str(BType)
+         self.name = name
+ 
+-lib_m = "m"
++lib_m = "c"
+ if sys.platform == 'win32':
+     #there is a small chance this fails on Mingw via environ $CC
+     import distutils.ccompiler
+--- cffi-1.11.4/testing/cffi0/test_unicode_literals.py
++++ cffi-1.11.4/testing/cffi0/test_unicode_literals.py
+@@ -10,7 +10,7 @@ from __future__ import unicode_literals
+ import sys, math
+ from cffi import FFI
+ 
+-lib_m = "m"
++lib_m = "c"
+ if sys.platform == 'win32':
+     #there is a small chance this fails on Mingw via environ $CC
+     import distutils.ccompiler
+--- cffi-1.11.4/testing/cffi0/test_verify.py
++++ cffi-1.11.4/testing/cffi0/test_verify.py
+@@ -1612,7 +1612,7 @@ def test_keepalive_ffi():
+     assert func() == 42
+ 
+ def test_FILE_stored_in_stdout():
+-    if not sys.platform.startswith('linux'):
++    if True:
+         py.test.skip("likely, we cannot assign to stdout")
+     ffi = FFI()
+     ffi.cdef("int printf(const char *, ...); FILE *setstdout(FILE *);")
+--- cffi-1.11.4/testing/cffi1/test_verify1.py
++++ cffi-1.11.4/testing/cffi1/test_verify1.py
+@@ -1576,7 +1576,7 @@ def test_keepalive_ffi():
+     assert func() == 42
+ 
+ def test_FILE_stored_in_stdout():
+-    if not sys.platform.startswith('linux'):
++    if True:
+         py.test.skip("likely, we cannot assign to stdout")
+     ffi = FFI()
+     ffi.cdef("int printf(const char *, ...); FILE *setstdout(FILE *);")

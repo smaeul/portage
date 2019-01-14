@@ -1,0 +1,26 @@
+--- buildsystem-1.7/testtools/testrunner.pl
++++ buildsystem-1.7/testtools/testrunner.pl
+@@ -159,20 +159,20 @@ sub run_test
+ 
+ 				if ($fh == $out) {
+ 					# Child's stdout
+-					foreach my $l (@lines) {
++					while (my ($i, $l) = each @lines) {
+ 						# Last line of previous read
+ 						# was incomplete, and this is
+ 						# the first line of this read
+ 						# Simply contatenate.
+ 						if ($outcont == 1 && 
+-							$l eq $lines[0]) {
++							$i eq 0) {
+ 							print LOG "$l\n";
+ 							$last .= $l;
+ 						# Last char of this read was 
+ 						# not '\n', so don't terminate
+ 						# line in log.
+ 						} elsif ($lastchar ne '\n' &&
+-							$l eq $lines[-1]) {
++							$i eq (scalar(@lines) - 1)) {
+ 							print LOG "    $l";
+ 							$last = $l;
+ 						# Normal behaviour, just print
