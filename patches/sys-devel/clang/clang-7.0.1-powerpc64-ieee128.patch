@@ -1,0 +1,35 @@
+diff --git a/lib/Basic/Targets/PPC.h b/lib/Basic/Targets/PPC.h
+index 439c73a0e3..7c9aabc7b0 100644
+--- a/lib/Basic/Targets/PPC.h
++++ b/lib/Basic/Targets/PPC.h
+@@ -76,7 +76,7 @@ public:
+     SuitableAlign = 128;
+     SimdDefaultAlign = 128;
+     LongDoubleWidth = LongDoubleAlign = 128;
+-    LongDoubleFormat = &llvm::APFloat::PPCDoubleDouble();
++    LongDoubleFormat = &llvm::APFloat::IEEEquad();
+   }
+ 
+   // Set the language option for altivec based on our value.
+@@ -305,7 +305,6 @@ public:
+ 
+   bool useFloat128ManglingForLongDouble() const override {
+     return LongDoubleWidth == 128 &&
+-           LongDoubleFormat == &llvm::APFloat::PPCDoubleDouble() &&
+            getTriple().isOSBinFormatELF();
+   }
+ };
+diff --git a/lib/Driver/ToolChains/Clang.cpp b/lib/Driver/ToolChains/Clang.cpp
+index d70947d6f4..c6db4b87b0 100644
+--- a/lib/Driver/ToolChains/Clang.cpp
++++ b/lib/Driver/ToolChains/Clang.cpp
+@@ -1656,6 +1656,9 @@ void Clang::AddPPCTargetArgs(const ArgList &Args,
+     CmdArgs.push_back("-target-abi");
+     CmdArgs.push_back(ABIName);
+   }
++
++  CmdArgs.push_back("-mllvm");
++  CmdArgs.push_back("-enable-ppc-quad-precision");
+ }
+ 
+ void Clang::AddRISCVTargetArgs(const ArgList &Args,

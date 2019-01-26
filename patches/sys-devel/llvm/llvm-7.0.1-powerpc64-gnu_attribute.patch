@@ -1,0 +1,1563 @@
+diff --git a/include/llvm/Support/ARMAttributeParser.h b/include/llvm/Support/ARMAttributeParser.h
+index 919f39721f8..b83adf3eba9 100644
+--- a/include/llvm/Support/ARMAttributeParser.h
++++ b/include/llvm/Support/ARMAttributeParser.h
+@@ -24,8 +24,10 @@ class ARMAttributeParser {
+   std::map<unsigned, unsigned> Attributes;
+ 
+   struct DisplayHandler {
++    ARMBuildAttrs::AttrVendor Vendor;
+     ARMBuildAttrs::AttrType Attribute;
+-    void (ARMAttributeParser::*Routine)(ARMBuildAttrs::AttrType,
++    void (ARMAttributeParser::*Routine)(ARMBuildAttrs::AttrVendor,
++                                        ARMBuildAttrs::AttrType,
+                                         const uint8_t *, uint32_t &);
+   };
+   static const DisplayHandler DisplayRoutines[];
+@@ -33,108 +35,147 @@ class ARMAttributeParser {
+   uint64_t ParseInteger(const uint8_t *Data, uint32_t &Offset);
+   StringRef ParseString(const uint8_t *Data, uint32_t &Offset);
+ 
+-  void IntegerAttribute(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void IntegerAttribute(ARMBuildAttrs::AttrVendor Vendor,
++                        ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                         uint32_t &Offset);
+-  void StringAttribute(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void StringAttribute(ARMBuildAttrs::AttrVendor Vendor,
++                       ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                        uint32_t &Offset);
+ 
+-  void PrintAttribute(unsigned Tag, unsigned Value, StringRef ValueDesc);
++  void PrintAttribute(unsigned Vendor, unsigned Tag, unsigned Value, StringRef ValueDesc);
+ 
+-  void CPU_arch(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+-                uint32_t &Offset);
+-  void CPU_arch_profile(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void CPU_arch(ARMBuildAttrs::AttrVendor Vendor, ARMBuildAttrs::AttrType Tag,
++                const uint8_t *Data, uint32_t &Offset);
++  void CPU_arch_profile(ARMBuildAttrs::AttrVendor Vendor,
++                        ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                         uint32_t &Offset);
+-  void ARM_ISA_use(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ARM_ISA_use(ARMBuildAttrs::AttrVendor Vendor,
++                   ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                    uint32_t &Offset);
+-  void THUMB_ISA_use(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void THUMB_ISA_use(ARMBuildAttrs::AttrVendor Vendor,
++                     ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                      uint32_t &Offset);
+-  void FP_arch(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+-               uint32_t &Offset);
+-  void WMMX_arch(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+-                 uint32_t &Offset);
+-  void Advanced_SIMD_arch(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void FP_arch(ARMBuildAttrs::AttrVendor Vendor, ARMBuildAttrs::AttrType Tag,
++               const uint8_t *Data, uint32_t &Offset);
++  void WMMX_arch(ARMBuildAttrs::AttrVendor Vendor, ARMBuildAttrs::AttrType Tag,
++                 const uint8_t *Data, uint32_t &Offset);
++  void Advanced_SIMD_arch(ARMBuildAttrs::AttrVendor Vendor,
++                          ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                           uint32_t &Offset);
+-  void PCS_config(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+-                  uint32_t &Offset);
+-  void ABI_PCS_R9_use(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void PCS_config(ARMBuildAttrs::AttrVendor Vendor, ARMBuildAttrs::AttrType Tag,
++                  const uint8_t *Data, uint32_t &Offset);
++  void ABI_PCS_R9_use(ARMBuildAttrs::AttrVendor Vendor,
++                      ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                       uint32_t &Offset);
+-  void ABI_PCS_RW_data(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_PCS_RW_data(ARMBuildAttrs::AttrVendor Vendor,
++                       ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                        uint32_t &Offset);
+-  void ABI_PCS_RO_data(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_PCS_RO_data(ARMBuildAttrs::AttrVendor Vendor,
++                       ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                        uint32_t &Offset);
+-  void ABI_PCS_GOT_use(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_PCS_GOT_use(ARMBuildAttrs::AttrVendor Vendor,
++                       ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                        uint32_t &Offset);
+-  void ABI_PCS_wchar_t(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_PCS_wchar_t(ARMBuildAttrs::AttrVendor Vendor,
++                       ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                        uint32_t &Offset);
+-  void ABI_FP_rounding(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_FP_rounding(ARMBuildAttrs::AttrVendor Vendor,
++                       ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                        uint32_t &Offset);
+-  void ABI_FP_denormal(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_FP_denormal(ARMBuildAttrs::AttrVendor Vendor,
++                       ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                        uint32_t &Offset);
+-  void ABI_FP_exceptions(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_FP_exceptions(ARMBuildAttrs::AttrVendor Vendor,
++                         ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                          uint32_t &Offset);
+-  void ABI_FP_user_exceptions(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_FP_user_exceptions(ARMBuildAttrs::AttrVendor Vendor,
++                              ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                               uint32_t &Offset);
+-  void ABI_FP_number_model(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_FP_number_model(ARMBuildAttrs::AttrVendor Vendor,
++                           ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                            uint32_t &Offset);
+-  void ABI_align_needed(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_align_needed(ARMBuildAttrs::AttrVendor Vendor,
++                        ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                         uint32_t &Offset);
+-  void ABI_align_preserved(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_align_preserved(ARMBuildAttrs::AttrVendor Vendor,
++                           ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                            uint32_t &Offset);
+-  void ABI_enum_size(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_enum_size(ARMBuildAttrs::AttrVendor Vendor,
++                     ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                      uint32_t &Offset);
+-  void ABI_HardFP_use(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_HardFP_use(ARMBuildAttrs::AttrVendor Vendor,
++                      ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                       uint32_t &Offset);
+-  void ABI_VFP_args(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_VFP_args(ARMBuildAttrs::AttrVendor Vendor,
++                    ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                     uint32_t &Offset);
+-  void ABI_WMMX_args(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_WMMX_args(ARMBuildAttrs::AttrVendor Vendor,
++                     ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                      uint32_t &Offset);
+-  void ABI_optimization_goals(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_optimization_goals(ARMBuildAttrs::AttrVendor Vendor,
++                              ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                               uint32_t &Offset);
+-  void ABI_FP_optimization_goals(ARMBuildAttrs::AttrType Tag,
++  void ABI_FP_optimization_goals(ARMBuildAttrs::AttrVendor Vendor,
++                                 ARMBuildAttrs::AttrType Tag,
+                                  const uint8_t *Data, uint32_t &Offset);
+-  void compatibility(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void compatibility(ARMBuildAttrs::AttrVendor Vendor,
++                     ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                      uint32_t &Offset);
+-  void CPU_unaligned_access(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void CPU_unaligned_access(ARMBuildAttrs::AttrVendor Vendor,
++                            ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                             uint32_t &Offset);
+-  void FP_HP_extension(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void FP_HP_extension(ARMBuildAttrs::AttrVendor Vendor,
++                       ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                        uint32_t &Offset);
+-  void ABI_FP_16bit_format(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void ABI_FP_16bit_format(ARMBuildAttrs::AttrVendor Vendor,
++                           ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                            uint32_t &Offset);
+-  void MPextension_use(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void MPextension_use(ARMBuildAttrs::AttrVendor Vendor,
++                       ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                        uint32_t &Offset);
+-  void DIV_use(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+-               uint32_t &Offset);
+-  void DSP_extension(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void DIV_use(ARMBuildAttrs::AttrVendor Vendor, ARMBuildAttrs::AttrType Tag,
++               const uint8_t *Data, uint32_t &Offset);
++  void DSP_extension(ARMBuildAttrs::AttrVendor Vendor,
++                     ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                      uint32_t &Offset);
+-  void T2EE_use(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+-                uint32_t &Offset);
+-  void Virtualization_use(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++  void T2EE_use(ARMBuildAttrs::AttrVendor Vendor, ARMBuildAttrs::AttrType Tag,
++                const uint8_t *Data, uint32_t &Offset);
++  void Virtualization_use(ARMBuildAttrs::AttrVendor Vendor,
++                          ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+                           uint32_t &Offset);
+-  void nodefaults(ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
+-                  uint32_t &Offset);
++  void nodefaults(ARMBuildAttrs::AttrVendor Vendor, ARMBuildAttrs::AttrType Tag,
++                  const uint8_t *Data, uint32_t &Offset);
+ 
+-  void ParseAttributeList(const uint8_t *Data, uint32_t &Offset,
+-                          uint32_t Length);
++  void GNU_Power_ABI_FP(ARMBuildAttrs::AttrVendor Vendor,
++                        ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++                        uint32_t &Offset);
++  void GNU_Power_ABI_Vector(ARMBuildAttrs::AttrVendor Vendor,
++                            ARMBuildAttrs::AttrType Tag, const uint8_t *Data,
++                            uint32_t &Offset);
++  void GNU_Power_ABI_Struct_Return(ARMBuildAttrs::AttrVendor Vendor,
++                                   ARMBuildAttrs::AttrType Tag,
++                                   const uint8_t *Data, uint32_t &Offset);
++
++  void ParseAttributeList(ARMBuildAttrs::AttrVendor Vendor, const uint8_t *Data,
++                          uint32_t &Offset, uint32_t Length);
+   void ParseIndexList(const uint8_t *Data, uint32_t &Offset,
+                       SmallVectorImpl<uint8_t> &IndexList);
+-  void ParseSubsection(const uint8_t *Data, uint32_t Length);
++  void ParseSubsection(const uint8_t *Data, uint32_t Length, bool isLittle);
++
+ public:
+   ARMAttributeParser(ScopedPrinter *SW) : SW(SW) {}
+ 
+-  ARMAttributeParser() : SW(nullptr) { }
++  ARMAttributeParser() : SW(nullptr) {}
+ 
+   void Parse(ArrayRef<uint8_t> Section, bool isLittle);
+ 
+-  bool hasAttribute(unsigned Tag) const {
+-    return Attributes.count(Tag);
+-  }
++  bool hasAttribute(unsigned Tag) const { return Attributes.count(Tag); }
+ 
+   unsigned getAttributeValue(unsigned Tag) const {
+     return Attributes.find(Tag)->second;
+   }
+ };
+ 
+-}
++} // namespace llvm
+ 
+ #endif
+-
+diff --git a/include/llvm/Support/ARMBuildAttributes.h b/include/llvm/Support/ARMBuildAttributes.h
+index b8a03765a7c..3ab82440a0b 100644
+--- a/include/llvm/Support/ARMBuildAttributes.h
++++ b/include/llvm/Support/ARMBuildAttributes.h
+@@ -30,6 +30,11 @@ enum SpecialAttr {
+   SEL_CPU
+ };
+ 
++enum AttrVendor {
++  AEABI,
++  GNU
++};
++
+ enum AttrType {
+   // Rest correspond to ELF/.ARM.attributes
+   File                      = 1,
+@@ -79,11 +84,18 @@ enum AttrType {
+   ABI_align8_preserved      = 25, // renamed to ABI_align_preserved (ABI r2.09)
+   nodefaults                = 64, // deprecated (ABI r2.09)
+   T2EE_use                  = 66, // deprecated (ABI r2.09)
+-  MPextension_use_old       = 70  // recoded to MPextension_use (ABI r2.08)
++  MPextension_use_old       = 70, // recoded to MPextension_use (ABI r2.08)
++
++  // PowerPC
++  GNU_Power_ABI_FP            = 4,
++  GNU_Power_ABI_Vector        = 8,
++  GNU_Power_ABI_Struct_Return = 12
+ };
+ 
+-StringRef AttrTypeAsString(unsigned Attr, bool HasTagPrefix = true);
+-StringRef AttrTypeAsString(AttrType Attr, bool HasTagPrefix = true);
++StringRef AttrTypeAsString(unsigned Vendor, unsigned Attr,
++                           bool HasTagPrefix = true);
++StringRef AttrTypeAsString(AttrVendor Vendor, AttrType Attr,
++                           bool HasTagPrefix = true);
+ int AttrTypeFromString(StringRef Tag);
+ 
+ // Magic numbers for .ARM.attributes
+@@ -242,6 +254,30 @@ enum {
+   AllowTZVirtualization = 3
+ };
+ 
++enum {
++  // Tag_GNU_Power_ABI_FP (=4), uleb128
++  UnspecifiedFloat = 0,
++  DoublePrecisionHardFloat = 1,
++  SoftFloat = 2,
++  SinglePrecisionHardFloat = 3,
++
++  UnspecifiedLongDouble = 0,
++  IBM128LongDouble = 4,
++  IEEE64LongDouble = 8,
++  IEEE128LongDouble = 12,
++
++  // Tag_GNU_Power_ABI_Vector (=8), uleb128
++  UnspecifiedVector = 0,
++  NoVector = 1,
++  AltivecVector = 2,
++  SPEVector = 3,
++
++  // Tag_GNU_Power_ABI_Struct_Return (=12), uleb128
++  UnspecifiedStructReturn = 0,
++  RegisterStructReturn = 1,
++  MemoryStructReturn = 2
++};
++
+ } // namespace ARMBuildAttrs
+ } // namespace llvm
+ 
+diff --git a/lib/Support/ARMAttributeParser.cpp b/lib/Support/ARMAttributeParser.cpp
+index 1f98ac2f40b..77f9e9d49fc 100644
+--- a/lib/Support/ARMAttributeParser.cpp
++++ b/lib/Support/ARMAttributeParser.cpp
+@@ -16,7 +16,6 @@
+ using namespace llvm;
+ using namespace llvm::ARMBuildAttrs;
+ 
+-
+ static const EnumEntry<unsigned> TagNames[] = {
+   { "Tag_File", ARMBuildAttrs::File },
+   { "Tag_Section", ARMBuildAttrs::Section },
+@@ -24,52 +23,60 @@ static const EnumEntry<unsigned> TagNames[] = {
+ };
+ 
+ namespace llvm {
+-#define ATTRIBUTE_HANDLER(Attr_)                                                \
+-  { ARMBuildAttrs::Attr_, &ARMAttributeParser::Attr_ }
++#define AEABI_ATTRIBUTE_HANDLER(Attr_)                                         \
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::Attr_, &ARMAttributeParser::Attr_ }
++#define GNU_ATTRIBUTE_HANDLER(Attr_)                                           \
++  { ARMBuildAttrs::GNU, ARMBuildAttrs::Attr_, &ARMAttributeParser::Attr_ }
+ 
+ const ARMAttributeParser::DisplayHandler
+ ARMAttributeParser::DisplayRoutines[] = {
+-  { ARMBuildAttrs::CPU_raw_name, &ARMAttributeParser::StringAttribute, },
+-  { ARMBuildAttrs::CPU_name, &ARMAttributeParser::StringAttribute },
+-  ATTRIBUTE_HANDLER(CPU_arch),
+-  ATTRIBUTE_HANDLER(CPU_arch_profile),
+-  ATTRIBUTE_HANDLER(ARM_ISA_use),
+-  ATTRIBUTE_HANDLER(THUMB_ISA_use),
+-  ATTRIBUTE_HANDLER(FP_arch),
+-  ATTRIBUTE_HANDLER(WMMX_arch),
+-  ATTRIBUTE_HANDLER(Advanced_SIMD_arch),
+-  ATTRIBUTE_HANDLER(PCS_config),
+-  ATTRIBUTE_HANDLER(ABI_PCS_R9_use),
+-  ATTRIBUTE_HANDLER(ABI_PCS_RW_data),
+-  ATTRIBUTE_HANDLER(ABI_PCS_RO_data),
+-  ATTRIBUTE_HANDLER(ABI_PCS_GOT_use),
+-  ATTRIBUTE_HANDLER(ABI_PCS_wchar_t),
+-  ATTRIBUTE_HANDLER(ABI_FP_rounding),
+-  ATTRIBUTE_HANDLER(ABI_FP_denormal),
+-  ATTRIBUTE_HANDLER(ABI_FP_exceptions),
+-  ATTRIBUTE_HANDLER(ABI_FP_user_exceptions),
+-  ATTRIBUTE_HANDLER(ABI_FP_number_model),
+-  ATTRIBUTE_HANDLER(ABI_align_needed),
+-  ATTRIBUTE_HANDLER(ABI_align_preserved),
+-  ATTRIBUTE_HANDLER(ABI_enum_size),
+-  ATTRIBUTE_HANDLER(ABI_HardFP_use),
+-  ATTRIBUTE_HANDLER(ABI_VFP_args),
+-  ATTRIBUTE_HANDLER(ABI_WMMX_args),
+-  ATTRIBUTE_HANDLER(ABI_optimization_goals),
+-  ATTRIBUTE_HANDLER(ABI_FP_optimization_goals),
+-  ATTRIBUTE_HANDLER(compatibility),
+-  ATTRIBUTE_HANDLER(CPU_unaligned_access),
+-  ATTRIBUTE_HANDLER(FP_HP_extension),
+-  ATTRIBUTE_HANDLER(ABI_FP_16bit_format),
+-  ATTRIBUTE_HANDLER(MPextension_use),
+-  ATTRIBUTE_HANDLER(DIV_use),
+-  ATTRIBUTE_HANDLER(DSP_extension),
+-  ATTRIBUTE_HANDLER(T2EE_use),
+-  ATTRIBUTE_HANDLER(Virtualization_use),
+-  ATTRIBUTE_HANDLER(nodefaults)
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::CPU_raw_name,
++    &ARMAttributeParser::StringAttribute },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::CPU_name,
++    &ARMAttributeParser::StringAttribute },
++  AEABI_ATTRIBUTE_HANDLER(CPU_arch),
++  AEABI_ATTRIBUTE_HANDLER(CPU_arch_profile),
++  AEABI_ATTRIBUTE_HANDLER(ARM_ISA_use),
++  AEABI_ATTRIBUTE_HANDLER(THUMB_ISA_use),
++  AEABI_ATTRIBUTE_HANDLER(FP_arch),
++  AEABI_ATTRIBUTE_HANDLER(WMMX_arch),
++  AEABI_ATTRIBUTE_HANDLER(Advanced_SIMD_arch),
++  AEABI_ATTRIBUTE_HANDLER(PCS_config),
++  AEABI_ATTRIBUTE_HANDLER(ABI_PCS_R9_use),
++  AEABI_ATTRIBUTE_HANDLER(ABI_PCS_RW_data),
++  AEABI_ATTRIBUTE_HANDLER(ABI_PCS_RO_data),
++  AEABI_ATTRIBUTE_HANDLER(ABI_PCS_GOT_use),
++  AEABI_ATTRIBUTE_HANDLER(ABI_PCS_wchar_t),
++  AEABI_ATTRIBUTE_HANDLER(ABI_FP_rounding),
++  AEABI_ATTRIBUTE_HANDLER(ABI_FP_denormal),
++  AEABI_ATTRIBUTE_HANDLER(ABI_FP_exceptions),
++  AEABI_ATTRIBUTE_HANDLER(ABI_FP_user_exceptions),
++  AEABI_ATTRIBUTE_HANDLER(ABI_FP_number_model),
++  AEABI_ATTRIBUTE_HANDLER(ABI_align_needed),
++  AEABI_ATTRIBUTE_HANDLER(ABI_align_preserved),
++  AEABI_ATTRIBUTE_HANDLER(ABI_enum_size),
++  AEABI_ATTRIBUTE_HANDLER(ABI_HardFP_use),
++  AEABI_ATTRIBUTE_HANDLER(ABI_VFP_args),
++  AEABI_ATTRIBUTE_HANDLER(ABI_WMMX_args),
++  AEABI_ATTRIBUTE_HANDLER(ABI_optimization_goals),
++  AEABI_ATTRIBUTE_HANDLER(ABI_FP_optimization_goals),
++  AEABI_ATTRIBUTE_HANDLER(compatibility),
++  AEABI_ATTRIBUTE_HANDLER(CPU_unaligned_access),
++  AEABI_ATTRIBUTE_HANDLER(FP_HP_extension),
++  AEABI_ATTRIBUTE_HANDLER(ABI_FP_16bit_format),
++  AEABI_ATTRIBUTE_HANDLER(MPextension_use),
++  AEABI_ATTRIBUTE_HANDLER(DIV_use),
++  AEABI_ATTRIBUTE_HANDLER(DSP_extension),
++  AEABI_ATTRIBUTE_HANDLER(T2EE_use),
++  AEABI_ATTRIBUTE_HANDLER(Virtualization_use),
++  AEABI_ATTRIBUTE_HANDLER(nodefaults),
++  GNU_ATTRIBUTE_HANDLER(GNU_Power_ABI_FP),
++  GNU_ATTRIBUTE_HANDLER(GNU_Power_ABI_Vector),
++  GNU_ATTRIBUTE_HANDLER(GNU_Power_ABI_Struct_Return)
+ };
+ 
+-#undef ATTRIBUTE_HANDLER
++#undef AEABI_ATTRIBUTE_HANDLER
++#undef GNU_ATTRIBUTE_HANDLER
+ 
+ uint64_t ARMAttributeParser::ParseInteger(const uint8_t *Data,
+                                           uint32_t &Offset) {
+@@ -87,19 +94,22 @@ StringRef ARMAttributeParser::ParseString(const uint8_t *Data,
+   return StringRef(String, Length);
+ }
+ 
+-void ARMAttributeParser::IntegerAttribute(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::IntegerAttribute(AttrVendor Vendor, AttrType Tag,
++                                          const uint8_t *Data,
+                                           uint32_t &Offset) {
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   Attributes.insert(std::make_pair(Tag, Value));
+ 
+   if (SW)
+-    SW->printNumber(ARMBuildAttrs::AttrTypeAsString(Tag), Value);
++    SW->printNumber(ARMBuildAttrs::AttrTypeAsString(Vendor, Tag), Value);
+ }
+ 
+-void ARMAttributeParser::StringAttribute(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::StringAttribute(AttrVendor Vendor, AttrType Tag,
++                                         const uint8_t *Data,
+                                          uint32_t &Offset) {
+-  StringRef TagName = ARMBuildAttrs::AttrTypeAsString(Tag, /*TagPrefix*/false);
++  StringRef TagName = ARMBuildAttrs::AttrTypeAsString(Vendor, Tag,
++                                                      /*TagPrefix*/false);
+   StringRef ValueDesc = ParseString(Data, Offset);
+ 
+   if (SW) {
+@@ -111,12 +121,12 @@ void ARMAttributeParser::StringAttribute(AttrType Tag, const uint8_t *Data,
+   }
+ }
+ 
+-void ARMAttributeParser::PrintAttribute(unsigned Tag, unsigned Value,
+-                                        StringRef ValueDesc) {
++void ARMAttributeParser::PrintAttribute(unsigned Vendor, unsigned Tag,
++                                        unsigned Value, StringRef ValueDesc) {
+   Attributes.insert(std::make_pair(Tag, Value));
+ 
+   if (SW) {
+-    StringRef TagName = ARMBuildAttrs::AttrTypeAsString(Tag,
++    StringRef TagName = ARMBuildAttrs::AttrTypeAsString(Vendor, Tag,
+                                                         /*TagPrefix*/false);
+     DictScope AS(*SW, "Attribute");
+     SW->printNumber("Tag", Tag);
+@@ -128,8 +138,8 @@ void ARMAttributeParser::PrintAttribute(unsigned Tag, unsigned Value,
+   }
+ }
+ 
+-void ARMAttributeParser::CPU_arch(AttrType Tag, const uint8_t *Data,
+-                                  uint32_t &Offset) {
++void ARMAttributeParser::CPU_arch(AttrVendor Vendor, AttrType Tag,
++                                  const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Pre-v4", "ARM v4", "ARM v4T", "ARM v5T", "ARM v5TE", "ARM v5TEJ", "ARM v6",
+     "ARM v6KZ", "ARM v6T2", "ARM v6K", "ARM v7", "ARM v6-M", "ARM v6S-M",
+@@ -139,10 +149,11 @@ void ARMAttributeParser::CPU_arch(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::CPU_arch_profile(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::CPU_arch_profile(AttrVendor Vendor, AttrType Tag,
++                                          const uint8_t *Data,
+                                           uint32_t &Offset) {
+   uint64_t Encoded = ParseInteger(Data, Offset);
+ 
+@@ -156,31 +167,31 @@ void ARMAttributeParser::CPU_arch_profile(AttrType Tag, const uint8_t *Data,
+   case 0: Profile = "None"; break;
+   }
+ 
+-  PrintAttribute(Tag, Encoded, Profile);
++  PrintAttribute(Vendor, Tag, Encoded, Profile);
+ }
+ 
+-void ARMAttributeParser::ARM_ISA_use(AttrType Tag, const uint8_t *Data,
+-                                     uint32_t &Offset) {
++void ARMAttributeParser::ARM_ISA_use(AttrVendor Vendor, AttrType Tag,
++                                     const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = { "Not Permitted", "Permitted" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::THUMB_ISA_use(AttrType Tag, const uint8_t *Data,
+-                                       uint32_t &Offset) {
++void ARMAttributeParser::THUMB_ISA_use(AttrVendor Vendor, AttrType Tag,
++                                       const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = { "Not Permitted", "Thumb-1", "Thumb-2" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::FP_arch(AttrType Tag, const uint8_t *Data,
+-                                 uint32_t &Offset) {
++void ARMAttributeParser::FP_arch(AttrVendor Vendor, AttrType Tag,
++                                 const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Not Permitted", "VFPv1", "VFPv2", "VFPv3", "VFPv3-D16", "VFPv4",
+     "VFPv4-D16", "ARMv8-a FP", "ARMv8-a FP-D16"
+@@ -189,20 +200,21 @@ void ARMAttributeParser::FP_arch(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::WMMX_arch(AttrType Tag, const uint8_t *Data,
+-                                   uint32_t &Offset) {
++void ARMAttributeParser::WMMX_arch(AttrVendor Vendor, AttrType Tag,
++                                   const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = { "Not Permitted", "WMMXv1", "WMMXv2" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::Advanced_SIMD_arch(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::Advanced_SIMD_arch(AttrVendor Vendor, AttrType Tag,
++                                            const uint8_t *Data,
+                                             uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Not Permitted", "NEONv1", "NEONv2+FMA", "ARMv8-a NEON", "ARMv8.1-a NEON"
+@@ -211,11 +223,11 @@ void ARMAttributeParser::Advanced_SIMD_arch(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::PCS_config(AttrType Tag, const uint8_t *Data,
+-                                    uint32_t &Offset) {
++void ARMAttributeParser::PCS_config(AttrVendor Vendor, AttrType Tag,
++                                    const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "None", "Bare Platform", "Linux Application", "Linux DSO", "Palm OS 2004",
+     "Reserved (Palm OS)", "Symbian OS 2004", "Reserved (Symbian OS)"
+@@ -224,20 +236,21 @@ void ARMAttributeParser::PCS_config(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_PCS_R9_use(AttrType Tag, const uint8_t *Data,
+-                                        uint32_t &Offset) {
++void ARMAttributeParser::ABI_PCS_R9_use(AttrVendor Vendor, AttrType Tag,
++                                        const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = { "v6", "Static Base", "TLS", "Unused" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_PCS_RW_data(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::ABI_PCS_RW_data(AttrVendor Vendor, AttrType Tag,
++                                         const uint8_t *Data,
+                                          uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Absolute", "PC-relative", "SB-relative", "Not Permitted"
+@@ -246,10 +259,11 @@ void ARMAttributeParser::ABI_PCS_RW_data(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_PCS_RO_data(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::ABI_PCS_RO_data(AttrVendor Vendor, AttrType Tag,
++                                         const uint8_t *Data,
+                                          uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Absolute", "PC-relative", "Not Permitted"
+@@ -258,10 +272,11 @@ void ARMAttributeParser::ABI_PCS_RO_data(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_PCS_GOT_use(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::ABI_PCS_GOT_use(AttrVendor Vendor, AttrType Tag,
++                                         const uint8_t *Data,
+                                          uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Not Permitted", "Direct", "GOT-Indirect"
+@@ -270,10 +285,11 @@ void ARMAttributeParser::ABI_PCS_GOT_use(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_PCS_wchar_t(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::ABI_PCS_wchar_t(AttrVendor Vendor, AttrType Tag,
++                                         const uint8_t *Data,
+                                          uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Not Permitted", "Unknown", "2-byte", "Unknown", "4-byte"
+@@ -282,20 +298,22 @@ void ARMAttributeParser::ABI_PCS_wchar_t(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_FP_rounding(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::ABI_FP_rounding(AttrVendor Vendor, AttrType Tag,
++                                         const uint8_t *Data,
+                                          uint32_t &Offset) {
+   static const char *const Strings[] = { "IEEE-754", "Runtime" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_FP_denormal(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::ABI_FP_denormal(AttrVendor Vendor, AttrType Tag,
++                                         const uint8_t *Data,
+                                          uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Unsupported", "IEEE-754", "Sign Only"
+@@ -304,20 +322,21 @@ void ARMAttributeParser::ABI_FP_denormal(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_FP_exceptions(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::ABI_FP_exceptions(AttrVendor Vendor, AttrType Tag,
++                                           const uint8_t *Data,
+                                            uint32_t &Offset) {
+   static const char *const Strings[] = { "Not Permitted", "IEEE-754" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_FP_user_exceptions(AttrType Tag,
++void ARMAttributeParser::ABI_FP_user_exceptions(AttrVendor Vendor, AttrType Tag,
+                                                 const uint8_t *Data,
+                                                 uint32_t &Offset) {
+   static const char *const Strings[] = { "Not Permitted", "IEEE-754" };
+@@ -325,10 +344,11 @@ void ARMAttributeParser::ABI_FP_user_exceptions(AttrType Tag,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_FP_number_model(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::ABI_FP_number_model(AttrVendor Vendor, AttrType Tag,
++                                             const uint8_t *Data,
+                                              uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Not Permitted", "Finite Only", "RTABI", "IEEE-754"
+@@ -337,10 +357,11 @@ void ARMAttributeParser::ABI_FP_number_model(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_align_needed(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::ABI_align_needed(AttrVendor Vendor, AttrType Tag,
++                                          const uint8_t *Data,
+                                           uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Not Permitted", "8-byte alignment", "4-byte alignment", "Reserved"
+@@ -357,10 +378,11 @@ void ARMAttributeParser::ABI_align_needed(AttrType Tag, const uint8_t *Data,
+   else
+     Description = "Invalid";
+ 
+-  PrintAttribute(Tag, Value, Description);
++  PrintAttribute(Vendor, Tag, Value, Description);
+ }
+ 
+-void ARMAttributeParser::ABI_align_preserved(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::ABI_align_preserved(AttrVendor Vendor, AttrType Tag,
++                                             const uint8_t *Data,
+                                              uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Not Required", "8-byte data alignment", "8-byte data and code alignment",
+@@ -378,11 +400,11 @@ void ARMAttributeParser::ABI_align_preserved(AttrType Tag, const uint8_t *Data,
+   else
+     Description = "Invalid";
+ 
+-  PrintAttribute(Tag, Value, Description);
++  PrintAttribute(Vendor, Tag, Value, Description);
+ }
+ 
+-void ARMAttributeParser::ABI_enum_size(AttrType Tag, const uint8_t *Data,
+-                                       uint32_t &Offset) {
++void ARMAttributeParser::ABI_enum_size(AttrVendor Vendor, AttrType Tag,
++                                       const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Not Permitted", "Packed", "Int32", "External Int32"
+   };
+@@ -390,11 +412,11 @@ void ARMAttributeParser::ABI_enum_size(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_HardFP_use(AttrType Tag, const uint8_t *Data,
+-                                        uint32_t &Offset) {
++void ARMAttributeParser::ABI_HardFP_use(AttrVendor Vendor, AttrType Tag,
++                                        const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Tag_FP_arch", "Single-Precision", "Reserved", "Tag_FP_arch (deprecated)"
+   };
+@@ -402,11 +424,11 @@ void ARMAttributeParser::ABI_HardFP_use(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_VFP_args(AttrType Tag, const uint8_t *Data,
+-                                      uint32_t &Offset) {
++void ARMAttributeParser::ABI_VFP_args(AttrVendor Vendor, AttrType Tag,
++                                      const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "AAPCS", "AAPCS VFP", "Custom", "Not Permitted"
+   };
+@@ -414,20 +436,20 @@ void ARMAttributeParser::ABI_VFP_args(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_WMMX_args(AttrType Tag, const uint8_t *Data,
+-                                       uint32_t &Offset) {
++void ARMAttributeParser::ABI_WMMX_args(AttrVendor Vendor, AttrType Tag,
++                                       const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = { "AAPCS", "iWMMX", "Custom" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_optimization_goals(AttrType Tag,
++void ARMAttributeParser::ABI_optimization_goals(AttrVendor Vendor, AttrType Tag,
+                                                 const uint8_t *Data,
+                                                 uint32_t &Offset) {
+   static const char *const Strings[] = {
+@@ -438,10 +460,11 @@ void ARMAttributeParser::ABI_optimization_goals(AttrType Tag,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_FP_optimization_goals(AttrType Tag,
++void ARMAttributeParser::ABI_FP_optimization_goals(AttrVendor Vendor,
++                                                   AttrType Tag,
+                                                    const uint8_t *Data,
+                                                    uint32_t &Offset) {
+   static const char *const Strings[] = {
+@@ -452,11 +475,11 @@ void ARMAttributeParser::ABI_FP_optimization_goals(AttrType Tag,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::compatibility(AttrType Tag, const uint8_t *Data,
+-                                       uint32_t &Offset) {
++void ARMAttributeParser::compatibility(AttrVendor Vendor, AttrType Tag,
++                                       const uint8_t *Data, uint32_t &Offset) {
+   uint64_t Integer = ParseInteger(Data, Offset);
+   StringRef String = ParseString(Data, Offset);
+ 
+@@ -464,7 +487,8 @@ void ARMAttributeParser::compatibility(AttrType Tag, const uint8_t *Data,
+     DictScope AS(*SW, "Attribute");
+     SW->printNumber("Tag", Tag);
+     SW->startLine() << "Value: " << Integer << ", " << String << '\n';
+-    SW->printString("TagName", AttrTypeAsString(Tag, /*TagPrefix*/false));
++    SW->printString("TagName", AttrTypeAsString(Vendor, Tag,
++                                                /*TagPrefix*/false));
+     switch (Integer) {
+     case 0:
+       SW->printString("Description", StringRef("No Specific Requirements"));
+@@ -479,48 +503,52 @@ void ARMAttributeParser::compatibility(AttrType Tag, const uint8_t *Data,
+   }
+ }
+ 
+-void ARMAttributeParser::CPU_unaligned_access(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::CPU_unaligned_access(AttrVendor Vendor, AttrType Tag,
++                                              const uint8_t *Data,
+                                               uint32_t &Offset) {
+   static const char *const Strings[] = { "Not Permitted", "v6-style" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::FP_HP_extension(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::FP_HP_extension(AttrVendor Vendor, AttrType Tag,
++                                         const uint8_t *Data,
+                                          uint32_t &Offset) {
+   static const char *const Strings[] = { "If Available", "Permitted" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::ABI_FP_16bit_format(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::ABI_FP_16bit_format(AttrVendor Vendor, AttrType Tag,
++                                             const uint8_t *Data,
+                                              uint32_t &Offset) {
+   static const char *const Strings[] = { "Not Permitted", "IEEE-754", "VFPv3" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::MPextension_use(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::MPextension_use(AttrVendor Vendor, AttrType Tag,
++                                         const uint8_t *Data,
+                                          uint32_t &Offset) {
+   static const char *const Strings[] = { "Not Permitted", "Permitted" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::DIV_use(AttrType Tag, const uint8_t *Data,
+-                                 uint32_t &Offset) {
++void ARMAttributeParser::DIV_use(AttrVendor Vendor, AttrType Tag,
++                                 const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "If Available", "Not Permitted", "Permitted"
+   };
+@@ -528,30 +556,31 @@ void ARMAttributeParser::DIV_use(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::DSP_extension(AttrType Tag, const uint8_t *Data,
+-                                       uint32_t &Offset) {
++void ARMAttributeParser::DSP_extension(AttrVendor Vendor, AttrType Tag,
++                                       const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = { "Not Permitted", "Permitted" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::T2EE_use(AttrType Tag, const uint8_t *Data,
+-                                  uint32_t &Offset) {
++void ARMAttributeParser::T2EE_use(AttrVendor Vendor, AttrType Tag,
++                                  const uint8_t *Data, uint32_t &Offset) {
+   static const char *const Strings[] = { "Not Permitted", "Permitted" };
+ 
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::Virtualization_use(AttrType Tag, const uint8_t *Data,
++void ARMAttributeParser::Virtualization_use(AttrVendor Vendor, AttrType Tag,
++                                            const uint8_t *Data,
+                                             uint32_t &Offset) {
+   static const char *const Strings[] = {
+     "Not Permitted", "TrustZone", "Virtualization Extensions",
+@@ -561,13 +590,63 @@ void ARMAttributeParser::Virtualization_use(AttrType Tag, const uint8_t *Data,
+   uint64_t Value = ParseInteger(Data, Offset);
+   StringRef ValueDesc =
+     (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
+-  PrintAttribute(Tag, Value, ValueDesc);
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+-void ARMAttributeParser::nodefaults(AttrType Tag, const uint8_t *Data,
+-                                    uint32_t &Offset) {
++void ARMAttributeParser::nodefaults(AttrVendor Vendor, AttrType Tag,
++                                    const uint8_t *Data, uint32_t &Offset) {
+   uint64_t Value = ParseInteger(Data, Offset);
+-  PrintAttribute(Tag, Value, "Unspecified Tags UNDEFINED");
++  PrintAttribute(Vendor, Tag, Value, "Unspecified Tags UNDEFINED");
++}
++
++void ARMAttributeParser::GNU_Power_ABI_FP(AttrVendor Vendor, AttrType Tag,
++                                          const uint8_t *Data,
++                                          uint32_t &Offset) {
++  static const char *const FloatStrings[] = {
++    "Unspecified Float ABI", "Hard Float", "Soft Float",
++    "Single-Precision Hard Float"
++  };
++  static const char *const LongDoubleStrings[] = {
++    "Unspecified long double", "128-bit IBM long double",
++    "64-bit long double", "128-bit IEEE long double"
++  };
++
++  uint64_t Value = ParseInteger(Data, Offset);
++  unsigned FloatValue = Value & 0x3;
++  unsigned LongDoubleValue = (Value & 0xc) >> 2;
++  Twine ValueDesc =
++    Twine(FloatStrings[FloatValue]) + ", " + LongDoubleStrings[LongDoubleValue];
++  PrintAttribute(Vendor, Tag, Value, ValueDesc.str());
++}
++
++void ARMAttributeParser::GNU_Power_ABI_Vector(AttrVendor Vendor, AttrType Tag,
++                                              const uint8_t *Data,
++                                              uint32_t &Offset) {
++  static const char *const Strings[] = {
++    "Unspecified Vector Registers", "No Vector Registers",
++    "Altivec Vector Registers", "SPE Vector Registers"
++  };
++
++  uint64_t Value = ParseInteger(Data, Offset);
++  StringRef ValueDesc =
++    (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
++}
++
++void ARMAttributeParser::GNU_Power_ABI_Struct_Return(AttrVendor Vendor,
++                                                     AttrType Tag,
++                                                     const uint8_t *Data,
++                                                     uint32_t &Offset) {
++  static const char *const Strings[] = {
++    "Unspecified Structure Return Method",
++    "Small Structures Returned In Registers",
++    "Structures Returned In Memory"
++  };
++
++  uint64_t Value = ParseInteger(Data, Offset);
++  StringRef ValueDesc =
++    (Value < array_lengthof(Strings)) ? Strings[Value] : nullptr;
++  PrintAttribute(Vendor, Tag, Value, ValueDesc);
+ }
+ 
+ void ARMAttributeParser::ParseIndexList(const uint8_t *Data, uint32_t &Offset,
+@@ -582,7 +661,8 @@ void ARMAttributeParser::ParseIndexList(const uint8_t *Data, uint32_t &Offset,
+   }
+ }
+ 
+-void ARMAttributeParser::ParseAttributeList(const uint8_t *Data,
++void ARMAttributeParser::ParseAttributeList(AttrVendor Vendor,
++                                            const uint8_t *Data,
+                                             uint32_t &Offset, uint32_t Length) {
+   while (Offset < Length) {
+     unsigned Length;
+@@ -592,29 +672,32 @@ void ARMAttributeParser::ParseAttributeList(const uint8_t *Data,
+     bool Handled = false;
+     for (unsigned AHI = 0, AHE = array_lengthof(DisplayRoutines);
+          AHI != AHE && !Handled; ++AHI) {
+-      if (uint64_t(DisplayRoutines[AHI].Attribute) == Tag) {
+-        (this->*DisplayRoutines[AHI].Routine)(ARMBuildAttrs::AttrType(Tag),
++      if (DisplayRoutines[AHI].Vendor == Vendor &&
++          uint64_t(DisplayRoutines[AHI].Attribute) == Tag) {
++        (this->*DisplayRoutines[AHI].Routine)(Vendor,
++                                              ARMBuildAttrs::AttrType(Tag),
+                                               Data, Offset);
+         Handled = true;
+         break;
+       }
+     }
+     if (!Handled) {
+-      if (Tag < 32) {
++      if (Vendor == AEABI && Tag < 32) {
+         errs() << "unhandled AEABI Tag " << Tag
+-               << " (" << ARMBuildAttrs::AttrTypeAsString(Tag) << ")\n";
++               << " (" << ARMBuildAttrs::AttrTypeAsString(Vendor, Tag) << ")\n";
+         continue;
+       }
+ 
+       if (Tag % 2 == 0)
+-        IntegerAttribute(ARMBuildAttrs::AttrType(Tag), Data, Offset);
++        IntegerAttribute(Vendor, ARMBuildAttrs::AttrType(Tag), Data, Offset);
+       else
+-        StringAttribute(ARMBuildAttrs::AttrType(Tag), Data, Offset);
++        StringAttribute(Vendor, ARMBuildAttrs::AttrType(Tag), Data, Offset);
+     }
+   }
+ }
+ 
+-void ARMAttributeParser::ParseSubsection(const uint8_t *Data, uint32_t Length) {
++void ARMAttributeParser::ParseSubsection(const uint8_t *Data, uint32_t Length,
++                                         bool isLittle) {
+   uint32_t Offset = sizeof(uint32_t); /* SectionLength */
+ 
+   const char *VendorName = reinterpret_cast<const char*>(Data + Offset);
+@@ -626,7 +709,12 @@ void ARMAttributeParser::ParseSubsection(const uint8_t *Data, uint32_t Length) {
+     SW->printString("Vendor", StringRef(VendorName, VendorNameLength));
+   }
+ 
+-  if (StringRef(VendorName, VendorNameLength).lower() != "aeabi") {
++  AttrVendor Vendor;
++  if (StringRef(VendorName, VendorNameLength).lower() == "aeabi") {
++    Vendor = AEABI;
++  } else if (StringRef(VendorName, VendorNameLength).lower() == "gnu") {
++    Vendor = GNU;
++  } else {
+     return;
+   }
+ 
+@@ -635,8 +723,9 @@ void ARMAttributeParser::ParseSubsection(const uint8_t *Data, uint32_t Length) {
+     uint8_t Tag = Data[Offset];
+     Offset = Offset + sizeof(Tag);
+ 
+-    uint32_t Size =
+-      *reinterpret_cast<const support::ulittle32_t*>(Data + Offset);
++    uint32_t Size = isLittle ?
++      support::endian::read32le(Data + Offset) :
++      support::endian::read32be(Data + Offset);
+     Offset = Offset + sizeof(Size);
+ 
+     if (SW) {
+@@ -674,9 +763,9 @@ void ARMAttributeParser::ParseSubsection(const uint8_t *Data, uint32_t Length) {
+       DictScope ASS(*SW, ScopeName);
+       if (!Indicies.empty())
+         SW->printList(IndexName, Indicies);
+-      ParseAttributeList(Data, Offset, Length);
++      ParseAttributeList(Vendor, Data, Offset, Length);
+     } else {
+-      ParseAttributeList(Data, Offset, Length);
++      ParseAttributeList(Vendor, Data, Offset, Length);
+     }
+   }
+ }
+@@ -695,7 +784,7 @@ void ARMAttributeParser::Parse(ArrayRef<uint8_t> Section, bool isLittle) {
+       SW->indent();
+     }
+ 
+-    ParseSubsection(Section.data() + Offset, SectionLength);
++    ParseSubsection(Section.data() + Offset, SectionLength, isLittle);
+     Offset = Offset + SectionLength;
+ 
+     if (SW) {
+diff --git a/lib/Support/ARMBuildAttrs.cpp b/lib/Support/ARMBuildAttrs.cpp
+index 8f18e9eb24e..0b9d858bc8c 100644
+--- a/lib/Support/ARMBuildAttrs.cpp
++++ b/lib/Support/ARMBuildAttrs.cpp
+@@ -14,71 +14,79 @@ using namespace llvm;
+ 
+ namespace {
+ const struct {
++  ARMBuildAttrs::AttrVendor Vendor;
+   ARMBuildAttrs::AttrType Attr;
+   StringRef TagName;
+ } ARMAttributeTags[] = {
+-  { ARMBuildAttrs::File, "Tag_File" },
+-  { ARMBuildAttrs::Section, "Tag_Section" },
+-  { ARMBuildAttrs::Symbol, "Tag_Symbol" },
+-  { ARMBuildAttrs::CPU_raw_name, "Tag_CPU_raw_name" },
+-  { ARMBuildAttrs::CPU_name, "Tag_CPU_name" },
+-  { ARMBuildAttrs::CPU_arch, "Tag_CPU_arch" },
+-  { ARMBuildAttrs::CPU_arch_profile, "Tag_CPU_arch_profile" },
+-  { ARMBuildAttrs::ARM_ISA_use, "Tag_ARM_ISA_use" },
+-  { ARMBuildAttrs::THUMB_ISA_use, "Tag_THUMB_ISA_use" },
+-  { ARMBuildAttrs::FP_arch, "Tag_FP_arch" },
+-  { ARMBuildAttrs::WMMX_arch, "Tag_WMMX_arch" },
+-  { ARMBuildAttrs::Advanced_SIMD_arch, "Tag_Advanced_SIMD_arch" },
+-  { ARMBuildAttrs::PCS_config, "Tag_PCS_config" },
+-  { ARMBuildAttrs::ABI_PCS_R9_use, "Tag_ABI_PCS_R9_use" },
+-  { ARMBuildAttrs::ABI_PCS_RW_data, "Tag_ABI_PCS_RW_data" },
+-  { ARMBuildAttrs::ABI_PCS_RO_data, "Tag_ABI_PCS_RO_data" },
+-  { ARMBuildAttrs::ABI_PCS_GOT_use, "Tag_ABI_PCS_GOT_use" },
+-  { ARMBuildAttrs::ABI_PCS_wchar_t, "Tag_ABI_PCS_wchar_t" },
+-  { ARMBuildAttrs::ABI_FP_rounding, "Tag_ABI_FP_rounding" },
+-  { ARMBuildAttrs::ABI_FP_denormal, "Tag_ABI_FP_denormal" },
+-  { ARMBuildAttrs::ABI_FP_exceptions, "Tag_ABI_FP_exceptions" },
+-  { ARMBuildAttrs::ABI_FP_user_exceptions, "Tag_ABI_FP_user_exceptions" },
+-  { ARMBuildAttrs::ABI_FP_number_model, "Tag_ABI_FP_number_model" },
+-  { ARMBuildAttrs::ABI_align_needed, "Tag_ABI_align_needed" },
+-  { ARMBuildAttrs::ABI_align_preserved, "Tag_ABI_align_preserved" },
+-  { ARMBuildAttrs::ABI_enum_size, "Tag_ABI_enum_size" },
+-  { ARMBuildAttrs::ABI_HardFP_use, "Tag_ABI_HardFP_use" },
+-  { ARMBuildAttrs::ABI_VFP_args, "Tag_ABI_VFP_args" },
+-  { ARMBuildAttrs::ABI_WMMX_args, "Tag_ABI_WMMX_args" },
+-  { ARMBuildAttrs::ABI_optimization_goals, "Tag_ABI_optimization_goals" },
+-  { ARMBuildAttrs::ABI_FP_optimization_goals, "Tag_ABI_FP_optimization_goals" },
+-  { ARMBuildAttrs::compatibility, "Tag_compatibility" },
+-  { ARMBuildAttrs::CPU_unaligned_access, "Tag_CPU_unaligned_access" },
+-  { ARMBuildAttrs::FP_HP_extension, "Tag_FP_HP_extension" },
+-  { ARMBuildAttrs::ABI_FP_16bit_format, "Tag_ABI_FP_16bit_format" },
+-  { ARMBuildAttrs::MPextension_use, "Tag_MPextension_use" },
+-  { ARMBuildAttrs::DIV_use, "Tag_DIV_use" },
+-  { ARMBuildAttrs::DSP_extension, "Tag_DSP_extension" },
+-  { ARMBuildAttrs::nodefaults, "Tag_nodefaults" },
+-  { ARMBuildAttrs::also_compatible_with, "Tag_also_compatible_with" },
+-  { ARMBuildAttrs::T2EE_use, "Tag_T2EE_use" },
+-  { ARMBuildAttrs::conformance, "Tag_conformance" },
+-  { ARMBuildAttrs::Virtualization_use, "Tag_Virtualization_use" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::File, "Tag_File" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::Section, "Tag_Section" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::Symbol, "Tag_Symbol" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::CPU_raw_name, "Tag_CPU_raw_name" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::CPU_name, "Tag_CPU_name" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::CPU_arch, "Tag_CPU_arch" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::CPU_arch_profile, "Tag_CPU_arch_profile" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ARM_ISA_use, "Tag_ARM_ISA_use" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::THUMB_ISA_use, "Tag_THUMB_ISA_use" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::FP_arch, "Tag_FP_arch" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::WMMX_arch, "Tag_WMMX_arch" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::Advanced_SIMD_arch, "Tag_Advanced_SIMD_arch" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::PCS_config, "Tag_PCS_config" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_PCS_R9_use, "Tag_ABI_PCS_R9_use" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_PCS_RW_data, "Tag_ABI_PCS_RW_data" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_PCS_RO_data, "Tag_ABI_PCS_RO_data" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_PCS_GOT_use, "Tag_ABI_PCS_GOT_use" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_PCS_wchar_t, "Tag_ABI_PCS_wchar_t" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_FP_rounding, "Tag_ABI_FP_rounding" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_FP_denormal, "Tag_ABI_FP_denormal" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_FP_exceptions, "Tag_ABI_FP_exceptions" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_FP_user_exceptions, "Tag_ABI_FP_user_exceptions" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_FP_number_model, "Tag_ABI_FP_number_model" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_align_needed, "Tag_ABI_align_needed" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_align_preserved, "Tag_ABI_align_preserved" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_enum_size, "Tag_ABI_enum_size" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_HardFP_use, "Tag_ABI_HardFP_use" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_VFP_args, "Tag_ABI_VFP_args" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_WMMX_args, "Tag_ABI_WMMX_args" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_optimization_goals, "Tag_ABI_optimization_goals" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_FP_optimization_goals, "Tag_ABI_FP_optimization_goals" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::compatibility, "Tag_compatibility" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::CPU_unaligned_access, "Tag_CPU_unaligned_access" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::FP_HP_extension, "Tag_FP_HP_extension" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_FP_16bit_format, "Tag_ABI_FP_16bit_format" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::MPextension_use, "Tag_MPextension_use" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::DIV_use, "Tag_DIV_use" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::DSP_extension, "Tag_DSP_extension" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::nodefaults, "Tag_nodefaults" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::also_compatible_with, "Tag_also_compatible_with" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::T2EE_use, "Tag_T2EE_use" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::conformance, "Tag_conformance" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::Virtualization_use, "Tag_Virtualization_use" },
+ 
+   // Legacy Names
+-  { ARMBuildAttrs::FP_arch, "Tag_VFP_arch" },
+-  { ARMBuildAttrs::FP_HP_extension, "Tag_VFP_HP_extension" },
+-  { ARMBuildAttrs::ABI_align_needed, "Tag_ABI_align8_needed" },
+-  { ARMBuildAttrs::ABI_align_preserved, "Tag_ABI_align8_preserved" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::FP_arch, "Tag_VFP_arch" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::FP_HP_extension, "Tag_VFP_HP_extension" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_align_needed, "Tag_ABI_align8_needed" },
++  { ARMBuildAttrs::AEABI, ARMBuildAttrs::ABI_align_preserved, "Tag_ABI_align8_preserved" },
++
++  // PowerPC
++  { ARMBuildAttrs::GNU, ARMBuildAttrs::GNU_Power_ABI_FP, "Tag_GNU_Power_ABI_FP" },
++  { ARMBuildAttrs::GNU, ARMBuildAttrs::GNU_Power_ABI_Vector, "Tag_GNU_Power_ABI_Vector" },
++  { ARMBuildAttrs::GNU, ARMBuildAttrs::GNU_Power_ABI_Struct_Return, "Tag_GNU_Power_ABI_Struct_Return" },
+ };
+ }
+ 
+ namespace llvm {
+ namespace ARMBuildAttrs {
+-StringRef AttrTypeAsString(unsigned Attr, bool HasTagPrefix) {
+-  return AttrTypeAsString(static_cast<AttrType>(Attr), HasTagPrefix);
++StringRef AttrTypeAsString(unsigned Vendor, unsigned Attr, bool HasTagPrefix) {
++  return AttrTypeAsString(static_cast<AttrVendor>(Vendor),
++                          static_cast<AttrType>(Attr), HasTagPrefix);
+ }
+ 
+-StringRef AttrTypeAsString(AttrType Attr, bool HasTagPrefix) {
++StringRef AttrTypeAsString(AttrVendor Vendor, AttrType Attr, bool HasTagPrefix) {
+   for (unsigned TI = 0, TE = sizeof(ARMAttributeTags) / sizeof(*ARMAttributeTags);
+        TI != TE; ++TI)
+-    if (ARMAttributeTags[TI].Attr == Attr) {
++    if (ARMAttributeTags[TI].Vendor == Vendor &&
++        ARMAttributeTags[TI].Attr == Attr) {
+       auto TagName = ARMAttributeTags[TI].TagName;
+       return HasTagPrefix ? TagName : TagName.drop_front(4);
+     }
+diff --git a/lib/Target/ARM/MCTargetDesc/ARMELFStreamer.cpp b/lib/Target/ARM/MCTargetDesc/ARMELFStreamer.cpp
+index 3373d691db5..e62e04a0748 100644
+--- a/lib/Target/ARM/MCTargetDesc/ARMELFStreamer.cpp
++++ b/lib/Target/ARM/MCTargetDesc/ARMELFStreamer.cpp
+@@ -178,7 +178,8 @@ void ARMTargetAsmStreamer::switchVendor(StringRef Vendor) {}
+ void ARMTargetAsmStreamer::emitAttribute(unsigned Attribute, unsigned Value) {
+   OS << "\t.eabi_attribute\t" << Attribute << ", " << Twine(Value);
+   if (IsVerboseAsm) {
+-    StringRef Name = ARMBuildAttrs::AttrTypeAsString(Attribute);
++    StringRef Name = ARMBuildAttrs::AttrTypeAsString(ARMBuildAttrs::AEABI,
++                                                     Attribute);
+     if (!Name.empty())
+       OS << "\t@ " << Name;
+   }
+@@ -194,7 +195,8 @@ void ARMTargetAsmStreamer::emitTextAttribute(unsigned Attribute,
+   default:
+     OS << "\t.eabi_attribute\t" << Attribute << ", \"" << String << "\"";
+     if (IsVerboseAsm) {
+-      StringRef Name = ARMBuildAttrs::AttrTypeAsString(Attribute);
++      StringRef Name = ARMBuildAttrs::AttrTypeAsString(ARMBuildAttrs::AEABI,
++                                                       Attribute);
+       if (!Name.empty())
+         OS << "\t@ " << Name;
+     }
+@@ -213,7 +215,8 @@ void ARMTargetAsmStreamer::emitIntTextAttribute(unsigned Attribute,
+     if (!StringValue.empty())
+       OS << ", \"" << StringValue << "\"";
+     if (IsVerboseAsm)
+-      OS << "\t@ " << ARMBuildAttrs::AttrTypeAsString(Attribute);
++      OS << "\t@ " << ARMBuildAttrs::AttrTypeAsString(ARMBuildAttrs::AEABI,
++                                                      Attribute);
+     break;
+   }
+   OS << "\n";
+diff --git a/lib/Target/PowerPC/AsmParser/PPCAsmParser.cpp b/lib/Target/PowerPC/AsmParser/PPCAsmParser.cpp
+index 56307a84f2e..9783c176cdb 100644
+--- a/lib/Target/PowerPC/AsmParser/PPCAsmParser.cpp
++++ b/lib/Target/PowerPC/AsmParser/PPCAsmParser.cpp
+@@ -286,6 +286,7 @@ class PPCAsmParser : public MCTargetAsmParser {
+   bool ParseDirectiveMachine(SMLoc L);
+   bool ParseDarwinDirectiveMachine(SMLoc L);
+   bool ParseDirectiveAbiVersion(SMLoc L);
++  bool ParseDirectiveGNUAttribute(SMLoc L);
+   bool ParseDirectiveLocalEntry(SMLoc L);
+ 
+   bool MatchAndEmitInstruction(SMLoc IDLoc, unsigned &Opcode,
+@@ -1801,6 +1802,8 @@ bool PPCAsmParser::ParseDirective(AsmToken DirectiveID) {
+     ParseDirectiveMachine(DirectiveID.getLoc());
+   else if (IDVal == ".abiversion")
+     ParseDirectiveAbiVersion(DirectiveID.getLoc());
++  else if (IDVal == ".gnu_attribute")
++    ParseDirectiveGNUAttribute(DirectiveID.getLoc());
+   else if (IDVal == ".localentry")
+     ParseDirectiveLocalEntry(DirectiveID.getLoc());
+   else
+@@ -1924,6 +1927,29 @@ bool PPCAsmParser::ParseDirectiveAbiVersion(SMLoc L) {
+   return false;
+ }
+ 
++/// ParseDirectiveGNUAttribute
++///  ::= .gnu_attribute constant-expression, constant-expression
++bool PPCAsmParser::ParseDirectiveGNUAttribute(SMLoc L) {
++  int64_t Tag, Value;
++  if (check(getParser().parseAbsoluteExpression(Tag), L,
++            "expected attribute tag") ||
++      parseToken(AsmToken::EndOfStatement))
++    return addErrorSuffix(" in '.gnu_attribute' directive");
++
++  if (parseToken(AsmToken::Comma) ||
++      check(getParser().parseAbsoluteExpression(Value), L,
++            "expected attribute value") ||
++      parseToken(AsmToken::EndOfStatement))
++    return addErrorSuffix(" in '.gnu_attribute' directive");
++
++  PPCTargetStreamer &TStreamer =
++      *static_cast<PPCTargetStreamer *>(
++           getParser().getStreamer().getTargetStreamer());
++  TStreamer.emitGNUAttribute(Tag, Value);
++
++  return false;
++}
++
+ /// ParseDirectiveLocalEntry
+ ///  ::= .localentry symbol, expression
+ bool PPCAsmParser::ParseDirectiveLocalEntry(SMLoc L) {
+diff --git a/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.cpp b/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.cpp
+index a1e4e07b25a..a1882019280 100644
+--- a/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.cpp
++++ b/lib/Target/PowerPC/MCTargetDesc/PPCMCTargetDesc.cpp
+@@ -25,14 +25,17 @@
+ #include "llvm/MC/MCExpr.h"
+ #include "llvm/MC/MCInstrInfo.h"
+ #include "llvm/MC/MCRegisterInfo.h"
++#include "llvm/MC/MCSectionELF.h"
+ #include "llvm/MC/MCStreamer.h"
+ #include "llvm/MC/MCSubtargetInfo.h"
+ #include "llvm/MC/MCSymbol.h"
+ #include "llvm/MC/MCSymbolELF.h"
++#include "llvm/Support/ARMBuildAttributes.h"
+ #include "llvm/Support/Casting.h"
+ #include "llvm/Support/CodeGen.h"
+ #include "llvm/Support/ErrorHandling.h"
+ #include "llvm/Support/FormattedStream.h"
++#include "llvm/Support/LEB128.h"
+ #include "llvm/Support/TargetRegistry.h"
+ #include "llvm/Support/raw_ostream.h"
+ 
+@@ -119,6 +122,10 @@ public:
+     OS << "\t.abiversion " << AbiVersion << '\n';
+   }
+ 
++  void emitGNUAttribute(unsigned Tag, unsigned Value) override {
++    OS << "\t.gnu_attribute " << Tag << ", " << Value << '\n';
++  }
++
+   void emitLocalEntry(MCSymbolELF *S, const MCExpr *LocalOffset) override {
+     const MCAsmInfo *MAI = Streamer.getContext().getAsmInfo();
+ 
+@@ -131,6 +138,32 @@ public:
+ };
+ 
+ class PPCTargetELFStreamer : public PPCTargetStreamer {
++private:
++  struct AttributeItem {
++    unsigned Tag;
++    unsigned Value;
++  };
++  SmallVector<AttributeItem, 4> GNUAttributes;
++
++  AttributeItem *getAttributeItem(unsigned Attribute) {
++    for (size_t i = 0; i < GNUAttributes.size(); ++i)
++      if (GNUAttributes[i].Tag == Attribute)
++        return &GNUAttributes[i];
++    return nullptr;
++  }
++
++  void setAttributeItem(unsigned Attribute, unsigned Value,
++                        bool OverwriteExisting) {
++    // Look for existing attribute item
++    if (AttributeItem *Item = getAttributeItem(Attribute)) {
++      if (!OverwriteExisting)
++        return;
++      Item->Value = Value;
++    } else {
++      GNUAttributes.push_back({ Attribute, Value });
++    }
++  }
++
+ public:
+   PPCTargetELFStreamer(MCStreamer &S) : PPCTargetStreamer(S) {}
+ 
+@@ -157,6 +190,10 @@ public:
+     MCA.setELFHeaderEFlags(Flags);
+   }
+ 
++  void emitGNUAttribute(unsigned Tag, unsigned Value) override {
++    setAttributeItem(Tag, Value, /* OverwriteExisting= */ true);
++  }
++
+   void emitLocalEntry(MCSymbolELF *S, const MCExpr *LocalOffset) override {
+     MCAssembler &MCA = getStreamer().getAssembler();
+ 
+@@ -193,6 +230,55 @@ public:
+     Other |= RhsSym.getOther() & ELF::STO_PPC64_LOCAL_MASK;
+     Symbol->setOther(Other);
+   }
++
++  void finish() override {
++    // <format-version>
++    // [ <section-length> "vendor-name"
++    // [ <file-tag> <size> <attribute>*
++    //   | <section-tag> <size> <section-number>* 0 <attribute>*
++    //   | <symbol-tag> <size> <symbol-number>* 0 <attribute>*
++    //   ]+
++    // ]*
++
++    if (GNUAttributes.empty())
++      return;
++
++    Streamer.SwitchSection(Streamer.getContext().getELFSection(
++        ".gnu.attributes", ELF::SHT_GNU_ATTRIBUTES, 0));
++
++    // Format version
++    Streamer.EmitIntValue(0x41, 1);
++
++    // Vendor size + Vendor name + '\0'
++    const std::string VendorName = "gnu";
++    const size_t VendorHeaderSize = 4 + VendorName.size() + 1;
++
++    // Tag + Tag Size
++    const size_t TagHeaderSize = 1 + 4;
++
++    size_t ContentsSize = 0;
++    for (size_t i = 0; i < GNUAttributes.size(); ++i) {
++      AttributeItem item = GNUAttributes[i];
++      ContentsSize += getULEB128Size(item.Tag);
++      ContentsSize += getULEB128Size(item.Value);
++    }
++
++    Streamer.EmitIntValue(VendorHeaderSize + TagHeaderSize + ContentsSize, 4);
++    Streamer.EmitBytes(VendorName);
++    Streamer.EmitIntValue(0, 1); // '\0'
++
++    Streamer.EmitIntValue(ARMBuildAttrs::File, 1);
++    Streamer.EmitIntValue(TagHeaderSize + ContentsSize, 4);
++
++    // Size should have been accounted for already, now emit each field.
++    for (size_t i = 0; i < GNUAttributes.size(); ++i) {
++      AttributeItem item = GNUAttributes[i];
++      Streamer.EmitULEB128IntValue(item.Tag);
++      Streamer.EmitULEB128IntValue(item.Value);
++    }
++
++    GNUAttributes.clear();
++  }
+ };
+ 
+ class PPCTargetMachOStreamer : public PPCTargetStreamer {
+@@ -212,6 +298,10 @@ public:
+     llvm_unreachable("Unknown pseudo-op: .abiversion");
+   }
+ 
++  void emitGNUAttribute(unsigned Tag, unsigned Value) override {
++    llvm_unreachable("Unknown pseudo-op: .gnu_attribute");
++  }
++
+   void emitLocalEntry(MCSymbolELF *S, const MCExpr *LocalOffset) override {
+     llvm_unreachable("Unknown pseudo-op: .localentry");
+   }
+diff --git a/lib/Target/PowerPC/PPCAsmPrinter.cpp b/lib/Target/PowerPC/PPCAsmPrinter.cpp
+index a9da64cc216..61a77fe78b2 100644
+--- a/lib/Target/PowerPC/PPCAsmPrinter.cpp
++++ b/lib/Target/PowerPC/PPCAsmPrinter.cpp
+@@ -55,6 +55,7 @@
+ #include "llvm/MC/MCSymbol.h"
+ #include "llvm/MC/MCSymbolELF.h"
+ #include "llvm/MC/SectionKind.h"
++#include "llvm/Support/ARMBuildAttributes.h"
+ #include "llvm/Support/Casting.h"
+ #include "llvm/Support/CodeGen.h"
+ #include "llvm/Support/Debug.h"
+@@ -1383,6 +1384,20 @@ bool PPCLinuxAsmPrinter::doFinalization(Module &M) {
+     }
+   }
+ 
++  TS.emitGNUAttribute(ARMBuildAttrs::GNU_Power_ABI_FP,
++      (Subtarget->useSoftFloat()
++          ? ARMBuildAttrs::SoftFloat
++          : ARMBuildAttrs::UnspecifiedFloat) |
++      (Subtarget->hasP9Vector()
++          ? ARMBuildAttrs::IEEE128LongDouble
++          : ARMBuildAttrs::IEEE64LongDouble));
++  TS.emitGNUAttribute(ARMBuildAttrs::GNU_Power_ABI_Vector,
++      Subtarget->hasSPE()
++          ? ARMBuildAttrs::SPEVector
++          : Subtarget->hasAltivec()
++              ? ARMBuildAttrs::AltivecVector
++              : ARMBuildAttrs::NoVector);
++
+   return AsmPrinter::doFinalization(M);
+ }
+ 
+diff --git a/lib/Target/PowerPC/PPCTargetStreamer.h b/lib/Target/PowerPC/PPCTargetStreamer.h
+index 310fea9ef09..9a23accae25 100644
+--- a/lib/Target/PowerPC/PPCTargetStreamer.h
++++ b/lib/Target/PowerPC/PPCTargetStreamer.h
+@@ -27,6 +27,7 @@ public:
+   virtual void emitTCEntry(const MCSymbol &S) = 0;
+   virtual void emitMachine(StringRef CPU) = 0;
+   virtual void emitAbiVersion(int AbiVersion) = 0;
++  virtual void emitGNUAttribute(unsigned Tag, unsigned Value) = 0;
+   virtual void emitLocalEntry(MCSymbolELF *S, const MCExpr *LocalOffset) = 0;
+ };
+ 
+diff --git a/tools/llvm-readobj/ELFDumper.cpp b/tools/llvm-readobj/ELFDumper.cpp
+index 645ec2d7e04..472f9272a79 100644
+--- a/tools/llvm-readobj/ELFDumper.cpp
++++ b/tools/llvm-readobj/ELFDumper.cpp
+@@ -1956,20 +1956,10 @@ template <typename ELFT> void ELFDumper<ELFT>::printLoadName() {
+ 
+ template <class ELFT>
+ void ELFDumper<ELFT>::printAttributes() {
+-  W.startLine() << "Attributes not implemented.\n";
+-}
+-
+-namespace {
+-
+-template <> void ELFDumper<ELF32LE>::printAttributes() {
+-  if (Obj->getHeader()->e_machine != EM_ARM) {
+-    W.startLine() << "Attributes not implemented.\n";
+-    return;
+-  }
+-
+   DictScope BA(W, "BuildAttributes");
+-  for (const ELFO::Elf_Shdr &Sec : unwrapOrError(Obj->sections())) {
+-    if (Sec.sh_type != ELF::SHT_ARM_ATTRIBUTES)
++  for (const auto &Sec : unwrapOrError(Obj->sections())) {
++    if (Sec.sh_type != ELF::SHT_ARM_ATTRIBUTES &&
++        Sec.sh_type != ELF::SHT_GNU_ATTRIBUTES)
+       continue;
+ 
+     ArrayRef<uint8_t> Contents = unwrapOrError(Obj->getSectionContents(&Sec));
+@@ -1983,10 +1973,13 @@ template <> void ELFDumper<ELF32LE>::printAttributes() {
+     if (Contents.size() == 1)
+       continue;
+ 
+-    ARMAttributeParser(&W).Parse(Contents, true);
++    ARMAttributeParser(&W).Parse(Contents,
++        ELFT::TargetEndianness == support::little);
+   }
+ }
+ 
++namespace {
++
+ template <class ELFT> class MipsGOTParser {
+ public:
+   TYPEDEF_ELF_TYPES(ELFT)
+diff --git a/tools/llvm-readobj/llvm-readobj.cpp b/tools/llvm-readobj/llvm-readobj.cpp
+index a7236c02b8a..997f7d1696d 100644
+--- a/tools/llvm-readobj/llvm-readobj.cpp
++++ b/tools/llvm-readobj/llvm-readobj.cpp
+@@ -453,9 +453,8 @@ static void dumpObject(const ObjectFile *Obj, ScopedPrinter &Writer) {
+   if (Obj->isELF()) {
+     if (opts::ELFLinkerOptions)
+       Dumper->printELFLinkerOptions();
+-    if (Obj->getArch() == llvm::Triple::arm)
+-      if (opts::ARMAttributes)
+-        Dumper->printAttributes();
++    if (opts::ARMAttributes)
++      Dumper->printAttributes();
+     if (isMipsArch(Obj->getArch())) {
+       if (opts::MipsPLTGOT)
+         Dumper->printMipsPLTGOT();

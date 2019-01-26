@@ -1,5 +1,7 @@
---- cfe-7.0.0.src/lib/Driver/ToolChains/Linux.cpp
-+++ cfe-7.0.0.src/lib/Driver/ToolChains/Linux.cpp
+diff --git a/lib/Driver/ToolChains/Linux.cpp b/lib/Driver/ToolChains/Linux.cpp
+index f8f3623918..e51dfc8190 100644
+--- a/lib/Driver/ToolChains/Linux.cpp
++++ b/lib/Driver/ToolChains/Linux.cpp
 @@ -59,6 +59,12 @@ static std::string getMultiarchTriple(const Driver &D,
    case llvm::Triple::thumb:
      if (IsAndroid) {
@@ -111,7 +113,7 @@
      break;
    case llvm::Triple::sparc:
      if (D.getVFS().exists(SysRoot + "/lib/sparc-linux-gnu"))
-@@ -150,6 +184,8 @@ static std::string getMultiarchTriple(const Driver &D,
+@@ -150,12 +184,17 @@ static std::string getMultiarchTriple(const Driver &D,
    case llvm::Triple::systemz:
      if (D.getVFS().exists(SysRoot + "/lib/s390x-linux-gnu"))
        return "s390x-linux-gnu";
@@ -120,3 +122,26 @@
      break;
    }
    return TargetTriple.str();
+ }
+ 
+ static StringRef getOSLibDir(const llvm::Triple &Triple, const ArgList &Args) {
++  if (Triple.isMusl())
++    return "lib";
++
+   if (Triple.isMIPS()) {
+     if (Triple.isAndroid()) {
+       StringRef CPUName;
+@@ -778,6 +817,13 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
+   if (getTriple().isAndroid())
+     MultiarchIncludeDirs = AndroidMultiarchIncludeDirs;
+ 
++  const std::string MuslMultiarchIncludeDir =
++      std::string("/usr/include/") +
++      getMultiarchTriple(D, getTriple(), SysRoot);
++  const StringRef MuslMultiarchIncludeDirs[] = {MuslMultiarchIncludeDir};
++  if (getTriple().isMusl())
++    MultiarchIncludeDirs = MuslMultiarchIncludeDirs;
++
+   for (StringRef Dir : MultiarchIncludeDirs) {
+     if (D.getVFS().exists(SysRoot + Dir)) {
+       addExternCSystemInclude(DriverArgs, CC1Args, SysRoot + Dir);
