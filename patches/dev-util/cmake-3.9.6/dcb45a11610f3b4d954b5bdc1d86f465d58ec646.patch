@@ -1,0 +1,30 @@
+From 972f7caad354e0bb04d338446601d391e4b0efbd Mon Sep 17 00:00:00 2001
+From: Brad King <brad.king@kitware.com>
+Date: Wed, 21 Feb 2018 14:34:56 -0500
+Subject: [PATCH] Tests: Make CompileFeatures C dialect check consistent with
+ impl
+
+`Modules/CMakeCCompilerId.c.in` will report the C dialect as 11 whenever
+`__STDC_VERSION__` indicates *at least* C 11.  Make the test consistent
+with this.  We already do this for the C++ case.
+
+Fixes: #17740
+---
+ Tests/CompileFeatures/default_dialect.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Tests/CompileFeatures/default_dialect.c b/Tests/CompileFeatures/default_dialect.c
+index 4debd9410c..2b4627ca46 100644
+--- a/Tests/CompileFeatures/default_dialect.c
++++ b/Tests/CompileFeatures/default_dialect.c
+@@ -1,6 +1,6 @@
+ 
+ #if DEFAULT_C11
+-#if __STDC_VERSION__ != 201112L
++#if __STDC_VERSION__ < 201112L
+ #error Unexpected value for __STDC_VERSION__.
+ #endif
+ #elif DEFAULT_C99
+-- 
+2.18.1
+
