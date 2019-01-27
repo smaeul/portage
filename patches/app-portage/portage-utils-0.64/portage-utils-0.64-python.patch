@@ -1,8 +1,0 @@
---- portage-utils-0.64/tests/atom_explode/atom-explode.py
-+++ portage-utils-0.64/tests/atom_explode/atom-explode.py
-@@ -1,4 +1,4 @@
--#!/usr/bin/python
-+#!/usr/bin/python3
- 
- import sys,portage
- 
