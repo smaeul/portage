@@ -40,6 +40,7 @@ sci-misc/boinc ~amd64
 sys-apps/linux-misc-apps ~amd64
 sys-block/sedutil ~amd64
 sys-devel/slibtool ~amd64
+sys-devel/sparse ~amd64
 sys-kernel/vanilla-sources ~amd64
 sys-power/brightnessctl ~amd64
 www-apps/gitea ~amd64
@@ -143,5 +144,7 @@ sys-libs/tevent ~amd64
 # Fixes a bunch of bugs on ppc64
 ~sys-devel/binutils-2.31.1 ~amd64
 ~sys-libs/binutils-libs-2.31.1 ~amd64
+# Required for perf
+~sys-kernel/linux-headers-4.20 ~amd64
 # This is old anyway
 ~sys-process/bcron-0.11 ~amd64

@@ -3,3 +3,4 @@ sys-apps/dbus
 sys-fs/zfs-kmod::gentoo
 sys-kernel/linux-headers::gentoo
 sys-kernel/spl::gentoo
+sys-libs/libunwind
