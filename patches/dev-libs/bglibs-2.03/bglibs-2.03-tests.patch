@@ -1,0 +1,88 @@
+--- bglibs-2.03/net/dns_ip4.c
++++ bglibs-2.03/net/dns_ip4.c
+@@ -50,7 +50,7 @@ int dns_ip4_r(struct dns_transmit* tx, struct dns_result *out, const char* fqdn)
+ */
+ DNS_R_FN_WRAP(ip4, const char*)
+ 
+-#ifdef SELFTEST_MAIN
++#ifdef SELFTEST_DISABLED
+ struct dns_result out = {0};
+ void doit(const char* fqdn)
+ {
+--- bglibs-2.03/net/dns_ip6.c
++++ bglibs-2.03/net/dns_ip6.c
+@@ -58,7 +58,7 @@ int dns_ip6_r(struct dns_transmit* tx, struct dns_result* out, const char* fqdn)
+ */
+ DNS_R_FN_WRAP(ip6, const char*)
+ 
+-#ifdef SELFTEST_MAIN
++#ifdef SELFTEST_DISABLED
+ struct dns_result out = {0};
+ void doit(const char* fqdn)
+ {
+--- bglibs-2.03/net/dns_mx.c
++++ bglibs-2.03/net/dns_mx.c
+@@ -53,7 +53,7 @@ int dns_mx_r(struct dns_transmit* tx, struct dns_result* out, const char* fqdn)
+ */
+ DNS_R_FN_WRAP(mx, const char*)
+ 
+-#ifdef SELFTEST_MAIN
++#ifdef SELFTEST_DISABLED
+ struct dns_result out = {0};
+ 
+ static void doit(const char* fqdn)
+--- bglibs-2.03/net/dns_name4.c
++++ bglibs-2.03/net/dns_name4.c
+@@ -19,7 +19,7 @@ int dns_name4_r(struct dns_transmit* tx, struct dns_result* out, const ipv4addr
+ */
+ DNS_R_FN_WRAP(name4, const ipv4addr*)
+ 
+-#ifdef SELFTEST_MAIN
++#ifdef SELFTEST_DISABLED
+ struct dns_result out = {0};
+ MAIN
+ {
+--- bglibs-2.03/net/dns_name6.c
++++ bglibs-2.03/net/dns_name6.c
+@@ -19,7 +19,7 @@ int dns_name6_r(struct dns_transmit *tx, struct dns_result* out, const ipv6addr*
+ */
+ DNS_R_FN_WRAP(name6, const ipv6addr*)
+ 
+-#ifdef SELFTEST_MAIN
++#ifdef SELFTEST_DISABLED
+ struct dns_result out = {0};
+ void doit(const char* addr)
+ {
+--- bglibs-2.03/net/dns_txt.c
++++ bglibs-2.03/net/dns_txt.c
+@@ -62,7 +62,7 @@ int dns_txt_r(struct dns_transmit* tx, struct dns_result* out, const char* fqdn)
+ */
+ DNS_R_FN_WRAP(txt, const char*)
+ 
+-#ifdef SELFTEST_MAIN
++#ifdef SELFTEST_DISABLED
+ struct dns_result out = {0};
+ void doit(const char* fqdn)
+ {
+--- bglibs-2.03/net/resolve_ipv4addr.c
++++ bglibs-2.03/net/resolve_ipv4addr.c
+@@ -10,7 +10,7 @@ const char* resolve_ipv4addr(const ipv4addr* addr)
+   return out.rr.name[0];
+ }
+ 
+-#ifdef SELFTEST_MAIN
++#ifdef SELFTEST_DISABLED
+ MAIN
+ {
+   ipv4addr ip = {{ 69,5,1,51 }};
+--- bglibs-2.03/net/resolve_ipv4name.c
++++ bglibs-2.03/net/resolve_ipv4name.c
+@@ -14,7 +14,7 @@ int resolve_ipv4name_n(const char* name, ipv4addr* addr, int maxaddrs)
+   return 1;
+ }
+ 
+-#ifdef SELFTEST_MAIN
++#ifdef SELFTEST_DISABLED
+ MAIN
+ {
+   ipv4addr ips[4];

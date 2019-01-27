@@ -1,0 +1,11 @@
+--- cmake-3.9.6/Modules/Platform/Linux.cmake
++++ cmake-3.9.6/Modules/Platform/Linux.cmake
+@@ -46,7 +46,7 @@ else()
+ endif()
+ 
+ # Match multiarch library directory names.
+-set(CMAKE_LIBRARY_ARCHITECTURE_REGEX "[a-z0-9_]+(-[a-z0-9_]+)?-linux-gnu[a-z0-9_]*")
++set(CMAKE_LIBRARY_ARCHITECTURE_REGEX "[a-z0-9_]+(-[a-z0-9_]+)?-linux-musl[a-z0-9_]*")
+ 
+ include(Platform/UnixPaths)
+ 
