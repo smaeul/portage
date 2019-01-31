@@ -128,6 +128,8 @@ sys-libs/tevent ~amd64
 # Required for parallel compilation
 <dev-libs/openssl-1.1.1 ~amd64
 # Required to pass tests
+~dev-python/cliff-2.12.0-r2 ~amd64
+# Required to pass tests
 >=dev-python/future-0.16.0-r1 ~amd64
 # Required to build on powerpc64
 >=dev-python/greenlet-0.4.14 ~amd64

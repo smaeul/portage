@@ -1,0 +1,12 @@
+--- qemu-3.0.0/linux-user/signal.c.old	2018-09-06 23:06:29.040000000 +0000
++++ qemu-3.0.0/linux-user/signal.c	2018-09-06 23:09:23.370000000 +0000
+@@ -37,6 +37,9 @@
+ static void host_signal_handler(int host_signum, siginfo_t *info,
+                                 void *puc);
+ 
++#define __SIGRTMIN 35
++#define __SIGRTMAX _NSIG-1
++
+ static uint8_t host_to_target_signal_table[_NSIG] = {
+     [SIGHUP] = TARGET_SIGHUP,
+     [SIGINT] = TARGET_SIGINT,

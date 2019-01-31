@@ -85,6 +85,7 @@ net-dns/dnsmasq tftp
 net-fs/samba -cups
 net-im/bitlbee -gnutls oscar twitter
 net-irc/weechat -charset -fset python
+net-libs/glib-networking -gnome -libproxy
 net-libs/gnutls -crywrap -openssl
 net-misc/iputils tracepath
 net-misc/s6-networking -ssl

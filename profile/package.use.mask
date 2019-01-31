@@ -9,12 +9,16 @@ app-text/asciidoc test
 dev-libs/glib test
 # Requires i3 to be running
 dev-perl/AnyEvent-I3 test
+# Depends on flaky (breaks pytest)
+dev-python/pyopenssl test
 # Depends on texlive
 dev-python/sphinx test
 # Depends on python:2.7
 media-gfx/graphite2 test
 # Depends on corefonts
 media-gfx/imagemagick test
+# Depends on dbus
+net-libs/glib-networking test
 # Takes forever to run
 net-misc/youtube-dl test
 # See /usr/lib/go/src/runtime/race/README (patched)
