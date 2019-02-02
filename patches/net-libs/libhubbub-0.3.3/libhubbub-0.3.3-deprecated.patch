@@ -1,0 +1,22 @@
+--- libhubbub-0.3.3/test/tokeniser2.c
++++ libhubbub-0.3.3/test/tokeniser2.c
+@@ -48,7 +48,7 @@ int main(int argc, char **argv)
+ 	}
+ 
+ 	json = json_object_from_file(argv[1]);
+-	assert(!is_error(json));
++	assert(json != NULL);
+ 
+ 	assert(strcmp((char *) ((json_object_get_object(json)->head)->k),
+ 			"tests") == 0);
+--- libhubbub-0.3.3/test/tokeniser3.c
++++ libhubbub-0.3.3/test/tokeniser3.c
+@@ -46,7 +46,7 @@ int main(int argc, char **argv)
+ 	}
+ 
+ 	json = json_object_from_file(argv[1]);
+-	assert(!is_error(json));
++	assert(json != NULL);
+ 
+ 	assert(strcmp((char *) ((json_object_get_object(json)->head)->k),
+ 			"tests") == 0);

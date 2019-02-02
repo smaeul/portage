@@ -1,0 +1,40 @@
+--- libhubbub-0.3.3/test/tokeniser2.c
++++ libhubbub-0.3.3/test/tokeniser2.c
+@@ -21,7 +21,7 @@ typedef struct context {
+ 	size_t input_len;
+ 
+ 	struct array_list *output;
+-	int output_index;
++	size_t output_index;
+ 	size_t char_off;
+ 
+ 	const char *last_start_tag;
+@@ -39,7 +39,7 @@ int main(int argc, char **argv)
+ 	struct lh_entry *entry;
+ 	char *key;
+ 	struct json_object *val;
+-	int i;
++	size_t i;
+ 	context ctx;
+ 
+ 	if (argc != 2) {
+--- libhubbub-0.3.3/test/tokeniser3.c
++++ libhubbub-0.3.3/test/tokeniser3.c
+@@ -19,7 +19,7 @@ typedef struct context {
+ 	size_t input_len;
+ 
+ 	struct array_list *output;
+-	int output_index;
++	size_t output_index;
+ 	size_t char_off;
+ 
+ 	const char *last_start_tag;
+@@ -37,7 +37,7 @@ int main(int argc, char **argv)
+ 	struct lh_entry *entry;
+ 	char *key;
+ 	struct json_object *val;
+-	int i;
++	size_t i;
+ 	context ctx;
+ 
+ 	if (argc != 2) {
