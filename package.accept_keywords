@@ -133,6 +133,12 @@ sys-libs/tevent ~amd64
 >=dev-python/future-0.16.0-r1 ~amd64
 # Required to build on powerpc64
 >=dev-python/greenlet-0.4.14 ~amd64
+# Required for pytest
+~dev-python/pluggy-0.7.1 ~amd64
+# Required to pass tests (670918)
+~dev-python/pytest-3.10.1 ~amd64
+# Required for pytest
+~dev-python/setuptools-40.6.3 ~amd64
 # Required to pass tests
 ~dev-util/strace-4.26 ~amd64
 # Required for Python 3
