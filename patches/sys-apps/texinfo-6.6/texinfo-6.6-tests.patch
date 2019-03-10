@@ -1,0 +1,11 @@
+- Fails with --disable-nls, because it uses gettext and expects French
+--- texinfo-6.6/tp/tests/Makefile.in
++++ texinfo-6.6/tp/tests/Makefile.in
+@@ -1374,7 +1374,6 @@ one_test_files_generated_list = \
+      test_scripts/layout_formatting_html32.sh \
+      test_scripts/layout_formatting_regions.sh \
+      test_scripts/layout_formatting_exotic.sh \
+-     test_scripts/layout_formatting_fr_icons.sh \
+      test_scripts/layout_formatting_chm.sh \
+      test_scripts/layout_formatting_nodes.sh \
+      test_scripts/layout_formatting.sh \

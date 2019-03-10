@@ -1,0 +1,32 @@
+--- openldap-2.4.45/libraries/libldap/ldap-int.h
++++ openldap-2.4.45/libraries/libldap/ldap-int.h
+@@ -801,6 +801,11 @@ LDAP_F (int) ldap_url_parsehosts LDAP_P((
+ LDAP_F (char *) ldap_url_list2hosts LDAP_P((
+ 	LDAPURLDesc *ludlist ));
+ 
++#ifdef LDAP_CONNECTIONLESS
++LDAP_F (int) ldap_is_ldapc_url LDAP_P((
++	LDAP_CONST char *url ));
++#endif
++
+ /*
+  * in cyrus.c
+  */
+--- openldap-2.4.45/servers/slapd/proto-slap.h
++++ openldap-2.4.45/servers/slapd/proto-slap.h
+@@ -316,6 +316,7 @@ LDAP_SLAPD_F (void) attrs_free LDAP_P(( Attribute *a ));
+ LDAP_SLAPD_F (Attribute *) attrs_dup LDAP_P(( Attribute *a ));
+ LDAP_SLAPD_F (int) attr_init LDAP_P(( void ));
+ LDAP_SLAPD_F (int) attr_destroy LDAP_P(( void ));
++LDAP_SLAPD_F (void) attr_clean LDAP_P(( Attribute *a ));
+ 
+ 
+ /*
+@@ -740,6 +741,7 @@ LDAP_SLAPD_F (int) bindconf_tls_set LDAP_P((
+ 	slap_bindconf *bc, LDAP *ld ));
+ LDAP_SLAPD_F (void) bindconf_free LDAP_P(( slap_bindconf *bc ));
+ LDAP_SLAPD_F (int) slap_client_connect LDAP_P(( LDAP **ldp, slap_bindconf *sb ));
++LDAP_SLAPD_F (void) slap_client_keepalive LDAP_P((LDAP *ld, slap_keepalive *sk));
+ LDAP_SLAPD_F (int) config_generic_wrapper LDAP_P(( Backend *be,
+ 	const char *fname, int lineno, int argc, char **argv ));
+ LDAP_SLAPD_F (char *) anlist_unparse LDAP_P(( AttributeName *, char *, ber_len_t buflen ));

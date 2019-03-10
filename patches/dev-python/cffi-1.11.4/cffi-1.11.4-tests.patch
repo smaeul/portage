@@ -1,7 +1,5 @@
 updates for musl
-diff --git cffi-1.11.4/c/test_c.py
-index 6717ee5..e50f2b1 100644
---- cffi-1.11.4/c/test_c.py.old
+--- cffi-1.11.4/c/test_c.py
 +++ cffi-1.11.4/c/test_c.py
 @@ -86,7 +86,6 @@ def test_all_rtld_symbols():
      if sys.platform.startswith("linux"):
@@ -11,6 +9,33 @@ index 6717ee5..e50f2b1 100644
  
  def test_new_primitive_type():
      py.test.raises(KeyError, new_primitive_type, "foo")
+@@ -1214,7 +1214,7 @@ def test_load_and_call_function():
+ def test_read_variable():
+     ## FIXME: this test assumes glibc specific behavior, it's not compliant with C standard
+     ## https://bugs.pypy.org/issue1643
+-    if not sys.platform.startswith("linux"):
++    if True:
+         py.test.skip("untested")
+     BVoidP = new_pointer_type(new_void_type())
+     ll = find_and_load_library('c')
+@@ -1224,7 +1224,7 @@ def test_read_variable():
+ def test_read_variable_as_unknown_length_array():
+     ## FIXME: this test assumes glibc specific behavior, it's not compliant with C standard
+     ## https://bugs.pypy.org/issue1643
+-    if not sys.platform.startswith("linux"):
++    if True:
+         py.test.skip("untested")
+     BCharP = new_pointer_type(new_primitive_type("char"))
+     BArray = new_array_type(BCharP, None)
+@@ -1236,7 +1236,7 @@ def test_read_variable_as_unknown_length_array():
+ def test_write_variable():
+     ## FIXME: this test assumes glibc specific behavior, it's not compliant with C standard
+     ## https://bugs.pypy.org/issue1643
+-    if not sys.platform.startswith("linux"):
++    if True:
+         py.test.skip("untested")
+     BVoidP = new_pointer_type(new_void_type())
+     ll = find_and_load_library('c')
 --- cffi-1.11.4/testing/cffi0/test_function.py
 +++ cffi-1.11.4/testing/cffi0/test_function.py
 @@ -13,7 +13,7 @@ except ImportError:
@@ -31,6 +56,15 @@ index 6717ee5..e50f2b1 100644
  
      def test_must_specify_type_of_vararg(self):
          ffi = FFI(backend=self.Backend())
+@@ -249,7 +249,7 @@ class TestFunction(object):
+         assert res == 5
+ 
+     def test_write_variable(self):
+-        if not sys.platform.startswith('linux'):
++        if True:
+             py.test.skip("probably no symbol 'stdout' in the lib")
+         ffi = FFI(backend=self.Backend())
+         ffi.cdef("""
 --- cffi-1.11.4/testing/cffi0/test_parsing.py
 +++ cffi-1.11.4/testing/cffi0/test_parsing.py
 @@ -74,7 +74,7 @@ class FakeFunction(object):
