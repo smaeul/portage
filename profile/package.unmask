@@ -1,5 +1,8 @@
+>=dev-lang/rust-1.33.0
 dev-libs/elfutils
 <dev-libs/openssl-1.1.1
 >=media-video/ffmpeg-4.0
+>=virtual/cargo-1.33.0
 virtual/libelf:0/1
+>=virtual/rust-1.33.0
 >=www-client/firefox-54.0

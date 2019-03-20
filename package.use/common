@@ -19,6 +19,8 @@ dev-libs/nss utils
 dev-libs/rasqal -mhash
 # Required by libreoffice
 dev-libs/xmlsec nss
+# Required for USE=test
+media-gfx/fontforge python
 # Required by inkscape[imagemagick]
 media-gfx/imagemagick cxx
 # Required for ffmpeg-4

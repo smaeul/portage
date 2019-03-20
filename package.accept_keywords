@@ -13,7 +13,6 @@ app-editors/vis ~amd64
 app-eselect/eselect-unison ~amd64
 app-misc/ddcutil ~amd64
 app-mobilephone/heimdall ~amd64
-app-text/libnumbertext ~amd64
 dev-java/icedtea ~amd64
 dev-libs/capstone ~amd64
 dev-libs/libcss ~amd64
@@ -41,7 +40,6 @@ sys-apps/linux-misc-apps ~amd64
 sys-block/sedutil ~amd64
 sys-devel/slibtool ~amd64
 sys-devel/sparse ~amd64
-sys-kernel/vanilla-sources ~amd64
 sys-power/brightnessctl ~amd64
 www-apps/gitea ~amd64
 www-client/netsurf ~amd64
@@ -115,35 +113,35 @@ sys-libs/tevent ~amd64
 ~app-arch/sharutils-4.15.2 ~amd64
 # Required for OpenSSL 1.1
 ~app-crypt/sbsigntools-0.9.1 ~amd64
-# Required for python3
-~app-emulation/qemu-3.1.0 ~amd64
 # Required for Python 3
 ~dev-java/javatoolkit-0.6.0 ~amd64
 # Required for newer bcron
 ~dev-libs/bglibs-2.03 ~amd64
 # Closest to the fixed version
 ~dev-libs/libffi-3.3_rc0 ~amd64
-# Required to pass tests
-~dev-libs/libunistring-0.9.10 ~amd64
+# Required for libreoffice
+~dev-libs/libixion-0.14.1 ~amd64
+# Required for libreoffice
+~dev-libs/liborcus-0.14.1 ~amd64
 # Required for parallel compilation
 <dev-libs/openssl-1.1.1 ~amd64
 # Required to pass tests
 ~dev-python/cliff-2.12.0-r2 ~amd64
-# Required to build on powerpc64
->=dev-python/greenlet-0.4.14 ~amd64
 # Required to pass tests
 ~dev-python/pytest-xprocess-0.12.1-r1 ~amd64
 # Required for streamlink
 ~dev-python/urllib3-1.24.1 ~amd64
+# Required for libreoffice
+~dev-util/mdds-1.4.3 ~amd64
 # Required to pass tests
 ~dev-util/strace-4.26 ~amd64
 # Required for Python 3
 <media-libs/mesa-18.4 ~amd64
 # Required for chromium
 ~media-video/ffmpeg-4.1.1 ~amd64
-# Required for OpenSSL 1.1 (r2)
-~media-video/rtmpdump-2.4_p20161210 ~amd64
-# Fixes a bunch of bugs on ppc64
+# Required for OpenSSL 1.1
+~media-video/rtmpdump-2.4_p20161210-r2 ~amd64
+# Fixes several bugs on ppc64
 ~sys-devel/binutils-2.31.1 ~amd64
 ~sys-libs/binutils-libs-2.31.1 ~amd64
 # Required for perf
