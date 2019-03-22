@@ -24,6 +24,7 @@ dev-util/dwarves ~amd64
 dev-util/netsurf-buildsystem ~amd64
 dev-util/perf ~amd64
 dev-util/radare2 ~amd64
+mail-client/s-nail ~amd64
 media-libs/libnsbmp ~amd64
 media-libs/libnsgif ~amd64
 media-libs/libnspsl ~amd64
@@ -148,3 +149,5 @@ sys-libs/tevent ~amd64
 ~sys-kernel/linux-headers-4.20 ~amd64
 # This is old anyway
 ~sys-process/bcron-0.11 ~amd64
+# Required for s-nail
+=virtual/mailx-2 ~amd64
