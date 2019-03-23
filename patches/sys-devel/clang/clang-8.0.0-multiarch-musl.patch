@@ -1,8 +1,8 @@
 diff --git a/lib/Driver/ToolChains/Linux.cpp b/lib/Driver/ToolChains/Linux.cpp
-index f8f3623918..e51dfc8190 100644
+index 65ab9b2daf..aeb14a3fe6 100644
 --- a/lib/Driver/ToolChains/Linux.cpp
 +++ b/lib/Driver/ToolChains/Linux.cpp
-@@ -59,6 +59,12 @@ static std::string getMultiarchTriple(const Driver &D,
+@@ -60,6 +60,12 @@ static std::string getMultiarchTriple(const Driver &D,
    case llvm::Triple::thumb:
      if (IsAndroid) {
        return "arm-linux-androideabi";
@@ -15,7 +15,7 @@ index f8f3623918..e51dfc8190 100644
      } else if (TargetEnvironment == llvm::Triple::GNUEABIHF) {
        if (D.getVFS().exists(SysRoot + "/lib/arm-linux-gnueabihf"))
          return "arm-linux-gnueabihf";
-@@ -69,7 +75,13 @@ static std::string getMultiarchTriple(const Driver &D,
+@@ -70,7 +76,13 @@ static std::string getMultiarchTriple(const Driver &D,
      break;
    case llvm::Triple::armeb:
    case llvm::Triple::thumbeb:
@@ -30,7 +30,7 @@ index f8f3623918..e51dfc8190 100644
        if (D.getVFS().exists(SysRoot + "/lib/armeb-linux-gnueabihf"))
          return "armeb-linux-gnueabihf";
      } else {
-@@ -82,6 +94,8 @@ static std::string getMultiarchTriple(const Driver &D,
+@@ -83,6 +95,8 @@ static std::string getMultiarchTriple(const Driver &D,
        return "i686-linux-android";
      if (D.getVFS().exists(SysRoot + "/lib/i386-linux-gnu"))
        return "i386-linux-gnu";
@@ -39,7 +39,7 @@ index f8f3623918..e51dfc8190 100644
      break;
    case llvm::Triple::x86_64:
      if (IsAndroid)
-@@ -90,32 +104,44 @@ static std::string getMultiarchTriple(const Driver &D,
+@@ -91,21 +105,29 @@ static std::string getMultiarchTriple(const Driver &D,
      if (TargetEnvironment != llvm::Triple::GNUX32 &&
          D.getVFS().exists(SysRoot + "/lib/x86_64-linux-gnu"))
        return "x86_64-linux-gnu";
@@ -60,39 +60,25 @@ index f8f3623918..e51dfc8190 100644
 +    if (D.getVFS().exists(SysRoot + "/lib/aarch64_be-linux-musl"))
 +      return "aarch64_be-linux-musl";
      break;
-   case llvm::Triple::mips:
-     if (D.getVFS().exists(SysRoot + "/lib/mips-linux-gnu"))
-       return "mips-linux-gnu";
-+    if (D.getVFS().exists(SysRoot + "/lib/mips-linux-musl"))
-+      return "mips-linux-musl";
+   case llvm::Triple::mips: {
+     std::string Arch = IsMipsR6 ? "mipsisa32r6" : "mips";
+     if (D.getVFS().exists(SysRoot + "/lib/" + Arch + "-linux-gnu"))
+       return Arch + "-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/" + Arch + "-linux-musl"))
++      return Arch + "-linux-musl";
      break;
-   case llvm::Triple::mipsel:
-     if (IsAndroid)
-       return "mipsel-linux-android";
-     if (D.getVFS().exists(SysRoot + "/lib/mipsel-linux-gnu"))
-       return "mipsel-linux-gnu";
-+    if (D.getVFS().exists(SysRoot + "/lib/mipsel-linux-musl"))
-+      return "mipsel-linux-musl";
+   }
+   case llvm::Triple::mipsel: {
+@@ -114,6 +136,8 @@ static std::string getMultiarchTriple(const Driver &D,
+     std::string Arch = IsMipsR6 ? "mipsisa32r6el" : "mipsel";
+     if (D.getVFS().exists(SysRoot + "/lib/" + Arch + "-linux-gnu"))
+       return Arch + "-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/" + Arch + "-linux-musl"))
++      return Arch + "-linux-musl";
      break;
-   case llvm::Triple::mips64:
-     if (D.getVFS().exists(SysRoot + "/lib/mips64-linux-gnu"))
-       return "mips64-linux-gnu";
-     if (D.getVFS().exists(SysRoot + "/lib/mips64-linux-gnuabi64"))
-       return "mips64-linux-gnuabi64";
-+    if (D.getVFS().exists(SysRoot + "/lib/mips64-linux-musl"))
-+      return "mips64-linux-musl";
-     break;
-   case llvm::Triple::mips64el:
-     if (IsAndroid)
-@@ -124,20 +150,28 @@ static std::string getMultiarchTriple(const Driver &D,
-       return "mips64el-linux-gnu";
-     if (D.getVFS().exists(SysRoot + "/lib/mips64el-linux-gnuabi64"))
-       return "mips64el-linux-gnuabi64";
-+    if (D.getVFS().exists(SysRoot + "/lib/mips64el-linux-musl"))
-+      return "mips64el-linux-musl";
-     break;
-   case llvm::Triple::ppc:
-     if (D.getVFS().exists(SysRoot + "/lib/powerpc-linux-gnuspe"))
+   }
+   case llvm::Triple::mips64: {
+@@ -137,14 +161,20 @@ static std::string getMultiarchTriple(const Driver &D,
        return "powerpc-linux-gnuspe";
      if (D.getVFS().exists(SysRoot + "/lib/powerpc-linux-gnu"))
        return "powerpc-linux-gnu";
@@ -113,7 +99,7 @@ index f8f3623918..e51dfc8190 100644
      break;
    case llvm::Triple::sparc:
      if (D.getVFS().exists(SysRoot + "/lib/sparc-linux-gnu"))
-@@ -150,12 +184,17 @@ static std::string getMultiarchTriple(const Driver &D,
+@@ -157,12 +187,17 @@ static std::string getMultiarchTriple(const Driver &D,
    case llvm::Triple::systemz:
      if (D.getVFS().exists(SysRoot + "/lib/s390x-linux-gnu"))
        return "s390x-linux-gnu";
@@ -131,7 +117,7 @@ index f8f3623918..e51dfc8190 100644
    if (Triple.isMIPS()) {
      if (Triple.isAndroid()) {
        StringRef CPUName;
-@@ -778,6 +817,13 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
+@@ -840,6 +875,13 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
    if (getTriple().isAndroid())
      MultiarchIncludeDirs = AndroidMultiarchIncludeDirs;
  
