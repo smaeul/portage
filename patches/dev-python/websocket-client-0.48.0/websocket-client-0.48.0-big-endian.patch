@@ -1,0 +1,13 @@
+diff --git websocket_client-0.48.0/websocket/_abnf.py.orig websocket_client-0.48.0/websocket/_abnf.py
+index a0000fa..37d2c06 100644
+--- websocket_client-0.48.0/websocket/_abnf.py.orig
++++ websocket_client-0.48.0/websocket/_abnf.py
+@@ -269,7 +269,7 @@ class ABNF(object):
+ 
+         if numpy:
+             origlen = len(data)
+-            _mask_key = mask_key[3] << 24 | mask_key[2] << 16 | mask_key[1] << 8 | mask_key[0]
++            _mask_key = struct.unpack("!I", mask_key)
+ 
+             # We need data to be a multiple of four...
+             data += bytes(" " * (4 - (len(data) % 4)), "us-ascii")

@@ -1,0 +1,65 @@
+From 63279a69e2b9277df5e97ace161fa3a1bb4f29cd Mon Sep 17 00:00:00 2001
+From: Mike Bayer <mike_mp@zzzcomputing.com>
+Date: Thu, 15 Nov 2018 19:48:45 -0500
+Subject: [PATCH] Repair tutorial code example to be deterministic
+
+A few queries featured an aggregate without a GROUP BY
+or a complete ordering, causing the doctests to fail
+with recent versions of SQLite.  The queries are now made
+to include a GROUP BY as well as ORDER BY both columns.
+
+Fixes: #4370
+Change-Id: I904bddb4372224158fcecff9f0dbbbe7c1bf36b3
+(cherry picked from commit 477a64e2b26a84cbf6d91f0ee292c7adc50d7a88)
+---
+ doc/build/core/tutorial.rst | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/doc/build/core/tutorial.rst b/doc/build/core/tutorial.rst
+index 55e3b2be83..7eb855247d 100644
+--- a/doc/build/core/tutorial.rst
++++ b/doc/build/core/tutorial.rst
+@@ -1024,7 +1024,8 @@ fields within an "OVER" or "DISTINCT" clause.  If we have such a label
+ in our :func:`.select` construct, we can refer to it directly by passing the
+ string straight into :meth:`.select.order_by` or :meth:`.select.group_by`,
+ among others.  This will refer to the named label and also prevent the
+-expression from being rendered twice:
++expression from being rendered twice.  Label names that resolve to columns
++are rendered fully:
+ 
+ .. sourcecode:: pycon+sql
+ 
+@@ -1032,13 +1033,13 @@ expression from being rendered twice:
+     >>> stmt = select([
+     ...         addresses.c.user_id,
+     ...         func.count(addresses.c.id).label('num_addresses')]).\
+-    ...         order_by("num_addresses")
++    ...         group_by("user_id").order_by("user_id", "num_addresses")
+ 
+     {sql}>>> conn.execute(stmt).fetchall()
+     SELECT addresses.user_id, count(addresses.id) AS num_addresses
+-    FROM addresses ORDER BY num_addresses
++    FROM addresses GROUP BY addresses.user_id ORDER BY addresses.user_id, num_addresses
+     ()
+-    {stop}[(2, 4)]
++    {stop}[(1, 2), (2, 2)]
+ 
+ We can use modifiers like :func:`.asc` or :func:`.desc` by passing the string
+ name:
+@@ -1049,13 +1050,13 @@ name:
+     >>> stmt = select([
+     ...         addresses.c.user_id,
+     ...         func.count(addresses.c.id).label('num_addresses')]).\
+-    ...         order_by(desc("num_addresses"))
++    ...         group_by("user_id").order_by("user_id", desc("num_addresses"))
+ 
+     {sql}>>> conn.execute(stmt).fetchall()
+     SELECT addresses.user_id, count(addresses.id) AS num_addresses
+-    FROM addresses ORDER BY num_addresses DESC
++    FROM addresses GROUP BY addresses.user_id ORDER BY addresses.user_id, num_addresses DESC
+     ()
+-    {stop}[(2, 4)]
++    {stop}[(1, 2), (2, 2)]
+ 
+ Note that the string feature here is very much tailored to when we have
+ already used the :meth:`~.ColumnElement.label` method to create a
