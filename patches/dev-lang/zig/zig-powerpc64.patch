@@ -1,0 +1,53 @@
+diff --git a/src/codegen.cpp b/src/codegen.cpp
+index 2de1243a..65f82342 100644
+--- a/src/codegen.cpp
++++ b/src/codegen.cpp
+@@ -7968,7 +7968,11 @@ static void detect_dynamic_linker(CodeGen *g) {
+         {
+             Error err;
+             static const char *dyn_tests[] = {
+-#if defined(ZIG_ARCH_X86_64)
++#if defined(ZIG_ARCH_POWERPC64)
++                "ld-linux-powerpc64.so.2",
++                "ld-musl-powerpc64.so.1",
++                "ld-musl-powerpc64-ld128.so.1",
++#elif defined(ZIG_ARCH_X86_64)
+                 "ld-linux-x86-64.so.2",
+                 "ld-musl-x86_64.so.1",
+ #endif
+diff --git a/src/compiler.cpp b/src/compiler.cpp
+index 7ec1485f..c855299f 100644
+--- a/src/compiler.cpp
++++ b/src/compiler.cpp
+@@ -26,7 +26,15 @@ Buf *get_stage1_cache_path(void) {
+ }
+ 
+ static void detect_dynamic_linker(Buf *lib_path) {
+-#if defined(ZIG_OS_LINUX) && defined(ZIG_ARCH_X86_64)
++#if defined(ZIG_OS_LINUX) && defined(ZIG_ARCH_POWERPC64)
++    if (buf_ends_with_str(lib_path, "ld-linux-powerpc64.so.2")) {
++        buf_init_from_buf(&saved_dynamic_linker_path, lib_path);
++    } else if (buf_ends_with_str(lib_path, "ld-musl-powerpc64.so.1")) {
++        buf_init_from_buf(&saved_dynamic_linker_path, lib_path);
++    } else if (buf_ends_with_str(lib_path, "ld-musl-powerpc64-ld128.so.1")) {
++        buf_init_from_buf(&saved_dynamic_linker_path, lib_path);
++    }
++#elif defined(ZIG_OS_LINUX) && defined(ZIG_ARCH_X86_64)
+     if (buf_ends_with_str(lib_path, "ld-linux-x86-64.so.2")) {
+         buf_init_from_buf(&saved_dynamic_linker_path, lib_path);
+     } else if (buf_ends_with_str(lib_path, "ld-musl-x86-64.so.1")) {
+diff --git a/src/os.hpp b/src/os.hpp
+index 36d3c327..546522a7 100644
+--- a/src/os.hpp
++++ b/src/os.hpp
+@@ -31,7 +31,9 @@
+ #define ZIG_OS_UNKNOWN
+ #endif
+ 
+-#if defined(__x86_64__)
++#if defined(__powerpc64__)
++#define ZIG_ARCH_POWERPC64
++#elif defined(__x86_64__)
+ #define ZIG_ARCH_X86_64
+ #else
+ #define ZIG_ARCH_UNKNOWN
