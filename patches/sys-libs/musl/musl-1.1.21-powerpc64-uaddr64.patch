@@ -32,7 +32,7 @@ index 35cacd76..dae066c2 100644
  			break;
 +		case REL_USYMBOLIC: {
 +			size_t sum = sym_val + addend;
-+			memcpy(reloc_addr, sum, sizeof(*reloc_addr));
++			memcpy(reloc_addr, &sum, sizeof(*reloc_addr));
 +		}
  		case REL_RELATIVE:
  			*reloc_addr = (size_t)base + addend;
