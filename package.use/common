@@ -106,7 +106,7 @@ sys-apps/pciutils dns
 sys-apps/util-linux -cramfs -ncurses
 sys-devel/binutils cxx
 sys-devel/clang-runtime compiler-rt libcxx -sanitize
-sys-devel/gcc -vtv
+sys-devel/gcc ada -vtv
 sys-devel/gdb multitarget python
 sys-firmware/intel-microcode initramfs
 sys-fs/cryptsetup -gcrypt nettle
