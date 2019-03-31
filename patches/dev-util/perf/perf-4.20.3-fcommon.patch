@@ -1,0 +1,52 @@
+diff --git perf/bench/futex-lock-pi.c
+index 8e9c475..7e5c30f 100644
+--- perf/bench/futex-lock-pi.c.orig
++++ perf/bench/futex-lock-pi.c
+@@ -35,7 +35,7 @@ static bool silent = false, multi = false;
+ static bool done = false, fshared = false;
+ static unsigned int nthreads = 0;
+ static int futex_flag = 0;
+-struct timeval start, end, runtime;
++static struct timeval start, end, runtime;
+ static pthread_mutex_t thread_lock;
+ static unsigned int threads_starting;
+ static struct stats throughput_stats;
+diff --git perf/bench/futex-hash.c
+index 9aa3a67..ba8a3e8 100644
+--- perf/bench/futex-hash.c.orig
++++ perf/bench/futex-hash.c
+@@ -35,7 +35,7 @@ static unsigned int nfutexes = 1024;
+ static bool fshared = false, done = false, silent = false;
+ static int futex_flag = 0;
+ 
+-struct timeval start, end, runtime;
++static struct timeval start, end, runtime;
+ static pthread_mutex_t thread_lock;
+ static unsigned int threads_starting;
+ static struct stats throughput_stats;
+diff --git perf/tests/bp_account.c
+index a20cbc4..624e4ef 100644
+--- perf/tests/bp_account.c.orig
++++ perf/tests/bp_account.c
+@@ -22,7 +22,7 @@
+ #include "perf.h"
+ #include "cloexec.h"
+ 
+-volatile long the_var;
++static volatile long the_var;
+ 
+ static noinline int test_function(void)
+ {
+diff --git perf/tests/bp_signal.c
+index a467615..6e9c217 100644
+--- perf/tests/bp_signal.c.orig
++++ perf/tests/bp_signal.c
+@@ -34,7 +34,7 @@ static int fd3;
+ static int overflows;
+ static int overflows_2;
+ 
+-volatile long the_var;
++static volatile long the_var;
+ 
+ 
+ /*

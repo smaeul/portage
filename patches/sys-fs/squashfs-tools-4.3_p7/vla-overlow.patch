@@ -1,5 +1,5 @@
---- ./squashfs-tools/unsquashfs.c
-+++ ./squashfs-tools/unsquashfs.c
+--- squashfs-tools/unsquashfs.c
++++ squashfs-tools/unsquashfs.c
 @@ -2099,7 +2099,9 @@
   */
  void *inflator(void *arg)

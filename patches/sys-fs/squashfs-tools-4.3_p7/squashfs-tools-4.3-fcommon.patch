@@ -1,5 +1,5 @@
---- squashfs4.3/squashfs-tools/mksquashfs.h
-+++ squashfs4.3/squashfs-tools/mksquashfs.h
+--- squashfs-tools/mksquashfs.h
++++ squashfs-tools/mksquashfs.h
 @@ -132,7 +132,7 @@ struct append_file {
  #define BLOCK_OFFSET 2
  
