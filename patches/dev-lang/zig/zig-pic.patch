@@ -1,0 +1,27 @@
+diff --git a/src/main.cpp b/src/main.cpp
+index 03cf3aad..d7cbeced 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -446,7 +446,7 @@ int main(int argc, char **argv) {
+     Buf *override_lib_dir = nullptr;
+     Buf *main_pkg_path = nullptr;
+     ValgrindSupport valgrind_support = ValgrindSupportAuto;
+-    WantPIC want_pic = WantPICAuto;
++    WantPIC want_pic = WantPICEnabled;
+ 
+     ZigList<const char *> llvm_argv = {0};
+     llvm_argv.append("zig (LLVM option parsing)");
+diff --git a/src/target.cpp b/src/target.cpp
+index 1954fd7e..57dad66c 100644
+--- a/src/target.cpp
++++ b/src/target.cpp
+@@ -1355,8 +1355,7 @@ bool target_supports_fpic(const ZigTarget *target) {
+ 
+ bool target_requires_pic(const ZigTarget *target, bool linking_libc) {
+   // This function returns whether non-pic code is completely invalid on the given target.
+-  return target->os == OsWindows || target_os_requires_libc(target->os) ||
+-      (linking_libc && target_is_glibc(target));
++  return target->os == OsWindows || target_os_requires_libc(target->os) || linking_libc;
+ }
+ 
+ bool target_is_glibc(const ZigTarget *target) {
