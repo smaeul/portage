@@ -92,3 +92,17 @@
  
    fprintf(stderr, "Finished.\n");
  
+diff --git valgrind-3.14.0/memcheck/tests/linux/sys-statx.c
+index fe9f9ba..d175b19 100644
+--- valgrind-3.14.0/memcheck/tests/linux/sys-statx.c.orig
++++ valgrind-3.14.0/memcheck/tests/linux/sys-statx.c
+@@ -7,6 +7,9 @@
+ #include <assert.h>
+ #include <string.h>
+ #include <sys/syscall.h>
++#ifndef __GLIBC_PREREQ
++#define __GLIBC_PREREQ(...) 0
++#endif
+ #if __GLIBC_PREREQ(2,28)
+ /* struct statx provided in sys/stat.h */
+ #else
