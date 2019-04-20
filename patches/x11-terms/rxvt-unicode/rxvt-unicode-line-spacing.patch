@@ -1,5 +1,5 @@
---- src/rxvtfont.C
-+++ src/rxvtfont.C
+--- a/src/rxvtfont.C
++++ b/src/rxvtfont.C
 @@ -1237,11 +1237,22 @@
  
        FT_Face face = XftLockFace (f);

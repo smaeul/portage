@@ -1,3 +1,4 @@
+dev-libs/elfutils::gentoo
 dev-util/pkgconfig
 sys-apps/dbus
 sys-fs/zfs-kmod::gentoo

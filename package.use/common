@@ -122,4 +122,4 @@ www-client/chromium -atk -gtk3 -hangouts system-ffmpeg
 www-client/firefox -gmp-autoupdate gtk2 system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 x11-base/xorg-server glamor xvfb
 x11-libs/gtk+ -vim-syntax
-x11-terms/rxvt-unicode 256-color alt-font-width iso14755 secondary-wheel unicode3 -vanilla wcwidth
+x11-terms/rxvt-unicode 256-color -blink -fading-colors font-styles iso14755 mousewheel -pixbuf unicode3 -utmp -wtmp

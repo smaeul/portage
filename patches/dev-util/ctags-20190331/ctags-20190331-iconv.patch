@@ -1,0 +1,26 @@
+diff --git ctags-95975bd157cc1326120977ce530f0477bcbf43b1/Tmain/input-encoding-option.d/run.sh
+index 163820d..fbb6737 100644
+--- ctags-95975bd157cc1326120977ce530f0477bcbf43b1/Tmain/input-encoding-option.d/run.sh.orig
++++ ctags-95975bd157cc1326120977ce530f0477bcbf43b1/Tmain/input-encoding-option.d/run.sh
+@@ -8,7 +8,7 @@ BUILDDIR=$2
+ 
+ . ../utils.sh
+ 
+-if ${CTAGS} --quiet --options=NONE --list-features | grep -q iconv; then
++if false; then
+   if ${CTAGS} --quiet --options=NONE \
+ 	      --input-encoding=utf-8 --input-encoding-java=cp932 --input-encoding-javascript=euc-jp \
+ 	      -o ${BUILDDIR}/tags \
+diff --git ctags-95975bd157cc1326120977ce530f0477bcbf43b1/Tmain/output-encoding-option.d/run.sh
+index 104b9a7..fa5cecc 100644
+--- ctags-95975bd157cc1326120977ce530f0477bcbf43b1/Tmain/output-encoding-option.d/run.sh.orig
++++ ctags-95975bd157cc1326120977ce530f0477bcbf43b1/Tmain/output-encoding-option.d/run.sh
+@@ -7,7 +7,7 @@ BUILDDIR=$2
+ 
+ . ../utils.sh
+ 
+-if ${CTAGS} --quiet --options=NONE --list-features | grep -q iconv; then
++if false; then
+   if ${CTAGS}  --quiet --options=NONE \
+ 	       --output-encoding=cp932 --input-encoding=utf-8 --input-encoding-javascript=euc-jp \
+ 	       -o ${BUILDDIR}/tags \

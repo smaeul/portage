@@ -1,0 +1,100 @@
+From 2e10973643021b141955238c7fee8b800ff7809d Mon Sep 17 00:00:00 2001
+From: latricewilgus <43064940+latricewilgus@users.noreply.github.com>
+Date: Thu, 4 Apr 2019 19:53:33 +0200
+Subject: [PATCH] Check for interactive feature in sandbox tests
+
+The sandbox tests pass the --_interactive option to ctags, which is only present if ctags was built with json support. Add check for the interactive feature in the tests skipping the tests if the feature is not present.
+---
+ Tmain/gcov-sandbox.d/run.sh                | 1 +
+ Tmain/sandbox-crash.d/run.sh               | 1 +
+ Tmain/sandbox-default-req.d/run.sh         | 1 +
+ Tmain/sandbox-no-eager-guessing.d/run.sh   | 1 +
+ Tmain/sandbox-unknown-submode.d/run.sh     | 1 +
+ Tmain/sandbox-with-eager-guessing.d/run.sh | 1 +
+ Tmain/sandbox.d/run.sh                     | 1 +
+ 7 files changed, 7 insertions(+)
+
+diff --git a/Tmain/gcov-sandbox.d/run.sh b/Tmain/gcov-sandbox.d/run.sh
+index 7861e09fb..7f311952c 100644
+--- a/Tmain/gcov-sandbox.d/run.sh
++++ b/Tmain/gcov-sandbox.d/run.sh
+@@ -7,6 +7,7 @@ CTAGS=$1
+ 
+ . ../utils.sh
+ is_feature_available $CTAGS sandbox
++is_feature_available ${CTAGS} interactive
+ is_feature_available ${CTAGS} gcov
+ 
+ {
+diff --git a/Tmain/sandbox-crash.d/run.sh b/Tmain/sandbox-crash.d/run.sh
+index fb0f0f4d3..225cbec2f 100644
+--- a/Tmain/sandbox-crash.d/run.sh
++++ b/Tmain/sandbox-crash.d/run.sh
+@@ -8,6 +8,7 @@ CTAGS=$1
+ . ../utils.sh
+ is_feature_available $CTAGS debug
+ is_feature_available $CTAGS sandbox
++is_feature_available ${CTAGS} interactive
+ is_feature_available ${CTAGS} '!' gcov
+ 
+ {
+diff --git a/Tmain/sandbox-default-req.d/run.sh b/Tmain/sandbox-default-req.d/run.sh
+index f75eb83f5..987abe535 100644
+--- a/Tmain/sandbox-default-req.d/run.sh
++++ b/Tmain/sandbox-default-req.d/run.sh
+@@ -7,6 +7,7 @@ CTAGS=$1
+ 
+ . ../utils.sh
+ is_feature_available $CTAGS sandbox
++is_feature_available ${CTAGS} interactive
+ is_feature_available ${CTAGS} '!' gcov
+ 
+ {
+diff --git a/Tmain/sandbox-no-eager-guessing.d/run.sh b/Tmain/sandbox-no-eager-guessing.d/run.sh
+index 9da4cefd1..ac1761760 100644
+--- a/Tmain/sandbox-no-eager-guessing.d/run.sh
++++ b/Tmain/sandbox-no-eager-guessing.d/run.sh
+@@ -7,6 +7,7 @@ CTAGS=$1
+ 
+ . ../utils.sh
+ is_feature_available $CTAGS sandbox
++is_feature_available ${CTAGS} interactive
+ is_feature_available ${CTAGS} '!' gcov
+ 
+ {
+diff --git a/Tmain/sandbox-unknown-submode.d/run.sh b/Tmain/sandbox-unknown-submode.d/run.sh
+index ee7499988..aca467654 100644
+--- a/Tmain/sandbox-unknown-submode.d/run.sh
++++ b/Tmain/sandbox-unknown-submode.d/run.sh
+@@ -7,6 +7,7 @@ CTAGS=$1
+ 
+ . ../utils.sh
+ is_feature_available $CTAGS sandbox
++is_feature_available ${CTAGS} interactive
+ is_feature_available ${CTAGS} '!' gcov
+ 
+ {
+diff --git a/Tmain/sandbox-with-eager-guessing.d/run.sh b/Tmain/sandbox-with-eager-guessing.d/run.sh
+index 016000fe4..3e204c6c1 100644
+--- a/Tmain/sandbox-with-eager-guessing.d/run.sh
++++ b/Tmain/sandbox-with-eager-guessing.d/run.sh
+@@ -7,6 +7,7 @@ CTAGS=$1
+ 
+ . ../utils.sh
+ is_feature_available $CTAGS sandbox
++is_feature_available ${CTAGS} interactive
+ is_feature_available ${CTAGS} '!' gcov
+ 
+ {
+diff --git a/Tmain/sandbox.d/run.sh b/Tmain/sandbox.d/run.sh
+index 61c4fa5b7..3fca60a6a 100644
+--- a/Tmain/sandbox.d/run.sh
++++ b/Tmain/sandbox.d/run.sh
+@@ -7,6 +7,7 @@ CTAGS=$1
+ 
+ . ../utils.sh
+ is_feature_available $CTAGS sandbox
++is_feature_available ${CTAGS} interactive
+ is_feature_available ${CTAGS} '!' gcov
+ 
+ {
