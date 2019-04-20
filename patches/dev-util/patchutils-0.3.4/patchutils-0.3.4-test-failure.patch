@@ -1,0 +1,19 @@
+==14251== Conditional jump or move depends on uninitialised value(s)
+==14251==    at 0x10B6E0: show_modified_hunk (rediff.c:673)
+==14251==    by 0x10A3E7: rediff (rediff.c:1009)
+==14251==    by 0x10A3E7: main (rediff.c:1097)
+==14251==
+
+Causes tests/addhunk2/run-test to fail, only under sandbox
+
+--- patchutils-0.3.4/src/rediff.c
++++ patchutils-0.3.4/src/rediff.c
+@@ -962,6 +962,8 @@ static int rediff (const char *original, const char *edited, FILE *out)
+ 
+ 		if (which->line_in_diff + which->num_lines <= orig_line)
+ 			which->discard_offset = 1;
++		else
++			which->discard_offset = 0;
+ 
+ #ifdef DEBUG
+ 		fprintf (stderr, "Modified hunk starts on line %lu\n",
