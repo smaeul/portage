@@ -51,6 +51,7 @@ app-office/libreoffice ~amd64
 app-office/libreoffice-l10n ~amd64
 dev-lang/go ~amd64
 dev-lang/mono ~amd64
+dev-libs/elfutils::musl ~amd64
 net-irc/weechat ~amd64
 net-misc/youtube-dl ~amd64
 net-p2p/syncthing ~amd64
