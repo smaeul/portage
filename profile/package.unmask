@@ -6,3 +6,4 @@ dev-libs/elfutils
 virtual/libelf:0/1
 >=virtual/rust-1.33.0
 >=www-client/firefox-54.0
+>=sys-process/bcron-0.11
