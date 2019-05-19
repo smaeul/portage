@@ -1,0 +1,58 @@
+Copied from CMakeParseImplicitLinkInfo.cmake. Fixes test failure in
+RunCMake.PositionIndependentCode:
+
+Expected stderr to match:
+
+ expect-err> CMake Error: Property POSITION_INDEPENDENT_CODE on target "conflict1" does
+ expect-err> not match the INTERFACE_POSITION_INDEPENDENT_CODE property requirement
+ expect-err> of dependency "genex_pic".
+
+Actual stderr:
+
+ actual-err> CMake Warning (dev) at /tmp/portage/dev-util/cmake-3.14.3/work/cmake-3.14.3/Modules/CMakeParseImplicitIncludeInfo.cmake:74 (if):
+ actual-err>   Policy CMP0054 is not set: Only interpret if() arguments as variables or
+ actual-err>   keywords when unquoted.  Run "cmake --help-policy CMP0054" for policy
+ actual-err>   details.  Use the cmake_policy command to set the policy and suppress this
+ actual-err>   warning.
+ actual-err>
+ actual-err>   Quoted keywords like ")" will no longer be interpreted as keywords when the
+ actual-err>   policy is set to NEW.  Since the policy is not set the OLD behavior will be
+ actual-err>   used.
+ actual-err> Call Stack (most recent call first):
+ actual-err>   /tmp/portage/dev-util/cmake-3.14.3/work/cmake-3.14.3/Modules/CMakeParseImplicitIncludeInfo.cmake:177 (cmake_parse_implicit_include_line)
+ actual-err>   /tmp/portage/dev-util/cmake-3.14.3/work/cmake-3.14.3/Modules/CMakeDetermineCompilerABI.cmake:95 (cmake_parse_implicit_include_info)
+ actual-err>   /tmp/portage/dev-util/cmake-3.14.3/work/cmake-3.14.3/Modules/CMakeTestCXXCompiler.cmake:67 (CMAKE_DETERMINE_COMPILER_ABI)
+ actual-err>   CMakeLists.txt:3 (project)
+ actual-err> This warning is for project developers.  Use -Wno-dev to suppress it.
+ actual-err>
+ actual-err> CMake Error at /tmp/portage/dev-util/cmake-3.14.3/work/cmake-3.14.3/Modules/CMakeParseImplicitIncludeInfo.cmake:74 (if):
+ actual-err>   if given arguments:
+ actual-err>
+ actual-err>     "GNU" "STREQUAL" "SunPro" "AND" "(" ")" "MATCHES" "-D__SUNPRO_C" "OR" ")" "MATCHES" "-D__SUNPRO_F" ")"
+ actual-err>
+ actual-err>   Unknown arguments specified
+ actual-err> Call Stack (most recent call first):
+ actual-err>   /tmp/portage/dev-util/cmake-3.14.3/work/cmake-3.14.3/Modules/CMakeParseImplicitIncludeInfo.cmake:177 (cmake_parse_implicit_include_line)
+ actual-err>   /tmp/portage/dev-util/cmake-3.14.3/work/cmake-3.14.3/Modules/CMakeDetermineCompilerABI.cmake:95 (cmake_parse_implicit_include_info)
+ actual-err>   /tmp/portage/dev-util/cmake-3.14.3/work/cmake-3.14.3/Modules/CMakeTestCXXCompiler.cmake:67 (CMAKE_DETERMINE_COMPILER_ABI)
+ actual-err>   CMakeLists.txt:3 (project)
+
+--- cmake-3.14.3/Modules/CMakeParseImplicitIncludeInfo.cmake
++++ cmake-3.14.3/Modules/CMakeParseImplicitIncludeInfo.cmake
+@@ -1,6 +1,10 @@
+ # Distributed under the OSI-approved BSD 3-Clause License.  See accompanying
+ # file Copyright.txt or https://cmake.org/licensing for details.
+ 
++cmake_policy(PUSH)
++cmake_policy(SET CMP0053 NEW)
++cmake_policy(SET CMP0054 NEW)
++
+ # This is used internally by CMake and should not be included by user code.
+ 
+ # helper function that parses implicit include dirs from a single line
+@@ -243,3 +247,5 @@ function(cmake_parse_implicit_include_info text lang dir_var log_var state_var)
+   set(${state_var} "${state}" PARENT_SCOPE)
+ 
+ endfunction()
++
++cmake_policy(POP)

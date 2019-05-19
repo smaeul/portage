@@ -1,0 +1,22 @@
+diff --git ctags-95975bd157cc1326120977ce530f0477bcbf43b1/main/lregex.c.orig ctags-95975bd157cc1326120977ce530f0477bcbf43b1/main/lregex.c
+index 5601f36..c46bc26 100644
+--- ctags-95975bd157cc1326120977ce530f0477bcbf43b1/main/lregex.c.orig
++++ ctags-95975bd157cc1326120977ce530f0477bcbf43b1/main/lregex.c
+@@ -415,7 +415,7 @@ static flagDefinition prePtrnFlagDef[] = {
+ static void scope_ptrn_flag_eval (const char* const f  CTAGS_ATTR_UNUSED,
+ 				  const char* const v, void* data)
+ {
+-	unsigned long *bfields = data;
++	unsigned int *bfields = data;
+ 
+ 	if (strcmp (v, "ref") == 0)
+ 		*bfields |= SCOPE_REF;
+@@ -434,7 +434,7 @@ static void scope_ptrn_flag_eval (const char* const f  CTAGS_ATTR_UNUSED,
+ static void placeholder_ptrn_flag_eval (const char* const f  CTAGS_ATTR_UNUSED,
+ 				     const char* const v  CTAGS_ATTR_UNUSED, void* data)
+ {
+-	unsigned long *bfields = data;
++	unsigned int *bfields = data;
+ 	*bfields |= SCOPE_PLACEHOLDER;
+ }
+ 
