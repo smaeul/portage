@@ -46,7 +46,9 @@ sys-libs/zlib minizip
 # Required by x11-wm/i3
 x11-libs/libxcb xkb
 
+app-arch/libarchive lz4
 app-arch/p7zip rar
+app-arch/zstd lz4
 app-crypt/gnupg readline
 app-crypt/rhash openssl
 app-editors/vim python

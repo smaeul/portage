@@ -48,8 +48,8 @@
  
  /* get parameters for vce 40.2.2 */
  void radeon_vce_40_2_2_get_param(struct rvce_encoder *enc,
---- mesa-18.2.1/src/mesa/drivers/dri/r200/radeon_debug.c
-+++ mesa-18.2.1/src/mesa/drivers/dri/r200/radeon_debug.c
+--- mesa-18.2.1/src/mesa/drivers/dri/radeon/radeon_debug.c
++++ mesa-18.2.1/src/mesa/drivers/dri/radeon/radeon_debug.c
 @@ -57,13 +57,13 @@ static const struct debug_control debug_control[] = {
  	{NULL, 0}
  };
@@ -67,8 +67,8 @@
  }
  
  void _radeon_debug_add_indent(void)
---- mesa-18.2.1/src/mesa/drivers/dri/r200/radeon_debug.h
-+++ mesa-18.2.1/src/mesa/drivers/dri/r200/radeon_debug.h
+--- mesa-18.2.1/src/mesa/drivers/dri/radeon/radeon_debug.h
++++ mesa-18.2.1/src/mesa/drivers/dri/radeon/radeon_debug.h
 @@ -81,18 +81,18 @@ struct radeon_debug {
         char indent[RADEON_MAX_INDENT];
  };

@@ -1,0 +1,13 @@
+diff --git bglibs-2.04/net/resolve_ipv4addr.c
+index a9c0d23..a91954b 100644
+--- bglibs-2.04/net/resolve_ipv4addr.c.orig
++++ bglibs-2.04/net/resolve_ipv4addr.c
+@@ -10,7 +10,7 @@ const char* resolve_ipv4addr(const ipv4addr* addr)
+   return out.rr.name[0];
+ }
+ 
+-#ifdef SELFTEST_MAIN
++#ifdef SELFTEST_DISABLED
+ MAIN
+ {
+   ipv4addr ip = {{ 69,5,1,51 }};
