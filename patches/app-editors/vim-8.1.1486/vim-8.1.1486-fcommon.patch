@@ -1,0 +1,21 @@
+diff --git vim-8.1.1486/src/autocmd.c
+index 6d3987c..1f628e5 100644
+--- vim-8.1.1486/src/autocmd.c.orig
++++ vim-8.1.1486/src/autocmd.c
+@@ -239,16 +239,6 @@ static garray_T augroups = {0, 0, sizeof(char_u *), 10, NULL};
+ /* use get_deleted_augroup() to get this */
+ static char_u *deleted_augroup = NULL;
+ 
+-/*
+- * Set by the apply_autocmds_group function if the given event is equal to
+- * EVENT_FILETYPE. Used by the readfile function in order to determine if
+- * EVENT_BUFREADPOST triggered the EVENT_FILETYPE.
+- *
+- * Relying on this value requires one to reset it prior calling
+- * apply_autocmds_group.
+- */
+-int au_did_filetype INIT(= FALSE);
+-
+ /*
+  * The ID of the current group.  Group 0 is the default one.
+  */
