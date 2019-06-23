@@ -39,6 +39,8 @@ net-dns/ldns-utils examples
 net-libs/libnftnl json
 # Required by chromium
 net-libs/nodejs inspector
+# Required by !python:2.7
+sys-apps/ripgrep -man
 # Required by bitcoind (cxx) and for USE=test (tcl)
 sys-libs/db cxx tcl
 # Required by chromium
@@ -70,7 +72,7 @@ dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
 dev-util/cmake system-jsoncpp
 dev-vcs/git -pcre-jit perl
-mail-client/thunderbird -crypt gtk2 system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+mail-client/thunderbird system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/noto cjk
 media-gfx/imagemagick pango
 media-libs/imlib2 -mp3
@@ -120,8 +122,8 @@ sys-libs/libcxx libcxxabi -libcxxrt libunwind
 sys-libs/libcxxabi libunwind
 sys-libs/ncurses:5 tinfo
 sys-power/nut -ups_drivers_* ups_drivers_usbhid-ups
-www-client/chromium -atk -gtk3 -hangouts system-ffmpeg
-www-client/firefox -gmp-autoupdate gtk2 system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+www-client/chromium -atk -hangouts system-ffmpeg
+www-client/firefox eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 x11-base/xorg-server glamor xvfb
 x11-libs/gtk+ -vim-syntax
 x11-terms/rxvt-unicode 256-color -blink -fading-colors font-styles iso14755 mousewheel -pixbuf unicode3 -utmp -wtmp
