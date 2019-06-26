@@ -2,4 +2,4 @@ app-arch/p7zip unRAR
 net-analyzer/fping fping
 net-analyzer/netperf netperf
 sys-firmware/intel-microcode intel-ucode
-sys-kernel/linux-firmware linux-firmware no-source-code
+sys-kernel/linux-firmware linux-fw-redistributable no-source-code

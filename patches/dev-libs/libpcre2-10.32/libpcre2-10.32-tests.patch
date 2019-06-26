@@ -1,0 +1,57 @@
+fix for musl stdio buffering different from glibc
+--- pcre2-10.32/RunGrepTest
++++ pcre2-10.32/RunGrepTest
+@@ -736,10 +736,10 @@ if [ $? != 0 ] ; then exit 1; fi
+ 
+ if $valgrind $vjs $pcre2grep --help | $valgrind $vjs $pcre2grep -q 'Callout scripts in patterns are supported'; then
+   echo "Testing pcre2grep script callouts"
+-  $valgrind $vjs $pcre2grep '(T)(..(.))(?C"/bin/echo|Arg1: [$1] [$2] [$3]|Arg2: $|${1}$| ($4) ($14) ($0)")()' $srcdir/testdata/grepinputv >testtrygrep
+-  $valgrind $vjs $pcre2grep '(T)(..(.))()()()()()()()(..)(?C"/bin/echo|Arg1: [$11] [${11}]")' $srcdir/testdata/grepinputv >>testtrygrep
+-  $valgrind $vjs $pcre2grep '(T)(?C"|$0:$1$n")' $srcdir/testdata/grepinputv >>testtrygrep
+-  $valgrind $vjs $pcre2grep '(T)(?C"|$1$n")(*F)' $srcdir/testdata/grepinputv >>testtrygrep
++  $valgrind $vjs $pcre2grep --line-buffered '(T)(..(.))(?C"/bin/echo|Arg1: [$1] [$2] [$3]|Arg2: $|${1}$| ($4) ($14) ($0)")()' $srcdir/testdata/grepinputv >testtrygrep
++  $valgrind $vjs $pcre2grep --line-buffered '(T)(..(.))()()()()()()()(..)(?C"/bin/echo|Arg1: [$11] [${11}]")' $srcdir/testdata/grepinputv >>testtrygrep
++  $valgrind $vjs $pcre2grep --line-buffered '(T)(?C"|$0:$1$n")' $srcdir/testdata/grepinputv >>testtrygrep
++  $valgrind $vjs $pcre2grep --line-buffered '(T)(?C"|$1$n")(*F)' $srcdir/testdata/grepinputv >>testtrygrep
+   # The above has no newline, which 'diff -ub' ignores, so add one.
+   $cf $srcdir/testdata/grepoutputC testtrygrep
+   if [ $? != 0 ] ; then exit 1; fi
+--- pcre2-10.32/testdata/grepoutputC
++++ pcre2-10.32/testdata/grepoutputC
+@@ -1,26 +1,26 @@
+ Arg1: [T] [he ] [ ] Arg2: |T| () () (0)
+-Arg1: [T] [his] [s] Arg2: |T| () () (0)
+-Arg1: [T] [his] [s] Arg2: |T| () () (0)
+-Arg1: [T] [he ] [ ] Arg2: |T| () () (0)
+-Arg1: [T] [he ] [ ] Arg2: |T| () () (0)
+-Arg1: [T] [he ] [ ] Arg2: |T| () () (0)
+ The quick brown
++Arg1: [T] [his] [s] Arg2: |T| () () (0)
+ This time it jumps and jumps and jumps.
++Arg1: [T] [his] [s] Arg2: |T| () () (0)
+ This line contains \E and (regex) *meta* [characters].
++Arg1: [T] [he ] [ ] Arg2: |T| () () (0)
+ The word is cat in this line
++Arg1: [T] [he ] [ ] Arg2: |T| () () (0)
+ The caterpillar sat on the mat
++Arg1: [T] [he ] [ ] Arg2: |T| () () (0)
+ The snowcat is not an animal
+ Arg1: [qu] [qu]
+-Arg1: [ t] [ t]
+-Arg1: [ l] [ l]
+-Arg1: [wo] [wo]
+-Arg1: [ca] [ca]
+-Arg1: [sn] [sn]
+ The quick brown
++Arg1: [ t] [ t]
+ This time it jumps and jumps and jumps.
++Arg1: [ l] [ l]
+ This line contains \E and (regex) *meta* [characters].
++Arg1: [wo] [wo]
+ The word is cat in this line
++Arg1: [ca] [ca]
+ The caterpillar sat on the mat
++Arg1: [sn] [sn]
+ The snowcat is not an animal
+ 0:T
+ The quick brown

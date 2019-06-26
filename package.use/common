@@ -116,7 +116,7 @@ sys-firmware/intel-microcode initramfs
 sys-fs/cryptsetup nettle -openssl
 sys-fs/lvm2 -thin
 sys-fs/zfs -rootfs
-sys-kernel/linux-firmware savedconfig
+sys-kernel/linux-firmware redistributable savedconfig
 sys-libs/ldb -ldap
 sys-libs/libcxx libcxxabi -libcxxrt libunwind
 sys-libs/libcxxabi libunwind
