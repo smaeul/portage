@@ -1,0 +1,12 @@
+diff --git LVM2.2.02.184/libdaemon/server/daemon-server.c
+index 3b19883..0155eb0 100644
+--- LVM2.2.02.184/libdaemon/server/daemon-server.c.orig
++++ LVM2.2.02.184/libdaemon/server/daemon-server.c
+@@ -20,6 +20,7 @@
+ 
+ #include <dlfcn.h>
+ #include <errno.h>
++#include <fcntl.h>
+ #include <pthread.h>
+ #include <sys/file.h>
+ #include <sys/stat.h>

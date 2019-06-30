@@ -1,0 +1,14 @@
+diff --git a/Modules/Platform/UnixPaths.cmake.orig b/Modules/Platform/UnixPaths.cmake
+index 8fafc92..b5fd90e 100644
+--- a/Modules/Platform/UnixPaths.cmake.orig
++++ b/Modules/Platform/UnixPaths.cmake
+@@ -98,6 +98,6 @@ set(_CMAKE_CUDA_IMPLICIT_INCLUDE_DIRECTORIES_INIT
+ unset(_cmake_sysroot_compile)
+ 
+ # Enable use of lib32 and lib64 search path variants by default.
+-set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB32_PATHS TRUE)
+-set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS TRUE)
+-set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIBX32_PATHS TRUE)
++set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB32_PATHS FALSE)
++set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS FALSE)
++set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIBX32_PATHS FALSE)
