@@ -1,0 +1,76 @@
+From 6d45cb7c68163ff95c5754f0f9d13218199b739c Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sat, 29 Jun 2019 18:10:20 -0500
+Subject: [PATCH 3/8] Revert "mips,powerpc: fix TIOCSER_TEMT in termios.h"
+
+Commit 3517d74a5e04a377192d1f4882ad6c8dc22ce69a changed the token in
+sys/ioctl.h from 0x01 to 1, so bits/termios.h no longer matches. Revert
+the bits/termios.h change to keep the headers in sync.
+
+This reverts commit 9eda4dc69c33852c97c6f69176bf45ffc80b522f.
+---
+ arch/mips/bits/termios.h      | 2 +-
+ arch/mips64/bits/termios.h    | 2 +-
+ arch/mipsn32/bits/termios.h   | 2 +-
+ arch/powerpc/bits/termios.h   | 2 +-
+ arch/powerpc64/bits/termios.h | 2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/arch/mips/bits/termios.h b/arch/mips/bits/termios.h
+index f7b9dd2e..9d571f78 100644
+--- a/arch/mips/bits/termios.h
++++ b/arch/mips/bits/termios.h
+@@ -165,5 +165,5 @@ struct termios {
+ #define EXTPROC 0200000
+ 
+ #define XTABS  0014000
+-#define TIOCSER_TEMT 0x01
++#define TIOCSER_TEMT 1
+ #endif
+diff --git a/arch/mips64/bits/termios.h b/arch/mips64/bits/termios.h
+index f7b9dd2e..9d571f78 100644
+--- a/arch/mips64/bits/termios.h
++++ b/arch/mips64/bits/termios.h
+@@ -165,5 +165,5 @@ struct termios {
+ #define EXTPROC 0200000
+ 
+ #define XTABS  0014000
+-#define TIOCSER_TEMT 0x01
++#define TIOCSER_TEMT 1
+ #endif
+diff --git a/arch/mipsn32/bits/termios.h b/arch/mipsn32/bits/termios.h
+index f7b9dd2e..9d571f78 100644
+--- a/arch/mipsn32/bits/termios.h
++++ b/arch/mipsn32/bits/termios.h
+@@ -165,5 +165,5 @@ struct termios {
+ #define EXTPROC 0200000
+ 
+ #define XTABS  0014000
+-#define TIOCSER_TEMT 0x01
++#define TIOCSER_TEMT 1
+ #endif
+diff --git a/arch/powerpc/bits/termios.h b/arch/powerpc/bits/termios.h
+index e3f22e86..da1f406b 100644
+--- a/arch/powerpc/bits/termios.h
++++ b/arch/powerpc/bits/termios.h
+@@ -167,5 +167,5 @@ struct termios {
+ #define EXTPROC 0x10000000
+ 
+ #define XTABS   00006000
+-#define TIOCSER_TEMT 0x01
++#define TIOCSER_TEMT 1
+ #endif
+diff --git a/arch/powerpc64/bits/termios.h b/arch/powerpc64/bits/termios.h
+index e3f22e86..da1f406b 100644
+--- a/arch/powerpc64/bits/termios.h
++++ b/arch/powerpc64/bits/termios.h
+@@ -167,5 +167,5 @@ struct termios {
+ #define EXTPROC 0x10000000
+ 
+ #define XTABS   00006000
+-#define TIOCSER_TEMT 0x01
++#define TIOCSER_TEMT 1
+ #endif
+-- 
+2.21.0
+

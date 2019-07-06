@@ -1,3 +1,14 @@
+From 9a3fd5fdd46168d917e22864a9492edb255c5484 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Mon, 22 Oct 2018 21:05:46 -0500
+Subject: [PATCH 6/8] strptime: Support %s (patch from mailing list)
+
+---
+ src/time/strptime.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/src/time/strptime.c b/src/time/strptime.c
+index c54a0d8c..87fa77a8 100644
 --- a/src/time/strptime.c
 +++ b/src/time/strptime.c
 @@ -5,6 +5,9 @@
@@ -30,5 +41,5 @@
  			s = strptime(s, "%H:%M:%S", tm);
  			if (!s) return 0;
 -- 
-2.18.1
+2.21.0
 

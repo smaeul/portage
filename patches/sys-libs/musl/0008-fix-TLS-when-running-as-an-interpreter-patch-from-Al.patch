@@ -1,8 +1,18 @@
+From 6bf90b345ca5ce410b316112278415d215d62e6b Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 30 Jun 2019 21:01:07 -0500
+Subject: [PATCH 8/8] fix TLS when running as an interpreter (patch from
+ Alpine)
+
+---
+ src/env/__init_tls.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
+
 diff --git a/src/env/__init_tls.c b/src/env/__init_tls.c
-index b125eb1..616c6a6 100644
+index 772baba3..db929945 100644
 --- a/src/env/__init_tls.c
 +++ b/src/env/__init_tls.c
-@@ -66,8 +66,10 @@ void *__copy_tls(unsigned char *mem)
+@@ -72,8 +72,10 @@ void *__copy_tls(unsigned char *mem)
  }
  
  #if ULONG_MAX == 0xffffffff
@@ -13,7 +23,7 @@ index b125eb1..616c6a6 100644
  typedef Elf64_Phdr Phdr;
  #endif
  
-@@ -77,15 +79,23 @@ extern const size_t _DYNAMIC[];
+@@ -82,15 +84,23 @@ extern weak hidden const size_t _DYNAMIC[];
  static void static_init_tls(size_t *aux)
  {
  	unsigned char *p;
@@ -41,3 +51,6 @@ index b125eb1..616c6a6 100644
  		if (phdr->p_type == PT_DYNAMIC && _DYNAMIC)
  			base = (size_t)_DYNAMIC - phdr->p_vaddr;
  		if (phdr->p_type == PT_TLS)
+-- 
+2.21.0
+

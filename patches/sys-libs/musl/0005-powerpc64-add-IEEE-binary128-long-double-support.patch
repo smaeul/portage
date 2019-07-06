@@ -1,0 +1,102 @@
+From cd8b0036f9607db7d687a43b3f1169786d7d9bce Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 30 Jun 2019 12:19:56 -0500
+Subject: [PATCH 5/8] powerpc64: add IEEE binary128 long double support
+
+This is added under a new "ieee128" sub-architecture. The 128-bit scalar
+floating-point ABI uses the Altivec registers for parameter passing, but
+no special instructions; thus, the ABI can be used with any CPU that
+supports Altivec. However, hardware instructions to operate on a 128-bit
+scalar are only available starting with POWER9. Any older CPU will use
+software fp.
+---
+ INSTALL                     |  4 ++--
+ arch/powerpc64/bits/float.h | 21 +++++++++++++++++++++
+ arch/powerpc64/reloc.h      |  8 +++++++-
+ configure                   |  1 +
+ 4 files changed, 31 insertions(+), 3 deletions(-)
+
+diff --git a/INSTALL b/INSTALL
+index a2a142bf..ce08bb17 100644
+--- a/INSTALL
++++ b/INSTALL
+@@ -76,8 +76,8 @@ and ABI combinations:
+ 
+ * PowerPC64
+     * Both little and big endian variants are supported
+-    * Compiler toolchain must provide 64-bit long double, not IBM
+-      double-double or IEEE quad
++    * Compiler toolchain must provide 64-bit or 128-bit IEEE long
++      double, not IBM double-double
+     * Compiler toolchain must use the new (ELFv2) ABI regardless of
+       whether it is for little or big endian
+ 
+diff --git a/arch/powerpc64/bits/float.h b/arch/powerpc64/bits/float.h
+index c4a655e7..cc183824 100644
+--- a/arch/powerpc64/bits/float.h
++++ b/arch/powerpc64/bits/float.h
+@@ -1,5 +1,24 @@
+ #define FLT_EVAL_METHOD 0
+ 
++#if __LDBL_MANT_DIG__ == 113
++
++#define LDBL_TRUE_MIN 6.47517511943802511092443895822764655e-4966L
++#define LDBL_MIN 3.36210314311209350626267781732175260e-4932L
++#define LDBL_MAX 1.18973149535723176508575932662800702e+4932L
++#define LDBL_EPSILON 1.92592994438723585305597794258492732e-34L
++
++#define LDBL_MANT_DIG 113
++#define LDBL_MIN_EXP (-16381)
++#define LDBL_MAX_EXP 16384
++
++#define LDBL_DIG 33
++#define LDBL_MIN_10_EXP (-4931)
++#define LDBL_MAX_10_EXP 4932
++
++#define DECIMAL_DIG 36
++
++#else
++
+ #define LDBL_TRUE_MIN 4.94065645841246544177e-324L
+ #define LDBL_MIN 2.22507385850720138309e-308L
+ #define LDBL_MAX 1.79769313486231570815e+308L
+@@ -14,3 +33,5 @@
+ #define LDBL_MAX_10_EXP 308
+ 
+ #define DECIMAL_DIG 17
++
++#endif
+diff --git a/arch/powerpc64/reloc.h b/arch/powerpc64/reloc.h
+index faf70acd..5ef8f0e5 100644
+--- a/arch/powerpc64/reloc.h
++++ b/arch/powerpc64/reloc.h
+@@ -6,7 +6,13 @@
+ #define ENDIAN_SUFFIX ""
+ #endif
+ 
+-#define LDSO_ARCH "powerpc64" ENDIAN_SUFFIX
++#if __LDBL_MANT_DIG__ == 113
++#define FP_SUFFIX "-ieee128"
++#else
++#define FP_SUFFIX ""
++#endif
++
++#define LDSO_ARCH "powerpc64" ENDIAN_SUFFIX FP_SUFFIX
+ 
+ #define TPOFF_K (-0x7000)
+ 
+diff --git a/configure b/configure
+index 60e0b1fc..8e7a191b 100755
+--- a/configure
++++ b/configure
+@@ -652,6 +652,7 @@ test "$ARCH" = "microblaze" && trycppif __MICROBLAZEEL__ "$t" \
+ if test "$ARCH" = "powerpc64" ; then
+ trycppif "_CALL_ELF == 2" "$t" || fail "$0: error: unsupported powerpc64 ABI"
+ trycppif __LITTLE_ENDIAN__ "$t" && SUBARCH=${SUBARCH}le
++trycppif "__LDBL_MANT_DIG__ == 113" "$t" && SUBARCH=${SUBARCH}-ieee128
+ trycppif _SOFT_FLOAT "$t" && fail "$0: error: soft-float not supported on powerpc64"
+ fi
+ 
+-- 
+2.21.0
+

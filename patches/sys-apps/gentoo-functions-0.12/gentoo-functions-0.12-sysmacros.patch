@@ -1,0 +1,12 @@
+diff --git gentoo-functions-0.12/consoletype.c.orig gentoo-functions-0.12/consoletype.c
+index 0eb7a07..e39c883 100644
+--- gentoo-functions-0.12/consoletype.c.orig
++++ gentoo-functions-0.12/consoletype.c
+@@ -13,6 +13,7 @@
+ #include <string.h>
+ #include <sys/ioctl.h>
+ #include <sys/stat.h>
++#include <sys/sysmacros.h>
+ #include <sys/types.h>
+ #include "headers.h"
+ 
