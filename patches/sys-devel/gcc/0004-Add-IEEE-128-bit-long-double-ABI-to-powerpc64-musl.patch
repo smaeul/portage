@@ -1,7 +1,7 @@
-From 74424f180f4d16bfd612907e602736350e1cda79 Mon Sep 17 00:00:00 2001
+From b3621e065780e2414ef815a4f95a9b07cea72759 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 30 Jun 2019 13:08:50 -0500
-Subject: [PATCH] powerpc64 musl libc support for IEEE binary128 long double
+Subject: [PATCH 4/6] Add IEEE 128-bit long double ABI to powerpc64 musl
 
 ---
  gcc/config/rs6000/linux.h   |  3 ++-
@@ -9,10 +9,10 @@ Subject: [PATCH] powerpc64 musl libc support for IEEE binary128 long double
  2 files changed, 11 insertions(+), 3 deletions(-)
 
 diff --git a/gcc/config/rs6000/linux.h b/gcc/config/rs6000/linux.h
-index 01b40c762f69..d5358cf87699 100644
+index 96b97877989b..439b5179b172 100644
 --- a/gcc/config/rs6000/linux.h
 +++ b/gcc/config/rs6000/linux.h
-@@ -121,8 +121,9 @@
+@@ -139,8 +139,9 @@
  #define POWERPC_LINUX
  
  /* ppc linux has 128-bit long double support in glibc 2.4 and later.  */
@@ -24,10 +24,10 @@ index 01b40c762f69..d5358cf87699 100644
  
  /* Static stack checking is supported by means of probes.  */
 diff --git a/gcc/config/rs6000/linux64.h b/gcc/config/rs6000/linux64.h
-index 44eab40a2349..0893e0abae10 100644
+index 5380f6a6a6f1..2b76255f7673 100644
 --- a/gcc/config/rs6000/linux64.h
 +++ b/gcc/config/rs6000/linux64.h
-@@ -425,10 +425,16 @@ extern int dot_symbols;
+@@ -447,12 +447,18 @@ extern int dot_symbols;
  ":%(dynamic_linker_prefix)/lib64/ld64.so.1}"
  #endif
  
@@ -37,15 +37,17 @@ index 44eab40a2349..0893e0abae10 100644
 +#define MUSL_DYNAMIC_LINKER_FP "%{mlong-double-128:-ieee128}"
 +#endif
 +
+ #undef MUSL_DYNAMIC_LINKER32
  #define MUSL_DYNAMIC_LINKER32 \
    "/lib/ld-musl-powerpc" MUSL_DYNAMIC_LINKER_E "%{msoft-float:-sf}.so.1"
+ #undef MUSL_DYNAMIC_LINKER64
  #define MUSL_DYNAMIC_LINKER64 \
 -  "/lib/ld-musl-powerpc64" MUSL_DYNAMIC_LINKER_E "%{msoft-float:-sf}.so.1"
 +  "/lib/ld-musl-powerpc64" MUSL_DYNAMIC_LINKER_E MUSL_DYNAMIC_LINKER_FP ".so.1"
  
- #define UCLIBC_DYNAMIC_LINKER32 "/lib/ld-uClibc.so.0"
- #define UCLIBC_DYNAMIC_LINKER64 "/lib/ld64-uClibc.so.0"
-@@ -615,8 +621,9 @@ extern int dot_symbols;
+ #undef  DEFAULT_ASM_ENDIAN
+ #if (TARGET_DEFAULT & MASK_LITTLE_ENDIAN)
+@@ -628,8 +634,9 @@ extern int dot_symbols;
  #define POWERPC_LINUX
  
  /* ppc{32,64} linux has 128-bit long double support in glibc 2.4 and later.  */

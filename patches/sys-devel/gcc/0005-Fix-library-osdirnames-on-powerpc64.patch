@@ -1,3 +1,16 @@
+From 51aa00d5e502b54d79834d8fdc280fea2ec0b0c3 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 7 Jul 2019 02:22:44 -0500
+Subject: [PATCH 5/6] Fix library osdirnames on powerpc64
+
+---
+ gcc/config/rs6000/t-linux       | 2 +-
+ gcc/config/rs6000/t-linux64     | 4 ++--
+ gcc/config/rs6000/t-linux64bele | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/gcc/config/rs6000/t-linux b/gcc/config/rs6000/t-linux
+index aeb7440c4920..3d2d582a1dae 100644
 --- a/gcc/config/rs6000/t-linux
 +++ b/gcc/config/rs6000/t-linux
 @@ -2,7 +2,7 @@
@@ -7,8 +20,10 @@
 -MULTILIB_OSDIRNAMES := .=../lib64$(call if_multiarch,:powerpc64-linux-gnu)
 +MULTILIB_OSDIRNAMES := $(call if_multiarch,.=.:powerpc64-linux-gnu)
  else
- MULTIARCH_DIRNAME := powerpc-linux-gnu
+ MULTIARCH_DIRNAME := $(call if_multiarch,powerpc-linux-gnu)
  endif
+diff --git a/gcc/config/rs6000/t-linux64 b/gcc/config/rs6000/t-linux64
+index f3c6e2be1d93..2a93af68078b 100644
 --- a/gcc/config/rs6000/t-linux64
 +++ b/gcc/config/rs6000/t-linux64
 @@ -28,8 +28,8 @@
@@ -22,6 +37,8 @@
  
  rs6000-linux.o: $(srcdir)/config/rs6000/rs6000-linux.c
  	$(COMPILE) $<
+diff --git a/gcc/config/rs6000/t-linux64bele b/gcc/config/rs6000/t-linux64bele
+index 97c1ee6fb4d7..6cb4cb707f9a 100644
 --- a/gcc/config/rs6000/t-linux64bele
 +++ b/gcc/config/rs6000/t-linux64bele
 @@ -2,6 +2,6 @@
@@ -32,3 +49,6 @@
 +MULTILIB_OSDIRNAMES += $(subst =,.mlittle=,$(subst -linux,le-linux,$(MULTILIB_OSDIRNAMES)))
  MULTILIB_OSDIRNAMES += $(subst $(if $(findstring 64,$(target)),m64,m32).,,$(filter $(if $(findstring 64,$(target)),m64,m32).mlittle%,$(MULTILIB_OSDIRNAMES)))
  MULTILIB_MATCHES    := ${MULTILIB_MATCHES_ENDIAN}
+-- 
+2.21.0
+

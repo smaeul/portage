@@ -1,0 +1,66 @@
+--- perf/bench/epoll-ctl.c
++++ perf/bench/epoll-ctl.c
+@@ -33,7 +33,7 @@
+ 
+ static unsigned int nthreads = 0;
+ static unsigned int nsecs    = 8;
+-struct timeval start, end, runtime;
++static struct timeval start, end, runtime;
+ static bool done, __verbose, randomize;
+ 
+ /*
+--- perf/bench/epoll-wait.c
++++ perf/bench/epoll-wait.c
+@@ -88,7 +88,7 @@
+ 
+ static unsigned int nthreads = 0;
+ static unsigned int nsecs    = 8;
+-struct timeval start, end, runtime;
++static struct timeval start, end, runtime;
+ static bool wdone, done, __verbose, randomize, nonblocking;
+ 
+ /*
+--- perf/bench/futex-hash.c
++++ perf/bench/futex-hash.c
+@@ -35,7 +35,7 @@ static unsigned int nfutexes = 1024;
+ static bool fshared = false, done = false, silent = false;
+ static int futex_flag = 0;
+ 
+-struct timeval start, end, runtime;
++static struct timeval start, end, runtime;
+ static pthread_mutex_t thread_lock;
+ static unsigned int threads_starting;
+ static struct stats throughput_stats;
+--- perf/bench/futex-lock-pi.c
++++ perf/bench/futex-lock-pi.c
+@@ -35,7 +35,7 @@ static bool silent = false, multi = false;
+ static bool done = false, fshared = false;
+ static unsigned int nthreads = 0;
+ static int futex_flag = 0;
+-struct timeval start, end, runtime;
++static struct timeval start, end, runtime;
+ static pthread_mutex_t thread_lock;
+ static unsigned int threads_starting;
+ static struct stats throughput_stats;
+--- perf/tests/bp_account.c
++++ perf/tests/bp_account.c
+@@ -22,7 +22,7 @@
+ #include "perf.h"
+ #include "cloexec.h"
+ 
+-volatile long the_var;
++static volatile long the_var;
+ 
+ static noinline int test_function(void)
+ {
+--- perf/tests/bp_signal.c
++++ perf/tests/bp_signal.c
+@@ -34,7 +34,7 @@ static int fd3;
+ static int overflows;
+ static int overflows_2;
+ 
+-volatile long the_var;
++static volatile long the_var;
+ 
+ 
+ /*

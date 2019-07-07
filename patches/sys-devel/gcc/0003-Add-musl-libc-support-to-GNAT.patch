@@ -1,5 +1,43 @@
+From afa0f8fcb786ad5736e68c8a80605bd5f216f001 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 7 Jul 2019 02:02:37 -0500
+Subject: [PATCH 3/6] Add musl libc support to GNAT
+
+---
+ gcc/ada/Makefile.rtl                 |  2 +-
+ gcc/ada/adadecode.c                  |  3 +-
+ gcc/ada/adaint.c                     |  4 +-
+ gcc/ada/adaint.h                     |  1 +
+ gcc/ada/argv.c                       |  4 +-
+ gcc/ada/cio.c                        |  4 +-
+ gcc/ada/cstreams.c                   |  4 +-
+ gcc/ada/exit.c                       |  4 +-
+ gcc/ada/init.c                       |  3 +-
+ gcc/ada/libgnarl/s-osinte__linux.ads | 11 ----
+ gcc/ada/libgnarl/s-taprop__linux.adb | 53 ++-----------------
+ gcc/ada/libgnat/s-dwalin.adb         |  4 ++
+ gcc/ada/libgnat/s-tsmona__linux.adb  | 76 +++++++++++++++-------------
+ gcc/ada/mkdir.c                      |  4 +-
+ gcc/ada/raise.c                      |  3 +-
+ gcc/ada/sysdep.c                     |  4 +-
+ gcc/ada/terminals.c                  |  3 +-
+ 17 files changed, 70 insertions(+), 117 deletions(-)
+
+diff --git a/gcc/ada/Makefile.rtl b/gcc/ada/Makefile.rtl
+index 775ab9857b6f..8875ce3cc1ce 100644
+--- a/gcc/ada/Makefile.rtl
++++ b/gcc/ada/Makefile.rtl
+@@ -2102,7 +2102,7 @@ ifeq ($(strip $(filter-out powerpc% linux%,$(target_cpu) $(target_os))),)
+ endif
+ 
+ # ARM linux, GNU eabi
+-ifeq ($(strip $(filter-out arm% linux-gnueabi%,$(target_cpu) $(target_os))),)
++ifeq ($(strip $(filter-out arm% linux-gnueabi% linux-musleabi% linux-muslgnueabi%,$(target_cpu) $(target_os))),)
+   LIBGNAT_TARGET_PAIRS = \
+   a-intnam.ads<libgnarl/a-intnam__linux.ads \
+   s-inmaop.adb<libgnarl/s-inmaop__posix.adb \
 diff --git a/gcc/ada/adadecode.c b/gcc/ada/adadecode.c
-index a63b7e7641b0..92155ef2025a 100644
+index a574f3cf4a6c..af56dac3f10f 100644
 --- a/gcc/ada/adadecode.c
 +++ b/gcc/ada/adadecode.c
 @@ -29,6 +29,7 @@
@@ -20,11 +58,11 @@ index a63b7e7641b0..92155ef2025a 100644
  #define ISDIGIT(c) isdigit(c)
  #endif
 diff --git a/gcc/ada/adaint.c b/gcc/ada/adaint.c
-index 414346558654..2586a1368903 100644
+index 4a75b5909113..97ec7a83f5fa 100644
 --- a/gcc/ada/adaint.c
 +++ b/gcc/ada/adaint.c
-@@ -85,6 +85,8 @@
- #define _LARGEFILE64_SOURCE 1
+@@ -87,6 +87,8 @@
+ #include <sys/syspage.h>
  #endif
  
 +#include "adaint.h"
@@ -32,7 +70,7 @@ index 414346558654..2586a1368903 100644
  #ifdef IN_RTS
  #include "tconfig.h"
  #include "tsystem.h"
-@@ -202,8 +204,6 @@ UINT __gnat_current_ccs_encoding;
+@@ -204,8 +206,6 @@ UINT __gnat_current_ccs_encoding;
  #include <utime.h>
  #endif
  
@@ -42,7 +80,7 @@ index 414346558654..2586a1368903 100644
     defined in the current system. On DOS-like systems these flags control
     whether the file is opened/created in text-translation mode (CR/LF in
 diff --git a/gcc/ada/adaint.h b/gcc/ada/adaint.h
-index 0d12f7e90209..74182446d4ac 100644
+index 2ae87669918e..0422af37ffda 100644
 --- a/gcc/ada/adaint.h
 +++ b/gcc/ada/adaint.h
 @@ -316,6 +316,7 @@ extern void   *__gnat_lwp_self			   (void);
@@ -54,7 +92,7 @@ index 0d12f7e90209..74182446d4ac 100644
  
  extern cpu_set_t *__gnat_cpu_alloc                 (size_t);
 diff --git a/gcc/ada/argv.c b/gcc/ada/argv.c
-index f62cf1eb37dc..0b6c5fe6f0df 100644
+index 3249c32cf314..3bbe17a9f4f7 100644
 --- a/gcc/ada/argv.c
 +++ b/gcc/ada/argv.c
 @@ -42,6 +42,8 @@
@@ -76,7 +114,7 @@ index f62cf1eb37dc..0b6c5fe6f0df 100644
  extern "C" {
  #endif
 diff --git a/gcc/ada/cio.c b/gcc/ada/cio.c
-index ff97abe36ef1..56aa3477c8cd 100644
+index dd91a3e1d694..72382a31c98f 100644
 --- a/gcc/ada/cio.c
 +++ b/gcc/ada/cio.c
 @@ -29,6 +29,8 @@
@@ -98,7 +136,7 @@ index ff97abe36ef1..56aa3477c8cd 100644
  #include <stdio.h>
  
 diff --git a/gcc/ada/cstreams.c b/gcc/ada/cstreams.c
-index cdcb531e2b3f..dde6b9948089 100644
+index e37070ddb78e..f89cbeba88f3 100644
 --- a/gcc/ada/cstreams.c
 +++ b/gcc/ada/cstreams.c
 @@ -52,6 +52,8 @@
@@ -120,7 +158,7 @@ index cdcb531e2b3f..dde6b9948089 100644
  extern "C" {
  #endif
 diff --git a/gcc/ada/exit.c b/gcc/ada/exit.c
-index 6274571c6f04..336b0f8f386b 100644
+index 3ac35968946c..3fe008e4d5ca 100644
 --- a/gcc/ada/exit.c
 +++ b/gcc/ada/exit.c
 @@ -33,6 +33,8 @@
@@ -141,21 +179,8 @@ index 6274571c6f04..336b0f8f386b 100644
  #ifdef __cplusplus
  extern "C" {
  #endif
-diff --git a/gcc/ada/gcc-interface/Makefile.in b/gcc/ada/gcc-interface/Makefile.in
-index 0258f106d404..0416244ae428 100644
---- a/gcc/ada/gcc-interface/Makefile.in
-+++ b/gcc/ada/gcc-interface/Makefile.in
-@@ -1574,7 +1574,7 @@ ifeq ($(strip $(filter-out powerpc% linux%,$(target_cpu) $(target_os))),)
- endif
- 
- # ARM linux, GNU eabi
--ifeq ($(strip $(filter-out arm% linux-gnueabi%,$(target_cpu) $(target_os))),)
-+ifeq ($(strip $(filter-out arm% linux-gnueabi% linux-musleabi% linux-muslgnueabi%,$(target_cpu) $(target_os))),)
-   LIBGNAT_TARGET_PAIRS = \
-   a-intnam.ads<libgnarl/a-intnam__linux.ads \
-   s-inmaop.adb<libgnarl/s-inmaop__posix.adb \
 diff --git a/gcc/ada/init.c b/gcc/ada/init.c
-index 5088ecffc4f1..02a45b3ce7ca 100644
+index 00f32e5e02ac..83f86f0c6367 100644
 --- a/gcc/ada/init.c
 +++ b/gcc/ada/init.c
 @@ -53,6 +53,8 @@
@@ -176,10 +201,10 @@ index 5088ecffc4f1..02a45b3ce7ca 100644
  
  #ifdef __cplusplus
 diff --git a/gcc/ada/libgnarl/s-osinte__linux.ads b/gcc/ada/libgnarl/s-osinte__linux.ads
-index 5bf4a5fe1d26..c52cc70dfbab 100644
+index ba3b82423adc..23418a286303 100644
 --- a/gcc/ada/libgnarl/s-osinte__linux.ads
 +++ b/gcc/ada/libgnarl/s-osinte__linux.ads
-@@ -394,12 +394,6 @@ package System.OS_Interface is
+@@ -398,12 +398,6 @@ package System.OS_Interface is
     PTHREAD_RWLOCK_PREFER_WRITER_NP              : constant := 1;
     PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP : constant := 2;
  
@@ -192,7 +217,7 @@ index 5bf4a5fe1d26..c52cc70dfbab 100644
     function pthread_rwlock_init
       (mutex : access pthread_rwlock_t;
        attr  : access pthread_rwlockattr_t) return int;
-@@ -464,11 +458,6 @@ package System.OS_Interface is
+@@ -465,11 +459,6 @@ package System.OS_Interface is
        protocol : int) return int;
     pragma Import (C, pthread_mutexattr_setprotocol);
  
@@ -205,7 +230,7 @@ index 5bf4a5fe1d26..c52cc70dfbab 100644
        sched_priority : int;  --  scheduling priority
     end record;
 diff --git a/gcc/ada/libgnarl/s-taprop__linux.adb b/gcc/ada/libgnarl/s-taprop__linux.adb
-index e55cd65e54f6..32d72b3980a6 100644
+index c45559e5ba00..0b0f173e7d46 100644
 --- a/gcc/ada/libgnarl/s-taprop__linux.adb
 +++ b/gcc/ada/libgnarl/s-taprop__linux.adb
 @@ -202,9 +202,6 @@ package body System.Task_Primitives.Operations is
@@ -298,54 +323,10 @@ index e55cd65e54f6..32d72b3980a6 100644
  
              pragma Assert (Result in 0 | ENOMEM);
 diff --git a/gcc/ada/libgnat/s-dwalin.adb b/gcc/ada/libgnat/s-dwalin.adb
-index a857b67132af..1e2bb4c545ad 100644
+index 5307eae2603c..68fb8d4f59c0 100644
 --- a/gcc/ada/libgnat/s-dwalin.adb
 +++ b/gcc/ada/libgnat/s-dwalin.adb
-@@ -382,7 +382,7 @@ package body System.Dwarf_Lines is
- 
-    function Low (C : Dwarf_Context) return Address is
-    begin
--      return C.Low;
-+      return To_Address (To_Integer (C.Low) + C.Load_Slide);
-    end Low;
- 
-    ----------
-@@ -1210,19 +1210,21 @@ package body System.Dwarf_Lines is
-                --  Discard symbols whose length is 0
-                Sz := uint32 (Size (S));
- 
--               --  Try to filter symbols at the same address. This is a best
--               --  effort as they might not be consecutive.
--               Addr := uint32 (Value (S) - uint64 (C.Low));
--               if Sz > 0 and then Addr /= Prev_Addr then
--                  Nbr_Symbols := Nbr_Symbols + 1;
--                  Prev_Addr   := Addr;
--
--                  if Phase = 2 then
--                     C.Cache (Nbr_Symbols) :=
--                       (First => Addr,
--                        Size  => Sz,
--                        Sym   => uint32 (Off (S)),
--                        Line  => 0);
-+               if Sz > 0 then
-+                  --  Try to filter symbols at the same address. This is a best
-+                  --  effort as they might not be consecutive.
-+                  Addr := uint32 (Value (S) - uint64 (C.Low));
-+                  if Addr /= Prev_Addr then
-+                     Nbr_Symbols := Nbr_Symbols + 1;
-+                     Prev_Addr   := Addr;
-+
-+                     if Phase = 2 then
-+                        C.Cache (Nbr_Symbols) :=
-+                          (First => Addr,
-+                           Size  => Sz,
-+                           Sym   => uint32 (Off (S)),
-+                           Line  => 0);
-+                     end if;
-                   end if;
-                end if;
- 
-@@ -1267,6 +1269,10 @@ package body System.Dwarf_Lines is
+@@ -1283,6 +1283,10 @@ package body System.Dwarf_Lines is
              --  Read table
              loop
                 Read_Aranges_Entry (C, Ar_Start, Ar_Len);
@@ -356,38 +337,8 @@ index a857b67132af..1e2bb4c545ad 100644
                 exit when Ar_Start = 0 and Ar_Len = 0;
  
                 Len   := uint32 (Ar_Len);
-diff --git a/gcc/ada/libgnat/s-trasym__dwarf.adb b/gcc/ada/libgnat/s-trasym__dwarf.adb
-index db7c5eb4cdd8..3cd60ecbc37b 100644
---- a/gcc/ada/libgnat/s-trasym__dwarf.adb
-+++ b/gcc/ada/libgnat/s-trasym__dwarf.adb
-@@ -123,7 +123,8 @@ package body System.Traceback.Symbolic is
-    --  Return the String contained in Item, up until the first NUL character
- 
-    pragma Warnings (Off, "*Add_Module_To_Cache*");
--   procedure Add_Module_To_Cache (Module_Name : String);
-+   procedure Add_Module_To_Cache (Module_Name  : String;
-+                                  Load_Address : System.Address);
-    --  To be called by Build_Cache_For_All_Modules to add a new module to the
-    --  list. May not be referenced.
- 
-@@ -217,12 +218,13 @@ package body System.Traceback.Symbolic is
-    -- Add_Module_To_Cache --
-    -------------------------
- 
--   procedure Add_Module_To_Cache (Module_Name : String) is
-+   procedure Add_Module_To_Cache (Module_Name  : String;
-+                                  Load_Address : System.Address) is
-       Module  : Module_Cache_Acc;
-       Success : Boolean;
-    begin
-       Module := new Module_Cache;
--      Init_Module (Module.all, Success, Module_Name);
-+      Init_Module (Module.all, Success, Module_Name, Load_Address);
-       if not Success then
-          Free (Module);
-          return;
 diff --git a/gcc/ada/libgnat/s-tsmona__linux.adb b/gcc/ada/libgnat/s-tsmona__linux.adb
-index cbebd0652048..c882aa64a6e2 100644
+index bc3ee23be8d1..4fe0ac685f83 100644
 --- a/gcc/ada/libgnat/s-tsmona__linux.adb
 +++ b/gcc/ada/libgnat/s-tsmona__linux.adb
 @@ -87,45 +87,49 @@ package body Module_Name is
@@ -468,7 +419,7 @@ index cbebd0652048..c882aa64a6e2 100644
 -      while lm /= null loop
 -         if Big_String_Conv.To_Pointer (lm.l_name) (1) /= ASCII.NUL then
 -            --  Discard non-file (like the executable itself or the gate).
--            Add_Module_To_Cache (Value (lm.l_name));
+-            Add_Module_To_Cache (Value (lm.l_name), lm.l_addr);
 -         end if;
 -         lm := lm.l_next;
 -      end loop;
@@ -477,7 +428,7 @@ index cbebd0652048..c882aa64a6e2 100644
  
     ---------
 diff --git a/gcc/ada/mkdir.c b/gcc/ada/mkdir.c
-index c101d968a851..43cdd51e8320 100644
+index d06147673f69..80095c71e31f 100644
 --- a/gcc/ada/mkdir.c
 +++ b/gcc/ada/mkdir.c
 @@ -34,6 +34,8 @@
@@ -499,7 +450,7 @@ index c101d968a851..43cdd51e8320 100644
  
  int
 diff --git a/gcc/ada/raise.c b/gcc/ada/raise.c
-index 70ad6cd3282a..eb92de1b2137 100644
+index 480a0eabca53..cceeefb27978 100644
 --- a/gcc/ada/raise.c
 +++ b/gcc/ada/raise.c
 @@ -32,6 +32,8 @@
@@ -520,7 +471,7 @@ index 70ad6cd3282a..eb92de1b2137 100644
  
  #ifdef __cplusplus
 diff --git a/gcc/ada/sysdep.c b/gcc/ada/sysdep.c
-index 98b3901cb16f..98db6a14c2d5 100644
+index 21a29bfcf278..5d10f2205491 100644
 --- a/gcc/ada/sysdep.c
 +++ b/gcc/ada/sysdep.c
 @@ -52,6 +52,8 @@
@@ -542,18 +493,10 @@ index 98b3901cb16f..98db6a14c2d5 100644
     imcompatible changes in some VxWorks versions */
  #ifdef __vxworks
 diff --git a/gcc/ada/terminals.c b/gcc/ada/terminals.c
-index 7025f57d645e..074845584958 100644
+index 23f9dfdfda77..6036949694a8 100644
 --- a/gcc/ada/terminals.c
 +++ b/gcc/ada/terminals.c
-@@ -1112,7 +1112,6 @@ __gnat_setup_winsize (void *desc, int rows, int columns)
-    (HP-UX) */
- #if !defined (__hpux__) && !defined (BSD) && !defined (__APPLE__) \
-   && !defined (__rtems__) && !defined (__QNXNTO__)
--#   include <termio.h>
- #endif
- 
- #include <sys/ioctl.h>
-@@ -1159,7 +1158,8 @@ __gnat_setup_winsize (void *desc, int rows, int columns)
+@@ -1150,7 +1150,8 @@ __gnat_setup_winsize (void *desc, int rows, int columns)
  #if defined (__APPLE__) || defined (BSD)
  #define USE_OPENPTY
  #elif defined (__linux__)
@@ -563,3 +506,6 @@ index 7025f57d645e..074845584958 100644
  #elif defined (__sun__)
  #define USE_CLONE_DEVICE "/dev/ptmx"
  #elif defined (_AIX)
+-- 
+2.21.0
+

@@ -1,0 +1,26 @@
+From f956353e0d3ebd47ca99407380c368d4763b0d22 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 7 Jul 2019 02:20:51 -0500
+Subject: [PATCH 2/6] Link libssp_nonshared when SSP is enabled
+
+---
+ gcc/gcc.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/gcc/gcc.c b/gcc/gcc.c
+index 4f57765b012a..4a2b31f02273 100644
+--- a/gcc/gcc.c
++++ b/gcc/gcc.c
+@@ -877,8 +877,7 @@ proper position among the other output files.  */
+ 
+ #ifndef LINK_SSP_SPEC
+ #ifdef TARGET_LIBC_PROVIDES_SSP
+-#define LINK_SSP_SPEC "%{fstack-protector|fstack-protector-all" \
+-		       "|fstack-protector-strong|fstack-protector-explicit:}"
++#define LINK_SSP_SPEC "%{!fno-stack-protector:-lssp_nonshared}"
+ #else
+ #define LINK_SSP_SPEC "%{fstack-protector|fstack-protector-all" \
+ 		       "|fstack-protector-strong|fstack-protector-explicit" \
+-- 
+2.21.0
+
