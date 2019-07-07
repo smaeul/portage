@@ -120,4 +120,5 @@ www-client/chromium -atk -hangouts system-ffmpeg -wayland
 www-client/firefox eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 x11-base/xorg-server xvfb
 x11-libs/gtk+ -vim-syntax
+x11-libs/libva -opengl
 x11-terms/rxvt-unicode 256-color -blink -fading-colors font-styles iso14755 mousewheel -pixbuf unicode3 -utmp -wtmp
