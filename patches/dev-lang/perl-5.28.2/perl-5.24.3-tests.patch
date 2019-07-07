@@ -31,23 +31,3 @@
  ########
  # NAME (?[ ]) in non-UTF-8 locale
  eval { require POSIX; POSIX->import("locale_h") };
---- perl-5.24.3/lib/locale.t
-+++ perl-5.24.3/lib/locale.t
-@@ -2353,17 +2353,6 @@ foreach $test_num ($first_locales_test_number..$final_locales_test_number) {
- 
- $test_num = $final_locales_test_number;
- 
--unless ( $^O =~ m!^(dragonfly|openbsd|bitrig|mirbsd)$! ) {
--    # perl #115808
--    use warnings;
--    my $warned = 0;
--    local $SIG{__WARN__} = sub {
--        $warned = $_[0] =~ /uninitialized/;
--    };
--    my $z = "y" . setlocale(&POSIX::LC_ALL, "xyzzy");
--    ok($warned, "variable set to setlocale(BAD LOCALE) is considered uninitialized");
--}
--
- # Test that tainting and case changing works on utf8 strings.  These tests are
- # placed last to avoid disturbing the hard-coded test numbers that existed at
- # the time these were added above this in this file.
