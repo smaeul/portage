@@ -1,0 +1,65 @@
+In file included from /tmp/portage/net-libs/libtirpc-1.0.2-r1/work/libtirpc-1.0.2/tirpc/rpc/rpc.h:43,                                                                                          
+                 from /tmp/portage/net-libs/libtirpc-1.0.2-r1/work/libtirpc-1.0.2/tirpc/rpc/des_crypt.h:46,                                                                                    
+                 from /tmp/portage/net-libs/libtirpc-1.0.2-r1/work/libtirpc-1.0.2/src/svc_auth_des.c:53:                                                                                       
+/tmp/portage/net-libs/libtirpc-1.0.2-r1/work/libtirpc-1.0.2/src/svc_auth_des.c: In function '_svcauth_des':                                                                                    
+/tmp/portage/net-libs/libtirpc-1.0.2-r1/work/libtirpc-1.0.2/tirpc/rpc/xdr.h:267:53: warning: array subscript 2 is outside array bounds of 'des_block[2]' {aka 'union des_block[2]'} [-Warray-bounds]
+  267 | #define IXDR_GET_LONG(buf)  ((long)ntohl((u_int32_t)*(buf)++))
+      |                                                     ^~~~~~~~
+/tmp/portage/net-libs/libtirpc-1.0.2-r1/work/libtirpc-1.0.2/tirpc/rpc/xdr.h:272:40: note: in expansion of macro 'IXDR_GET_LONG'                                                                
+  272 | #define IXDR_GET_U_LONG(buf)  ((u_long)IXDR_GET_LONG(buf))
+      |                                        ^~~~~~~~~~~~~
+/tmp/portage/net-libs/libtirpc-1.0.2-r1/work/libtirpc-1.0.2/src/svc_auth_des.c:240:13: note: in expansion of macro 'IXDR_GET_U_LONG'                                                           
+  240 |    window = IXDR_GET_U_LONG(ixdr);
+      |             ^~~~~~~~~~~~~~~
+/tmp/portage/net-libs/libtirpc-1.0.2-r1/work/libtirpc-1.0.2/src/svc_auth_des.c:113:12: note: while referencing 'cryptbuf'                                                                      
+  113 |  des_block cryptbuf[2];
+      |            ^~~~~~~~
+
+The code is trying to pull 32-bit values out of ixdr, so incrementing the pointer should go to the next 32-bit value.
+--- libtirpc-1.0.2/src/svc_auth_des.c
++++ libtirpc-1.0.2/src/svc_auth_des.c
+@@ -110,6 +110,7 @@ _svcauth_des(rqst, msg)
+ {
+ 
+ 	long *ixdr;
++	int *iixdr;
+ 	des_block cryptbuf[2];
+ 	struct authdes_cred *cred;
+ 	struct authdes_verf verf;
+@@ -221,9 +222,9 @@ _svcauth_des(rqst, msg)
+ 	/*
+ 	 * XDR the decrypted timestamp
+ 	 */
+-	ixdr = (long *)cryptbuf;
+-	timestamp.tv_sec = IXDR_GET_LONG(ixdr);
+-	timestamp.tv_usec = IXDR_GET_LONG(ixdr);
++	iixdr = (int *)cryptbuf;
++	timestamp.tv_sec = IXDR_GET_LONG(iixdr);
++	timestamp.tv_usec = IXDR_GET_LONG(iixdr);
+ 
+ 	/*
+  	 * Check for valid credentials and verifiers.
+@@ -237,8 +238,8 @@ _svcauth_des(rqst, msg)
+ 		int winverf;
+ 
+ 		if (cred->adc_namekind == ADN_FULLNAME) {
+-			window = IXDR_GET_U_LONG(ixdr);
+-			winverf = IXDR_GET_U_LONG(ixdr);
++			window = IXDR_GET_U_LONG(iixdr);
++			winverf = IXDR_GET_U_LONG(iixdr);
+ 			if (winverf != window - 1) {
+ 				LIBTIRPC_DEBUG(1, ("_svcauth_des: window verifier mismatch"));
+ 				return (AUTH_BADCRED);	/* garbled credential */
+@@ -282,9 +283,9 @@ _svcauth_des(rqst, msg)
+ 	/*
+ 	 * xdr the timestamp before encrypting
+ 	 */
+-	ixdr = (long *)cryptbuf;
+-	IXDR_PUT_LONG(ixdr, timestamp.tv_sec - 1);
+-	IXDR_PUT_LONG(ixdr, timestamp.tv_usec);
++	iixdr = (int *)cryptbuf;
++	IXDR_PUT_LONG(iixdr, timestamp.tv_sec - 1);
++	IXDR_PUT_LONG(iixdr, timestamp.tv_usec);
+ 
+ 	/*	 
+ 	 * encrypt the timestamp

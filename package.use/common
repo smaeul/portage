@@ -63,6 +63,7 @@ dev-db/postgresql readline
 dev-db/sqlite -icu
 dev-haskell/cryptonite support_blake2_sse support_pclmuldq
 dev-lang/ghc ghcbootstrap
+dev-lang/go system-bootstrap
 dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
 dev-lang/python berkdb readline
 dev-lang/rust cargo clippy rls rustfmt system-llvm

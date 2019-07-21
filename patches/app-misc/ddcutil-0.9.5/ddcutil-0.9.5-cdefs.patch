@@ -1,0 +1,43 @@
+--- ddcutil-0.9.5/src/libmain/api_base.c
++++ ddcutil-0.9.5/src/libmain/api_base.c
+@@ -49,7 +49,7 @@ ddca_get_precondition_failure_mode()
+ 
+ 
+ 
+-__THROW  __attribute__ ((__noreturn__))
++__attribute__ ((__noreturn__))
+ void __precond_fail (const char *__assertion, const char *__file,
+             unsigned int __line, const char *__function)
+ {
+@@ -58,7 +58,7 @@ void __precond_fail (const char *__assertion, const char *__file,
+    abort();
+ }
+ 
+-__THROW  __attribute__ ((__noreturn__))
++__attribute__ ((__noreturn__))
+ void __precond_abort()
+ {
+    abort();
+--- ddcutil-0.9.5/src/libmain/api_base_internal.h
++++ ddcutil-0.9.5/src/libmain/api_base_internal.h
+@@ -11,7 +11,6 @@
+ 
+ #include <stdbool.h>
+ #include <assert.h>
+-#include <sys/cdefs.h>
+ 
+ #include "public/ddcutil_status_codes.h"
+ #include "public/ddcutil_c_api.h"
+@@ -34,10 +33,10 @@ extern DDCA_Api_Precondition_Failure_Mode api_failure_mode;
+ 
+ void __precond_fail (const char *__assertion, const char *__file,
+             unsigned int __line, const char *__function)
+-     __THROW __attribute__ ((__noreturn__));
++     __attribute__ ((__noreturn__));
+ 
+ void __precond_abort ()
+-     __THROW __attribute__ ((__noreturn__));
++     __attribute__ ((__noreturn__));
+ 
+ #ifdef ALT1
+ #define PRECOND(expr)  \

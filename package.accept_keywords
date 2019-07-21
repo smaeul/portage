@@ -121,7 +121,7 @@ sys-libs/tevent ~amd64
 # Required for parallel compilation
 <dev-libs/openssl-1.1.1 ~amd64
 # Required to pass tests
-~dev-perl/IO-Socket-SSL-2.60.0 ~amd64
+~dev-perl/IO-Socket-SSL-2.66.0 ~amd64
 # Required for dev-python/twisted
 >=dev-python/automat-0.7.0 ~amd64
 # Required to pass tests
