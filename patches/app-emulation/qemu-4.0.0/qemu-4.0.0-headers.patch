@@ -1,0 +1,14 @@
+diff --git qemu-4.0.0/linux-user/syscall.c.orig qemu-4.0.0/linux-user/syscall.c
+index 61ad136..e2e5fc2 100644
+--- qemu-4.0.0/linux-user/syscall.c.orig
++++ qemu-4.0.0/linux-user/syscall.c
+@@ -105,7 +105,9 @@
+ #include <linux/filter.h>
+ #include <linux/blkpg.h>
+ #include <netpacket/packet.h>
++#define sysinfo __kernel_sysinfo
+ #include <linux/netlink.h>
++#undef sysinfo
+ #include "linux_loop.h"
+ #include "uname.h"
+ 
