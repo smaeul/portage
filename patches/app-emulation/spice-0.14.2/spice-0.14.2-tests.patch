@@ -1,0 +1,13 @@
+diff --git spice-0.14.2/server/tests/test-qxl-parsing.c.orig spice-0.14.2/server/tests/test-qxl-parsing.c
+index edccfee..78ba2f2 100644
+--- spice-0.14.2/server/tests/test-qxl-parsing.c.orig
++++ spice-0.14.2/server/tests/test-qxl-parsing.c
+@@ -98,7 +98,7 @@ static void test_memslot_invalid_slot_id(void)
+     RedMemSlotInfo mem_info;
+     init_meminfo(&mem_info);
+ 
+-    memslot_get_virt(&mem_info, 1 << mem_info.memslot_id_shift, 16, 0);
++    memslot_get_virt(&mem_info, 1L << mem_info.memslot_id_shift, 16, 0);
+ }
+ 
+ static void test_memslot_invalid_addresses(void)
