@@ -1,0 +1,29 @@
+This test tries to send the wrong GstObject, but GstBuffer is a GstMiniObject,
+so we get a segfault in g_type_check_instance_is_a(). Fix with a real GstObject.
+
+(gdb) p *(GstBuffer *)pad
+$10 = {mini_object = {type = 0x10010cf7560 [GstBuffer], refcount = 1, lockstate = 0, flags = 0, copy = 0x3fff86e3ce70 <_gst_buffer_copy>, dispose = 0x3fff86e39b70 <_gst_buffer_dispose>, free = 0x3fff86e399a0 <_gst_buffer_free>, n_qdata = 0, qdata = 0x0}, pool = 0x0, pts = 18446744073709551615, dts = 18446744073709551615, duration = 18446744073709551615, offset = 18446744073709551615, offset_end = 18446744073709551615}
+(gdb) p *pad
+$11 = {object = {object = {g_type_instance = {g_class = <error reading variable: Cannot access memory at address 0x100000028>}, ref_count = 1, qdata = 0x7061642e}, lock = {p = 0x3fff86e3ce70 <_gst_buffer_copy>, i = {16383, 2263076464}}, name = 0x3fff86e39b70 <_gst_buffer_dispose> "<L", parent = 0x3fff86e399a0, flags = 0, control_bindings = 0x0, control_rate = 0, last_sync = 18446744073709551615, _gst_reserved = 0xffffffffffffffff}, element_private = 0xffffffffffffffff, padtemplate = 0xffffffffffffffff, direction = (GST_PAD_SRC | GST_PAD_SINK | unknown: 4294967292), stream_rec_lock = {p = 0x110, i = {0, 0}}, task = 0x0, block_cond = {p = 0x0, i = {0, 0}}, probes = {seq_id = 0, hook_size = 0, is_setup = 0, hooks = 0x0, dummy3 = 0x0, finalize_hook = 0x0, dummy = {0x0, 0x0}}, mode = GST_PAD_MODE_NONE, activatefunc = 0x0, activatedata = 0x0, activatenotify = 0x0, activatemodefunc = 0x0, activatemodedata = 0x0, activatemodenotify = 0x0, peer = 0x0, linkfunc = 0x10010d13270, linkdata = 0x0, linknotify = 0x0, unlinkfunc = 0x0, unlinkdata = 0x0, unlinknotify = 0x0, chainfunc = 0x0, chaindata = 0x0, chainnotify = 0x0, chainlistfunc = 0x0, chainlistdata = 0x0, chainlistnotify = 0x0, getrangefunc = 0x0, getrangedata = 0x0, getrangenotify = 0x0, eventfunc = 0x0, eventdata = 0x0, eventnotify = 0x0, offset = 0, queryfunc = 0x0, querydata = 0x0, querynotify = 0x0, iterintlinkfunc = 0x0, iterintlinkdata = 0x0, iterintlinknotify = 0x0, num_probes = 0, num_blocked = 0, priv = 0x0, ABI = {_gst_reserved = {0x0, 0x0, 0x0, 0x0}, abi = {last_flowret = GST_FLOW_OK, eventfullfunc = 0x0}}}
+
+--- gstreamer-1.14.4/tests/check/gst/gstpad.c
++++ gstreamer-1.14.4/tests/check/gst/gstpad.c
+@@ -169,14 +169,14 @@ GST_START_TEST (test_get_allowed_caps)
+ {
+   GstPad *src, *sink;
+   GstCaps *caps, *gotcaps;
+-  GstBuffer *buffer;
++  GstBufferPool *buffer_pool;
+   GstPadLinkReturn plr;
+ 
+   ASSERT_CRITICAL (gst_pad_get_allowed_caps (NULL));
+ 
+-  buffer = gst_buffer_new ();
+-  ASSERT_CRITICAL (gst_pad_get_allowed_caps ((GstPad *) buffer));
+-  gst_buffer_unref (buffer);
++  buffer_pool = gst_buffer_pool_new ();
++  ASSERT_CRITICAL (gst_pad_get_allowed_caps ((GstPad *) buffer_pool));
++  gst_object_unref (buffer_pool);
+ 
+   src = gst_pad_new ("src", GST_PAD_SRC);
+   fail_if (src == NULL);

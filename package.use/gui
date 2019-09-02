@@ -10,6 +10,7 @@ dev-java/icedtea gtk
 media-gfx/sane-frontends gtk
 media-fonts/* X
 media-libs/freetype X
+media-libs/gst-plugins-base X
 media-libs/imlib2 X
 media-libs/libepoxy X
 media-video/mpv X

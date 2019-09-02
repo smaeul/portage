@@ -1,0 +1,20 @@
+--- gst-plugins-good-1.14.4/tests/check/elements/alpha.c
++++ gst-plugins-good-1.14.4/tests/check/elements/alpha.c
+@@ -99,9 +99,17 @@
+   int i;
+ 
+   if (color == FILL_GREEN)
++#if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
++    rgba_col = 0x00ff00ff;
++#else
+     rgba_col = 0xff00ff00;      /* GREEN */
++#endif
+   else
++#if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
++    rgba_col = 0x0000ffff;
++#else
+     rgba_col = 0xffff0000;      /* BLUE */
++#endif
+ 
+   for (i = 0; i < HEIGHT * WIDTH; i++)
+     rgba32[i] = rgba_col;

@@ -1,0 +1,12 @@
+diff --git elfutils-0.177/backends/ppc_initreg.c.orig elfutils-0.177/backends/ppc_initreg.c
+index 0e0d359..72cdb86 100644
+--- elfutils-0.177/backends/ppc_initreg.c.orig
++++ elfutils-0.177/backends/ppc_initreg.c
+@@ -32,6 +32,7 @@
+ 
+ #include <stdlib.h>
+ #if defined(__powerpc__) && defined(__linux__)
++# include <asm/ptrace.h>
+ # include <sys/ptrace.h>
+ # include <sys/user.h>
+ #endif
