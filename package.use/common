@@ -97,6 +97,7 @@ sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
 sys-apps/util-linux -cramfs
+sys-devel/clang default-compiler-rt default-libcxx
 sys-devel/clang-runtime compiler-rt libcxx -sanitize
 sys-devel/gcc ada
 sys-devel/gdb multitarget python
