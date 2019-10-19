@@ -91,18 +91,20 @@
  }
  
  extern void _radeon_print(const radeon_debug_type_t type,
-diff --git mesa-19.1.0/src/gallium/auxiliary/target-helpers/drm_helper_public.h
-index fedb5c0..e0be599 100644
---- mesa-19.1.0/src/gallium/auxiliary/target-helpers/drm_helper_public.h.orig
-+++ mesa-19.1.0/src/gallium/auxiliary/target-helpers/drm_helper_public.h
-@@ -4,8 +4,8 @@
+--- mesa-19.2.1/src/gallium/auxiliary/target-helpers/drm_helper_public.h
++++ mesa-19.2.1/src/gallium/auxiliary/target-helpers/drm_helper_public.h
+@@ -4,10 +4,10 @@
  struct pipe_screen;
  struct pipe_screen_config;
- 
+
 -const char *iris_driconf_xml;
 -const char *radeonsi_driconf_xml;
+-const char *v3d_driconf_xml;
+-const char *virgl_driconf_xml;
 +extern const char *iris_driconf_xml;
 +extern const char *radeonsi_driconf_xml;
- 
++extern const char *v3d_driconf_xml;
++extern const char *virgl_driconf_xml;
+
  struct pipe_screen *
  pipe_i915_create_screen(int fd, const struct pipe_screen_config *config);

@@ -1,0 +1,11 @@
+--- fontconfig-2.13.0/test/run-test.sh
++++ fontconfig-2.13.0/test/run-test.sh
+@@ -38,7 +38,7 @@ FCCACHE=../fc-cache/fc-cache$EXEEXT
+ 
+ which bwrap > /dev/null 2>&1
+ if [ $? -eq 0 ]; then
+-    BWRAP=`which bwrap`
++    BWRAP=
+ fi
+ 
+ FONT1=$TESTDIR/4x6.pcf

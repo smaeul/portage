@@ -1,0 +1,10 @@
+--- mcelog-162/client.c
++++ mcelog-162/client.c
+@@ -16,6 +16,7 @@
+    on your Linux system; if not, write to the Free Software Foundation, 
+    Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA */
+ #include <stdio.h>
++#include <string.h>
+ #include <sys/socket.h>
+ #include <sys/un.h>
+ #include <unistd.h>

@@ -66,7 +66,7 @@ dev-lang/ghc ghcbootstrap
 dev-lang/go system-bootstrap
 dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
 dev-lang/python berkdb readline
-dev-lang/rust cargo clippy rls rustfmt system-llvm
+dev-lang/rust cargo clippy miri rls rustfmt system-llvm
 dev-libs/capstone python
 dev-libs/openssl -sslv3
 dev-ml/lablgtk -opengl

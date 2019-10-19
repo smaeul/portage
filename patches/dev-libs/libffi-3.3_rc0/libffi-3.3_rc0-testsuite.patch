@@ -1,0 +1,40 @@
+--- libffi-3.3-rc0/testsuite/libffi.call/cls_align_longdouble_split.c
++++ libffi-3.3-rc0/testsuite/libffi.call/cls_align_longdouble_split.c
+@@ -5,7 +5,6 @@
+    Originator:	<hos@tamanegi.org> 20031203	 */
+ 
+ /* { dg-do run { xfail strongarm*-*-* xscale*-*-* } } */
+-/* { dg-options -mlong-double-128 { target powerpc64*-*-linux* } } */
+ 
+ #include "ffitest.h"
+ 
+--- libffi-3.3-rc0/testsuite/libffi.call/cls_align_longdouble_split2.c
++++ libffi-3.3-rc0/testsuite/libffi.call/cls_align_longdouble_split2.c
+@@ -6,7 +6,6 @@
+ */
+ 
+ /* { dg-do run { xfail strongarm*-*-* } } */
+-/* { dg-options -mlong-double-128 { target powerpc64*-*-linux* } } */
+ 
+ #include "ffitest.h"
+ 
+--- libffi-3.3-rc0/testsuite/libffi.call/cls_longdouble.c
++++ libffi-3.3-rc0/testsuite/libffi.call/cls_longdouble.c
+@@ -7,7 +7,6 @@
+ /* This test is known to PASS on armv7l-unknown-linux-gnueabihf, so I have
+    remove the xfail for arm*-*-* below, until we know more.  */
+ /* { dg-do run { xfail strongarm*-*-* xscale*-*-* } } */
+-/* { dg-options -mlong-double-128 { target powerpc64*-*-linux* } } */
+ 
+ #include "ffitest.h"
+ 
+--- libffi-3.3-rc0/testsuite/libffi.call/huge_struct.c
++++ libffi-3.3-rc0/testsuite/libffi.call/huge_struct.c
+@@ -6,7 +6,6 @@
+ */
+ 
+ /* { dg-do run { xfail strongarm*-*-* xscale*-*-* } } */
+-/* { dg-options -mlong-double-128 { target powerpc64*-*-linux* } } */
+ /* { dg-options -Wformat=0 { target moxie*-*-elf } } */
+ 
+ #include "ffitest.h"

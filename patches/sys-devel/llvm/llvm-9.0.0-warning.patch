@@ -1,0 +1,13 @@
+--- llvm-9.0.0.src/include/llvm/ADT/SmallVector.h
++++ llvm-9.0.0.src/include/llvm/ADT/SmallVector.h
+@@ -517,7 +517,10 @@ public:
+     // the reference.
+     const T *EltPtr = &Elt;
+     if (I <= EltPtr && EltPtr < this->end())
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Warray-bounds"
+       ++EltPtr;
++#pragma GCC diagnostic pop
+ 
+     *I = *EltPtr;
+     return I;

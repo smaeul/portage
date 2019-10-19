@@ -1,0 +1,11 @@
+--- portage-2.3.69/lib/portage/package/ebuild/doebuild.py
++++ portage-2.3.69/lib/portage/package/ebuild/doebuild.py
+@@ -252,7 +252,7 @@ def _doebuild_path(settings, eapi=None):
+ 
+ 	for prefix in prefixes:
+ 		prefix = prefix if prefix else "/"
+-		for x in ("usr/local/sbin", "usr/local/bin", "usr/sbin", "usr/bin", "sbin", "bin"):
++		for x in ("usr/bin", "bin"):
+ 			# Respect order defined in ROOTPATH
+ 			x_abs = os.path.join(prefix, x)
+ 			if x_abs not in rootpath_set:
