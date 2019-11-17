@@ -61,7 +61,6 @@ app-office/libreoffice gtk2
 app-shells/bash -net
 dev-db/postgresql readline
 dev-db/sqlite -icu
-dev-haskell/cryptonite support_blake2_sse support_pclmuldq
 dev-lang/ghc ghcbootstrap
 dev-lang/go system-bootstrap
 dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
@@ -73,7 +72,7 @@ dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
 dev-util/cmake system-jsoncpp
 dev-vcs/git -pcre-jit perl
-mail-client/thunderbird system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+mail-client/thunderbird eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/noto cjk
 media-gfx/imagemagick pango
 media-libs/imlib2 -mp3
@@ -104,7 +103,7 @@ net-print/cups-filters pclm
 net-wireless/wpa_supplicant ap -hs2-0 readline
 sys-apps/busybox savedconfig
 sys-apps/elfix -ptpax
-sys-apps/flashrom -* internal linux_spi tools
+sys-apps/flashrom -* internal linux-mtd linux-spi tools
 sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns

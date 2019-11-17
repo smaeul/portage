@@ -1,0 +1,28 @@
+--- portage-2.3.76/bin/install-qa-check.d/80libraries
++++ portage-2.3.76/bin/install-qa-check.d/80libraries
+@@ -133,25 +133,6 @@ lib_check() {
+ 		done
+ 	done
+ 
+-	# When installing static libraries into /usr/lib and shared libraries into
+-	# /lib, we have to make sure we have a linker script in /usr/lib along side
+-	# the static library, or gcc will utilize the static lib when linking :(.
+-	# https://bugs.gentoo.org/4411
+-	local abort="no"
+-	local a s
+-	for a in "${ED%/}"/usr/lib*/*.a ; do
+-		s=${a%.a}.so
+-		if [[ ! -e ${s} ]] ; then
+-			s=${s%usr/*}${s##*/usr/}
+-			if [[ -e ${s} ]] ; then
+-				__vecho -ne '\n'
+-				eqawarn "QA Notice: Missing gen_usr_ldscript for ${s##*/}"
+-				abort="yes"
+-			fi
+-		fi
+-	done
+-	[[ ${abort} == "yes" ]] && die "add those ldscripts"
+-
+ 	# Make sure people don't store libtool files or static libs in /lib
+ 	f=$(ls "${ED%/}"/lib*/*.{a,la} 2>/dev/null)
+ 	if [[ -n ${f} ]] ; then
