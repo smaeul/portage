@@ -1,17 +1,271 @@
-From 89331505f100ceb66493dd977e3c43dc82a27d29 Mon Sep 17 00:00:00 2001
-From: Samuel Holland <samuel@sholland.org>
-Date: Sat, 13 Oct 2018 02:48:33 +0000
-Subject: [PATCH 9/9] powerpc64 ELFv2 IEEE128 long double support
-
----
- src/powerpc/ffi.c             |   5 +-
- src/powerpc/ffi_linux64.c     | 162 ++++++++++++++++++++++++++++++++--
- src/powerpc/ffi_powerpc.h     |  13 ++-
- src/powerpc/ffitarget.h       |  14 ++-
- src/powerpc/linux64.S         |  58 +++++++++++-
- src/powerpc/linux64_closure.S |  70 ++++++++++++++-
- 6 files changed, 301 insertions(+), 21 deletions(-)
-
+diff --git a/include/ffi.h.in b/include/ffi.h.in
+index f6b4024..71cc05c 100644
+--- a/include/ffi.h.in
++++ b/include/ffi.h.in
+@@ -1,5 +1,5 @@
+ /* -----------------------------------------------------------------*-C-*-
+-   libffi @VERSION@ - Copyright (c) 2011, 2014 Anthony Green
++   libffi @VERSION@ - Copyright (c) 2011, 2014, 2019 Anthony Green
+                     - Copyright (c) 1996-2003, 2007, 2008 Red Hat, Inc.
+ 
+    Permission is hereby granted, free of charge, to any person
+@@ -288,15 +288,15 @@ FFI_API
+ void ffi_java_raw_call (ffi_cif *cif,
+ 			void (*fn)(void),
+ 			void *rvalue,
+-			ffi_java_raw *avalue);
++			ffi_java_raw *avalue) __attribute__((deprecated));
+ #endif
+ 
+ FFI_API
+-void ffi_java_ptrarray_to_raw (ffi_cif *cif, void **args, ffi_java_raw *raw);
++void ffi_java_ptrarray_to_raw (ffi_cif *cif, void **args, ffi_java_raw *raw) __attribute__((deprecated));
+ FFI_API
+-void ffi_java_raw_to_ptrarray (ffi_cif *cif, ffi_java_raw *raw, void **args);
++void ffi_java_raw_to_ptrarray (ffi_cif *cif, ffi_java_raw *raw, void **args) __attribute__((deprecated));
+ FFI_API
+-size_t ffi_java_raw_size (ffi_cif *cif);
++size_t ffi_java_raw_size (ffi_cif *cif) __attribute__((deprecated));
+ 
+ /* ---- Definitions for closures ----------------------------------------- */
+ 
+@@ -421,14 +421,14 @@ FFI_API ffi_status
+ ffi_prep_java_raw_closure (ffi_java_raw_closure*,
+ 		           ffi_cif *cif,
+ 		           void (*fun)(ffi_cif*,void*,ffi_java_raw*,void*),
+-		           void *user_data);
++		           void *user_data) __attribute__((deprecated));
+ 
+ FFI_API ffi_status
+ ffi_prep_java_raw_closure_loc (ffi_java_raw_closure*,
+ 			       ffi_cif *cif,
+ 			       void (*fun)(ffi_cif*,void*,ffi_java_raw*,void*),
+ 			       void *user_data,
+-			       void *codeloc);
++			       void *codeloc) __attribute__((deprecated));
+ #endif
+ 
+ #endif /* FFI_CLOSURES */
+diff --git a/m4/ax_append_flag.m4 b/m4/ax_append_flag.m4
+index e8c5312..dd6d8b6 100644
+--- a/m4/ax_append_flag.m4
++++ b/m4/ax_append_flag.m4
+@@ -23,33 +23,12 @@
+ #   Copyright (c) 2008 Guido U. Draheim <guidod@gmx.de>
+ #   Copyright (c) 2011 Maarten Bosmans <mkbosmans@gmail.com>
+ #
+-#   This program is free software: you can redistribute it and/or modify it
+-#   under the terms of the GNU General Public License as published by the
+-#   Free Software Foundation, either version 3 of the License, or (at your
+-#   option) any later version.
+-#
+-#   This program is distributed in the hope that it will be useful, but
+-#   WITHOUT ANY WARRANTY; without even the implied warranty of
+-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+-#   Public License for more details.
+-#
+-#   You should have received a copy of the GNU General Public License along
+-#   with this program. If not, see <https://www.gnu.org/licenses/>.
+-#
+-#   As a special exception, the respective Autoconf Macro's copyright owner
+-#   gives unlimited permission to copy, distribute and modify the configure
+-#   scripts that are the output of Autoconf when processing the Macro. You
+-#   need not follow the terms of the GNU General Public License when using
+-#   or distributing such scripts, even though portions of the text of the
+-#   Macro appear in them. The GNU General Public License (GPL) does govern
+-#   all other use of the material that constitutes the Autoconf Macro.
+-#
+-#   This special exception to the GPL applies to versions of the Autoconf
+-#   Macro released by the Autoconf Archive. When you make and distribute a
+-#   modified version of the Autoconf Macro, you may extend this special
+-#   exception to the GPL to apply to your modified version as well.
++#   Copying and distribution of this file, with or without modification, are
++#   permitted in any medium without royalty provided the copyright notice
++#   and this notice are preserved.  This file is offered as-is, without any
++#   warranty.
+ 
+-#serial 7
++#serial 8
+ 
+ AC_DEFUN([AX_APPEND_FLAG],
+ [dnl
+diff --git a/m4/ax_check_compile_flag.m4 b/m4/ax_check_compile_flag.m4
+index dcabb92..bd753b3 100644
+--- a/m4/ax_check_compile_flag.m4
++++ b/m4/ax_check_compile_flag.m4
+@@ -29,33 +29,12 @@
+ #   Copyright (c) 2008 Guido U. Draheim <guidod@gmx.de>
+ #   Copyright (c) 2011 Maarten Bosmans <mkbosmans@gmail.com>
+ #
+-#   This program is free software: you can redistribute it and/or modify it
+-#   under the terms of the GNU General Public License as published by the
+-#   Free Software Foundation, either version 3 of the License, or (at your
+-#   option) any later version.
+-#
+-#   This program is distributed in the hope that it will be useful, but
+-#   WITHOUT ANY WARRANTY; without even the implied warranty of
+-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+-#   Public License for more details.
+-#
+-#   You should have received a copy of the GNU General Public License along
+-#   with this program. If not, see <https://www.gnu.org/licenses/>.
+-#
+-#   As a special exception, the respective Autoconf Macro's copyright owner
+-#   gives unlimited permission to copy, distribute and modify the configure
+-#   scripts that are the output of Autoconf when processing the Macro. You
+-#   need not follow the terms of the GNU General Public License when using
+-#   or distributing such scripts, even though portions of the text of the
+-#   Macro appear in them. The GNU General Public License (GPL) does govern
+-#   all other use of the material that constitutes the Autoconf Macro.
+-#
+-#   This special exception to the GPL applies to versions of the Autoconf
+-#   Macro released by the Autoconf Archive. When you make and distribute a
+-#   modified version of the Autoconf Macro, you may extend this special
+-#   exception to the GPL to apply to your modified version as well.
++#   Copying and distribution of this file, with or without modification, are
++#   permitted in any medium without royalty provided the copyright notice
++#   and this notice are preserved.  This file is offered as-is, without any
++#   warranty.
+ 
+-#serial 5
++#serial 6
+ 
+ AC_DEFUN([AX_CHECK_COMPILE_FLAG],
+ [AC_PREREQ(2.64)dnl for _AC_LANG_PREFIX and AS_VAR_IF
+diff --git a/m4/ax_compiler_vendor.m4 b/m4/ax_compiler_vendor.m4
+index 4ca8089..73efdb0 100644
+--- a/m4/ax_compiler_vendor.m4
++++ b/m4/ax_compiler_vendor.m4
+@@ -44,7 +44,7 @@
+ #   modified version of the Autoconf Macro, you may extend this special
+ #   exception to the GPL to apply to your modified version as well.
+ 
+-#serial 16
++#serial 17
+ 
+ AC_DEFUN([AX_COMPILER_VENDOR],
+ [AC_CACHE_CHECK([for _AC_LANG compiler vendor], ax_cv_[]_AC_LANG_ABBREV[]_compiler_vendor,
+@@ -56,6 +56,7 @@ AC_DEFUN([AX_COMPILER_VENDOR],
+            clang:     __clang__
+            cray:      _CRAYC
+            fujitsu:   __FUJITSU
++           sdcc:      SDCC, __SDCC
+            gnu:       __GNUC__
+            sun:       __SUNPRO_C,__SUNPRO_CC
+            hp:        __HP_cc,__HP_aCC
+diff --git a/m4/ax_configure_args.m4 b/m4/ax_configure_args.m4
+index 95f9f64..9237efe 100644
+--- a/m4/ax_configure_args.m4
++++ b/m4/ax_configure_args.m4
+@@ -31,33 +31,12 @@
+ #
+ #   Copyright (c) 2008 Guido U. Draheim <guidod@gmx.de>
+ #
+-#   This program is free software; you can redistribute it and/or modify it
+-#   under the terms of the GNU General Public License as published by the
+-#   Free Software Foundation; either version 3 of the License, or (at your
+-#   option) any later version.
+-#
+-#   This program is distributed in the hope that it will be useful, but
+-#   WITHOUT ANY WARRANTY; without even the implied warranty of
+-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+-#   Public License for more details.
+-#
+-#   You should have received a copy of the GNU General Public License along
+-#   with this program. If not, see <https://www.gnu.org/licenses/>.
+-#
+-#   As a special exception, the respective Autoconf Macro's copyright owner
+-#   gives unlimited permission to copy, distribute and modify the configure
+-#   scripts that are the output of Autoconf when processing the Macro. You
+-#   need not follow the terms of the GNU General Public License when using
+-#   or distributing such scripts, even though portions of the text of the
+-#   Macro appear in them. The GNU General Public License (GPL) does govern
+-#   all other use of the material that constitutes the Autoconf Macro.
+-#
+-#   This special exception to the GPL applies to versions of the Autoconf
+-#   Macro released by the Autoconf Archive. When you make and distribute a
+-#   modified version of the Autoconf Macro, you may extend this special
+-#   exception to the GPL to apply to your modified version as well.
++#   Copying and distribution of this file, with or without modification, are
++#   permitted in any medium without royalty provided the copyright notice
++#   and this notice are preserved.  This file is offered as-is, without any
++#   warranty.
+ 
+-#serial 13
++#serial 14
+ 
+ AC_DEFUN([AX_CONFIGURE_ARGS],[
+    # [$]@ is unusable in 2.60+ but earlier autoconf had no ac_configure_args
+diff --git a/m4/ax_gcc_archflag.m4 b/m4/ax_gcc_archflag.m4
+index d4a37f8..c52b9b2 100644
+--- a/m4/ax_gcc_archflag.m4
++++ b/m4/ax_gcc_archflag.m4
+@@ -37,7 +37,7 @@
+ #   Copyright (c) 2008 Steven G. Johnson <stevenj@alum.mit.edu>
+ #   Copyright (c) 2008 Matteo Frigo
+ #   Copyright (c) 2014 Tsukasa Oi
+-#   Copyright (c) 2017 Alexey Kopytov
++#   Copyright (c) 2017-2018 Alexey Kopytov
+ #
+ #   This program is free software: you can redistribute it and/or modify it
+ #   under the terms of the GNU General Public License as published by the
+@@ -65,7 +65,7 @@
+ #   modified version of the Autoconf Macro, you may extend this special
+ #   exception to the GPL to apply to your modified version as well.
+ 
+-#serial 20
++#serial 22
+ 
+ AC_DEFUN([AX_GCC_ARCHFLAG],
+ [AC_REQUIRE([AC_PROG_CC])
+@@ -108,7 +108,7 @@ case $host_cpu in
+ 	    *2?6[[ad]]?:*:*:*) ax_gcc_arch="sandybridge corei7-avx corei7 core2 pentium-m pentium3 pentiumpro" ;;
+ 	    *3?6[[ae]]?:*:*:*) ax_gcc_arch="ivybridge core-avx-i corei7-avx corei7 core2 pentium-m pentium3 pentiumpro" ;;
+ 	    *3?6[[cf]]?:*:*:*|*4?6[[56]]?:*:*:*) ax_gcc_arch="haswell core-avx2 core-avx-i corei7-avx corei7 core2 pentium-m pentium3 pentiumpro" ;;
+-	    *3?6d?:*:*:*) ax_gcc_arch="broadwell core-avx2 core-avx-i corei7-avx corei7 core2 pentium-m pentium3 pentiumpro" ;;
++	    *3?6d?:*:*:*|*4?6[[7f]]?:*:*:*|*5?66?:*:*:*) ax_gcc_arch="broadwell core-avx2 core-avx-i corei7-avx corei7 core2 pentium-m pentium3 pentiumpro" ;;
+ 	    *1?6c?:*:*:*|*2?6[[67]]?:*:*:*|*3?6[[56]]?:*:*:*) ax_gcc_arch="bonnell atom core2 pentium-m pentium3 pentiumpro" ;;
+ 	    *3?67?:*:*:*|*[[45]]?6[[ad]]?:*:*:*) ax_gcc_arch="silvermont atom core2 pentium-m pentium3 pentiumpro" ;;
+ 	    *000?f[[012]]?:*:*:*|?f[[012]]?:*:*:*|f[[012]]?:*:*:*) ax_gcc_arch="pentium4 pentiumpro" ;;
+@@ -198,6 +198,10 @@ case $host_cpu in
+        *POWER4*|*power4*|*gq*) ax_gcc_arch="power4 970";;
+        *POWER5*|*power5*|*gr*|*gs*) ax_gcc_arch="power5 power4 970";;
+        603ev|8240) ax_gcc_arch="$cputype 603e 603";;
++       *POWER7*) ax_gcc_arch="power7";;
++       *POWER8*) ax_gcc_arch="power8";;
++       *POWER9*) ax_gcc_arch="power9";;
++       *POWER10*) ax_gcc_arch="power10";;
+        *) ax_gcc_arch=$cputype ;;
+      esac
+      ax_gcc_arch="$ax_gcc_arch powerpc"
+diff --git a/src/closures.c b/src/closures.c
+index 86e74c2..5120021 100644
+--- a/src/closures.c
++++ b/src/closures.c
+@@ -1,5 +1,6 @@
+ /* -----------------------------------------------------------------------
+-   closures.c - Copyright (c) 2007, 2009, 2010  Red Hat, Inc.
++   closures.c - Copyright (c) 2019 Anthony Green
++                Copyright (c) 2007, 2009, 2010 Red Hat, Inc.
+                 Copyright (C) 2007, 2009, 2010 Free Software Foundation, Inc
+                 Copyright (c) 2011 Plausible Labs Cooperative, Inc.
+ 
+@@ -936,7 +937,14 @@ void *
+ ffi_data_to_code_pointer (void *data)
+ {
+   msegmentptr seg = segment_holding (gm, data);
+-  return add_segment_exec_offset (data, seg);
++  /* We expect closures to be allocated with ffi_closure_alloc(), in
++     which case seg will be non-NULL.  However, some users take on the
++     burden of managing this memory themselves, in which case this
++     we'll just return data. */
++  if (seg)
++    return add_segment_exec_offset (data, seg);
++  else
++    return data;
+ }
+ 
+ /* Release a chunk of memory allocated with ffi_closure_alloc.  If
 diff --git a/src/powerpc/ffi.c b/src/powerpc/ffi.c
 index 94a1170..a19bcbb 100644
 --- a/src/powerpc/ffi.c
@@ -371,21 +625,36 @@ index 4cf59a4..de0d033 100644
  }
  #endif
 diff --git a/src/powerpc/ffi_powerpc.h b/src/powerpc/ffi_powerpc.h
-index aab006c..5ee2a70 100644
+index 3dcd6b5..5ee2a70 100644
 --- a/src/powerpc/ffi_powerpc.h
 +++ b/src/powerpc/ffi_powerpc.h
-@@ -34,6 +34,7 @@ enum {
-   FLAG_RETURNS_SMST     = 1 << (31-31), /* Used for FFI_SYSV small structs.  */
+@@ -31,22 +31,24 @@
+ enum {
+   /* The assembly depends on these exact flags.  */
+   /* These go in cr7 */
+-  FLAG_RETURNS_SMST	= 1 << (31-31), /* Used for FFI_SYSV small structs.  */
++  FLAG_RETURNS_SMST     = 1 << (31-31), /* Used for FFI_SYSV small structs.  */
    FLAG_RETURNS_NOTHING  = 1 << (31-30),
    FLAG_RETURNS_FP       = 1 << (31-29),
+-  FLAG_RETURNS_64BITS   = 1 << (31-28),
 +  FLAG_RETURNS_VEC      = 1 << (31-28),
  
-   /* These go in cr6 */
-   FLAG_RETURNS_64BITS   = 1 << (31-27),
-@@ -47,6 +48,7 @@ enum {
+-  /* This goes in cr6 */
+-  FLAG_RETURNS_128BITS  = 1 << (31-27),
++  /* These go in cr6 */
++  FLAG_RETURNS_64BITS   = 1 << (31-27),
++  FLAG_RETURNS_128BITS  = 1 << (31-26),
+ 
+-  FLAG_COMPAT		= 1 << (31- 8), /* Not used by assembly */
++  FLAG_COMPAT           = 1 << (31- 8), /* Not used by assembly */
+ 
+   /* These go in cr1 */
+   FLAG_ARG_NEEDS_COPY   = 1 << (31- 7), /* Used by sysv code */
+   FLAG_ARG_NEEDS_PSAVE  = FLAG_ARG_NEEDS_COPY, /* Used by linux64 code */
    FLAG_FP_ARGUMENTS     = 1 << (31- 6), /* cr1.eq; specified by ABI */
    FLAG_4_GPR_ARGUMENTS  = 1 << (31- 5),
-   FLAG_RETVAL_REFERENCE = 1 << (31- 4),
+-  FLAG_RETVAL_REFERENCE = 1 << (31- 4)
++  FLAG_RETVAL_REFERENCE = 1 << (31- 4),
 +  FLAG_VEC_ARGUMENTS    = 1 << (31- 3),
  };
  
@@ -453,10 +722,10 @@ index 90aa36b..7fb9a93 100644
  #if _CALL_ELF == 2
  # define FFI_TRAMPOLINE_SIZE 32
 diff --git a/src/powerpc/linux64.S b/src/powerpc/linux64.S
-index 153f077..c99889c 100644
+index b2ae60e..c99889c 100644
 --- a/src/powerpc/linux64.S
 +++ b/src/powerpc/linux64.S
-@@ -101,8 +101,8 @@ ffi_call_LINUX64:
+@@ -101,40 +101,70 @@ ffi_call_LINUX64:
  	ld	%r2, 8(%r29)
  # endif
  	/* Now do the call.  */
@@ -467,8 +736,56 @@ index 153f077..c99889c 100644
  
  	/* Get the address to call into CTR.  */
  	mtctr	%r12
-@@ -137,6 +137,34 @@ ffi_call_LINUX64:
- 	lfd	%f13, (13*8)(%r29)
+ 	/* Load all those argument registers.  */
+-	ld	%r3, -32-(8*8)(%r28)
+-	ld	%r4, -32-(7*8)(%r28)
+-	ld	%r5, -32-(6*8)(%r28)
+-	ld	%r6, -32-(5*8)(%r28)
++	addi	%r29, %r28, -32-(8*8)
++	ld	%r3,  (0*8)(%r29)
++	ld	%r4,  (1*8)(%r29)
++	ld	%r5,  (2*8)(%r29)
++	ld	%r6,  (3*8)(%r29)
+ 	bf-	5, 1f
+-	ld	%r7, -32-(4*8)(%r28)
+-	ld	%r8, -32-(3*8)(%r28)
+-	ld	%r9, -32-(2*8)(%r28)
+-	ld	%r10, -32-(1*8)(%r28)
++	ld	%r7,  (4*8)(%r29)
++	ld	%r8,  (5*8)(%r29)
++	ld	%r9,  (6*8)(%r29)
++	ld	%r10, (7*8)(%r29)
+ 1:
+ 
+ 	/* Load all the FP registers.  */
+ 	bf-	6, 2f
+-	lfd	%f1, -32-(21*8)(%r28)
+-	lfd	%f2, -32-(20*8)(%r28)
+-	lfd	%f3, -32-(19*8)(%r28)
+-	lfd	%f4, -32-(18*8)(%r28)
+-	lfd	%f5, -32-(17*8)(%r28)
+-	lfd	%f6, -32-(16*8)(%r28)
+-	lfd	%f7, -32-(15*8)(%r28)
+-	lfd	%f8, -32-(14*8)(%r28)
+-	lfd	%f9, -32-(13*8)(%r28)
+-	lfd	%f10, -32-(12*8)(%r28)
+-	lfd	%f11, -32-(11*8)(%r28)
+-	lfd	%f12, -32-(10*8)(%r28)
+-	lfd	%f13, -32-(9*8)(%r28)
++	addi	%r29, %r29, -(14*8)
++	lfd	%f1,  ( 1*8)(%r29)
++	lfd	%f2,  ( 2*8)(%r29)
++	lfd	%f3,  ( 3*8)(%r29)
++	lfd	%f4,  ( 4*8)(%r29)
++	lfd	%f5,  ( 5*8)(%r29)
++	lfd	%f6,  ( 6*8)(%r29)
++	lfd	%f7,  ( 7*8)(%r29)
++	lfd	%f8,  ( 8*8)(%r29)
++	lfd	%f9,  ( 9*8)(%r29)
++	lfd	%f10, (10*8)(%r29)
++	lfd	%f11, (11*8)(%r29)
++	lfd	%f12, (12*8)(%r29)
++	lfd	%f13, (13*8)(%r29)
  2:
  
 +	/* Load all the vector registers.  */
@@ -502,7 +819,7 @@ index 153f077..c99889c 100644
  	/* Make the call.  */
  	ld	%r11, 8(%r28)
  	bctrl
-@@ -154,6 +182,7 @@ ffi_call_LINUX64:
+@@ -152,6 +182,7 @@ ffi_call_LINUX64:
  	bt	31, .Lstruct_return_value
  	bt	30, .Ldone_return_value
  	bt	29, .Lfp_return_value
@@ -510,7 +827,7 @@ index 153f077..c99889c 100644
  	std	%r3, 0(%r30)
  	/* Fall through...  */
  
-@@ -169,6 +198,10 @@ ffi_call_LINUX64:
+@@ -167,12 +198,16 @@ ffi_call_LINUX64:
  	ld	%r31, -8(%r1)
  	blr
  
@@ -520,17 +837,29 @@ index 153f077..c99889c 100644
 +
  .Lfp_return_value:
  	.cfi_def_cfa_register 28
+-	bf	28, .Lfloat_return_value
+-	stfd	%f1, 0(%r30)
  	mtcrf	0x02, %r31 /* cr6  */
-@@ -182,7 +215,7 @@ ffi_call_LINUX64:
+-	bf	27, .Ldone_return_value
++	bf	27, .Lfloat_return_value
++	stfd	%f1, 0(%r30)
++	bf	26, .Ldone_return_value
+ 	stfd	%f2, 8(%r30)
+ 	b	.Ldone_return_value
+ .Lfloat_return_value:
+@@ -180,8 +215,9 @@ ffi_call_LINUX64:
  	b	.Ldone_return_value
  
  .Lstruct_return_value:
 -	bf	29, .Lsmall_struct
+-	bf	28, .Lfloat_homog_return_value
 +	bf	29, .Lvec_homog_or_small_struct
- 	mtcrf	0x02, %r31 /* cr6  */
- 	bf	27, .Lfloat_homog_return_value
++	mtcrf	0x02, %r31 /* cr6  */
++	bf	27, .Lfloat_homog_return_value
  	stfd	%f1, 0(%r30)
-@@ -206,6 +239,25 @@ ffi_call_LINUX64:
+ 	stfd	%f2, 8(%r30)
+ 	stfd	%f3, 16(%r30)
+@@ -203,6 +239,25 @@ ffi_call_LINUX64:
  	stfs	%f8, 28(%r30)
  	b	.Ldone_return_value
  
@@ -658,6 +987,30 @@ index 7f2a214..d67e4bb 100644
  .Lmorefloat:
  	lfs %f4, RETVAL+12(%r1)
  	mtlr %r0
--- 
-2.21.0
-
+diff --git a/testsuite/libffi.call/call.exp b/testsuite/libffi.call/call.exp
+index ab47415..13ba2bd 100644
+--- a/testsuite/libffi.call/call.exp
++++ b/testsuite/libffi.call/call.exp
+@@ -32,10 +32,21 @@ if { [string match $compiler_vendor "microsoft"] } {
+     set additional_options "";
+ }
+ 
+-set tlist [lsort [glob -nocomplain -- $srcdir/$subdir/*.{c,cc}]]
++set tlist [lsort [glob -nocomplain -- $srcdir/$subdir/*.c]]
+ 
+ run-many-tests $tlist $additional_options
+ 
++set tlist [lsort [glob -nocomplain -- $srcdir/$subdir/*.cc]]
++
++# No C++ for or1k
++if { [istarget "or1k-*-*"] } {
++    foreach test $tlist {
++        unsupported "$test"
++    }
++} else {
++    run-many-tests $tlist $additional_options
++}
++
+ dg-finish
+ 
+ # Local Variables:

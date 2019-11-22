@@ -120,8 +120,8 @@ sys-libs/tevent ~amd64
 ~app-emulation/spice-protocol-0.14.0 ~amd64
 # Required for Python 3
 ~dev-java/javatoolkit-0.6.0 ~amd64
-# Closest to the fixed version
-~dev-libs/libffi-3.3_rc0 ~amd64
+# Required for patches
+~dev-libs/libffi-3.3_rc2 ~amd64
 # Required for parallel compilation
 <dev-libs/openssl-1.1.1 ~amd64
 # Required to pass tests
@@ -135,6 +135,8 @@ sys-libs/tevent ~amd64
 # Required for dev-python/twisted
 >=dev-python/m2r-0.1.14 ~amd64
 # Required to pass tests
+~dev-python/pytest-fixture-config-1.7.0 ~amd64
+# Required to pass tests
 ~dev-python/pytest-xprocess-0.12.1-r1 ~amd64
 # Required to pass tests
 ~dev-python/twisted-18.7.0 ~amd64
@@ -145,7 +147,7 @@ sys-libs/tevent ~amd64
 # Required for big endian
 ~net-misc/spice-gtk-0.37 ~amd64
 # Required for perf
-~sys-kernel/linux-headers-5.0 ~amd64
+~sys-kernel/linux-headers-5.3 ~amd64
 # This is old anyway
 ~sys-process/bcron-0.11 ~amd64
 # Required for s-nail

@@ -1,4 +1,6 @@
 # These USE changes are necessary to fulfill a dependency from another package.
+# Required by gitea
+acct-user/git gitea
 # Required by libreoffice
 app-crypt/gpgme cxx
 # Required by cups-filters
@@ -115,7 +117,7 @@ sys-devel/gdb multitarget python
 sys-firmware/intel-microcode initramfs
 sys-fs/cryptsetup nettle -openssl
 sys-fs/lvm2 -thin
-sys-fs/zfs -rootfs
+sys-fs/zfs kernel-builtin -rootfs
 sys-kernel/linux-firmware redistributable savedconfig
 sys-libs/ldb -ldap
 sys-libs/libcxx libcxxabi -libcxxrt libunwind
