@@ -1,0 +1,12 @@
+--- acl-2.2.53/test/misc.test
++++ acl-2.2.53/test/misc.test
+@@ -441,8 +441,8 @@ Dangling symlink test http://savannah.nongnu.org/bugs/?28131
+ 	> 
+ 	$ setfacl -R -m u:bin:rw d
+ 	$ getfacl -RL d
+-	> getfacl: d/b: No such file or directory
+ 	> # file: d
++	> getfacl: d/b: No such file or directory
+ 	> # owner: %TUSER
+ 	> # group: %TGROUP
+ 	> user::rwx

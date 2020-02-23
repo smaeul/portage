@@ -1,0 +1,11 @@
+--- attr-2.4.48/test/attr.test
++++ attr-2.4.48/test/attr.test
+@@ -11,7 +11,7 @@ Try various valid and invalid names
+ 
+ 	$ touch f
+ 	$ setfattr -n user -v value f
+-	> setfattr: f: Operation not supported
++	> setfattr: f: Not supported
+ 	
+ 	$ setfattr -n user. -v value f
+ 	> setfattr: f: Invalid argument

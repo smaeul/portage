@@ -24,7 +24,7 @@ mail-client/s-nail ~amd64
 net-analyzer/flent ~amd64
 net-misc/streamlink ~amd64
 net-misc/unison:2.48 ~amd64
-net-vpn/wireguard ~amd64
+net-vpn/wireguard-tools ~amd64
 net-p2p/transmission-remote-cli ~amd64
 sci-misc/boinc ~amd64
 sys-apps/linux-misc-apps ~amd64
@@ -120,8 +120,6 @@ sys-libs/tevent ~amd64
 ~app-emulation/spice-protocol-0.14.0 ~amd64
 # Required for Python 3
 ~dev-java/javatoolkit-0.6.0 ~amd64
-# Required for patches
-~dev-libs/libffi-3.3_rc2 ~amd64
 # Required for parallel compilation
 <dev-libs/openssl-1.1.1 ~amd64
 # Required to pass tests
