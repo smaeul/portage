@@ -1,5 +1,6 @@
+dev-lang/python:3.7
+dev-libs/elfutils::gentoo
 dev-util/pkgconfig
+media-libs/mesa::gentoo
 sys-apps/dbus
-sys-fs/zfs-kmod::gentoo
-sys-kernel/spl::gentoo
 sys-libs/libunwind

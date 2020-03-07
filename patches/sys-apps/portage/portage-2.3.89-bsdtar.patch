@@ -1,0 +1,11 @@
+--- portage-2.3.89-python3_6/lib/portage/dbapi/vartree.py
++++ portage-2.3.89-python3_6/lib/portage/dbapi/vartree.py
+@@ -1031,7 +1031,7 @@ class vardbapi(dbapi):
+ 
+ 		opts, args = parser.parse_known_args(opts_list)
+ 
+-		tar_cmd = ('tar', '-x', '--xattrs', '--xattrs-include=*', '-C', dest_dir)
++		tar_cmd = ('tar', '-x', '--xattrs', '-f', '-', '-C', dest_dir)
+ 		pr, pw = os.pipe()
+ 		proc = (yield asyncio.create_subprocess_exec(*tar_cmd, stdin=pr))
+ 		os.close(pr)

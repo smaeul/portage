@@ -1,0 +1,23 @@
+--- psutil-5.6.7/psutil/tests/test_linux.py
++++ psutil-5.6.7/psutil/tests/test_linux.py
+@@ -199,7 +199,8 @@ class TestSystemVirtualMemory(unittest.TestCase):
+         # self.assertEqual(free_value, psutil_value)
+         vmstat_value = vmstat('total memory') * 1024
+         psutil_value = psutil.virtual_memory().total
+-        self.assertAlmostEqual(vmstat_value, psutil_value)
++        self.assertAlmostEqual(
++            vmstat_value, psutil_value, delta=MEMORY_TOLERANCE)
+ 
+     # Older versions of procps used slab memory to calculate used memory.
+     # This got changed in:
+--- psutil-5.6.7/psutil/tests/test_process.py
++++ psutil-5.6.7/psutil/tests/test_process.py
+@@ -951,7 +951,7 @@ class TestProcess(unittest.TestCase):
+ 
+         for combo in combos:
+             p.cpu_affinity(combo)
+-            self.assertEqual(p.cpu_affinity(), combo)
++            self.assertEqual(sorted(p.cpu_affinity()), sorted(combo))
+ 
+     # TODO: #595
+     @unittest.skipIf(BSD, "broken on BSD")

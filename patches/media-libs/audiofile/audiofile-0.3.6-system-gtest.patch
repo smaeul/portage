@@ -1,0 +1,11 @@
+--- audiofile-0.3.6/libaudiofile/Makefile.am
++++ audiofile-0.3.6/libaudiofile/Makefile.am
+@@ -111,7 +111,7 @@ endif
+ 
+ UnitTests_SOURCES = modules/UT_RebufferModule.cpp $(libaudiofile_la_SOURCES)
+ UnitTests_LDADD = $(libaudiofile_la_LIBADD) -lgtest
+-UnitTests_CPPFLAGS = -I$(top_srcdir)
++UnitTests_CPPFLAGS =
+ UnitTests_CXXFLAGS = -fno-rtti -fno-exceptions -DGTEST_HAS_RTTI=0 -DGTEST_HAS_EXCEPTIONS=0
+ UnitTests_LDFLAGS = -static
+ 

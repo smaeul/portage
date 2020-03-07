@@ -1,0 +1,546 @@
+--- man-db-2.8.7/Makefile.in
++++ man-db-2.8.7/Makefile.in
+@@ -1455,8 +1455,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ @HAVE_GNULIB_PO_TRUE@GNULIB_PO = gl/po
+ SUBDIRS = docs gl/lib $(GNULIB_PO) init lib libdb src man manual po tools
+ dist_noinst_DATA = FAQ NEWS README include/README
+--- man-db-2.8.7/config.h.in
++++ man-db-2.8.7/config.h.in
+@@ -1301,6 +1301,9 @@
+ /* Define if you have xz. */
+ #undef HAVE_XZ
+ 
++/* Define if you have zstd. */
++#undef HAVE_ZSTD
++
+ /* Define to 1 if the system has the type `_Bool'. */
+ #undef HAVE__BOOL
+ 
+--- man-db-2.8.7/configure
++++ man-db-2.8.7/configure
+@@ -1584,6 +1584,7 @@ LEXLIB
+ LEX_OUTPUT_ROOT
+ LEX
+ LIBCOMPRESS
++unzstd
+ unlzip
+ unxz
+ unlzma
+@@ -1592,6 +1593,7 @@ uncompress
+ gunzip
+ compress_ext
+ compressor
++zstd
+ lzip
+ lzma
+ xz
+@@ -1805,6 +1807,7 @@ with_bzip2
+ with_xz
+ with_lzma
+ with_lzip
++with_zstd
+ with_included_regex
+ enable_nls
+ enable_rpath
+@@ -2546,6 +2549,7 @@ Optional Packages:
+                           compression utility
+   --with-lzip=LZIP        use LZIP as Lempel-Ziv-Markov chain-Algorithm
+                           compression utility
++  --with-zstd=ZSTD        use ZSTD as fast lossless compression utility
+   --without-included-regex
+                           don't compile regex; this is the default on systems
+                           with recent-enough versions of the GNU C Library
+@@ -18117,7 +18121,73 @@ if test -n "$lzip"
+ then
+ 	unlzip="$lzip -dc"
+ fi
+-if test -n "$gzip" || test -n "$compress" || test -n "$bzip2" || test -n "$xz" || test -n "$lzip" || test -n "$lzma"
++
++# Check whether --with-zstd was given.
++if test "${with_zstd+set}" = set; then :
++  withval=$with_zstd; if test "$withval" = yes || test "$withval" = no; then :
++  as_fn_error $? "--with-zstd requires an argument" "$LINENO" 5
++else
++  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for zstd" >&5
++$as_echo_n "checking for zstd... " >&6; }
++                     { $as_echo "$as_me:${as_lineno-$LINENO}: result: $withval" >&5
++$as_echo "$withval" >&6; }
++                     zstd="$withval"
++fi
++else
++  for ac_prog in zstd
++do
++  # Extract the first word of "$ac_prog", so it can be a program name with args.
++set dummy $ac_prog; ac_word=$2
++{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for $ac_word" >&5
++$as_echo_n "checking for $ac_word... " >&6; }
++if ${ac_cv_prog_zstd+:} false; then :
++  $as_echo_n "(cached) " >&6
++else
++  if test -n "$zstd"; then
++  ac_cv_prog_zstd="$zstd" # Let the user override the test.
++else
++as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
++for as_dir in $PATH
++do
++  IFS=$as_save_IFS
++  test -z "$as_dir" && as_dir=.
++    for ac_exec_ext in '' $ac_executable_extensions; do
++  if as_fn_executable_p "$as_dir/$ac_word$ac_exec_ext"; then
++    ac_cv_prog_zstd="$ac_prog"
++    $as_echo "$as_me:${as_lineno-$LINENO}: found $as_dir/$ac_word$ac_exec_ext" >&5
++    break 2
++  fi
++done
++  done
++IFS=$as_save_IFS
++
++fi
++fi
++zstd=$ac_cv_prog_zstd
++if test -n "$zstd"; then
++  { $as_echo "$as_me:${as_lineno-$LINENO}: result: $zstd" >&5
++$as_echo "$zstd" >&6; }
++else
++  { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
++$as_echo "no" >&6; }
++fi
++
++
++  test -n "$zstd" && break
++done
++
++fi
++
++if test -n "$zstd"; then
++
++$as_echo "#define HAVE_ZSTD 1" >>confdefs.h
++
++fi
++if test -n "$zstd"
++then
++	unzstd="$zstd -dcq"
++fi
++if test -n "$gzip" || test -n "$compress" || test -n "$bzip2" || test -n "$xz" || test -n "$lzip" || test -n "$lzma" || test -n "$zstd"
+ then
+ 
+ $as_echo "#define COMP_CAT 1" >>confdefs.h
+--- man-db-2.8.7/configure.ac
++++ man-db-2.8.7/configure.ac
+@@ -318,7 +318,12 @@ if test -n "$lzip"
+ then
+ 	unlzip="$lzip -dc"
+ fi
+-if test -n "$gzip" || test -n "$compress" || test -n "$bzip2" || test -n "$xz" || test -n "$lzip" || test -n "$lzma"
++MAN_CHECK_PROGS([zstd], [ZSTD], [use ZSTD as fast lossless compression utility], [zstd])
++if test -n "$zstd"
++then
++	unzstd="$zstd -dcq"
++fi
++if test -n "$gzip" || test -n "$compress" || test -n "$bzip2" || test -n "$xz" || test -n "$lzip" || test -n "$lzma" || test -n "$zstd"
+ then
+ 	AC_DEFINE([COMP_CAT], [1], [Define if you have compressors and want to support compressed cat files.])
+ 	AC_DEFINE([COMP_SRC], [1], [Define if you have compressors and want to support compressed manual source.])
+@@ -331,6 +336,7 @@ AC_SUBST([bunzip2])
+ AC_SUBST([unlzma])
+ AC_SUBST([unxz])
+ AC_SUBST([unlzip])
++AC_SUBST([unzstd])
+ MAN_COMPRESS_LIB([z], [gzopen])
+ dnl To add more decompressors just follow the scheme above.
+ 
+--- man-db-2.8.7/docs/Makefile.in
++++ man-db-2.8.7/docs/Makefile.in
+@@ -1362,8 +1362,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ dist_noinst_DATA = \
+ 	HACKING \
+ 	TODO \
+--- man-db-2.8.7/gl/lib/Makefile.in
++++ man-db-2.8.7/gl/lib/Makefile.in
+@@ -1675,8 +1675,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ AUTOMAKE_OPTIONS = 1.11 gnits subdir-objects
+ SUBDIRS = 
+ noinst_HEADERS = 
+--- man-db-2.8.7/include/comp_src.h.in
++++ man-db-2.8.7/include/comp_src.h.in
+@@ -79,6 +79,11 @@ struct compression comp_list[] = {
+       {UNLZIP, "lz", NULL},
+ #endif /* HAVE_LZIP */
+
++/* If we have zstd, incorporate the following */
++#ifdef HAVE_ZSTD
++      {UNZSTD, "zst", NULL},
++#endif /* HAVE_LZIP */
++
+ /*------------------------------------------------------*/
+ /* Add your decompressor(s) and extension(s) below here */
+ /*------------------------------------------------------*/
+--- man-db-2.8.7/include/manconfig.h.in
++++ man-db-2.8.7/include/manconfig.h.in
+@@ -228,6 +228,7 @@
+ #  define UNLZMA "@unlzma@"
+ #  define UNXZ "@unxz@"
+ #  define UNLZIP "@unlzip@"
++#  define UNZSTD "@unzstd@"
+ #endif /* COMP_SRC */
+
+ /*-----------------------------------------------------------------------*/
+--- man-db-2.8.7/init/Makefile.in
++++ man-db-2.8.7/init/Makefile.in
+@@ -1419,8 +1419,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ SUBDIRS = systemd
+ all: all-recursive
+ 
+--- man-db-2.8.7/init/systemd/Makefile.in
++++ man-db-2.8.7/init/systemd/Makefile.in
+@@ -1395,8 +1395,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ EXTRA_DIST = man-db.conf.in man-db.service.in $(am__append_1)
+ CLEANFILES = \
+ 	man-db.conf \
+--- man-db-2.8.7/lib/Makefile.in
++++ man-db-2.8.7/lib/Makefile.in
+@@ -1463,8 +1463,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ pkglib_LTLIBRARIES = libman.la
+ dist_noinst_DATA = README
+ AM_CFLAGS = $(WARN_CFLAGS)
+--- man-db-2.8.7/libdb/Makefile.in
++++ man-db-2.8.7/libdb/Makefile.in
+@@ -1456,8 +1456,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ pkglib_LTLIBRARIES = libmandb.la
+ dist_noinst_DATA = README
+ AM_CFLAGS = $(WARN_CFLAGS)
+--- man-db-2.8.7/man/Makefile.in
++++ man-db-2.8.7/man/Makefile.in
+@@ -1630,8 +1630,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ SUBDIRS = $(MAN_SUBDIRS)
+ DIST_SUBDIRS = \
+ 	po4a \
+--- man-db-2.8.7/man/da/Makefile.in
++++ man-db-2.8.7/man/da/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = da
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/de/Makefile.in
++++ man-db-2.8.7/man/de/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = de
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/es/Makefile.in
++++ man-db-2.8.7/man/es/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = es
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/fr/Makefile.in
++++ man-db-2.8.7/man/fr/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = fr
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/id/Makefile.in
++++ man-db-2.8.7/man/id/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = id
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/it/Makefile.in
++++ man-db-2.8.7/man/it/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = it
+ man1_MANS = \
+ 	man1/apropos.1 \
+--- man-db-2.8.7/man/ja/Makefile.in
++++ man-db-2.8.7/man/ja/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = ja
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/nl/Makefile.in
++++ man-db-2.8.7/man/nl/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = nl
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/pl/Makefile.in
++++ man-db-2.8.7/man/pl/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = pl
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/po4a/Makefile.in
++++ man-db-2.8.7/man/po4a/Makefile.in
+@@ -1359,8 +1359,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ DOMAIN = man-db-manpages
+ POFILES = \
+ 	po/da.po \
+--- man-db-2.8.7/man/pt/Makefile.in
++++ man-db-2.8.7/man/pt/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = pt
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/pt_BR/Makefile.in
++++ man-db-2.8.7/man/pt_BR/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = pt_BR
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/ru/Makefile.in
++++ man-db-2.8.7/man/ru/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = ru
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/sr/Makefile.in
++++ man-db-2.8.7/man/sr/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = sr
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/sv/Makefile.in
++++ man-db-2.8.7/man/sv/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = sv
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/tr/Makefile.in
++++ man-db-2.8.7/man/tr/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = tr
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/man/zh_CN/Makefile.in
++++ man-db-2.8.7/man/zh_CN/Makefile.in
+@@ -1572,8 +1572,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ LINGUA = zh_CN
+ PO4A_LINGUA = yes
+ EXTRA_DIST = translator.add
+--- man-db-2.8.7/manual/Makefile.in
++++ man-db-2.8.7/manual/Makefile.in
+@@ -1362,8 +1362,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ ME_FILES = \
+ 	comp.me \
+ 	db.me \
+--- man-db-2.8.7/src/Makefile.in
++++ man-db-2.8.7/src/Makefile.in
+@@ -1540,8 +1540,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ SUBDIRS = . tests
+ noinst_DATA = man_db.conf
+ EXTRA_DIST = lexgrog.c zsoelim.c
+--- man-db-2.8.7/src/tests/Makefile.in
++++ man-db-2.8.7/src/tests/Makefile.in
+@@ -1617,8 +1617,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ TESTS_ENVIRONMENT = PATH=$(abs_builddir)/..:$$PATH; export PATH; \
+ 		    DBTYPE=$(DBTYPE); export DBTYPE; \
+ 		    MANDIR_LAYOUT=$(MANDIR_LAYOUT); export MANDIR_LAYOUT; \
+--- man-db-2.8.7/tools/Makefile.in
++++ man-db-2.8.7/tools/Makefile.in
+@@ -1364,8 +1364,10 @@ uncompress = @uncompress@
+ unlzip = @unlzip@
+ unlzma = @unlzma@
+ unxz = @unxz@
++unzstd = @unzstd@
+ vgrind = @vgrind@
+ xz = @xz@
++zstd = @zstd@
+ dist_noinst_SCRIPTS = \
+ 	chconfig \
+ 	checkman \

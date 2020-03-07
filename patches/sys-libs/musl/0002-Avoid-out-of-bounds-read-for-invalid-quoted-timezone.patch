@@ -1,0 +1,30 @@
+From e3853b53cc4f2f6d4500083afd550fe94082e4b2 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sat, 22 Feb 2020 15:28:13 -0600
+Subject: [PATCH 2/7] Avoid out-of-bounds read for invalid quoted timezone
+
+Parsing the timezone name must stop when reaching the null terminator.
+In that case, there is no '>' to skip.
+---
+ src/time/__tz.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/time/__tz.c b/src/time/__tz.c
+index 185642e8..a962960e 100644
+--- a/src/time/__tz.c
++++ b/src/time/__tz.c
+@@ -86,9 +86,9 @@ static void getname(char *d, const char **p)
+ 	int i;
+ 	if (**p == '<') {
+ 		++*p;
+-		for (i=0; (*p)[i]!='>' && i<TZNAME_MAX; i++)
++		for (i=0; (*p)[i] && (*p)[i]!='>' && i<TZNAME_MAX; i++)
+ 			d[i] = (*p)[i];
+-		++*p;
++		if ((*p)[i]) ++*p;
+ 	} else {
+ 		for (i=0; ((*p)[i]|32)-'a'<26U && i<TZNAME_MAX; i++)
+ 			d[i] = (*p)[i];
+-- 
+2.24.1
+

@@ -1,17 +1,17 @@
-From df498cd19cb2cd952af383f6ffc334f1023c3e91 Mon Sep 17 00:00:00 2001
+From 5d1a3c93d1f1285b1e31f67071236aef36f0587b Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Thu, 10 Oct 2019 20:05:46 -0500
-Subject: [PATCH 1/5] [LLVM] Support vendorless Linux triples
+Subject: [PATCH 1/4] [LLVM] Support vendorless Linux triples
 
 ---
  llvm/lib/Support/Triple.cpp | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git llvm/lib/Support/Triple.cpp llvm/lib/Support/Triple.cpp
-index d419463e6a5..9ec98c8b71d 100644
+index 2c480c1094a..e1e11e3d824 100644
 --- llvm/lib/Support/Triple.cpp
 +++ llvm/lib/Support/Triple.cpp
-@@ -980,7 +980,7 @@ std::string Triple::normalize(StringRef Str) {
+@@ -985,7 +985,7 @@ std::string Triple::normalize(StringRef Str) {
    // Stick the corrected components back together to form the normalized string.
    std::string Normalized;
    for (unsigned i = 0, e = Components.size(); i != e; ++i) {
@@ -21,5 +21,5 @@ index d419463e6a5..9ec98c8b71d 100644
    }
    return Normalized;
 -- 
-2.21.0
+2.24.1
 

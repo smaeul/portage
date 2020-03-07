@@ -13,6 +13,7 @@ media-libs/freetype X
 media-libs/gst-plugins-base X
 media-libs/imlib2 X
 media-libs/libepoxy X
+media-libs/libglvnd X
 media-libs/mesa X
 media-video/mpv X
 net-analyzer/wireshark qt5

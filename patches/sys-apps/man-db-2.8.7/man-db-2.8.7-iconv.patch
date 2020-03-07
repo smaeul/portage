@@ -1,0 +1,81 @@
+--- man-db-2.8.7/src/man.c
++++ man-db-2.8.7/src/man.c
+@@ -1516,15 +1516,13 @@ static void add_output_iconv (pipeline *p,
+ {
+ 	debug ("add_output_iconv: source %s, target %s\n", source, target);
+ 	if (source && target && !STREQ (source, target)) {
+-		char *target_translit = xasprintf ("%s//TRANSLIT", target);
+ 		pipecmd *iconv_cmd;
+ 		iconv_cmd = pipecmd_new_args
+-			("iconv", "-c", "-f", source, "-t", target_translit,
++			("iconv", "-c", "-f", source, "-t", target,
+ 			 (void *) 0);
+ 		pipecmd_pre_exec (iconv_cmd, sandbox_load, sandbox_free,
+ 				  sandbox);
+ 		pipeline_command (p, iconv_cmd);
+-		free (target_translit);
+ 	}
+ }
+ 
+--- man-db-2.8.7/src/manconv.c
++++ man-db-2.8.7/src/manconv.c
+@@ -106,10 +106,9 @@ static int try_iconv (pipeline *p, const char *try_from_code, const char *to,
+ 	static char *utf8 = NULL, *output = NULL;
+ 	size_t utf8left = 0;
+ 	iconv_t cd_utf8, cd = NULL;
+-	int to_utf8 = STREQ (try_to_code, "UTF-8") ||
+-		      STRNEQ (try_to_code, "UTF-8//", 7);
+-	const char *utf8_target = last ? "UTF-8//IGNORE" : "UTF-8";
+-	int ignore_errors = (strstr (try_to_code, "//IGNORE") != NULL);;
++	int to_utf8 = STREQ (try_to_code, "UTF-8");
++	const char *utf8_target = "UTF-8";
++	int ignore_errors = 0;
+ 	int ret = 0;
+ 
+ 	debug ("trying encoding %s -> %s\n", try_from_code, try_to_code);
+--- man-db-2.8.7/src/manconv_client.c
++++ man-db-2.8.7/src/manconv_client.c
+@@ -105,7 +105,7 @@ void add_manconv (pipeline *p, const char *source, const char *target)
+ 		codes->from[2] = NULL;
+ 		name = appendstr (name, "UTF-8:", source, (void *) 0);
+ 	}
+-	codes->to = xasprintf ("%s//IGNORE", target);
++	codes->to = xstrdup (target);
+ 	/* informational only; no shell quoting concerns */
+ 	name = appendstr (name, " -t ", codes->to, (void *) 0);
+ 	if (quiet >= 2)
+--- man-db-2.8.7/src/manconv_main.c
++++ man-db-2.8.7/src/manconv_main.c
+@@ -107,9 +107,6 @@ static error_t parse_opt (int key, char *arg, struct argp_state *state)
+ 			return 0;
+ 		case 't':
+ 			to_code = xstrdup (arg);
+-			if (!strstr (to_code, "//"))
+-				to_code = appendstr (to_code, "//TRANSLIT",
+-						     (void *) 0);
+ 			return 0;
+ 		case 'd':
+ 			debug_level = true;
+--- man-db-2.8.7/src/whatis.c
++++ man-db-2.8.7/src/whatis.c
+@@ -869,9 +869,6 @@ static bool search (const char * const *pages, int num_pages)
+ int main (int argc, char *argv[])
+ {
+ 	char *program_base_name;
+-#ifdef HAVE_ICONV
+-	char *locale_charset;
+-#endif
+ 	int status = OK;
+ 
+ 	set_program_name (argv[0]);
+@@ -945,9 +942,7 @@ int main (int argc, char *argv[])
+ 	display_seen = new_string_set (GL_HASH_SET);
+ 
+ #ifdef HAVE_ICONV
+-	locale_charset = xasprintf ("%s//IGNORE", get_locale_charset ());
+-	conv_to_locale = iconv_open (locale_charset, "UTF-8");
+-	free (locale_charset);
++	conv_to_locale = iconv_open (get_locale_charset (), "UTF-8");
+ #endif /* HAVE_ICONV */
+ 
+ 	if (regex_opt) {

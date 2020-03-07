@@ -1,0 +1,45 @@
+From 20b48ee1fd479d172eb452980e246c90b984ccf6 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sat, 14 Mar 2020 00:06:22 -0500
+Subject: [PATCH] define MAP_SYNC on powerpc/powerpc64
+
+Linux defines MAP_SYNC on powerpc and powerpc64 as of commit
+22fcea6f85f2 ("mm: move MAP_SYNC to asm-generic/mman-common.h"),
+so we can stop undefining it on those architectures.
+
+--
+
+This is currently breaking qemu compilation on powerpc64.
+
+---
+ arch/powerpc/bits/mman.h   | 1 -
+ arch/powerpc64/bits/mman.h | 1 -
+ 2 files changed, 2 deletions(-)
+
+diff --git a/arch/powerpc/bits/mman.h b/arch/powerpc/bits/mman.h
+index b3a675a8..95ec4358 100644
+--- a/arch/powerpc/bits/mman.h
++++ b/arch/powerpc/bits/mman.h
+@@ -4,7 +4,6 @@
+ #define MAP_NORESERVE   0x40
+ #undef MAP_LOCKED
+ #define MAP_LOCKED	0x80
+-#undef MAP_SYNC
+ 
+ #undef MCL_CURRENT
+ #define MCL_CURRENT     0x2000
+diff --git a/arch/powerpc64/bits/mman.h b/arch/powerpc64/bits/mman.h
+index b3a675a8..95ec4358 100644
+--- a/arch/powerpc64/bits/mman.h
++++ b/arch/powerpc64/bits/mman.h
+@@ -4,7 +4,6 @@
+ #define MAP_NORESERVE   0x40
+ #undef MAP_LOCKED
+ #define MAP_LOCKED	0x80
+-#undef MAP_SYNC
+ 
+ #undef MCL_CURRENT
+ #define MCL_CURRENT     0x2000
+-- 
+2.24.1
+

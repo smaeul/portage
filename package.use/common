@@ -79,7 +79,7 @@ media-fonts/noto cjk
 media-gfx/imagemagick pango
 media-libs/imlib2 -mp3
 media-libs/libass -enca
-media-libs/mesa gles2 osmesa xa
+media-libs/mesa gles2 -llvm osmesa
 media-libs/openh264 -plugin
 media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
@@ -102,6 +102,7 @@ net-misc/freerdp -usb
 net-misc/spice-gtk lz4
 net-print/cups -usb
 net-print/cups-filters pclm
+net-vpn/wireguard-tools -wg-quick
 net-wireless/wpa_supplicant ap -hs2-0 readline
 sys-apps/busybox savedconfig
 sys-apps/elfix -ptpax

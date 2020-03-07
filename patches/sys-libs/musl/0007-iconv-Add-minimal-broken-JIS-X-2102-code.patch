@@ -1,7 +1,7 @@
-From 3c4786d25e97508c3bfbc5ac1d8cc44ef4f91d8c Mon Sep 17 00:00:00 2001
+From 74637580a7822f7775f166c717eddaa873fabae7 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Mon, 22 Oct 2018 20:50:04 -0500
-Subject: [PATCH 7/8] iconv: Add minimal broken JIS X 2102 code
+Subject: [PATCH 7/7] iconv: Add minimal broken JIS X 2102 code
 
 ---
  src/locale/iconv.c | 14 ++++++++++++--
@@ -39,5 +39,5 @@ index 3047c27b..77f7ce3c 100644
  			c -= 0xa1;
  			d -= 0xa1;
 -- 
-2.21.0
+2.24.1
 

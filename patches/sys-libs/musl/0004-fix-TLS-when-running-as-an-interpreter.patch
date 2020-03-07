@@ -1,0 +1,56 @@
+From 38f6e15e7b19b1b9e759657c2c02bd98b3cdb831 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 30 Jun 2019 21:01:07 -0500
+Subject: [PATCH 4/7] fix TLS when running as an interpreter
+
+patch from Alpine
+---
+ src/env/__init_tls.c | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
+
+diff --git a/src/env/__init_tls.c b/src/env/__init_tls.c
+index 772baba3..db929945 100644
+--- a/src/env/__init_tls.c
++++ b/src/env/__init_tls.c
+@@ -72,8 +72,10 @@ void *__copy_tls(unsigned char *mem)
+ }
+ 
+ #if ULONG_MAX == 0xffffffff
++typedef Elf32_Ehdr Ehdr;
+ typedef Elf32_Phdr Phdr;
+ #else
++typedef Elf64_Ehdr Ehdr;
+ typedef Elf64_Phdr Phdr;
+ #endif
+ 
+@@ -82,15 +84,23 @@ extern weak hidden const size_t _DYNAMIC[];
+ static void static_init_tls(size_t *aux)
+ {
+ 	unsigned char *p;
+-	size_t n;
++	size_t n, e;
+ 	Phdr *phdr, *tls_phdr=0;
+ 	size_t base = 0;
+ 	void *mem;
+ 
+-	for (p=(void *)aux[AT_PHDR],n=aux[AT_PHNUM]; n; n--,p+=aux[AT_PHENT]) {
++	if (aux[AT_BASE]) {
++		Ehdr *ehdr = (void *)aux[AT_BASE];
++		p = (unsigned char *)aux[AT_BASE] + ehdr->e_phoff;
++		n = ehdr->e_phnum;
++		e = ehdr->e_phentsize;
++	} else {
++		p = (void *)aux[AT_PHDR];
++		n = aux[AT_PHNUM];
++		e = aux[AT_PHENT];
++	}
++	for (; n; n--, p+=e) {
+ 		phdr = (void *)p;
+-		if (phdr->p_type == PT_PHDR)
+-			base = aux[AT_PHDR] - phdr->p_vaddr;
+ 		if (phdr->p_type == PT_DYNAMIC && _DYNAMIC)
+ 			base = (size_t)_DYNAMIC - phdr->p_vaddr;
+ 		if (phdr->p_type == PT_TLS)
+-- 
+2.24.1
+

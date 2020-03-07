@@ -1,0 +1,12 @@
+--- qemu-4.2.0/linux-user/signal.c
++++ qemu-4.2.0/linux-user/signal.c
+@@ -30,6 +30,9 @@ static struct target_sigaction sigact_table[TARGET_NSIG];
+ static void host_signal_handler(int host_signum, siginfo_t *info,
+                                 void *puc);
+ 
++#define __SIGRTMIN 35
++#define __SIGRTMAX _NSIG-1
++
+ static uint8_t host_to_target_signal_table[_NSIG] = {
+     [SIGHUP] = TARGET_SIGHUP,
+     [SIGINT] = TARGET_SIGINT,

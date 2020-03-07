@@ -1,0 +1,15 @@
+musl doesn't support version 1.1 .mo files
+--- gettext-0.20.1/gettext-tools/tests/format-c-5-prg.c
++++ gettext-0.20.1/gettext-tools/tests/format-c-5-prg.c
+@@ -71,7 +71,11 @@ main (int argc, char *argv[])
+   if (strcmp (s, en) == 0)
+     {
+       fprintf (stderr, "String untranslated.\n");
++#if USE_SYSTEM_LIBINTL
++      exit (77);
++#else
+       exit (1);
++#endif
+     }
+   if (strcmp (s, expected_translation) != 0)
+     {

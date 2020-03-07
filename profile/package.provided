@@ -8,11 +8,7 @@ app-arch/tar-9999
 dev-libs/libbsd-9999
 # Obsolete
 net-wireless/crda-9999
-# Provided by s6
-sys-apps/ucspi-unix-9999
 # Not needed with s6
 sys-fs/udev-init-scripts-9999
-# Provided by s6
-virtual/daemontools-0
 # Managed outside of portage
-virtual/linux-sources-3
+virtual/linux-sources-9999

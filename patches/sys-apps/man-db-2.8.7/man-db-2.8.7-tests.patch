@@ -1,0 +1,15 @@
+- manconv requires //IGNORE pseudo-locales in iconv
+- man-10 is broken by sandbox (works fine outside sandbox)
+--- man-db-2.8.7/src/tests/Makefile.in
++++ man-db-2.8.7/src/tests/Makefile.in
+@@ -1585,8 +1585,8 @@
+ AM_LOG_FLAGS = $(SHELL)
+ ALL_TESTS = \
+ 	lexgrog-1 lexgrog-2 lexgrog-3 \
+-	man-1 man-2 man-3 man-4 man-5 man-6 man-7 man-8 man-9 man-10 man-11 \
+-	manconv-1 manconv-2 manconv-3 \
++	man-1 man-2 man-3 man-4 man-5 man-6 man-7 man-8 man-9 man-11 \
++	manconv-1 \
+ 	mandb-1 mandb-2 mandb-3 mandb-4 mandb-5 mandb-6 mandb-7 \
+ 	whatis-1 \
+ 	zsoelim-1

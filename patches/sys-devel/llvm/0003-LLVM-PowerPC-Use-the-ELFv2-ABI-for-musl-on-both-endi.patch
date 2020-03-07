@@ -1,30 +1,30 @@
-From 0ac06c34aa5c14b932b922bfbedcfcfcff9d1334 Mon Sep 17 00:00:00 2001
+From 84a7ceeaadb5ae97f73fffcdcb6a6ba67433ee2a Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Thu, 10 Oct 2019 21:21:07 -0500
-Subject: [PATCH 3/5] [LLVM][PowerPC] Use the ELFv2 ABI for musl on both
+Subject: [PATCH 3/4] [LLVM][PowerPC] Use the ELFv2 ABI for musl on both
  endians
 
 ---
- llvm/lib/Target/PowerPC/PPCTargetMachine.cpp | 3 ++-
+ llvm/lib/Target/PowerPC/PPCTargetMachine.cpp | 3 +++
  llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll   | 1 +
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ 2 files changed, 4 insertions(+)
 
 diff --git llvm/lib/Target/PowerPC/PPCTargetMachine.cpp llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
-index ce00f848dd7..46b92a0cecd 100644
+index 2caf4c99a1f..37897e403bf 100644
 --- llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
 +++ llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
-@@ -213,7 +213,8 @@ static PPCTargetMachine::PPCABI computeTargetABI(const Triple &TT,
+@@ -215,6 +215,9 @@ static PPCTargetMachine::PPCABI computeTargetABI(const Triple &TT,
    case Triple::ppc64le:
      return PPCTargetMachine::PPC_ABI_ELFv2;
    case Triple::ppc64:
--    if (TT.getEnvironment() == llvm::Triple::ELFv2)
 +    // musl uses the ELFv2 ABI on both endians.
-+    if (TT.getEnvironment() == Triple::ELFv2 || TT.isMusl())
-       return PPCTargetMachine::PPC_ABI_ELFv2;
++    if (TT.isMusl())
++      return PPCTargetMachine::PPC_ABI_ELFv2;
      return PPCTargetMachine::PPC_ABI_ELFv1;
    default:
+     return PPCTargetMachine::PPC_ABI_UNKNOWN;
 diff --git llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
-index 0842f357d8a..60469b4bb88 100644
+index 8b1cf6b5882..dc0bcf274ba 100644
 --- llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
 +++ llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
 @@ -1,6 +1,7 @@
@@ -36,5 +36,5 @@ index 0842f357d8a..60469b4bb88 100644
  ; RUN: llc -verify-machineinstrs -mtriple=powerpc64le-unknown-linux-gnu -target-abi elfv1 < %s | FileCheck %s -check-prefix=CHECK-ELFv1
  ; RUN: llc -verify-machineinstrs -mtriple=powerpc64le-unknown-linux-gnu -target-abi elfv2 < %s | FileCheck %s -check-prefix=CHECK-ELFv2
 -- 
-2.21.0
+2.24.1
 
