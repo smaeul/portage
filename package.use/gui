@@ -1,9 +1,5 @@
 # Required by media-gfx/inkscape
 dev-cpp/cairomm X
-# Required by net-misc/unison[gtk]
-dev-lang/ocaml X
-# Required by x11-wm/i3
-x11-libs/cairo xcb
 
 app-text/mupdf X
 dev-java/icedtea gtk

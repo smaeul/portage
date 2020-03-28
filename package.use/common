@@ -17,8 +17,6 @@ dev-libs/gmp static-libs
 dev-libs/libffi static-libs
 # Required by dev-libs/xmlsec
 dev-libs/nss utils
-# app-crypt/mhash is broken
-dev-libs/rasqal -mhash
 # Required by libreoffice
 dev-libs/xmlsec nss
 # Required for USE=test
@@ -37,8 +35,6 @@ media-libs/soxr examples
 net-analyzer/netperf demo
 # Required by unbound[test]
 net-dns/ldns-utils examples
-# Required for USE=test
-net-libs/libnftnl json
 # Required by chromium
 net-libs/nodejs inspector
 # Required by !python:2.7
@@ -50,24 +46,17 @@ sys-libs/zlib minizip
 # Required by x11-wm/i3
 x11-libs/libxcb xkb
 
-app-arch/libarchive lz4
 app-arch/p7zip rar
-app-arch/zstd lz4
-app-crypt/gnupg readline
-app-crypt/rhash openssl
 app-editors/vim python
-app-emulation/spice lz4
-app-emulation/qemu -curl -jpeg -ncurses numa -opengl -png -pulseaudio spice usb -vnc
+app-emulation/qemu -curl -jpeg numa -opengl -png -pulseaudio spice usb -vnc
 app-eselect/eselect-php fpm
 app-office/libreoffice gtk2
 app-shells/bash -net
-dev-db/postgresql readline
 dev-db/sqlite -icu
 dev-lang/ghc ghcbootstrap
 dev-lang/go system-bootstrap
-dev-lang/php bcmath -exif fpm pdo postgres readline -truetype -webp
-dev-lang/python berkdb readline
-dev-lang/rust cargo clippy miri rls rustfmt system-llvm
+dev-lang/php bcmath fpm pdo
+dev-lang/rust clippy miri rls rustfmt system-llvm
 dev-libs/capstone python
 dev-libs/openssl -sslv3
 dev-ml/lablgtk -opengl
@@ -78,42 +67,38 @@ mail-client/thunderbird eme-free -gmp-autoupdate system-harfbuzz system-icu syst
 media-fonts/noto cjk
 media-gfx/imagemagick pango
 media-libs/imlib2 -mp3
-media-libs/libass -enca
 media-libs/mesa gles2 -llvm osmesa
 media-libs/openh264 -plugin
 media-plugins/alsa-plugins -ffmpeg
-media-sound/mpd -fifo -glib -id3tag libsoxr -mad -network -sqlite -vorbis
+media-sound/mpd -fifo -id3tag libsoxr -mad -network -sqlite
 media-sound/pulseaudio alsa -asyncns
 media-video/ffmpeg libsoxr network openssl
-media-video/mpv cli drm -dvd egl -enca -uchardet
+media-video/mpv cli drm egl -uchardet
 net-analyzer/flent -plots
 net-analyzer/nmap ncat nping
 net-dns/bind-tools urandom
 net-dns/dnsmasq tftp
 net-fs/samba -cups
-net-im/bitlbee -gnutls oscar twitter
+net-im/bitlbee oscar twitter
 net-irc/weechat -charset -fset python
 net-libs/glib-networking -gnome -libproxy
-net-libs/gnutls -crywrap -openssl
+net-libs/gnutls -openssl
 net-misc/iputils tracepath
 net-misc/s6-networking -ssl
-net-misc/socat readline
 net-misc/freerdp -usb
-net-misc/spice-gtk lz4
 net-print/cups -usb
 net-print/cups-filters pclm
 net-vpn/wireguard-tools -wg-quick
-net-wireless/wpa_supplicant ap -hs2-0 readline
+net-wireless/wpa_supplicant ap -hs2-0
 sys-apps/busybox savedconfig
 sys-apps/elfix -ptpax
 sys-apps/flashrom -* internal linux-mtd linux-spi tools
 sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
-sys-apps/util-linux -cramfs -ncurses
-sys-devel/binutils cxx
+sys-apps/util-linux -cramfs
 sys-devel/clang-runtime compiler-rt libcxx -sanitize
-sys-devel/gcc ada -vtv
+sys-devel/gcc ada
 sys-devel/gdb multitarget python
 sys-firmware/intel-microcode initramfs
 sys-fs/cryptsetup nettle -openssl
@@ -121,12 +106,11 @@ sys-fs/lvm2 -thin
 sys-fs/zfs kernel-builtin -rootfs
 sys-kernel/linux-firmware redistributable savedconfig
 sys-libs/ldb -ldap
-sys-libs/libcxx libcxxabi -libcxxrt libunwind
+sys-libs/libcxx libcxxabi libunwind
 sys-libs/libcxxabi libunwind
-sys-libs/ncurses:5 tinfo
 sys-power/nut -ups_drivers_* ups_drivers_usbhid-ups
 www-client/chromium -atk -hangouts system-ffmpeg
 www-client/firefox eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
-x11-base/xorg-server glamor xvfb
+x11-base/xorg-server xvfb
 x11-libs/gtk+ -vim-syntax
 x11-terms/rxvt-unicode 256-color -blink -fading-colors font-styles iso14755 mousewheel -pixbuf unicode3 -utmp -wtmp
