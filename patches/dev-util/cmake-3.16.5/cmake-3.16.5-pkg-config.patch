@@ -1,0 +1,11 @@
+--- cmake-3.16.5/Modules/FindPkgConfig.cmake
++++ cmake-3.16.5/Modules/FindPkgConfig.cmake
+@@ -299,7 +299,7 @@ macro(_pkg_set_path_internal)
+     if(NOT DEFINED CMAKE_SYSTEM_NAME
+         OR (CMAKE_SYSTEM_NAME MATCHES "^(Linux|kFreeBSD|GNU)$"
+             AND NOT CMAKE_CROSSCOMPILING))
+-      if(EXISTS "/etc/debian_version") # is this a debian system ?
++      if(CMAKE_LIBRARY_ARCHITECTURE)
+         if(CMAKE_LIBRARY_ARCHITECTURE)
+           list(APPEND _lib_dirs "lib/${CMAKE_LIBRARY_ARCHITECTURE}/pkgconfig")
+         endif()

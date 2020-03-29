@@ -56,12 +56,11 @@ dev-db/sqlite -icu
 dev-lang/ghc ghcbootstrap
 dev-lang/go system-bootstrap
 dev-lang/php bcmath fpm pdo
-dev-lang/rust clippy miri rls rustfmt system-llvm
+dev-lang/rust clippy rls rustfmt system-llvm
 dev-libs/capstone python
 dev-libs/openssl -sslv3
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
-dev-util/cmake system-jsoncpp
 dev-vcs/git -pcre-jit perl
 mail-client/thunderbird eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/noto cjk

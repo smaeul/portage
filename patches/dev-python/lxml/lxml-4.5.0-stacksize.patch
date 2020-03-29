@@ -1,0 +1,18 @@
+--- lxml-lxml-4.5.0/src/lxml/tests/test_threading.py
++++ lxml-lxml-4.5.0/src/lxml/tests/test_threading.py
+@@ -51,6 +51,7 @@ class ThreadingTestCase(HelperTestCase):
+                 with lock:
+                     counter['finished'] += 1
+ 
++        old_stack_size = threading.stack_size(2**20)
+         threads = [threading.Thread(target=sync_start, args=(func,)) for _ in range(count)]
+         for thread in threads:
+             thread.start()
+@@ -58,6 +59,7 @@ class ThreadingTestCase(HelperTestCase):
+             sync_start(main_func)
+         for thread in threads:
+             thread.join()
++        threading.stack_size(old_stack_size)
+ 
+         self.assertEqual(0, counter['failed'])
+         self.assertEqual(counter['finished'], counter['started'])

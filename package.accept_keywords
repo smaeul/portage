@@ -129,7 +129,7 @@ sys-libs/tevent ~amd64
 # Required to pass tests
 ~dev-python/pytest-fixture-config-1.7.0 ~amd64
 # Required for glvnd
-~media-libs/mesa-20.0.1 ~amd64
+~media-libs/mesa-20.0.2 ~amd64
 # Required for big endian
 ~net-misc/spice-gtk-0.37 ~amd64
 # Required for perf

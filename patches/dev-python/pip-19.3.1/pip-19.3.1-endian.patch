@@ -1,0 +1,27 @@
+https://github.com/pypa/pip/issues/7921
+
+--- pip-19.3.1/tests/unit/test_compat.py
++++ pip-19.3.1/tests/unit/test_compat.py
+@@ -93,10 +93,6 @@ def test_str_to_display__decode_error(monkeypatch, caplog):
+     data = u'ab'.encode('utf-16')
+     actual = str_to_display(data)
+ 
+-    assert actual == u'\\xff\\xfea\x00b\x00', (
+-        # Show the encoding for easier troubleshooting.
+-        'encoding: {!r}'.format(locale.getpreferredencoding())
+-    )
+     assert len(caplog.records) == 1
+     record = caplog.records[0]
+     assert record.levelname == 'WARNING'
+--- pip-19.3.1/tests/unit/test_utils.py
++++ pip-19.3.1/tests/unit/test_utils.py
+@@ -383,9 +383,6 @@ def test_rmtree_retries_for_3sec(tmpdir, monkeypatch):
+     (u'/path/déf'.encode('utf-8'), 'utf-8', u'/path/déf'),
+     # Test a bytes object with a character that can't be decoded.
+     (u'/path/déf'.encode('utf-8'), 'ascii', u"b'/path/d\\xc3\\xa9f'"),
+-    (u'/path/déf'.encode('utf-16'), 'utf-8',
+-     u"b'\\xff\\xfe/\\x00p\\x00a\\x00t\\x00h\\x00/"
+-     "\\x00d\\x00\\xe9\\x00f\\x00'"),
+ ])
+ def test_path_to_display(monkeypatch, path, fs_encoding, expected):
+     monkeypatch.setattr(sys, 'getfilesystemencoding', lambda: fs_encoding)

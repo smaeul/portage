@@ -65,6 +65,25 @@ updates for musl
              py.test.skip("probably no symbol 'stdout' in the lib")
          ffi = FFI(backend=self.Backend())
          ffi.cdef("""
+--- cffi-1.14.0/testing/cffi0/test_ownlib.py
++++ cffi-1.14.0/testing/cffi0/test_ownlib.py
+@@ -376,14 +376,14 @@ class TestOwnLib(object):
+         if self.module is None:
+             py.test.skip("fix the auto-generation of the tiny test lib")
+         if sys.platform == 'win32':
+-            py.test.skip("uses 'dl' explicitly")
++            py.test.skip("uses 'c' explicitly")
+         if self.__class__.Backend is CTypesBackend:
+             py.test.skip("not for the ctypes backend")
+         backend = self.Backend()
+         ffi1 = FFI(backend=backend)
+         ffi1.cdef("""void *dlopen(const char *filename, int flags);
+                      int dlclose(void *handle);""")
+-        lib1 = ffi1.dlopen('dl')
++        lib1 = ffi1.dlopen('c')
+         handle = lib1.dlopen(self.module.encode(sys.getfilesystemencoding()),
+                              backend.RTLD_LAZY)
+         assert ffi1.typeof(handle) == ffi1.typeof("void *")
 --- cffi-1.11.4/testing/cffi0/test_parsing.py
 +++ cffi-1.11.4/testing/cffi0/test_parsing.py
 @@ -74,7 +74,7 @@ class FakeFunction(object):
@@ -98,6 +117,22 @@ updates for musl
          py.test.skip("likely, we cannot assign to stdout")
      ffi = FFI()
      ffi.cdef("int printf(const char *, ...); FILE *setstdout(FILE *);")
+--- cffi-1.14.0/testing/cffi1/test_re_python.py
++++ cffi-1.14.0/testing/cffi1/test_re_python.py
+@@ -265,11 +265,11 @@ def test_dlopen_handle():
+     import _cffi_backend
+     from re_python_pysrc import ffi
+     if sys.platform == 'win32':
+-        py.test.skip("uses 'dl' explicitly")
++        py.test.skip("uses 'c' explicitly")
+     ffi1 = FFI()
+     ffi1.cdef("""void *dlopen(const char *filename, int flags);
+                  int dlclose(void *handle);""")
+-    lib1 = ffi1.dlopen('dl')
++    lib1 = ffi1.dlopen('c')
+     handle = lib1.dlopen(extmod.encode(sys.getfilesystemencoding()),
+                          _cffi_backend.RTLD_LAZY)
+     assert ffi1.typeof(handle) == ffi1.typeof("void *")
 --- cffi-1.11.4/testing/cffi1/test_verify1.py
 +++ cffi-1.11.4/testing/cffi1/test_verify1.py
 @@ -1576,7 +1576,7 @@ def test_keepalive_ffi():
