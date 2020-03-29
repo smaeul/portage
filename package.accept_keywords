@@ -69,6 +69,11 @@ sys-libs/libcxxabi ~amd64
 sys-libs/libomp ~amd64
 sys-libs/llvm-libunwind ~amd64
 
+# matrix and friends
+dev-libs/olm ~amd64
+dev-python/aiofiles ~amd64
+dev-python/h11 ~amd64
+
 # netsurf and friends
 dev-lang/duktape ~amd64
 dev-libs/libcss ~amd64
