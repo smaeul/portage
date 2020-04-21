@@ -32,8 +32,6 @@ www-apps/gitea ~amd64
 # These packages have a stable version, but either it is too out of date to be
 # useful, or I need the latest version for compatibility with other software.
 app-misc/ca-certificates ~amd64
-app-office/libreoffice ~amd64
-app-office/libreoffice-l10n ~amd64
 dev-lang/go ~amd64
 dev-lang/mono ~amd64
 dev-libs/elfutils::musl ~amd64
@@ -90,13 +88,6 @@ sys-apps/s6-linux-utils ~amd64
 sys-apps/s6-portable-utils ~amd64
 sys-apps/s6-rc ~amd64
 
-# samba and friends
-net-fs/samba ~amd64
-sys-libs/ldb ~amd64
-sys-libs/talloc ~amd64
-sys-libs/tdb ~amd64
-sys-libs/tevent ~amd64
-
 # These packages are either only available as git repositories, or have
 # significant features added/changed/fixed since their latest release.
 =dev-util/uncrustify-9999 **
@@ -128,8 +119,10 @@ sys-libs/tevent ~amd64
 ~dev-python/pbr-5.1.1 ~amd64
 # Required to pass tests
 ~dev-python/pytest-fixture-config-1.7.0 ~amd64
+# Required for python3
+~media-libs/libmypaint-1.4.0-r1 ~amd64
 # Required for glvnd
-~media-libs/mesa-20.0.2 ~amd64
+~media-libs/mesa-20.0.3 ~amd64
 # Required for big endian
 ~net-misc/spice-gtk-0.37 ~amd64
 # Required for perf

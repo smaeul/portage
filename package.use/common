@@ -48,14 +48,13 @@ x11-libs/libxcb xkb
 
 app-arch/p7zip rar
 app-editors/vim python
-app-emulation/qemu -curl -jpeg numa -opengl -png -pulseaudio spice usb -vnc
+app-emulation/qemu -curl -jpeg numa -opengl -oss -png -pulseaudio spice usb -vnc
 app-eselect/eselect-php fpm
 app-office/libreoffice gtk2
 app-shells/bash -net
 dev-db/sqlite -icu
 dev-lang/ghc ghcbootstrap
-dev-lang/go system-bootstrap
-dev-lang/php bcmath fpm pdo
+dev-lang/php bcmath gd fpm pdo
 dev-lang/rust clippy rls rustfmt system-llvm
 dev-libs/capstone python
 dev-libs/openssl -sslv3
@@ -71,7 +70,7 @@ media-libs/openh264 -plugin
 media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -id3tag libsoxr -mad -network -sqlite
 media-sound/pulseaudio alsa -asyncns
-media-video/ffmpeg libsoxr network openssl
+media-video/ffmpeg dav1d libsoxr network openssl
 media-video/mpv cli drm egl -uchardet
 net-analyzer/flent -plots
 net-analyzer/nmap ncat nping
