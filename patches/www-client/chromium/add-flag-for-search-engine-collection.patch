@@ -1,0 +1,165 @@
+# Add flag to disable automatic search engine collection
+
+diff --git chromium-81.0.4044.113/chrome/browser/about_flags.cc chromium-81.0.4044.113/chrome/browser/about_flags.cc
+index ce705a44cd..94a6397513 100644
+--- chromium-81.0.4044.113/chrome/browser/about_flags.cc
++++ chromium-81.0.4044.113/chrome/browser/about_flags.cc
+@@ -1544,6 +1544,10 @@ const FeatureEntry::Choice kEnableCrOSActionRecorderChoices[] = {
+ //
+ // When adding a new choice, add it to the end of the list.
+ const FeatureEntry kFeatureEntries[] = {
++    {"disable-search-engine-collection",
++     "Disable search engine collection",
++     "Prevents search engines from being added automatically.",
++     kOsAll, SINGLE_VALUE_TYPE("disable-search-engine-collection")},
+     {"ignore-gpu-blacklist", flag_descriptions::kIgnoreGpuBlacklistName,
+      flag_descriptions::kIgnoreGpuBlacklistDescription, kOsAll,
+      SINGLE_VALUE_TYPE(switches::kIgnoreGpuBlacklist)},
+diff --git chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.cc chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.cc
+index 2406ef3461..714f96125c 100644
+--- chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.cc
++++ chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.cc
+@@ -165,9 +165,10 @@ ChromeRenderFrameObserver::ChromeRenderFrameObserver(
+   if (!render_frame->IsMainFrame())
+     return;
+ 
+-#if BUILDFLAG(SAFE_BROWSING_CSD)
+   const base::CommandLine& command_line =
+       *base::CommandLine::ForCurrentProcess();
++  should_autocollect_ = !command_line.HasSwitch("disable-search-engine-collection");
++#if BUILDFLAG(SAFE_BROWSING_CSD)
+   if (!command_line.HasSwitch(switches::kDisableClientSidePhishingDetection))
+     SetClientSidePhishingDetection(true);
+ #endif
+@@ -367,14 +368,16 @@ void ChromeRenderFrameObserver::DidFinishLoad() {
+   if (frame->Parent())
+     return;
+ 
+-  GURL osdd_url = frame->GetDocument().OpenSearchDescriptionURL();
+-  if (!osdd_url.is_empty()) {
+-    mojo::AssociatedRemote<chrome::mojom::OpenSearchDescriptionDocumentHandler>
+-        osdd_handler;
+-    render_frame()->GetRemoteAssociatedInterfaces()->GetInterface(
+-        &osdd_handler);
+-    osdd_handler->PageHasOpenSearchDescriptionDocument(
+-        frame->GetDocument().Url(), osdd_url);
++  if (should_autocollect_) {
++    GURL osdd_url = frame->GetDocument().OpenSearchDescriptionURL();
++    if (!osdd_url.is_empty()) {
++      mojo::AssociatedRemote<chrome::mojom::OpenSearchDescriptionDocumentHandler>
++          osdd_handler;
++      render_frame()->GetRemoteAssociatedInterfaces()->GetInterface(
++          &osdd_handler);
++      osdd_handler->PageHasOpenSearchDescriptionDocument(
++          frame->GetDocument().Url(), osdd_url);
++    }
+   }
+ }
+ 
+diff --git chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.h chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.h
+index dbd135b8fe..40ec450dd5 100644
+--- chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.h
++++ chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.h
+@@ -115,6 +115,7 @@ class ChromeRenderFrameObserver : public content::RenderFrameObserver,
+   // Have the same lifetime as us.
+   translate::TranslateAgent* translate_agent_;
+   safe_browsing::PhishingClassifierDelegate* phishing_classifier_;
++  bool should_autocollect_; // Whether to autocollect search engines
+ 
+   // Owned by ChromeContentRendererClient and outlive us.
+   web_cache::WebCacheImpl* web_cache_impl_;
+diff --git chromium-81.0.4044.113/components/search_engines/template_url_service.cc chromium-81.0.4044.113/components/search_engines/template_url_service.cc
+index e1c5e91f23..7efd510eb2 100644
+--- chromium-81.0.4044.113/components/search_engines/template_url_service.cc
++++ chromium-81.0.4044.113/components/search_engines/template_url_service.cc
+@@ -9,6 +9,7 @@
+ #include "base/auto_reset.h"
+ #include "base/bind.h"
+ #include "base/callback.h"
++#include "base/command_line.h"
+ #include "base/debug/crash_logging.h"
+ #include "base/format_macros.h"
+ #include "base/metrics/histogram_macros.h"
+@@ -199,6 +200,12 @@ bool IsCreatedByExtension(const TemplateURL* template_url) {
+          template_url->type() == TemplateURL::OMNIBOX_API_EXTENSION;
+ }
+ 
++bool ShouldAutocollect() {
++  const base::CommandLine& command_line =
++    *base::CommandLine::ForCurrentProcess();
++  return !command_line.HasSwitch("disable-search-engine-collection");
++}
++
+ }  // namespace
+ 
+ // TemplateURLService::LessWithPrefix -----------------------------------------
+@@ -283,6 +290,7 @@ TemplateURLService::TemplateURLService(
+     std::unique_ptr<TemplateURLServiceClient> client,
+     const base::Closure& dsp_change_callback)
+     : prefs_(prefs),
++      should_autocollect_(true),
+       search_terms_data_(std::move(search_terms_data)),
+       web_data_service_(web_data_service),
+       client_(std::move(client)),
+@@ -346,7 +354,7 @@ bool TemplateURLService::CanAddAutogeneratedKeyword(
+   if (existing_url) {
+     // We already have a TemplateURL for this keyword. Only allow it to be
+     // replaced if the TemplateURL can be replaced.
+-    return CanReplace(existing_url);
++    return should_autocollect_ && CanReplace(existing_url);
+   }
+ 
+   // We don't have a TemplateURL with keyword.  We still may not allow this
+@@ -355,8 +363,8 @@ bool TemplateURLService::CanAddAutogeneratedKeyword(
+   // that may interfere with search queries).  An easy heuristic for this is
+   // whether the user has a TemplateURL that has been manually modified (e.g.,
+   // renamed) connected to the same host.
+-  return !url.is_valid() || url.host().empty() ||
+-      CanAddAutogeneratedKeywordForHost(url.host());
++  return should_autocollect_ && (!url.is_valid() || url.host().empty() ||
++      CanAddAutogeneratedKeywordForHost(url.host()));
+ }
+ 
+ bool TemplateURLService::IsPrepopulatedOrCreatedByPolicy(
+@@ -1396,6 +1404,8 @@ SyncDataMap TemplateURLService::CreateGUIDToSyncDataMap(
+ 
+ void TemplateURLService::Init(const Initializer* initializers,
+                               int num_initializers) {
++  should_autocollect_ = ShouldAutocollect();
++
+   if (client_)
+     client_->SetOwner(this);
+ 
+@@ -1617,6 +1627,9 @@ void TemplateURLService::ChangeToLoadedState() {
+ 
+ bool TemplateURLService::CanAddAutogeneratedKeywordForHost(
+     const std::string& host) const {
++  if (!should_autocollect_)
++    return false;
++
+   const TemplateURLSet* urls = provider_map_->GetURLsForHost(host);
+   if (!urls)
+     return true;
+@@ -1627,7 +1640,8 @@ bool TemplateURLService::CanAddAutogeneratedKeywordForHost(
+ }
+ 
+ bool TemplateURLService::CanReplace(const TemplateURL* t_url) const {
+-  return !ShowInDefaultList(t_url) && t_url->safe_for_autoreplace();
++  return should_autocollect_ && !ShowInDefaultList(t_url) &&
++      t_url->safe_for_autoreplace();
+ }
+ 
+ TemplateURL* TemplateURLService::FindNonExtensionTemplateURLForKeyword(
+diff --git chromium-81.0.4044.113/components/search_engines/template_url_service.h chromium-81.0.4044.113/components/search_engines/template_url_service.h
+index cfda0d16f8..d07089488a 100644
+--- chromium-81.0.4044.113/components/search_engines/template_url_service.h
++++ chromium-81.0.4044.113/components/search_engines/template_url_service.h
+@@ -728,6 +728,8 @@ class TemplateURLService : public WebDataServiceConsumer,
+   // ---------- Browser state related members ---------------------------------
+   PrefService* prefs_ = nullptr;
+ 
++  bool should_autocollect_; // Whether search engines should be auto-collected
++
+   std::unique_ptr<SearchTermsData> search_terms_data_ =
+       std::make_unique<SearchTermsData>();
+ 

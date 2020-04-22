@@ -1,0 +1,54 @@
+diff --git chromium-81.0.4044.113/components/signin/core/browser/cookie_settings_util.cc chromium-81.0.4044.113/components/signin/core/browser/cookie_settings_util.cc
+index 5423303500..baec8c1a5d 100644
+--- chromium-81.0.4044.113/components/signin/core/browser/cookie_settings_util.cc
++++ chromium-81.0.4044.113/components/signin/core/browser/cookie_settings_util.cc
+@@ -12,25 +12,12 @@ namespace signin {
+ 
+ bool SettingsAllowSigninCookies(
+     const content_settings::CookieSettings* cookie_settings) {
+-  GURL gaia_url = GaiaUrls::GetInstance()->gaia_url();
+-  GURL google_url = GaiaUrls::GetInstance()->google_url();
+-  return cookie_settings &&
+-         cookie_settings->IsCookieAccessAllowed(gaia_url, gaia_url) &&
+-         cookie_settings->IsCookieAccessAllowed(google_url, google_url);
++  return false;
+ }
+ 
+ bool SettingsDeleteSigninCookiesOnExit(
+     const content_settings::CookieSettings* cookie_settings) {
+-  GURL gaia_url = GaiaUrls::GetInstance()->gaia_url();
+-  GURL google_url = GaiaUrls::GetInstance()->google_url();
+-  ContentSettingsForOneType settings;
+-  cookie_settings->GetCookieSettings(&settings);
+-
+-  return !cookie_settings ||
+-         cookie_settings->ShouldDeleteCookieOnExit(
+-             settings, "." + gaia_url.host(), true) ||
+-         cookie_settings->ShouldDeleteCookieOnExit(
+-             settings, "." + google_url.host(), true);
++  return false;
+ }
+ 
+ }  // namespace signin
+diff --git chromium-81.0.4044.113/components/signin/core/browser/dice_account_reconcilor_delegate.cc chromium-81.0.4044.113/components/signin/core/browser/dice_account_reconcilor_delegate.cc
+index 8c2749be90..d9bfbfae30 100644
+--- chromium-81.0.4044.113/components/signin/core/browser/dice_account_reconcilor_delegate.cc
++++ chromium-81.0.4044.113/components/signin/core/browser/dice_account_reconcilor_delegate.cc
+@@ -27,7 +27,7 @@ DiceAccountReconcilorDelegate::DiceAccountReconcilorDelegate(
+ }
+ 
+ bool DiceAccountReconcilorDelegate::IsReconcileEnabled() const {
+-  return true;
++  return false;
+ }
+ 
+ bool DiceAccountReconcilorDelegate::IsMultiloginEndpointEnabled() const {
+@@ -35,7 +35,7 @@ bool DiceAccountReconcilorDelegate::IsMultiloginEndpointEnabled() const {
+ }
+ 
+ bool DiceAccountReconcilorDelegate::IsAccountConsistencyEnforced() const {
+-  return true;
++  return false;
+ }
+ 
+ DiceAccountReconcilorDelegate::InconsistencyReason

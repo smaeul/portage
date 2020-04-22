@@ -1,0 +1,18 @@
+# Disable Network Time Tracker
+# This connects to Google to check if the system time is correct when a website certificate
+# date seems incorrect, according to https://bugs.chromium.org/p/chromium/issues/detail?id=725232,
+# Fixes https://github.com/Eloston/ungoogled-chromium/issues/302
+
+diff --git chromium-81.0.4044.113/components/network_time/network_time_tracker.cc chromium-81.0.4044.113/components/network_time/network_time_tracker.cc
+index 3a4bed488a..4d690110c2 100644
+--- chromium-81.0.4044.113/components/network_time/network_time_tracker.cc
++++ chromium-81.0.4044.113/components/network_time/network_time_tracker.cc
+@@ -276,7 +276,7 @@ void NetworkTimeTracker::UpdateNetworkTime(base::Time network_time,
+ }
+ 
+ bool NetworkTimeTracker::AreTimeFetchesEnabled() const {
+-  return base::FeatureList::IsEnabled(kNetworkTimeServiceQuerying);
++  return false;
+ }
+ 
+ NetworkTimeTracker::FetchBehavior NetworkTimeTracker::GetFetchBehavior() const {
