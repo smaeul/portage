@@ -122,7 +122,9 @@ sys-apps/s6-rc ~amd64
 # Required for python3
 ~media-libs/libmypaint-1.4.0-r1 ~amd64
 # Required for glvnd
-~media-libs/mesa-20.0.3 ~amd64
+~media-libs/mesa-20.0.4 ~amd64
+# Required for gcc10
+~net-analyzer/iftop-1.0_pre4-r4 ~amd64
 # Required for big endian
 ~net-misc/spice-gtk-0.37 ~amd64
 # Required for perf

@@ -1,0 +1,11 @@
+--- Python-3.8.2/Python/thread_pthread.h
++++ Python-3.8.2/Python/thread_pthread.h
+@@ -28,7 +28,7 @@
+    be conditional on _POSIX_THREAD_ATTR_STACKSIZE being defined. */
+ #ifdef _POSIX_THREAD_ATTR_STACKSIZE
+ #ifndef THREAD_STACK_SIZE
+-#define THREAD_STACK_SIZE       0       /* use default stack size */
++#define THREAD_STACK_SIZE       0x100000
+ #endif
+ 
+ /* The default stack size for new threads on OSX and BSD is small enough that

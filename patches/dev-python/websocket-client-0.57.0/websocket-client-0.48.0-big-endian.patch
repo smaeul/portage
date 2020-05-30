@@ -7,7 +7,7 @@ index a0000fa..37d2c06 100644
          if numpy:
              origlen = len(data)
 -            _mask_key = mask_key[3] << 24 | mask_key[2] << 16 | mask_key[1] << 8 | mask_key[0]
-+            _mask_key = struct.unpack("!I", mask_key)
++            _mask_key = struct.unpack("=I", mask_key)
  
              # We need data to be a multiple of four...
              data += bytes(" " * (4 - (len(data) % 4)), "us-ascii")

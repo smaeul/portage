@@ -1,0 +1,116 @@
+--- Python-3.8.2/Lib/test/test__locale.py
++++ Python-3.8.2/Lib/test/test__locale.py
+@@ -65,11 +65,11 @@ def setUpModule():
+ # value is not known, use '' .
+ known_numerics = {
+     'en_US': ('.', ','),
+-    'de_DE' : (',', '.'),
++    'de_DE' : ('.', '.'),
+     # The French thousands separator may be a breaking or non-breaking space
+     # depending on the platform, so do not test it
+-    'fr_FR' : (',', ''),
+-    'ps_AF': ('\u066b', '\u066c'),
++    'fr_FR' : ('.', ''),
++    'ps_AF': ('.', '\u066c'),
+ }
+ 
+ class _LocaleTests(unittest.TestCase):
+--- Python-3.8.2/Lib/test/test_c_locale_coercion.py
++++ Python-3.8.2/Lib/test/test_c_locale_coercion.py
+@@ -13,15 +13,15 @@ from test.support.script_helper import run_python_until_end
+ 
+ 
+ # Set the list of ways we expect to be able to ask for the "C" locale
+-EXPECTED_C_LOCALE_EQUIVALENTS = ["C", "invalid.ascii"]
++EXPECTED_C_LOCALE_EQUIVALENTS = ["C"]
+ 
+ # Set our expectation for the default encoding used in the C locale
+ # for the filesystem encoding and the standard streams
+ EXPECTED_C_LOCALE_STREAM_ENCODING = "ascii"
+ EXPECTED_C_LOCALE_FS_ENCODING = "ascii"
+ 
+ # Set our expectation for the default locale used when none is specified
+-EXPECT_COERCION_IN_DEFAULT_LOCALE = True
++EXPECT_COERCION_IN_DEFAULT_LOCALE = False
+ 
+ TARGET_LOCALES = ["C.UTF-8", "C.utf8", "UTF-8"]
+ 
+@@ -320,10 +320,14 @@ class LocaleCoercionTests(_LocaleHandlingTestCase):
+         # Check behaviour for the default locale
+         with self.subTest(default_locale=True,
+                           PYTHONCOERCECLOCALE=coerce_c_locale):
+-            if EXPECT_COERCION_IN_DEFAULT_LOCALE:
++            if EXPECT_COERCION_IN_DEFAULT_LOCALE or extra_vars:
++                _fs_encoding       = fs_encoding
++                _stream_encoding   = stream_encoding
+                 _expected_warnings = expected_warnings
+                 _coercion_expected = coercion_expected
+             else:
++                _fs_encoding       = "utf-8"
++                _stream_encoding   = "utf-8"
+                 _expected_warnings = None
+                 _coercion_expected = False
+             # On Android CLI_COERCION_WARNING is not printed when all the
+@@ -334,8 +338,8 @@ class LocaleCoercionTests(_LocaleHandlingTestCase):
+                     _expected_warnings == [CLI_COERCION_WARNING]):
+                 _expected_warnings = None
+             self._check_child_encoding_details(base_var_dict,
+-                                               fs_encoding,
+-                                               stream_encoding,
++                                               _fs_encoding,
++                                               _stream_encoding,
+                                                _expected_warnings,
+                                                _coercion_expected)
+ 
+--- Python-3.8.2/Lib/test/test_fcntl.py
++++ Python-3.8.2/Lib/test/test_fcntl.py
+@@ -131,7 +131,7 @@ class TestFcntl(unittest.TestCase):
+             cmd = fcntl.F_NOTIFY
+             # This flag is larger than 2**31 in 64-bit builds
+             flags = fcntl.DN_MULTISHOT
+-        except AttributeError:
++        finally: # disabled in kernel config
+             self.skipTest("F_NOTIFY or DN_MULTISHOT unavailable")
+         fd = os.open(os.path.dirname(os.path.abspath(TESTFN)), os.O_RDONLY)
+         try:
+--- Python-3.8.2/Lib/test/test_locale.py
++++ Python-3.8.2/Lib/test/test_locale.py
+@@ -368,6 +368,7 @@ class TestEnUSCollation(BaseLocalizedTest, TestCollation):
+         if enc != 'iso8859-1' and (sys.platform == 'darwin' or is_android or
+                                    sys.platform.startswith('freebsd')):
+             raise unittest.SkipTest('wcscoll/wcsxfrm have known bugs')
++        raise unittest.SkipTest('musl does not support unicode collation')
+         BaseLocalizedTest.setUp(self)
+ 
+     @unittest.skipIf(sys.platform.startswith('aix'),
+--- Python-3.8.2/Lib/test/test_os.py
++++ Python-3.8.2/Lib/test/test_os.py
+@@ -1893,7 +1893,7 @@ class TestInvalidFD(unittest.TestCase):
+     def test_fchown(self):
+         self.check(os.fchown, -1, -1)
+ 
+-    @unittest.skipUnless(hasattr(os, 'fpathconf'), 'test needs os.fpathconf()')
++    @unittest.skip('musl pathconf/fpathconf does not use filedes')
+     def test_fpathconf(self):
+         self.check(os.pathconf, "PC_NAME_MAX")
+         self.check(os.fpathconf, "PC_NAME_MAX")
+--- Python-3.8.2/Lib/test/test_re.py
++++ Python-3.8.2/Lib/test/test_re.py
+@@ -1898,7 +1898,7 @@ ELSE
+         for loc in 'en_US.iso88591', 'en_US.utf8':
+             try:
+                 locale.setlocale(locale.LC_CTYPE, loc)
+-            except locale.Error:
++            finally: # musl setlocale never fails
+                 # Unsupported locale on this system
+                 self.skipTest('test needs %s locale' % loc)
+ 
+@@ -1933,7 +1933,7 @@ ELSE
+         for loc in 'en_US.iso88591', 'en_US.utf8':
+             try:
+                 locale.setlocale(locale.LC_CTYPE, loc)
+-            except locale.Error:
++            finally: # musl setlocale never fails
+                 # Unsupported locale on this system
+                 self.skipTest('test needs %s locale' % loc)
+ 

@@ -1,17 +1,16 @@
-From afa0f8fcb786ad5736e68c8a80605bd5f216f001 Mon Sep 17 00:00:00 2001
+From f2a689be247d7aad3f29639ae89a4180524e460e Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 7 Jul 2019 02:02:37 -0500
-Subject: [PATCH 3/6] Add musl libc support to GNAT
+Subject: [PATCH 3/7] Add musl libc support to GNAT
 
 ---
  gcc/ada/Makefile.rtl                 |  2 +-
- gcc/ada/adadecode.c                  |  3 +-
+ gcc/ada/adadecode.c                  |  2 -
  gcc/ada/adaint.c                     |  4 +-
  gcc/ada/adaint.h                     |  1 +
  gcc/ada/argv.c                       |  4 +-
  gcc/ada/cio.c                        |  4 +-
  gcc/ada/cstreams.c                   |  4 +-
- gcc/ada/exit.c                       |  4 +-
  gcc/ada/init.c                       |  3 +-
  gcc/ada/libgnarl/s-osinte__linux.ads | 11 ----
  gcc/ada/libgnarl/s-taprop__linux.adb | 53 ++-----------------
@@ -21,13 +20,13 @@ Subject: [PATCH 3/6] Add musl libc support to GNAT
  gcc/ada/raise.c                      |  3 +-
  gcc/ada/sysdep.c                     |  4 +-
  gcc/ada/terminals.c                  |  3 +-
- 17 files changed, 70 insertions(+), 117 deletions(-)
+ 16 files changed, 67 insertions(+), 115 deletions(-)
 
 diff --git a/gcc/ada/Makefile.rtl b/gcc/ada/Makefile.rtl
-index 775ab9857b6f..8875ce3cc1ce 100644
+index 55ff9b0f3d56..5bb8e15ffd69 100644
 --- a/gcc/ada/Makefile.rtl
 +++ b/gcc/ada/Makefile.rtl
-@@ -2102,7 +2102,7 @@ ifeq ($(strip $(filter-out powerpc% linux%,$(target_cpu) $(target_os))),)
+@@ -2112,7 +2112,7 @@ ifeq ($(strip $(filter-out powerpc% linux%,$(target_cpu) $(target_os))),)
  endif
  
  # ARM linux, GNU eabi
@@ -37,18 +36,10 @@ index 775ab9857b6f..8875ce3cc1ce 100644
    a-intnam.ads<libgnarl/a-intnam__linux.ads \
    s-inmaop.adb<libgnarl/s-inmaop__posix.adb \
 diff --git a/gcc/ada/adadecode.c b/gcc/ada/adadecode.c
-index a574f3cf4a6c..af56dac3f10f 100644
+index f87d421224f2..f5d8e5eca5ab 100644
 --- a/gcc/ada/adadecode.c
 +++ b/gcc/ada/adadecode.c
-@@ -29,6 +29,7 @@
-  *                                                                          *
-  ****************************************************************************/
- 
-+#include "adaint.h"  /* for a macro version of xstrdup.  */
- 
- #if defined(IN_RTS)
- #include "tconfig.h"
-@@ -42,8 +43,6 @@
+@@ -34,8 +34,6 @@
  #include <stdio.h>
  #include <ctype.h>
  
@@ -58,19 +49,19 @@ index a574f3cf4a6c..af56dac3f10f 100644
  #define ISDIGIT(c) isdigit(c)
  #endif
 diff --git a/gcc/ada/adaint.c b/gcc/ada/adaint.c
-index 4a75b5909113..97ec7a83f5fa 100644
+index 595abf87d65e..29649a84b27f 100644
 --- a/gcc/ada/adaint.c
 +++ b/gcc/ada/adaint.c
-@@ -87,6 +87,8 @@
+@@ -99,6 +99,8 @@
  #include <sys/syspage.h>
  #endif
  
 +#include "adaint.h"
 +
  #ifdef IN_RTS
- #include "tconfig.h"
- #include "tsystem.h"
-@@ -204,8 +206,6 @@ UINT __gnat_current_ccs_encoding;
+ 
+ #ifdef STANDALONE
+@@ -234,8 +236,6 @@ UINT __gnat_current_ccs_encoding;
  #include <utime.h>
  #endif
  
@@ -80,7 +71,7 @@ index 4a75b5909113..97ec7a83f5fa 100644
     defined in the current system. On DOS-like systems these flags control
     whether the file is opened/created in text-translation mode (CR/LF in
 diff --git a/gcc/ada/adaint.h b/gcc/ada/adaint.h
-index 2ae87669918e..0422af37ffda 100644
+index 311e240dfcce..20007c814e22 100644
 --- a/gcc/ada/adaint.h
 +++ b/gcc/ada/adaint.h
 @@ -316,6 +316,7 @@ extern void   *__gnat_lwp_self			   (void);
@@ -92,7 +83,7 @@ index 2ae87669918e..0422af37ffda 100644
  
  extern cpu_set_t *__gnat_cpu_alloc                 (size_t);
 diff --git a/gcc/ada/argv.c b/gcc/ada/argv.c
-index 3249c32cf314..3bbe17a9f4f7 100644
+index ca82ed596e9d..326e957596a4 100644
 --- a/gcc/ada/argv.c
 +++ b/gcc/ada/argv.c
 @@ -42,6 +42,8 @@
@@ -102,9 +93,9 @@ index 3249c32cf314..3bbe17a9f4f7 100644
 +#include "adaint.h"
 +
  #ifdef IN_RTS
- #include "tconfig.h"
- #include "tsystem.h"
-@@ -51,8 +53,6 @@
+ #include "runtime.h"
+ #include <string.h>
+@@ -50,8 +52,6 @@
  #include "system.h"
  #endif
  
@@ -114,7 +105,7 @@ index 3249c32cf314..3bbe17a9f4f7 100644
  extern "C" {
  #endif
 diff --git a/gcc/ada/cio.c b/gcc/ada/cio.c
-index dd91a3e1d694..72382a31c98f 100644
+index 7fca41285c0d..46f4ee09cc44 100644
 --- a/gcc/ada/cio.c
 +++ b/gcc/ada/cio.c
 @@ -29,6 +29,8 @@
@@ -124,9 +115,9 @@ index dd91a3e1d694..72382a31c98f 100644
 +#include "adaint.h"
 +
  #ifdef IN_RTS
- #include "tconfig.h"
- #include "tsystem.h"
-@@ -38,8 +40,6 @@
+ #include "runtime.h"
+ #include <sys/stat.h>
+@@ -37,8 +39,6 @@
  #include "system.h"
  #endif
  
@@ -136,7 +127,7 @@ index dd91a3e1d694..72382a31c98f 100644
  #include <stdio.h>
  
 diff --git a/gcc/ada/cstreams.c b/gcc/ada/cstreams.c
-index e37070ddb78e..f89cbeba88f3 100644
+index 92392fcbd1c5..2395083233b3 100644
 --- a/gcc/ada/cstreams.c
 +++ b/gcc/ada/cstreams.c
 @@ -52,6 +52,8 @@
@@ -146,31 +137,9 @@ index e37070ddb78e..f89cbeba88f3 100644
 +#include "adaint.h"
 +
  #ifdef IN_RTS
- #include "tconfig.h"
- #include "tsystem.h"
-@@ -61,8 +63,6 @@
- #include "system.h"
- #endif
- 
--#include "adaint.h"
--
- #ifdef __cplusplus
- extern "C" {
- #endif
-diff --git a/gcc/ada/exit.c b/gcc/ada/exit.c
-index 3ac35968946c..3fe008e4d5ca 100644
---- a/gcc/ada/exit.c
-+++ b/gcc/ada/exit.c
-@@ -33,6 +33,8 @@
- #include "vxWorks.h"
- #endif
- 
-+#include "adaint.h"
-+
- #ifdef IN_RTS
- #include "tconfig.h"
- #include "tsystem.h"
-@@ -42,8 +44,6 @@
+ #include <string.h>
+ #else
+@@ -59,8 +61,6 @@
  #include "system.h"
  #endif
  
@@ -180,7 +149,7 @@ index 3ac35968946c..3fe008e4d5ca 100644
  extern "C" {
  #endif
 diff --git a/gcc/ada/init.c b/gcc/ada/init.c
-index 00f32e5e02ac..83f86f0c6367 100644
+index 67ea4dc25798..66336c3a8d02 100644
 --- a/gcc/ada/init.c
 +++ b/gcc/ada/init.c
 @@ -53,6 +53,8 @@
@@ -190,9 +159,9 @@ index 00f32e5e02ac..83f86f0c6367 100644
 +#include "adaint.h"
 +
  #ifdef IN_RTS
- #include "tconfig.h"
- #include "tsystem.h"
-@@ -65,7 +67,6 @@
+ 
+ #ifdef STANDALONE
+@@ -71,7 +73,6 @@
  #include "system.h"
  #endif
  
@@ -201,10 +170,10 @@ index 00f32e5e02ac..83f86f0c6367 100644
  
  #ifdef __cplusplus
 diff --git a/gcc/ada/libgnarl/s-osinte__linux.ads b/gcc/ada/libgnarl/s-osinte__linux.ads
-index ba3b82423adc..23418a286303 100644
+index 80cb2b2a793e..701b7a3aeabc 100644
 --- a/gcc/ada/libgnarl/s-osinte__linux.ads
 +++ b/gcc/ada/libgnarl/s-osinte__linux.ads
-@@ -398,12 +398,6 @@ package System.OS_Interface is
+@@ -399,12 +399,6 @@ package System.OS_Interface is
     PTHREAD_RWLOCK_PREFER_WRITER_NP              : constant := 1;
     PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP : constant := 2;
  
@@ -217,7 +186,7 @@ index ba3b82423adc..23418a286303 100644
     function pthread_rwlock_init
       (mutex : access pthread_rwlock_t;
        attr  : access pthread_rwlockattr_t) return int;
-@@ -465,11 +459,6 @@ package System.OS_Interface is
+@@ -466,11 +460,6 @@ package System.OS_Interface is
        protocol : int) return int;
     pragma Import (C, pthread_mutexattr_setprotocol);
  
@@ -428,7 +397,7 @@ index bc3ee23be8d1..4fe0ac685f83 100644
  
     ---------
 diff --git a/gcc/ada/mkdir.c b/gcc/ada/mkdir.c
-index d06147673f69..80095c71e31f 100644
+index e0efccec36f7..e016722a3867 100644
 --- a/gcc/ada/mkdir.c
 +++ b/gcc/ada/mkdir.c
 @@ -34,6 +34,8 @@
@@ -438,9 +407,9 @@ index d06147673f69..80095c71e31f 100644
 +#include "adaint.h"
 +
  #ifdef IN_RTS
- #include "tconfig.h"
- #include "tsystem.h"
-@@ -53,8 +55,6 @@
+ #include "runtime.h"
+ #include <sys/stat.h>
+@@ -52,8 +54,6 @@
  #endif
  #endif
  
@@ -450,7 +419,7 @@ index d06147673f69..80095c71e31f 100644
  
  int
 diff --git a/gcc/ada/raise.c b/gcc/ada/raise.c
-index 480a0eabca53..cceeefb27978 100644
+index bf8a8797afc7..d8a9127ce383 100644
 --- a/gcc/ada/raise.c
 +++ b/gcc/ada/raise.c
 @@ -32,6 +32,8 @@
@@ -460,9 +429,9 @@ index 480a0eabca53..cceeefb27978 100644
 +#include "adaint.h"
 +
  #ifdef IN_RTS
- #include "tconfig.h"
- #include "tsystem.h"
-@@ -40,7 +42,6 @@
+ #include "runtime.h"
+ #else
+@@ -39,7 +41,6 @@
  #include "system.h"
  #endif
  
@@ -471,7 +440,7 @@ index 480a0eabca53..cceeefb27978 100644
  
  #ifdef __cplusplus
 diff --git a/gcc/ada/sysdep.c b/gcc/ada/sysdep.c
-index 21a29bfcf278..5d10f2205491 100644
+index 1e1f5eeb5e6e..b8d016e0b3cb 100644
 --- a/gcc/ada/sysdep.c
 +++ b/gcc/ada/sysdep.c
 @@ -52,6 +52,8 @@
@@ -482,8 +451,8 @@ index 21a29bfcf278..5d10f2205491 100644
 +
  #ifdef IN_RTS
  #define POSIX
- #include "tconfig.h"
-@@ -72,8 +74,6 @@
+ #include "runtime.h"
+@@ -74,8 +76,6 @@
  extern struct tm *localtime_r(const time_t *, struct tm *);
  #endif
  
@@ -493,10 +462,10 @@ index 21a29bfcf278..5d10f2205491 100644
     imcompatible changes in some VxWorks versions */
  #ifdef __vxworks
 diff --git a/gcc/ada/terminals.c b/gcc/ada/terminals.c
-index 23f9dfdfda77..6036949694a8 100644
+index af4417fab906..7d717d08b992 100644
 --- a/gcc/ada/terminals.c
 +++ b/gcc/ada/terminals.c
-@@ -1150,7 +1150,8 @@ __gnat_setup_winsize (void *desc, int rows, int columns)
+@@ -1159,7 +1159,8 @@ __gnat_setup_winsize (void *desc, int rows, int columns)
  #if defined (__APPLE__) || defined (BSD)
  #define USE_OPENPTY
  #elif defined (__linux__)
@@ -507,5 +476,5 @@ index 23f9dfdfda77..6036949694a8 100644
  #define USE_CLONE_DEVICE "/dev/ptmx"
  #elif defined (_AIX)
 -- 
-2.21.0
+2.24.1
 

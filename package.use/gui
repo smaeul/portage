@@ -3,6 +3,7 @@ dev-cpp/cairomm X
 
 app-text/mupdf X
 dev-java/icedtea gtk
+gui-wm/sway X
 media-gfx/sane-frontends gtk
 media-fonts/* X
 media-libs/freetype X

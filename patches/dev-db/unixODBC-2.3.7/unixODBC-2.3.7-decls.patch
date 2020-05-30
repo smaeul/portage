@@ -1,0 +1,68 @@
+--- unixODBC-2.3.7/DriverManager/SQLBrowseConnect.c
++++ unixODBC-2.3.7/DriverManager/SQLBrowseConnect.c
+@@ -178,6 +178,31 @@ static char const rcsid[]= "$RCSfile: SQLBrowseConnect.c,v $ $Revision: 1.15 $";
+ 
+ #define BUFFER_LEN      4095
+ 
++void extract_diag_error( int htype,
++                            DRV_SQLHANDLE handle,
++                            DMHDBC connection,
++                            EHEAD *head,
++                            int return_code,
++                            int save_to_diag );
++void extract_diag_error_w( int htype,
++                            DRV_SQLHANDLE handle,
++                            DMHDBC connection,
++                            EHEAD *head,
++                            int return_code,
++                            int save_to_diag );
++void extract_sql_error( DRV_SQLHANDLE henv,
++                            DRV_SQLHANDLE hdbc,
++                            DRV_SQLHANDLE hstmt,
++                            DMHDBC connection,
++                            EHEAD *head, 
++                            int return_code );
++void extract_sql_error_w( DRV_SQLHANDLE henv,
++                            DRV_SQLHANDLE hdbc,
++                            DRV_SQLHANDLE hstmt,
++                            DMHDBC connection,
++                            EHEAD *head, 
++                            int return_code );
++
+ SQLRETURN SQLBrowseConnectA(
+     SQLHDBC            hdbc,
+     SQLCHAR            *conn_str_in,
+--- unixODBC-2.3.7/DriverManager/SQLBrowseConnectW.c
++++ unixODBC-2.3.7/DriverManager/SQLBrowseConnectW.c
+@@ -124,6 +124,31 @@ static char const rcsid[]= "$RCSfile: SQLBrowseConnectW.c,v $";
+ 
+ #define BUFFER_LEN      4095
+ 
++void extract_diag_error( int htype,
++                            DRV_SQLHANDLE handle,
++                            DMHDBC connection,
++                            EHEAD *head,
++                            int return_code,
++                            int save_to_diag );
++void extract_diag_error_w( int htype,
++                            DRV_SQLHANDLE handle,
++                            DMHDBC connection,
++                            EHEAD *head,
++                            int return_code,
++                            int save_to_diag );
++void extract_sql_error( DRV_SQLHANDLE henv,
++                            DRV_SQLHANDLE hdbc,
++                            DRV_SQLHANDLE hstmt,
++                            DMHDBC connection,
++                            EHEAD *head, 
++                            int return_code );
++void extract_sql_error_w( DRV_SQLHANDLE henv,
++                            DRV_SQLHANDLE hdbc,
++                            DRV_SQLHANDLE hstmt,
++                            DMHDBC connection,
++                            EHEAD *head, 
++                            int return_code );
++
+ SQLRETURN SQLBrowseConnectW(
+     SQLHDBC            hdbc,
+     SQLWCHAR           *conn_str_in,

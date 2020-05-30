@@ -1,7 +1,7 @@
-From 51aa00d5e502b54d79834d8fdc280fea2ec0b0c3 Mon Sep 17 00:00:00 2001
+From 6985d0f8e7bdbb6cf257e357ca17aed3a47cd2d0 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 7 Jul 2019 02:22:44 -0500
-Subject: [PATCH 5/6] Fix library osdirnames on powerpc64
+Subject: [PATCH 5/7] Fix library osdirnames on powerpc64
 
 ---
  gcc/config/rs6000/t-linux       | 2 +-
@@ -23,7 +23,7 @@ index aeb7440c4920..3d2d582a1dae 100644
  MULTIARCH_DIRNAME := $(call if_multiarch,powerpc-linux-gnu)
  endif
 diff --git a/gcc/config/rs6000/t-linux64 b/gcc/config/rs6000/t-linux64
-index f3c6e2be1d93..2a93af68078b 100644
+index 264a7e27524e..451f67bb2e11 100644
 --- a/gcc/config/rs6000/t-linux64
 +++ b/gcc/config/rs6000/t-linux64
 @@ -28,8 +28,8 @@
@@ -50,5 +50,5 @@ index 97c1ee6fb4d7..6cb4cb707f9a 100644
  MULTILIB_OSDIRNAMES += $(subst $(if $(findstring 64,$(target)),m64,m32).,,$(filter $(if $(findstring 64,$(target)),m64,m32).mlittle%,$(MULTILIB_OSDIRNAMES)))
  MULTILIB_MATCHES    := ${MULTILIB_MATCHES_ENDIAN}
 -- 
-2.21.0
+2.24.1
 

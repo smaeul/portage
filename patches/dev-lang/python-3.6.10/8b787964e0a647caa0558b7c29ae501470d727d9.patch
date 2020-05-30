@@ -1,0 +1,52 @@
+From 8b787964e0a647caa0558b7c29ae501470d727d9 Mon Sep 17 00:00:00 2001
+From: Victor Stinner <vstinner@python.org>
+Date: Wed, 4 Dec 2019 21:10:06 +0100
+Subject: [PATCH] bpo-38965: Fix faulthandler._stack_overflow() on GCC 10
+ (GH-17467)
+
+Use the "volatile" keyword to prevent tail call optimization
+on any compiler, rather than relying on compiler specific pragma.
+---
+ .../2019-12-04-17-08-55.bpo-38965.yqax3m.rst     |  3 +++
+ Modules/faulthandler.c                           | 16 ++++++----------
+ 2 files changed, 9 insertions(+), 10 deletions(-)
+ create mode 100644 Misc/NEWS.d/next/Tests/2019-12-04-17-08-55.bpo-38965.yqax3m.rst
+
+diff --git a/Misc/NEWS.d/next/Tests/2019-12-04-17-08-55.bpo-38965.yqax3m.rst b/Misc/NEWS.d/next/Tests/2019-12-04-17-08-55.bpo-38965.yqax3m.rst
+new file mode 100644
+index 0000000000000..517a1371eacd9
+--- /dev/null
++++ b/Misc/NEWS.d/next/Tests/2019-12-04-17-08-55.bpo-38965.yqax3m.rst
+@@ -0,0 +1,3 @@
++Fix test_faulthandler on GCC 10. Use the "volatile" keyword in
++``faulthandler._stack_overflow()`` to prevent tail call optimization on any
++compiler, rather than relying on compiler specific pragma.
+diff --git a/Modules/faulthandler.c b/Modules/faulthandler.c
+index d1280532ae2d4..b19401e94d85a 100644
+--- a/Modules/faulthandler.c
++++ b/Modules/faulthandler.c
+@@ -1161,18 +1161,14 @@ faulthandler_fatal_error_py(PyObject *self, PyObject *args)
+ #if defined(FAULTHANDLER_USE_ALT_STACK)
+ #define FAULTHANDLER_STACK_OVERFLOW
+ 
+-#ifdef __INTEL_COMPILER
+-   /* Issue #23654: Turn off ICC's tail call optimization for the
+-    * stack_overflow generator. ICC turns the recursive tail call into
+-    * a loop. */
+-#  pragma intel optimization_level 0
+-#endif
+-static
+-uintptr_t
++static uintptr_t
+ stack_overflow(uintptr_t min_sp, uintptr_t max_sp, size_t *depth)
+ {
+-    /* allocate 4096 bytes on the stack at each call */
+-    unsigned char buffer[4096];
++    /* Allocate (at least) 4096 bytes on the stack at each call.
++
++       bpo-23654, bpo-38965: use volatile keyword to prevent tail call
++       optimization. */
++    volatile unsigned char buffer[4096];
+     uintptr_t sp = (uintptr_t)&buffer;
+     *depth += 1;
+     if (sp < min_sp || max_sp < sp)

@@ -1,14 +1,14 @@
-From c302d3bf7b1d58797c2b21d641c77df13510fc5f Mon Sep 17 00:00:00 2001
+From b251b0197a494704251fc0c59e5cc2b3ac009f77 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 7 Jul 2019 02:19:11 -0500
-Subject: [PATCH 6/6] Fix library osdirnames on x86_64
+Subject: [PATCH 6/7] Fix library osdirnames on x86_64
 
 ---
  gcc/config/i386/t-linux64 | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/gcc/config/i386/t-linux64 b/gcc/config/i386/t-linux64
-index c686ab2f0d26..68c4c3c564c1 100644
+index 1171e218578e..a5300d2af6d7 100644
 --- a/gcc/config/i386/t-linux64
 +++ b/gcc/config/i386/t-linux64
 @@ -33,6 +33,6 @@
@@ -20,5 +20,5 @@ index c686ab2f0d26..68c4c3c564c1 100644
  MULTILIB_OSDIRNAMES+= m32=$(if $(wildcard $(shell echo $(SYSTEM_HEADER_DIR))/../../usr/lib32),../lib32,../lib)$(call if_multiarch,:i386-linux-gnu)
  MULTILIB_OSDIRNAMES+= mx32=../libx32$(call if_multiarch,:x86_64-linux-gnux32)
 -- 
-2.21.0
+2.24.1
 

@@ -89,6 +89,7 @@ net-print/cups-filters pclm
 net-vpn/wireguard-tools -wg-quick
 net-wireless/wpa_supplicant ap -hs2-0
 sys-apps/busybox savedconfig
+sys-apps/debianutils -installkernel
 sys-apps/elfix -ptpax
 sys-apps/flashrom -* internal linux-mtd linux-spi tools
 sys-apps/iproute2 -iptables
