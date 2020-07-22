@@ -31,6 +31,7 @@ www-apps/gitea ~amd64
 
 # These packages have a stable version, but either it is too out of date to be
 # useful, or I need the latest version for compatibility with other software.
+app-i18n/unicode-data ~amd64
 app-misc/ca-certificates ~amd64
 dev-lang/go ~amd64
 dev-lang/mono ~amd64
@@ -42,7 +43,7 @@ sys-apps/flashrom ~amd64
 sys-devel/gcc ~amd64
 sys-fs/zfs ~amd64
 sys-fs/zfs-kmod ~amd64
-sys-kernel/spl ~amd64
+sys-kernel/linux-headers ~amd64
 
 # llvm and friends
 dev-util/lldb ~amd64
@@ -60,6 +61,7 @@ sys-libs/libomp ~amd64
 sys-libs/llvm-libunwind ~amd64
 
 # netsurf and friends
+dev-lang/duktape ~amd64
 dev-libs/libcss ~amd64
 dev-libs/libnsutils ~amd64
 dev-libs/libwapcaplet ~amd64
@@ -99,6 +101,8 @@ sys-apps/s6-rc ~amd64
 # The following packages have significant features or bugfixes in an unstable
 # version. These entries should be removed once that version is stabilized.
 #
+# Required to pass tests
+~app-crypt/gpgme-1.14.0 ~amd64
 # Required for big endian
 ~app-emulation/spice-0.14.2 ~amd64
 ~app-emulation/spice-protocol-0.14.0 ~amd64
@@ -106,7 +110,11 @@ sys-apps/s6-rc ~amd64
 ~dev-java/javatoolkit-0.6.2 ~amd64
 # Solves version conflicts
 ~dev-lang/ocaml-4.09.0 ~amd64
-# Required for dev-lang/ocaml-4.09.0
+# Required for python3.8
+~dev-libs/libnl-3.5.0 ~amd64
+# Required by www-client/netsurf-3.10-r2
+~dev-libs/libutf8proc-2.5.0 ~amd64
+# Required by dev-lang/ocaml-4.09.0
 ~dev-ml/camlp4-4.08_p1 ~amd64
 ~dev-ml/findlib-1.8.1 ~amd64
 ~dev-ml/lablgtk-2.18.10 ~amd64
@@ -127,11 +135,15 @@ sys-apps/s6-rc ~amd64
 ~net-analyzer/iftop-1.0_pre4-r4 ~amd64
 # Required for big endian
 ~net-misc/spice-gtk-0.37 ~amd64
-# Required for perf
-~sys-kernel/linux-headers-5.5 ~amd64
+# Required for -fno-common
+~sys-apps/iproute2-5.7.0 ~amd64
+# Required for big endian
+~sys-apps/kbd-2.3.0 ~amd64
+# Required for python3.8
+~sys-apps/kmod-27 ~amd64
 # Required to build
 ~sys-libs/db-5.3.28-r4 ~amd64
 # This is old anyway
 ~sys-process/bcron-0.11 ~amd64
-# Required for s-nail
+# Required by s-nail
 =virtual/mailx-2 ~amd64

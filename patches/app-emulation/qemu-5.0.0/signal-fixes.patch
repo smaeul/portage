@@ -1,0 +1,12 @@
+--- qemu-5.0.0/linux-user/signal.c
++++ qemu-5.0.0/linux-user/signal.c
+@@ -25,6 +25,9 @@
+ #include "trace.h"
+ #include "signal-common.h"
+ 
++#define __SIGRTMIN 35
++#define __SIGRTMAX _NSIG-1
++
+ static struct target_sigaction sigact_table[TARGET_NSIG];
+ 
+ static void host_signal_handler(int host_signum, siginfo_t *info,

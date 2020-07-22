@@ -10,14 +10,3 @@
  
      # Older versions of procps used slab memory to calculate used memory.
      # This got changed in:
---- psutil-5.6.7/psutil/tests/test_process.py
-+++ psutil-5.6.7/psutil/tests/test_process.py
-@@ -951,7 +951,7 @@ class TestProcess(unittest.TestCase):
- 
-         for combo in combos:
-             p.cpu_affinity(combo)
--            self.assertEqual(p.cpu_affinity(), combo)
-+            self.assertEqual(sorted(p.cpu_affinity()), sorted(combo))
- 
-     # TODO: #595
-     @unittest.skipIf(BSD, "broken on BSD")

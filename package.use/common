@@ -66,11 +66,12 @@ dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
 dev-qt/qtgui egl eglfs evdev tslib
 dev-vcs/git -pcre-jit perl
+gnome-base/librsvg tools
 mail-client/thunderbird eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/noto cjk
 media-gfx/imagemagick pango
 media-libs/imlib2 -mp3
-media-libs/mesa gles2 -llvm osmesa
+media-libs/mesa gles2 osmesa
 media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -id3tag libsoxr -mad -network -sqlite
 media-sound/pulseaudio alsa -asyncns

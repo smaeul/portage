@@ -1,0 +1,81 @@
+--- skiboot-6.5/ccan/endian/endian.h
++++ skiboot-6.5/ccan/endian/endian.h
+@@ -108,6 +108,7 @@ static inline uint64_t bswap_64(uint64_t val)
+ #define	__BIG_ENDIAN	4321
+ 
+ /* Sanity check the defines.  We don't handle weird endianness. */
++#undef __BYTE_ORDER
+ #if !HAVE_LITTLE_ENDIAN && !HAVE_BIG_ENDIAN
+ #error "Unknown endian"
+ #elif HAVE_LITTLE_ENDIAN && HAVE_BIG_ENDIAN
+--- skiboot-6.6.2/external/opal-prd/thunk.S
++++ skiboot-6.6.2/external/opal-prd/thunk.S
+@@ -1,7 +1,6 @@
+ // SPDX-License-Identifier: Apache-2.0 OR GPL-2.0-or-later
+ /* Copyright 2015-2017 IBM Corp */
+ 	
+-#include <endian.h>
+ #include <asm/unistd.h>
+ 
+ #ifndef __NR_switch_endian
+@@ -41,7 +40,7 @@ call_be:
+ 	std %r2,40(%r1)
+ 
+ 	/* Grab the target r2 and function pointer */
+-#if __BYTE_ORDER == __LITTLE_ENDIAN
++#if __BYTE_ORDER__ == __LITTLE_ENDIAN__
+ 	ldbrx %r0, 0, %r11
+ 	li %r2, 8
+ 	ldbrx %r2, %r2, %r11
+@@ -52,7 +51,7 @@ call_be:
+ 
+ 	mtlr %r0
+ 
+-#if __BYTE_ORDER == __LITTLE_ENDIAN
++#if __BYTE_ORDER__ == __LITTLE_ENDIAN__
+ 	/* Switch to the "other endian" */
+ 	li %r0,__NR_switch_endian
+ 	sc
+@@ -110,7 +109,7 @@ call_hbrt_init:
+ 	ld %r11,hbrt_entry@got(%r2)
+ 	b call_be
+ 
+-#if __BYTE_ORDER == __LITTLE_ENDIAN
++#if __BYTE_ORDER__ == __LITTLE_ENDIAN__
+ 	/* Callback from HBRT, stack conversion and call into C code,
+ 	 * we arrive here from the thunk macro with r11 containing the
+ 	 * target function and r2 already set from the OPD.
+@@ -156,7 +155,7 @@ name##_thunk:									;\
+ 1:	.llong name##_thunk, .TOC., 0 						;\
+ 	.popsection								;\
+ 	.llong 1b
+-#else /* __BYTE_ORDER == __LITTLE_ENDIAN */
++#else /* __BYTE_ORDER__ == __LITTLE_ENDIAN__ */
+ #define CALLBACK_THUNK(name)							 \
+ 	.llong name
+ #endif
+--- skiboot-6.5/include/inttypes.h
++++ skiboot-6.5/include/inttypes.h
+@@ -10,17 +10,17 @@
+ #ifndef __SKIBOOT_INTTYPES_H
+ #define __SKIBOOT_INTTYPES_H
+ 
+-#include <stdint.h>
++#include <limits.h>
+ 
+-#ifndef __WORDSIZE
+-/* If we don't have __WORDSIZE it means we're *certainly* building skiboot
++#ifndef LONG_BIT
++/* If we don't have LONG_BIT it means we're *certainly* building skiboot
+  * which will *ALWAYS* have a word size of 32bits.
+  * (unless someone goes and ports skiboot to something that isn't powerpc)
+  */
+-#define __WORDSIZE 32
++#define LONG_BIT 32
+ #endif
+ 
+-#if __WORDSIZE == 64
++#if LONG_BIT == 64
+ #define PRIu64 "lu"
+ #define PRIx64 "lx"
+ #else

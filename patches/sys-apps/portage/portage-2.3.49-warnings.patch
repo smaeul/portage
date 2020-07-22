@@ -1,6 +1,6 @@
 --- portage-2.3.49/bin/install-qa-check.d/90gcc-warnings
 +++ portage-2.3.49/bin/install-qa-check.d/90gcc-warnings
-@@ -43,9 +43,6 @@ gcc_warn_check() {
+@@ -43,16 +43,11 @@ gcc_warn_check() {
  			'warning: .*NULL.*\[-Wpointer-arith\]'
  			# pointer to a function used in arithmetic and likes
  			'warning: .*function.*\[-Wpointer-arith\]'
@@ -10,3 +10,10 @@
  			# outdated?
  			'warning: .*too few arguments for format'
  			# format ... expects a matching ... argument
+ 			# (iow, too few arguments for format in new wording :))
+ 			'warning: .*matching.*\[-Wformat=\]'
+-			# function returns address of local variable
+-			'warning: .*\[-Wreturn-local-addr\]'
+ 			# argument to sizeof ... is the same expression as the source
+ 			'warning: .*\[-Wsizeof-pointer-memaccess\]'
+ 			# iteration invokes undefined behavior

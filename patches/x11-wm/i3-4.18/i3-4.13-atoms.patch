@@ -22,27 +22,3 @@
  /** This is the equivalent of XC_left_ptr. I’m not sure why xcb doesn’t have a
   * constant for that. */
  #define XCB_CURSOR_LEFT_PTR 68
---- i3-4.13/include/xcb.h
-+++ i3-fixed/include/xcb.h
-@@ -55,7 +55,7 @@
-                          XCB_EVENT_MASK_PROPERTY_CHANGE |                                             \
-                          XCB_EVENT_MASK_ENTER_WINDOW)
- 
--#define xmacro(atom) xcb_atom_t A_##atom;
-+#define xmacro(atom) extern xcb_atom_t A_##atom;
- #include "atoms.xmacro"
- #undef xmacro
- 
---- i3-4.13/src/xcb.c
-+++ i3-fixed/src/xcb.c
-@@ -9,6 +9,10 @@
-  */
- #include "all.h"
- 
-+#define xmacro(atom) xcb_atom_t A_##atom;
-+#include "atoms.xmacro"
-+#undef xmacro
-+
- unsigned int xcb_numlock_mask;
- 
- /*
