@@ -1,8 +1,13 @@
 # Required by media-gfx/inkscape
 dev-cpp/cairomm X
 
+app-office/libreoffice gtk
 app-text/mupdf X
 dev-java/icedtea gtk
+dev-qt/qtgui X
+dev-qt/qtwayland X
+dev-qt/qtwidgets X
+gui-libs/wlroots X
 gui-wm/sway X
 media-gfx/sane-frontends gtk
 media-fonts/* X

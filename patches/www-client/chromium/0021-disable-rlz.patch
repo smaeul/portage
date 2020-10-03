@@ -1,9 +1,7 @@
-# Disable rlz
-
-diff --git chromium-81.0.4044.113/rlz/buildflags/buildflags.gni chromium-81.0.4044.113/rlz/buildflags/buildflags.gni
+diff --git chromium-85.0.4183.83/rlz/buildflags/buildflags.gni chromium-85.0.4183.83/rlz/buildflags/buildflags.gni
 index d90c6e1833..42a5b597d6 100644
---- chromium-81.0.4044.113/rlz/buildflags/buildflags.gni
-+++ chromium-81.0.4044.113/rlz/buildflags/buildflags.gni
+--- chromium-85.0.4183.83/rlz/buildflags/buildflags.gni
++++ chromium-85.0.4183.83/rlz/buildflags/buildflags.gni
 @@ -6,6 +6,6 @@ import("//build/config/chrome_build.gni")
  
  # Whether we are using the rlz library or not.  Platforms like Android send

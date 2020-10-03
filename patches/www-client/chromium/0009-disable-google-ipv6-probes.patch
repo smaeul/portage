@@ -1,8 +1,8 @@
-diff --git chromium-81.0.4044.113/net/dns/host_resolver_manager.cc chromium-81.0.4044.113/net/dns/host_resolver_manager.cc
-index 8bf870bb57..e8c6ffb4ec 100644
---- chromium-81.0.4044.113/net/dns/host_resolver_manager.cc
-+++ chromium-81.0.4044.113/net/dns/host_resolver_manager.cc
-@@ -128,10 +128,10 @@ const unsigned kMinimumTTLSeconds = kCacheEntryTTLSeconds;
+diff --git chromium-85.0.4183.83/net/dns/host_resolver_manager.cc chromium-85.0.4183.83/net/dns/host_resolver_manager.cc
+index 9c15a2d72c..3a790b57f7 100644
+--- chromium-85.0.4183.83/net/dns/host_resolver_manager.cc
++++ chromium-85.0.4183.83/net/dns/host_resolver_manager.cc
+@@ -131,10 +131,10 @@ const unsigned kMinimumTTLSeconds = kCacheEntryTTLSeconds;
  // cached.
  const int kIPv6ProbePeriodMs = 1000;
  

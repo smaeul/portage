@@ -1,9 +1,7 @@
-# Disables WebRTC log uploading to Google
-
-diff --git chromium-81.0.4044.113/chrome/browser/media/webrtc/webrtc_log_uploader.cc chromium-81.0.4044.113/chrome/browser/media/webrtc/webrtc_log_uploader.cc
-index 1b386f4a80..c4706eb217 100644
---- chromium-81.0.4044.113/chrome/browser/media/webrtc/webrtc_log_uploader.cc
-+++ chromium-81.0.4044.113/chrome/browser/media/webrtc/webrtc_log_uploader.cc
+diff --git chromium-85.0.4183.83/chrome/browser/media/webrtc/webrtc_log_uploader.cc chromium-85.0.4183.83/chrome/browser/media/webrtc/webrtc_log_uploader.cc
+index 61851b8c66..272816b45e 100644
+--- chromium-85.0.4183.83/chrome/browser/media/webrtc/webrtc_log_uploader.cc
++++ chromium-85.0.4183.83/chrome/browser/media/webrtc/webrtc_log_uploader.cc
 @@ -125,29 +125,11 @@ void WebRtcLogUploader::LoggingStoppedDoUpload(
    DCHECK(meta_data.get());
    DCHECK(!upload_done_data.paths.directory.empty());

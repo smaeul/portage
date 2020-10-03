@@ -15,6 +15,10 @@ dev-libs/boost nls
 dev-libs/gmp static-libs
 # Required for static Haskell
 dev-libs/libffi static-libs
+# Required by qtcore
+dev-libs/libpcre2 pcre16
+# Required by itstool -> shared-mime-info
+dev-libs/libxml2 python
 # Required by dev-libs/xmlsec
 dev-libs/nss utils
 # Required by libreoffice
@@ -48,11 +52,11 @@ x11-libs/libxcb xkb
 
 app-arch/p7zip rar
 app-editors/vim python
-app-emulation/qemu -curl -jpeg numa -opengl -oss -png -pulseaudio spice usb -vnc
+app-emulation/qemu -curl io-uring -jpeg numa -opengl -oss -png -pulseaudio spice usb -vnc
 app-eselect/eselect-php fpm
-app-office/libreoffice gtk2
 app-shells/bash -net
 dev-db/sqlite -icu
+dev-java/openjdk alsa
 dev-lang/ghc ghcbootstrap
 dev-lang/php bcmath gd fpm pdo
 dev-lang/rust clippy rls rustfmt system-llvm
@@ -60,13 +64,13 @@ dev-libs/capstone python
 dev-libs/openssl -sslv3
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
+dev-qt/qtgui egl eglfs evdev tslib
 dev-vcs/git -pcre-jit perl
 mail-client/thunderbird eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/noto cjk
 media-gfx/imagemagick pango
 media-libs/imlib2 -mp3
 media-libs/mesa gles2 -llvm osmesa
-media-libs/openh264 -plugin
 media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -id3tag libsoxr -mad -network -sqlite
 media-sound/pulseaudio alsa -asyncns
@@ -101,7 +105,7 @@ sys-devel/clang-runtime compiler-rt libcxx -sanitize
 sys-devel/gcc ada
 sys-devel/gdb multitarget python
 sys-firmware/intel-microcode initramfs
-sys-fs/cryptsetup nettle -openssl
+sys-fs/cryptsetup luks1_default nettle -openssl
 sys-fs/lvm2 -thin
 sys-fs/zfs kernel-builtin -rootfs
 sys-kernel/linux-firmware redistributable savedconfig
@@ -109,7 +113,7 @@ sys-libs/ldb -ldap
 sys-libs/libcxx libcxxabi libunwind
 sys-libs/libcxxabi libunwind
 sys-power/nut -ups_drivers_* ups_drivers_usbhid-ups
-www-client/chromium -atk -hangouts system-ffmpeg
+www-client/chromium -atk -hangouts system-ffmpeg -wayland
 www-client/firefox eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 x11-base/xorg-server xvfb
 x11-libs/gtk+ -vim-syntax

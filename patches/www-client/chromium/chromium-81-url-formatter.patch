@@ -1,8 +1,8 @@
-diff --git chromium-81.0.4044.113/components/url_formatter/url_formatter.cc chromium-81.0.4044.113/components/url_formatter/url_formatter.cc
-index 58cadb980b..5bacd59c25 100644
---- chromium-81.0.4044.113/components/url_formatter/url_formatter.cc
-+++ chromium-81.0.4044.113/components/url_formatter/url_formatter.cc
-@@ -460,14 +460,14 @@ bool IDNToUnicodeOneComponent(const base::char16* comp,
+diff --git chromium-85.0.4183.83/components/url_formatter/url_formatter.cc chromium-85.0.4183.83/components/url_formatter/url_formatter.cc
+index 62a21f1c52..39ccca722f 100644
+--- chromium-85.0.4183.83/components/url_formatter/url_formatter.cc
++++ chromium-85.0.4183.83/components/url_formatter/url_formatter.cc
+@@ -487,14 +487,14 @@ ComponentResult IDNToUnicodeOneComponent(
  }  // namespace
  
  const FormatUrlType kFormatUrlOmitNothing = 0;

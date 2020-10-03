@@ -1,12 +1,12 @@
-diff --git chromium-81.0.4044.113/chrome/updater/configurator.cc chromium-81.0.4044.113/chrome/updater/configurator.cc
-index 00b74c2f9e..0f06989279 100644
---- chromium-81.0.4044.113/chrome/updater/configurator.cc
-+++ chromium-81.0.4044.113/chrome/updater/configurator.cc
-@@ -60,7 +60,7 @@ int Configurator::UpdateDelay() const {
+diff --git chromium-85.0.4183.83/chrome/updater/configurator.cc chromium-85.0.4183.83/chrome/updater/configurator.cc
+index 1bdfb849cc..9033f5dfd8 100644
+--- chromium-85.0.4183.83/chrome/updater/configurator.cc
++++ chromium-85.0.4183.83/chrome/updater/configurator.cc
+@@ -61,7 +61,7 @@ int Configurator::UpdateDelay() const {
  }
  
  std::vector<GURL> Configurator::UpdateUrl() const {
--  return std::vector<GURL>{GURL(kUpdaterJSONDefaultUrl)};
+-  return external_constants_->UpdateURL();
 +  return std::vector<GURL>;
  }
  

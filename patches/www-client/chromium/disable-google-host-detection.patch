@@ -1,11 +1,9 @@
-# Disables various detections of Google hosts and functionality specific to them
-
-diff --git chromium-81.0.4044.113/chrome/common/google_url_loader_throttle.cc chromium-81.0.4044.113/chrome/common/google_url_loader_throttle.cc
-index cce1eac387..b204977d50 100644
---- chromium-81.0.4044.113/chrome/common/google_url_loader_throttle.cc
-+++ chromium-81.0.4044.113/chrome/common/google_url_loader_throttle.cc
-@@ -10,10 +10,6 @@
- #include "components/variations/net/variations_http_headers.h"
+diff --git chromium-85.0.4183.83/chrome/common/google_url_loader_throttle.cc chromium-85.0.4183.83/chrome/common/google_url_loader_throttle.cc
+index c1870b0f56..377c59cf94 100644
+--- chromium-85.0.4183.83/chrome/common/google_url_loader_throttle.cc
++++ chromium-85.0.4183.83/chrome/common/google_url_loader_throttle.cc
+@@ -13,10 +13,6 @@
+ #include "net/base/url_util.h"
  #include "services/network/public/mojom/url_response_head.mojom.h"
  
 -#if BUILDFLAG(ENABLE_EXTENSIONS)
@@ -15,16 +13,10 @@ index cce1eac387..b204977d50 100644
  namespace {
  
  #if defined(OS_ANDROID)
-@@ -42,43 +38,6 @@ void GoogleURLLoaderThrottle::DetachFromCurrentSequence() {}
+@@ -58,53 +54,6 @@ void GoogleURLLoaderThrottle::DetachFromCurrentSequence() {}
  void GoogleURLLoaderThrottle::WillStartRequest(
      network::ResourceRequest* request,
      bool* defer) {
--  variations::AppendVariationsHeaderWithCustomValue(
--      request->url,
--      is_off_the_record_ ? variations::InIncognito::kYes
--                         : variations::InIncognito::kNo,
--      dynamic_params_.variation_ids_header, request);
--
 -  if (dynamic_params_.force_safe_search) {
 -    GURL new_url;
 -    safe_search_util::ForceGoogleSafeSearch(request->url, &new_url);
@@ -39,33 +31,46 @@ index cce1eac387..b204977d50 100644
 -      dynamic_params_.youtube_restrict <
 -          safe_search_util::YOUTUBE_RESTRICT_COUNT) {
 -    safe_search_util::ForceYouTubeRestrict(
--        request->url, &request->headers,
+-        request->url, &request->cors_exempt_headers,
 -        static_cast<safe_search_util::YouTubeRestrictMode>(
 -            dynamic_params_.youtube_restrict));
 -  }
 -
 -  if (!dynamic_params_.allowed_domains_for_apps.empty() &&
 -      request->url.DomainIs("google.com")) {
--    request->headers.SetHeader(safe_search_util::kGoogleAppsAllowedDomains,
--                               dynamic_params_.allowed_domains_for_apps);
+-    request->cors_exempt_headers.SetHeader(
+-        safe_search_util::kGoogleAppsAllowedDomains,
+-        dynamic_params_.allowed_domains_for_apps);
 -  }
 -
 -#if defined(OS_ANDROID)
 -  if (!client_data_header_.empty() &&
 -      google_util::IsGoogleAssociatedDomainUrl(request->url)) {
--    request->headers.SetHeader(kClientDataHeader, client_data_header_);
+-    request->cors_exempt_headers.SetHeader(kCCTClientDataHeader,
+-                                           client_data_header_);
+-  }
+-
+-  bool is_google_homepage_or_search =
+-      google_util::IsGoogleHomePageUrl(request->url) ||
+-      google_util::IsGoogleSearchUrl(request->url);
+-  if (is_google_homepage_or_search) {
+-    // TODO (crbug.com/1081510): Remove this experimental code once a final
+-    // solution is agreed upon.
+-    if (base::FeatureList::IsEnabled(features::kAndroidDarkSearch)) {
+-      request->url = net::AppendOrReplaceQueryParameter(
+-          request->url, "cs", night_mode_enabled_ ? "1" : "0");
+-    }
+-    base::UmaHistogramBoolean("Android.DarkTheme.DarkSearchRequested",
+-                              night_mode_enabled_);
 -  }
 -#endif
  }
  
  void GoogleURLLoaderThrottle::WillRedirectRequest(
-@@ -87,39 +46,6 @@ void GoogleURLLoaderThrottle::WillRedirectRequest(
-     bool* /* defer */,
+@@ -114,37 +63,6 @@ void GoogleURLLoaderThrottle::WillRedirectRequest(
      std::vector<std::string>* to_be_removed_headers,
-     net::HttpRequestHeaders* modified_headers) {
--  variations::RemoveVariationsHeaderIfNeeded(*redirect_info, response_head,
--                                             to_be_removed_headers);
--
+     net::HttpRequestHeaders* modified_headers,
+     net::HttpRequestHeaders* modified_cors_exempt_headers) {
 -  // URLLoaderThrottles can only change the redirect URL when the network
 -  // service is enabled. The non-network service path handles this in
 -  // ChromeNetworkDelegate.
@@ -79,27 +84,28 @@ index cce1eac387..b204977d50 100644
 -      dynamic_params_.youtube_restrict <
 -          safe_search_util::YOUTUBE_RESTRICT_COUNT) {
 -    safe_search_util::ForceYouTubeRestrict(
--        redirect_info->new_url, modified_headers,
+-        redirect_info->new_url, modified_cors_exempt_headers,
 -        static_cast<safe_search_util::YouTubeRestrictMode>(
 -            dynamic_params_.youtube_restrict));
 -  }
 -
 -  if (!dynamic_params_.allowed_domains_for_apps.empty() &&
 -      redirect_info->new_url.DomainIs("google.com")) {
--    modified_headers->SetHeader(safe_search_util::kGoogleAppsAllowedDomains,
--                                dynamic_params_.allowed_domains_for_apps);
+-    modified_cors_exempt_headers->SetHeader(
+-        safe_search_util::kGoogleAppsAllowedDomains,
+-        dynamic_params_.allowed_domains_for_apps);
 -  }
 -
 -#if defined(OS_ANDROID)
 -  if (!client_data_header_.empty() &&
 -      !google_util::IsGoogleAssociatedDomainUrl(redirect_info->new_url)) {
--    to_be_removed_headers->push_back(kClientDataHeader);
+-    to_be_removed_headers->push_back(kCCTClientDataHeader);
 -  }
 -#endif
  }
  
  #if BUILDFLAG(ENABLE_EXTENSIONS)
-@@ -127,17 +53,5 @@ void GoogleURLLoaderThrottle::WillProcessResponse(
+@@ -152,16 +70,5 @@ void GoogleURLLoaderThrottle::WillProcessResponse(
      const GURL& response_url,
      network::mojom::URLResponseHead* response_head,
      bool* defer) {
@@ -111,21 +117,19 @@ index cce1eac387..b204977d50 100644
 -        !response_head->headers->HasHeaderValue("x-frame-options", "deny") &&
 -        !response_head->headers->HasHeaderValue("x-frame-options",
 -                                                "sameorigin")) {
--      response_head->headers->RemoveHeader("x-frame-options");
--      response_head->headers->AddHeader("x-frame-options: sameorigin");
+-      response_head->headers->AddHeader("x-frame-options", "sameorigin");
 -    }
 -  }
  }
  #endif
-diff --git chromium-81.0.4044.113/components/google/core/common/google_util.cc chromium-81.0.4044.113/components/google/core/common/google_util.cc
-index 08c89f41c3..573540a704 100644
---- chromium-81.0.4044.113/components/google/core/common/google_util.cc
-+++ chromium-81.0.4044.113/components/google/core/common/google_util.cc
-@@ -45,103 +45,6 @@ namespace {
+diff --git chromium-85.0.4183.83/components/google/core/common/google_util.cc chromium-85.0.4183.83/components/google/core/common/google_util.cc
+index 3c7d10d023..1aad9c8d46 100644
+--- chromium-85.0.4183.83/components/google/core/common/google_util.cc
++++ chromium-85.0.4183.83/components/google/core/common/google_util.cc
+@@ -45,109 +45,6 @@ namespace {
+ 
  bool gUseMockLinkDoctorBaseURLForTesting = false;
  
- bool g_ignore_port_numbers = false;
--
 -bool IsPathHomePageBase(base::StringPiece path) {
 -  return (path == "/") || (path == "/webhp");
 -}
@@ -137,13 +141,13 @@ index 08c89f41c3..573540a704 100644
 -}
 -
 -// True if the given canonical |host| is "[www.]<domain_in_lower_case>.<TLD>"
--// with a valid TLD. If |subdomain_permission| is ALLOW_SUBDOMAIN, we check
--// against host "*.<domain_in_lower_case>.<TLD>" instead. Will return the TLD
--// string in |tld|, if specified and the |host| can be parsed.
+-// with a valid TLD that appears in |allowed_tlds|. If |subdomain_permission| is
+-// ALLOW_SUBDOMAIN, we check against host "*.<domain_in_lower_case>.<TLD>"
+-// instead.
 -bool IsValidHostName(base::StringPiece host,
 -                     base::StringPiece domain_in_lower_case,
 -                     SubdomainPermission subdomain_permission,
--                     base::StringPiece* tld) {
+-                     const base::flat_set<base::StringPiece>& allowed_tlds) {
 -  // Fast path to avoid searching the registry set.
 -  if (host.find(domain_in_lower_case) == base::StringPiece::npos)
 -    return false;
@@ -159,21 +163,23 @@ index 08c89f41c3..573540a704 100644
 -  base::StringPiece host_minus_tld =
 -      host.substr(0, host.length() - tld_length - 1);
 -
--  if (tld)
--    *tld = host.substr(host.length() - tld_length);
+-  base::StringPiece tld = host.substr(host.length() - tld_length);
+-  // Remove the trailing dot from tld if present, as for Google domains it's the
+-  // same page.
+-  StripTrailingDot(&tld);
+-  if (!allowed_tlds.contains(tld))
+-    return false;
 -
 -  if (base::LowerCaseEqualsASCII(host_minus_tld, domain_in_lower_case))
 -    return true;
 -
 -  if (subdomain_permission == ALLOW_SUBDOMAIN) {
--    std::string dot_domain(".");
--    domain_in_lower_case.AppendToString(&dot_domain);
+-    std::string dot_domain = base::StrCat({".", domain_in_lower_case});
 -    return base::EndsWith(host_minus_tld, dot_domain,
 -                          base::CompareCase::INSENSITIVE_ASCII);
 -  }
 -
--  std::string www_domain("www.");
--  domain_in_lower_case.AppendToString(&www_domain);
+-  std::string www_domain = base::StrCat({"www.", domain_in_lower_case});
 -  return base::LowerCaseEqualsASCII(host_minus_tld, www_domain);
 -}
 -
@@ -181,6 +187,9 @@ index 08c89f41c3..573540a704 100644
 -// is DISALLOW_NON_STANDARD_PORTS, this also requires |url| to use the standard
 -// port for its scheme (80 for HTTP, 443 for HTTPS).
 -bool IsValidURL(const GURL& url, PortPermission port_permission) {
+-  static bool g_ignore_port_numbers =
+-      base::CommandLine::ForCurrentProcess()->HasSwitch(
+-          switches::kIgnoreGooglePortNumbers);
 -  return url.is_valid() && url.SchemeIsHTTPOrHTTPS() &&
 -         (url.port().empty() || g_ignore_port_numbers ||
 -          (port_permission == ALLOW_NON_STANDARD_PORTS));
@@ -192,17 +201,19 @@ index 08c89f41c3..573540a704 100644
 -  if (base_url.is_valid() && (canonical_host == base_url.host_piece()))
 -    return true;
 -
--  base::StringPiece tld;
--  if (!IsValidHostName(canonical_host, "google", subdomain_permission, &tld))
--    return false;
--
--  // Remove the trailing dot from tld if present, as for google domain it's the
--  // same page.
--  StripTrailingDot(&tld);
--
 -  static const base::NoDestructor<base::flat_set<base::StringPiece>>
 -      google_tlds(std::initializer_list<base::StringPiece>({GOOGLE_TLD_LIST}));
--  return google_tlds->contains(tld);
+-  return IsValidHostName(canonical_host, "google", subdomain_permission,
+-                         *google_tlds);
+-}
+-
+-bool IsCanonicalHostYoutubeHostname(base::StringPiece canonical_host,
+-                                    SubdomainPermission subdomain_permission) {
+-  static const base::NoDestructor<base::flat_set<base::StringPiece>>
+-      youtube_tlds(
+-          std::initializer_list<base::StringPiece>({YOUTUBE_TLD_LIST}));
+-  return IsValidHostName(canonical_host, "youtube", subdomain_permission,
+-                         *youtube_tlds);
 -}
 -
 -// True if |url| is a valid URL with a host that is in the static list of
@@ -225,7 +236,7 @@ index 08c89f41c3..573540a704 100644
  }  // namespace
  
  // Global functions -----------------------------------------------------------
-@@ -149,19 +52,11 @@ bool IsGoogleSearchSubdomainUrl(const GURL& url) {
+@@ -155,19 +52,11 @@ bool IsGoogleSearchSubdomainUrl(const GURL& url) {
  const char kGoogleHomepageURL[] = "https://www.google.com/";
  
  bool HasGoogleSearchQueryParam(base::StringPiece str) {
@@ -246,7 +257,7 @@ index 08c89f41c3..573540a704 100644
  }
  
  void SetMockLinkDoctorBaseURLForTesting() {
-@@ -175,162 +70,53 @@ std::string GetGoogleLocale(const std::string& application_locale) {
+@@ -181,161 +70,53 @@ std::string GetGoogleLocale(const std::string& application_locale) {
  
  GURL AppendGoogleLocaleParam(const GURL& url,
                               const std::string& application_locale) {
@@ -371,8 +382,7 @@ index 08c89f41c3..573540a704 100644
                          SubdomainPermission subdomain_permission,
                          PortPermission port_permission) {
 -  return IsValidURL(url, port_permission) &&
--         IsValidHostName(url.host_piece(), "youtube", subdomain_permission,
--                         nullptr);
+-         IsCanonicalHostYoutubeHostname(url.host_piece(), subdomain_permission);
 +  return false;
  }
  
@@ -419,11 +429,11 @@ index 08c89f41c3..573540a704 100644
    return false;
  }
  
-diff --git chromium-81.0.4044.113/components/page_load_metrics/browser/page_load_metrics_util.cc chromium-81.0.4044.113/components/page_load_metrics/browser/page_load_metrics_util.cc
-index 9e33a8c8f1..4a4e1992e4 100644
---- chromium-81.0.4044.113/components/page_load_metrics/browser/page_load_metrics_util.cc
-+++ chromium-81.0.4044.113/components/page_load_metrics/browser/page_load_metrics_util.cc
-@@ -171,9 +171,7 @@ bool DidObserveLoadingBehaviorInAnyFrame(
+diff --git chromium-85.0.4183.83/components/page_load_metrics/browser/page_load_metrics_util.cc chromium-85.0.4183.83/components/page_load_metrics/browser/page_load_metrics_util.cc
+index 5bcb45f80b..24ab1855bd 100644
+--- chromium-85.0.4183.83/components/page_load_metrics/browser/page_load_metrics_util.cc
++++ chromium-85.0.4183.83/components/page_load_metrics/browser/page_load_metrics_util.cc
+@@ -184,9 +184,7 @@ bool DidObserveLoadingBehaviorInAnyFrame(
  }
  
  bool IsGoogleSearchHostname(const GURL& url) {
@@ -434,10 +444,10 @@ index 9e33a8c8f1..4a4e1992e4 100644
  }
  
  bool IsGoogleSearchResultUrl(const GURL& url) {
-diff --git chromium-81.0.4044.113/components/page_load_metrics/common/page_load_metrics_util.cc chromium-81.0.4044.113/components/page_load_metrics/common/page_load_metrics_util.cc
+diff --git chromium-85.0.4183.83/components/page_load_metrics/common/page_load_metrics_util.cc chromium-85.0.4183.83/components/page_load_metrics/common/page_load_metrics_util.cc
 index 8768df8c82..c15e2b54be 100644
---- chromium-81.0.4044.113/components/page_load_metrics/common/page_load_metrics_util.cc
-+++ chromium-81.0.4044.113/components/page_load_metrics/common/page_load_metrics_util.cc
+--- chromium-85.0.4183.83/components/page_load_metrics/common/page_load_metrics_util.cc
++++ chromium-85.0.4183.83/components/page_load_metrics/common/page_load_metrics_util.cc
 @@ -12,38 +12,7 @@
  namespace page_load_metrics {
  
@@ -478,11 +488,11 @@ index 8768df8c82..c15e2b54be 100644
  }
  
  bool IsGoogleHostname(const GURL& url) {
-diff --git chromium-81.0.4044.113/components/search_engines/template_url.cc chromium-81.0.4044.113/components/search_engines/template_url.cc
-index 39968b30cf..dbf45384d8 100644
---- chromium-81.0.4044.113/components/search_engines/template_url.cc
-+++ chromium-81.0.4044.113/components/search_engines/template_url.cc
-@@ -507,11 +507,7 @@ base::string16 TemplateURLRef::SearchTermToString16(
+diff --git chromium-85.0.4183.83/components/search_engines/template_url.cc chromium-85.0.4183.83/components/search_engines/template_url.cc
+index 08ee376cc1..4b19ead148 100644
+--- chromium-85.0.4183.83/components/search_engines/template_url.cc
++++ chromium-85.0.4183.83/components/search_engines/template_url.cc
+@@ -510,11 +510,7 @@ base::string16 TemplateURLRef::SearchTermToString16(
  bool TemplateURLRef::HasGoogleBaseURLs(
      const SearchTermsData& search_terms_data) const {
    ParseIfNecessary(search_terms_data);
@@ -495,25 +505,27 @@ index 39968b30cf..dbf45384d8 100644
  }
  
  bool TemplateURLRef::ExtractSearchTermsFromURL(
-diff --git chromium-81.0.4044.113/components/variations/net/variations_http_headers.cc chromium-81.0.4044.113/components/variations/net/variations_http_headers.cc
-index fc1eff14cf..f830b99d89 100644
---- chromium-81.0.4044.113/components/variations/net/variations_http_headers.cc
-+++ chromium-81.0.4044.113/components/variations/net/variations_http_headers.cc
-@@ -27,10 +27,6 @@ namespace variations {
+diff --git chromium-85.0.4183.83/components/variations/net/variations_http_headers.cc chromium-85.0.4183.83/components/variations/net/variations_http_headers.cc
+index 6f733ee3fc..737ad93abf 100644
+--- chromium-85.0.4183.83/components/variations/net/variations_http_headers.cc
++++ chromium-85.0.4183.83/components/variations/net/variations_http_headers.cc
+@@ -27,10 +27,6 @@
  
- namespace {
+ namespace variations {
  
 -// The name string for the header for variations information.
 -// Note that prior to M33 this header was named X-Chrome-Variations.
 -const char kClientDataHeader[] = "X-Client-Data";
 -
- // The result of checking if a URL should have variations headers appended.
- // This enum is used to record UMA histogram values, and should not be
- // reordered.
-@@ -87,26 +83,7 @@ class VariationsHeaderHelper {
+ namespace {
+ 
+ // The result of checking whether a request to a URL should have variations
+@@ -192,32 +188,7 @@ class VariationsHeaderHelper {
    }
  
    bool AppendHeaderIfNeeded(const GURL& url, InIncognito incognito) {
+-    AppendOmniboxOnDeviceSuggestionsHeaderIfNeeded(url, resource_request_);
+-
 -    // Note the criteria for attaching client experiment headers:
 -    // 1. We only transmit to Google owned domains which can evaluate
 -    // experiments.
@@ -523,8 +535,12 @@ index fc1eff14cf..f830b99d89 100644
 -    //         international TLD domains *.google.<TLD> or *.youtube.<TLD>.
 -    // 2. Only transmit for non-Incognito profiles.
 -    // 3. For the X-Client-Data header, only include non-empty variation IDs.
--    if ((incognito == InIncognito::kYes) || !ShouldAppendVariationsHeader(url))
+-    if ((incognito == InIncognito::kYes) ||
+-        !ShouldAppendVariationsHeader(url, "Append"))
 -      return false;
+-
+-    // TODO(crbug/1094303): Use the result to determine which IDs to include.
+-    IsFirstPartyContext(*resource_request_);
 -
 -    if (variations_header_.empty())
 -      return false;
@@ -538,42 +554,50 @@ index fc1eff14cf..f830b99d89 100644
    }
  
   private:
-@@ -149,8 +126,6 @@ void RemoveVariationsHeaderIfNeeded(
+@@ -260,8 +231,6 @@ void RemoveVariationsHeaderIfNeeded(
      const net::RedirectInfo& redirect_info,
      const network::mojom::URLResponseHead& response_head,
      std::vector<std::string>* to_be_removed_headers) {
--  if (!ShouldAppendVariationsHeader(redirect_info.new_url))
+-  if (!ShouldAppendVariationsHeader(redirect_info.new_url, "Remove"))
 -    to_be_removed_headers->push_back(kClientDataHeader);
  }
  
  std::unique_ptr<network::SimpleURLLoader>
-@@ -180,11 +155,11 @@ CreateSimpleURLLoaderWithVariationsHeaderUnknownSignedIn(
+@@ -291,14 +260,11 @@ CreateSimpleURLLoaderWithVariationsHeaderUnknownSignedIn(
  }
  
  bool IsVariationsHeader(const std::string& header_name) {
--  return header_name == kClientDataHeader;
+-  return header_name == kClientDataHeader ||
+-         header_name == kOmniboxOnDeviceSuggestionsHeader;
 +  return false;
  }
  
  bool HasVariationsHeader(const network::ResourceRequest& request) {
+-  // Note: kOmniboxOnDeviceSuggestionsHeader is not listed because this function
+-  // is only used for testing.
 -  return request.cors_exempt_headers.HasHeader(kClientDataHeader);
 +  return false;
  }
  
- bool ShouldAppendVariationsHeaderForTesting(const GURL& url) {
-@@ -193,7 +168,6 @@ bool ShouldAppendVariationsHeaderForTesting(const GURL& url) {
+ bool ShouldAppendVariationsHeaderForTesting(
+@@ -309,12 +275,6 @@ bool ShouldAppendVariationsHeaderForTesting(
  
  void UpdateCorsExemptHeaderForVariations(
      network::mojom::NetworkContextParams* params) {
 -  params->cors_exempt_header_list.push_back(kClientDataHeader);
+-
+-  if (base::FeatureList::IsEnabled(kReportOmniboxOnDeviceSuggestionsHeader)) {
+-    params->cors_exempt_header_list.push_back(
+-        kOmniboxOnDeviceSuggestionsHeader);
+-  }
  }
  
  }  // namespace variations
-diff --git chromium-81.0.4044.113/net/base/url_util.cc chromium-81.0.4044.113/net/base/url_util.cc
-index 9cd3c3671e..de6b915d28 100644
---- chromium-81.0.4044.113/net/base/url_util.cc
-+++ chromium-81.0.4044.113/net/base/url_util.cc
-@@ -394,27 +394,6 @@ bool HasGoogleHost(const GURL& url) {
+diff --git chromium-85.0.4183.83/net/base/url_util.cc chromium-85.0.4183.83/net/base/url_util.cc
+index b6c36ea137..9287e424ef 100644
+--- chromium-85.0.4183.83/net/base/url_util.cc
++++ chromium-85.0.4183.83/net/base/url_util.cc
+@@ -415,27 +415,6 @@ bool HasGoogleHost(const GURL& url) {
  }
  
  bool IsGoogleHost(base::StringPiece host) {

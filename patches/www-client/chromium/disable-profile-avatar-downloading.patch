@@ -1,12 +1,10 @@
-# Stop downloading of profile avatar (trk:271:...)
-
-diff --git chromium-81.0.4044.113/chrome/browser/profiles/profile_avatar_downloader.cc chromium-81.0.4044.113/chrome/browser/profiles/profile_avatar_downloader.cc
-index 365120a6fa..de0c2aa290 100644
---- chromium-81.0.4044.113/chrome/browser/profiles/profile_avatar_downloader.cc
-+++ chromium-81.0.4044.113/chrome/browser/profiles/profile_avatar_downloader.cc
-@@ -27,8 +27,7 @@ ProfileAvatarDownloader::ProfileAvatarDownloader(
-     : icon_index_(icon_index),
-       callback_(callback) {
+diff --git chromium-85.0.4183.83/chrome/browser/profiles/profile_avatar_downloader.cc chromium-85.0.4183.83/chrome/browser/profiles/profile_avatar_downloader.cc
+index 93cd3890ea..51feeb36b3 100644
+--- chromium-85.0.4183.83/chrome/browser/profiles/profile_avatar_downloader.cc
++++ chromium-85.0.4183.83/chrome/browser/profiles/profile_avatar_downloader.cc
+@@ -25,8 +25,7 @@ ProfileAvatarDownloader::ProfileAvatarDownloader(size_t icon_index,
+                                                  FetchCompleteCallback callback)
+     : icon_index_(icon_index), callback_(std::move(callback)) {
    DCHECK(!callback_.is_null());
 -  GURL url(std::string(kHighResAvatarDownloadUrlPrefix) +
 -           profiles::GetDefaultAvatarIconFileNameAtIndex(icon_index));

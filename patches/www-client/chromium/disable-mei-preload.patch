@@ -1,23 +1,16 @@
-# Disables use of a binary for preloading the Media Engagement index
-# Said binary is: chrome/browser/resources/media/mei_preload/preloaded_data.pb
-# According to media/base/media_switches (for PreloadMediaEngagementData), it
-# "enables a list of origins to be considered as having a high MEI until there
-# is enough local data to determine the user's preferred behavior." This feature
-# does not seem to outweigh the benefit of removing the binary, thus this patch.
-
-diff --git chromium-81.0.4044.113/chrome/BUILD.gn chromium-81.0.4044.113/chrome/BUILD.gn
-index fe09f99a91..591961d573 100644
---- chromium-81.0.4044.113/chrome/BUILD.gn
-+++ chromium-81.0.4044.113/chrome/BUILD.gn
-@@ -335,7 +335,6 @@ if (!is_android && !is_mac) {
+diff --git chromium-85.0.4183.83/chrome/BUILD.gn chromium-85.0.4183.83/chrome/BUILD.gn
+index f06eeeee05..f43f2be203 100644
+--- chromium-85.0.4183.83/chrome/BUILD.gn
++++ chromium-85.0.4183.83/chrome/BUILD.gn
+@@ -291,7 +291,6 @@ if (!is_android && !is_mac) {
      }
  
      data_deps += [
 -      "//chrome/browser/resources/media/mei_preload:component",
        "//third_party/widevine/cdm",
      ]
- 
-@@ -1109,7 +1108,6 @@ if (is_win) {
+   }
+@@ -999,7 +998,6 @@ if (is_win) {
        ":keystone_registration_framework",
        ":swiftshader_library",
        ":widevine_cdm_library",

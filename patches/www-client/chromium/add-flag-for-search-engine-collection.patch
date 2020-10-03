@@ -1,13 +1,11 @@
-# Add flag to disable automatic search engine collection
-
-diff --git chromium-81.0.4044.113/chrome/browser/about_flags.cc chromium-81.0.4044.113/chrome/browser/about_flags.cc
-index ce705a44cd..94a6397513 100644
---- chromium-81.0.4044.113/chrome/browser/about_flags.cc
-+++ chromium-81.0.4044.113/chrome/browser/about_flags.cc
-@@ -1544,6 +1544,10 @@ const FeatureEntry::Choice kEnableCrOSActionRecorderChoices[] = {
- //
- // When adding a new choice, add it to the end of the list.
- const FeatureEntry kFeatureEntries[] = {
+diff --git chromium-85.0.4183.83/chrome/browser/about_flags.cc chromium-85.0.4183.83/chrome/browser/about_flags.cc
+index 12172c1e9b..5db37b318c 100644
+--- chromium-85.0.4183.83/chrome/browser/about_flags.cc
++++ chromium-85.0.4183.83/chrome/browser/about_flags.cc
+@@ -1962,6 +1962,10 @@ const FeatureEntry kFeatureEntries[] = {
+ // Include generated flags for flag unexpiry; see //docs/flag_expiry.md and
+ // //tools/flags/generate_unexpire_flags.py.
+ #include "chrome/browser/unexpire_flags_gen.inc"
 +    {"disable-search-engine-collection",
 +     "Disable search engine collection",
 +     "Prevents search engines from being added automatically.",
@@ -15,23 +13,23 @@ index ce705a44cd..94a6397513 100644
      {"ignore-gpu-blacklist", flag_descriptions::kIgnoreGpuBlacklistName,
       flag_descriptions::kIgnoreGpuBlacklistDescription, kOsAll,
       SINGLE_VALUE_TYPE(switches::kIgnoreGpuBlacklist)},
-diff --git chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.cc chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.cc
-index 2406ef3461..714f96125c 100644
---- chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.cc
-+++ chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.cc
-@@ -165,9 +165,10 @@ ChromeRenderFrameObserver::ChromeRenderFrameObserver(
+diff --git chromium-85.0.4183.83/chrome/renderer/chrome_render_frame_observer.cc chromium-85.0.4183.83/chrome/renderer/chrome_render_frame_observer.cc
+index a545474a8a..bdc208189c 100644
+--- chromium-85.0.4183.83/chrome/renderer/chrome_render_frame_observer.cc
++++ chromium-85.0.4183.83/chrome/renderer/chrome_render_frame_observer.cc
+@@ -130,9 +130,10 @@ ChromeRenderFrameObserver::ChromeRenderFrameObserver(
    if (!render_frame->IsMainFrame())
      return;
  
--#if BUILDFLAG(SAFE_BROWSING_CSD)
+-#if BUILDFLAG(FULL_SAFE_BROWSING)
    const base::CommandLine& command_line =
        *base::CommandLine::ForCurrentProcess();
 +  should_autocollect_ = !command_line.HasSwitch("disable-search-engine-collection");
-+#if BUILDFLAG(SAFE_BROWSING_CSD)
++#if BUILDFLAG(FULL_SAFE_BROWSING)
    if (!command_line.HasSwitch(switches::kDisableClientSidePhishingDetection))
-     SetClientSidePhishingDetection(true);
+     SetClientSidePhishingDetection();
  #endif
-@@ -367,14 +368,16 @@ void ChromeRenderFrameObserver::DidFinishLoad() {
+@@ -214,14 +215,16 @@ void ChromeRenderFrameObserver::DidFinishLoad() {
    if (frame->Parent())
      return;
  
@@ -56,22 +54,22 @@ index 2406ef3461..714f96125c 100644
    }
  }
  
-diff --git chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.h chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.h
-index dbd135b8fe..40ec450dd5 100644
---- chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.h
-+++ chromium-81.0.4044.113/chrome/renderer/chrome_render_frame_observer.h
-@@ -115,6 +115,7 @@ class ChromeRenderFrameObserver : public content::RenderFrameObserver,
-   // Have the same lifetime as us.
-   translate::TranslateAgent* translate_agent_;
-   safe_browsing::PhishingClassifierDelegate* phishing_classifier_;
+diff --git chromium-85.0.4183.83/chrome/renderer/chrome_render_frame_observer.h chromium-85.0.4183.83/chrome/renderer/chrome_render_frame_observer.h
+index 2680019005..25047bc3b0 100644
+--- chromium-85.0.4183.83/chrome/renderer/chrome_render_frame_observer.h
++++ chromium-85.0.4183.83/chrome/renderer/chrome_render_frame_observer.h
+@@ -134,6 +134,7 @@ class ChromeRenderFrameObserver : public content::RenderFrameObserver,
+ #if BUILDFLAG(FULL_SAFE_BROWSING)
+   safe_browsing::PhishingClassifierDelegate* phishing_classifier_ = nullptr;
+ #endif
 +  bool should_autocollect_; // Whether to autocollect search engines
  
    // Owned by ChromeContentRendererClient and outlive us.
    web_cache::WebCacheImpl* web_cache_impl_;
-diff --git chromium-81.0.4044.113/components/search_engines/template_url_service.cc chromium-81.0.4044.113/components/search_engines/template_url_service.cc
-index e1c5e91f23..7efd510eb2 100644
---- chromium-81.0.4044.113/components/search_engines/template_url_service.cc
-+++ chromium-81.0.4044.113/components/search_engines/template_url_service.cc
+diff --git chromium-85.0.4183.83/components/search_engines/template_url_service.cc chromium-85.0.4183.83/components/search_engines/template_url_service.cc
+index 65cbba2261..2a07ab9065 100644
+--- chromium-85.0.4183.83/components/search_engines/template_url_service.cc
++++ chromium-85.0.4183.83/components/search_engines/template_url_service.cc
 @@ -9,6 +9,7 @@
  #include "base/auto_reset.h"
  #include "base/bind.h"
@@ -80,7 +78,7 @@ index e1c5e91f23..7efd510eb2 100644
  #include "base/debug/crash_logging.h"
  #include "base/format_macros.h"
  #include "base/metrics/histogram_macros.h"
-@@ -199,6 +200,12 @@ bool IsCreatedByExtension(const TemplateURL* template_url) {
+@@ -201,6 +202,12 @@ bool IsCreatedByExtension(const TemplateURL* template_url) {
           template_url->type() == TemplateURL::OMNIBOX_API_EXTENSION;
  }
  
@@ -93,7 +91,7 @@ index e1c5e91f23..7efd510eb2 100644
  }  // namespace
  
  // TemplateURLService::LessWithPrefix -----------------------------------------
-@@ -283,6 +290,7 @@ TemplateURLService::TemplateURLService(
+@@ -285,6 +292,7 @@ TemplateURLService::TemplateURLService(
      std::unique_ptr<TemplateURLServiceClient> client,
      const base::Closure& dsp_change_callback)
      : prefs_(prefs),
@@ -101,7 +99,7 @@ index e1c5e91f23..7efd510eb2 100644
        search_terms_data_(std::move(search_terms_data)),
        web_data_service_(web_data_service),
        client_(std::move(client)),
-@@ -346,7 +354,7 @@ bool TemplateURLService::CanAddAutogeneratedKeyword(
+@@ -350,7 +358,7 @@ bool TemplateURLService::CanAddAutogeneratedKeyword(
    if (existing_url) {
      // We already have a TemplateURL for this keyword. Only allow it to be
      // replaced if the TemplateURL can be replaced.
@@ -110,7 +108,7 @@ index e1c5e91f23..7efd510eb2 100644
    }
  
    // We don't have a TemplateURL with keyword.  We still may not allow this
-@@ -355,8 +363,8 @@ bool TemplateURLService::CanAddAutogeneratedKeyword(
+@@ -359,8 +367,8 @@ bool TemplateURLService::CanAddAutogeneratedKeyword(
    // that may interfere with search queries).  An easy heuristic for this is
    // whether the user has a TemplateURL that has been manually modified (e.g.,
    // renamed) connected to the same host.
@@ -121,7 +119,7 @@ index e1c5e91f23..7efd510eb2 100644
  }
  
  bool TemplateURLService::IsPrepopulatedOrCreatedByPolicy(
-@@ -1396,6 +1404,8 @@ SyncDataMap TemplateURLService::CreateGUIDToSyncDataMap(
+@@ -1394,6 +1402,8 @@ SyncDataMap TemplateURLService::CreateGUIDToSyncDataMap(
  
  void TemplateURLService::Init(const Initializer* initializers,
                                int num_initializers) {
@@ -130,7 +128,7 @@ index e1c5e91f23..7efd510eb2 100644
    if (client_)
      client_->SetOwner(this);
  
-@@ -1617,6 +1627,9 @@ void TemplateURLService::ChangeToLoadedState() {
+@@ -1615,6 +1625,9 @@ void TemplateURLService::ChangeToLoadedState() {
  
  bool TemplateURLService::CanAddAutogeneratedKeywordForHost(
      const std::string& host) const {
@@ -140,7 +138,7 @@ index e1c5e91f23..7efd510eb2 100644
    const TemplateURLSet* urls = provider_map_->GetURLsForHost(host);
    if (!urls)
      return true;
-@@ -1627,7 +1640,8 @@ bool TemplateURLService::CanAddAutogeneratedKeywordForHost(
+@@ -1625,7 +1638,8 @@ bool TemplateURLService::CanAddAutogeneratedKeywordForHost(
  }
  
  bool TemplateURLService::CanReplace(const TemplateURL* t_url) const {
@@ -150,11 +148,11 @@ index e1c5e91f23..7efd510eb2 100644
  }
  
  TemplateURL* TemplateURLService::FindNonExtensionTemplateURLForKeyword(
-diff --git chromium-81.0.4044.113/components/search_engines/template_url_service.h chromium-81.0.4044.113/components/search_engines/template_url_service.h
-index cfda0d16f8..d07089488a 100644
---- chromium-81.0.4044.113/components/search_engines/template_url_service.h
-+++ chromium-81.0.4044.113/components/search_engines/template_url_service.h
-@@ -728,6 +728,8 @@ class TemplateURLService : public WebDataServiceConsumer,
+diff --git chromium-85.0.4183.83/components/search_engines/template_url_service.h chromium-85.0.4183.83/components/search_engines/template_url_service.h
+index e266c7a27d..131285a59c 100644
+--- chromium-85.0.4183.83/components/search_engines/template_url_service.h
++++ chromium-85.0.4183.83/components/search_engines/template_url_service.h
+@@ -731,6 +731,8 @@ class TemplateURLService : public WebDataServiceConsumer,
    // ---------- Browser state related members ---------------------------------
    PrefService* prefs_ = nullptr;
  

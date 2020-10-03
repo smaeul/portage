@@ -1,10 +1,8 @@
-# Disables Chrome Webstore-related URLs and other internal functionality. Mainly for disabling auto updates via the Chrome Webstore.
-
-diff --git chromium-81.0.4044.113/chrome/browser/extensions/chrome_content_browser_client_extensions_part.cc chromium-81.0.4044.113/chrome/browser/extensions/chrome_content_browser_client_extensions_part.cc
-index 50bfbc7475..394bdb87b2 100644
---- chromium-81.0.4044.113/chrome/browser/extensions/chrome_content_browser_client_extensions_part.cc
-+++ chromium-81.0.4044.113/chrome/browser/extensions/chrome_content_browser_client_extensions_part.cc
-@@ -605,10 +605,6 @@ std::vector<url::Origin> ChromeContentBrowserClientExtensionsPart::
+diff --git chromium-85.0.4183.83/chrome/browser/extensions/chrome_content_browser_client_extensions_part.cc chromium-85.0.4183.83/chrome/browser/extensions/chrome_content_browser_client_extensions_part.cc
+index 6823d87e4a..8c6316095a 100644
+--- chromium-85.0.4183.83/chrome/browser/extensions/chrome_content_browser_client_extensions_part.cc
++++ chromium-85.0.4183.83/chrome/browser/extensions/chrome_content_browser_client_extensions_part.cc
+@@ -604,10 +604,6 @@ std::vector<url::Origin> ChromeContentBrowserClientExtensionsPart::
      GetOriginsRequiringDedicatedProcess() {
    std::vector<url::Origin> list;
  
@@ -15,10 +13,10 @@ index 50bfbc7475..394bdb87b2 100644
    return list;
  }
  
-diff --git chromium-81.0.4044.113/chrome/browser/extensions/chrome_content_verifier_delegate.cc chromium-81.0.4044.113/chrome/browser/extensions/chrome_content_verifier_delegate.cc
+diff --git chromium-85.0.4183.83/chrome/browser/extensions/chrome_content_verifier_delegate.cc chromium-85.0.4183.83/chrome/browser/extensions/chrome_content_verifier_delegate.cc
 index 5d0be02687..8dc08ceb82 100644
---- chromium-81.0.4044.113/chrome/browser/extensions/chrome_content_verifier_delegate.cc
-+++ chromium-81.0.4044.113/chrome/browser/extensions/chrome_content_verifier_delegate.cc
+--- chromium-85.0.4183.83/chrome/browser/extensions/chrome_content_verifier_delegate.cc
++++ chromium-85.0.4183.83/chrome/browser/extensions/chrome_content_verifier_delegate.cc
 @@ -286,13 +286,7 @@ bool ChromeContentVerifierDelegate::IsFromWebstore(const Extension& extension) {
    // between which extensions are considered in-store.
    // See https://crbug.com/766806 for details.
@@ -34,10 +32,10 @@ index 5d0be02687..8dc08ceb82 100644
    }
    return true;
  }
-diff --git chromium-81.0.4044.113/chrome/browser/extensions/extension_migrator.cc chromium-81.0.4044.113/chrome/browser/extensions/extension_migrator.cc
+diff --git chromium-85.0.4183.83/chrome/browser/extensions/extension_migrator.cc chromium-85.0.4183.83/chrome/browser/extensions/extension_migrator.cc
 index cb39532983..2ebd661c7b 100644
---- chromium-81.0.4044.113/chrome/browser/extensions/extension_migrator.cc
-+++ chromium-81.0.4044.113/chrome/browser/extensions/extension_migrator.cc
+--- chromium-85.0.4183.83/chrome/browser/extensions/extension_migrator.cc
++++ chromium-85.0.4183.83/chrome/browser/extensions/extension_migrator.cc
 @@ -18,7 +18,9 @@ namespace extensions {
  ExtensionMigrator::ExtensionMigrator(Profile* profile,
                                       const std::string& old_id,
@@ -58,10 +56,10 @@ index cb39532983..2ebd661c7b 100644
  
      prefs->SetWithoutPathExpansion(new_id_, std::move(entry));
    }
-diff --git chromium-81.0.4044.113/chrome/browser/extensions/extension_migrator.h chromium-81.0.4044.113/chrome/browser/extensions/extension_migrator.h
+diff --git chromium-85.0.4183.83/chrome/browser/extensions/extension_migrator.h chromium-85.0.4183.83/chrome/browser/extensions/extension_migrator.h
 index 5b9de2cf7f..2f2e9f60a8 100644
---- chromium-81.0.4044.113/chrome/browser/extensions/extension_migrator.h
-+++ chromium-81.0.4044.113/chrome/browser/extensions/extension_migrator.h
+--- chromium-85.0.4183.83/chrome/browser/extensions/extension_migrator.h
++++ chromium-85.0.4183.83/chrome/browser/extensions/extension_migrator.h
 @@ -9,6 +9,7 @@
  
  #include "base/macros.h"
@@ -78,11 +76,11 @@ index 5b9de2cf7f..2f2e9f60a8 100644
  
    DISALLOW_COPY_AND_ASSIGN(ExtensionMigrator);
  };
-diff --git chromium-81.0.4044.113/extensions/browser/updater/extension_downloader.cc chromium-81.0.4044.113/extensions/browser/updater/extension_downloader.cc
-index 6857e9301e..d5815086ce 100644
---- chromium-81.0.4044.113/extensions/browser/updater/extension_downloader.cc
-+++ chromium-81.0.4044.113/extensions/browser/updater/extension_downloader.cc
-@@ -94,27 +94,18 @@ const char kNotFromWebstoreInstallSource[] = "notfromwebstore";
+diff --git chromium-85.0.4183.83/extensions/browser/updater/extension_downloader.cc chromium-85.0.4183.83/extensions/browser/updater/extension_downloader.cc
+index a8c378d4d6..e534079722 100644
+--- chromium-85.0.4183.83/extensions/browser/updater/extension_downloader.cc
++++ chromium-85.0.4183.83/extensions/browser/updater/extension_downloader.cc
+@@ -95,27 +95,18 @@ const char kNotFromWebstoreInstallSource[] = "notfromwebstore";
  const char kDefaultInstallSource[] = "";
  const char kReinstallInstallSource[] = "reinstall";
  
@@ -112,7 +110,7 @@ index 6857e9301e..d5815086ce 100644
  
  bool ShouldRetryRequest(const network::SimpleURLLoader* loader) {
    DCHECK(loader);
-@@ -308,12 +299,6 @@ void ExtensionDownloader::DoStartAllPending() {
+@@ -329,12 +320,6 @@ void ExtensionDownloader::DoStartAllPending() {
    ReportStats();
    url_stats_ = URLStats();
  
@@ -125,7 +123,7 @@ index 6857e9301e..d5815086ce 100644
    fetches_preparing_.clear();
  }
  
-@@ -347,11 +332,6 @@ bool ExtensionDownloader::AddExtensionData(
+@@ -373,11 +358,6 @@ bool ExtensionDownloader::AddExtensionData(
      return false;
    }
  
@@ -137,7 +135,7 @@ index 6857e9301e..d5815086ce 100644
    // Skip extensions with empty IDs.
    if (id.empty()) {
      DLOG(WARNING) << "Found extension with empty ID";
-@@ -360,12 +340,10 @@ bool ExtensionDownloader::AddExtensionData(
+@@ -386,12 +366,10 @@ bool ExtensionDownloader::AddExtensionData(
      return false;
    }
  
@@ -152,8 +150,8 @@ index 6857e9301e..d5815086ce 100644
    } else {
      url_stats_.other_url_count++;
    }
-@@ -709,20 +687,6 @@ void ExtensionDownloader::HandleManifestResults(
-         fetch_data->request_ids()));
+@@ -852,20 +830,6 @@ void ExtensionDownloader::HandleManifestResults(
+                           update->info);
    }
  
 -  // If the manifest response included a <daystart> element, we want to save
@@ -163,7 +161,7 @@ index 6857e9301e..d5815086ce 100644
 -    Time day_start =
 -        Time::Now() - TimeDelta::FromSeconds(results->daystart_elapsed_seconds);
 -
--    for (const std::string& id : fetch_data->extension_ids()) {
+-    for (const ExtensionId& id : extension_ids) {
 -      ExtensionDownloaderDelegate::PingResult& result = ping_results_[id];
 -      result.did_ping = fetch_data->DidPing(id, ManifestFetchData::ROLLCALL);
 -      result.day_start = day_start;
@@ -173,7 +171,7 @@ index 6857e9301e..d5815086ce 100644
    NotifyExtensionsDownloadStageChanged(
        no_updates, ExtensionDownloaderDelegate::Stage::FINISHED);
    NotifyExtensionsDownloadFailed(
-@@ -1218,11 +1182,7 @@ bool ExtensionDownloader::IterateFetchCredentialsAfterFailure(
+@@ -1414,11 +1378,7 @@ bool ExtensionDownloader::IterateFetchCredentialsAfterFailure(
    // fetch.
    switch (fetch->credentials) {
      case ExtensionFetch::CREDENTIALS_NONE:
@@ -186,11 +184,11 @@ index 6857e9301e..d5815086ce 100644
        return true;
      case ExtensionFetch::CREDENTIALS_OAUTH2_TOKEN:
        fetch->oauth2_attempt_count++;
-diff --git chromium-81.0.4044.113/extensions/common/extension_urls.cc chromium-81.0.4044.113/extensions/common/extension_urls.cc
-index 769fbc0179..251f2f21f9 100644
---- chromium-81.0.4044.113/extensions/common/extension_urls.cc
-+++ chromium-81.0.4044.113/extensions/common/extension_urls.cc
-@@ -30,7 +30,7 @@ bool IsSourceFromAnExtension(const base::string16& source) {
+diff --git chromium-85.0.4183.83/extensions/common/extension_urls.cc chromium-85.0.4183.83/extensions/common/extension_urls.cc
+index 51d2e3c469..ed9eeeddaf 100644
+--- chromium-85.0.4183.83/extensions/common/extension_urls.cc
++++ chromium-85.0.4183.83/extensions/common/extension_urls.cc
+@@ -26,7 +26,7 @@ bool IsSourceFromAnExtension(const base::string16& source) {
  
  namespace extension_urls {
  

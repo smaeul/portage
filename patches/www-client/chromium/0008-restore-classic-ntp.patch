@@ -1,8 +1,8 @@
-diff --git chromium-81.0.4044.113/chrome/browser/search/search.cc chromium-81.0.4044.113/chrome/browser/search/search.cc
-index 6e15aaa1f3..15ad2a40bd 100644
---- chromium-81.0.4044.113/chrome/browser/search/search.cc
-+++ chromium-81.0.4044.113/chrome/browser/search/search.cc
-@@ -182,26 +182,7 @@ struct NewTabURLDetails {
+diff --git chromium-85.0.4183.83/chrome/browser/search/search.cc chromium-85.0.4183.83/chrome/browser/search/search.cc
+index 0bf37a0610..afe83f9866 100644
+--- chromium-85.0.4183.83/chrome/browser/search/search.cc
++++ chromium-85.0.4183.83/chrome/browser/search/search.cc
+@@ -185,26 +185,7 @@ struct NewTabURLDetails {
                               : chrome::kChromeSearchLocalNtpUrl);
  #endif
  
@@ -30,10 +30,10 @@ index 6e15aaa1f3..15ad2a40bd 100644
    }
  
    const GURL url;
-diff --git chromium-81.0.4044.113/components/ntp_snippets/features.cc chromium-81.0.4044.113/components/ntp_snippets/features.cc
+diff --git chromium-85.0.4183.83/components/ntp_snippets/features.cc chromium-85.0.4183.83/components/ntp_snippets/features.cc
 index 226d09dcb9..03eea28ab7 100644
---- chromium-81.0.4044.113/components/ntp_snippets/features.cc
-+++ chromium-81.0.4044.113/components/ntp_snippets/features.cc
+--- chromium-85.0.4183.83/components/ntp_snippets/features.cc
++++ chromium-85.0.4183.83/components/ntp_snippets/features.cc
 @@ -39,7 +39,7 @@ const base::Feature* const kAllFeatures[] = {
      &kOptionalImagesEnabledFeature};
  
