@@ -17,6 +17,7 @@ dev-util/perf ~amd64
 dev-util/radare2 ~amd64
 mail-client/s-nail ~amd64
 net-analyzer/flent ~amd64
+net-mail/b4 ~amd64
 net-misc/streamlink ~amd64
 net-vpn/wireguard-tools ~amd64
 net-p2p/transmission-remote-cli ~amd64
@@ -41,8 +42,8 @@ net-misc/youtube-dl ~amd64
 net-p2p/syncthing ~amd64
 sys-apps/flashrom ~amd64
 sys-devel/gcc ~amd64
-sys-fs/zfs ~amd64
-sys-fs/zfs-kmod ~amd64
+<sys-fs/zfs-1 ~amd64
+<sys-fs/zfs-kmod-1 ~amd64
 sys-kernel/linux-headers ~amd64
 
 # llvm and friends
@@ -106,7 +107,9 @@ sys-apps/s6-rc ~amd64
 # Required for big endian
 ~app-emulation/spice-0.14.2 ~amd64
 ~app-emulation/spice-protocol-0.14.0 ~amd64
-# Required for Python 3
+# Required for python3.8
+=app-text/asciidoc-9.0.0* ~amd64
+# Required for python3
 ~dev-java/javatoolkit-0.6.2 ~amd64
 # Solves version conflicts
 ~dev-lang/ocaml-4.09.0 ~amd64

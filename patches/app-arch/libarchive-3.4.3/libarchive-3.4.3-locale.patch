@@ -1,0 +1,712 @@
+--- libarchive-3.4.3/libarchive/test/test_gnutar_filename_encoding.c
++++ libarchive-3.4.3/libarchive/test/test_gnutar_filename_encoding.c
+@@ -75,7 +75,7 @@ DEFINE_TEST(test_gnutar_filename_encoding_KOI8R_UTF8)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -116,7 +116,7 @@ DEFINE_TEST(test_gnutar_filename_encoding_KOI8R_CP866)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -157,8 +157,8 @@ DEFINE_TEST(test_gnutar_filename_encoding_CP1251_UTF8)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -202,7 +202,7 @@ DEFINE_TEST(test_gnutar_filename_encoding_ru_RU_CP1251)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -242,7 +242,7 @@ DEFINE_TEST(test_gnutar_filename_encoding_Russian_Russia)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia")) {
++	if (setlocale(LC_ALL, "Russian_Russia")) {
+ 		skipping("Russian_Russia locale not available on this system.");
+ 		return;
+ 	}
+@@ -277,7 +277,7 @@ DEFINE_TEST(test_gnutar_filename_encoding_EUCJP_UTF8)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ja_JP.eucJP")) {
++	if (setlocale(LC_ALL, "ja_JP.eucJP")) {
+ 		skipping("eucJP locale not available on this system.");
+ 		return;
+ 	}
+@@ -317,7 +317,7 @@ DEFINE_TEST(test_gnutar_filename_encoding_EUCJP_CP932)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ja_JP.eucJP")) {
++	if (setlocale(LC_ALL, "ja_JP.eucJP")) {
+ 		skipping("eucJP locale not available on this system.");
+ 		return;
+ 	}
+@@ -357,8 +357,8 @@ DEFINE_TEST(test_gnutar_filename_encoding_CP932_UTF8)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "Japanese_Japan") &&
+-	    NULL == setlocale(LC_ALL, "ja_JP.SJIS")) {
++	if (setlocale(LC_ALL, "Japanese_Japan") &&
++	    setlocale(LC_ALL, "ja_JP.SJIS")) {
+ 		skipping("CP932/SJIS locale not available on this system.");
+ 		return;
+ 	}
+--- libarchive-3.4.3/libarchive/test/test_pax_filename_encoding.c
++++ libarchive-3.4.3/libarchive/test/test_pax_filename_encoding.c
+@@ -342,7 +342,7 @@ DEFINE_TEST(test_pax_filename_encoding_KOI8R)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -388,8 +388,8 @@ DEFINE_TEST(test_pax_filename_encoding_CP1251)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -435,7 +435,7 @@ DEFINE_TEST(test_pax_filename_encoding_EUCJP)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ja_JP.eucJP")) {
++	if (setlocale(LC_ALL, "ja_JP.eucJP")) {
+ 		skipping("eucJP locale not available on this system.");
+ 		return;
+ 	}
+@@ -482,8 +482,8 @@ DEFINE_TEST(test_pax_filename_encoding_CP932)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "Japanese_Japan") &&
+-	    NULL == setlocale(LC_ALL, "ja_JP.SJIS")) {
++	if (setlocale(LC_ALL, "Japanese_Japan") &&
++	    setlocale(LC_ALL, "ja_JP.SJIS")) {
+ 		skipping("eucJP locale not available on this system.");
+ 		return;
+ 	}
+@@ -531,7 +531,7 @@ DEFINE_TEST(test_pax_filename_encoding_KOI8R_BINARY)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -567,7 +567,7 @@ DEFINE_TEST(test_pax_filename_encoding_KOI8R_CP1251)
+ {
+   	struct archive *a;
+ 
+-	if (NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+--- libarchive-3.4.3/libarchive/test/test_read_format_cab_filename.c
++++ libarchive-3.4.3/libarchive/test/test_read_format_cab_filename.c
+@@ -36,7 +36,7 @@ test_read_format_cab_filename_CP932_eucJP(const char *refname)
+ 	/*
+ 	 * Read CAB filename in ja_JP.eucJP with "hdrcharset=CP932" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "ja_JP.eucJP")) {
++	if (setlocale(LC_ALL, "ja_JP.eucJP")) {
+ 		skipping("ja_JP.eucJP locale not available on this system.");
+ 		return;
+ 	}
+--- libarchive-3.4.3/libarchive/test/test_read_format_cpio_filename.c
++++ libarchive-3.4.3/libarchive/test/test_read_format_cpio_filename.c
+@@ -91,7 +91,7 @@ DEFINE_TEST(test_read_format_cpio_filename_UTF8_eucJP)
+ 	/*
+ 	 * Read UTF-8 filename in ja_JP.eucJP with "hdrcharset=UTF-8" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "ja_JP.eucJP")) {
++	if (setlocale(LC_ALL, "ja_JP.eucJP")) {
+ 		skipping("ja_JP.eucJP locale not available on this system.");
+ 		return;
+ 	}
+@@ -191,8 +191,8 @@ DEFINE_TEST(test_read_format_cpio_filename_CP866_KOI8R)
+ 	/*
+ 	 * Read CP866 filename in ru_RU.KOI8-R with "hdrcharset=CP866" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.20866") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "Russian_Russia.20866") &&
++	    setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("ru_RU.KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -296,8 +296,8 @@ DEFINE_TEST(test_read_format_cpio_filename_KOI8R_CP866)
+ 	/*
+ 	 * Read KOI8-R filename in ru_RU.CP866 with "hdrcharset=KOI8-R" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.866") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP866")) {
++	if (setlocale(LC_ALL, "Russian_Russia.866") &&
++	    setlocale(LC_ALL, "ru_RU.CP866")) {
+ 		skipping("ru_RU.CP866 locale not available on this system.");
+ 		return;
+ 	}
+@@ -401,8 +401,8 @@ DEFINE_TEST(test_read_format_cpio_filename_UTF8_KOI8R)
+ 	/*
+ 	 * Read UTF-8 filename in ru_RU.KOI8-R with "hdrcharset=UTF-8" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.20866") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "Russian_Russia.20866") &&
++	    setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("ru_RU.KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -454,8 +454,8 @@ DEFINE_TEST(test_read_format_cpio_filename_UTF8_CP866)
+ 	/*
+ 	 * Read UTF-8 filename in ru_RU.CP866 with "hdrcharset=UTF-8" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.866") &&
+-		NULL == setlocale(LC_ALL, "ru_RU.CP866")) {
++	if (setlocale(LC_ALL, "Russian_Russia.866") &&
++		setlocale(LC_ALL, "ru_RU.CP866")) {
+ 		skipping("ru_RU.CP866 locale not available on this system.");
+ 		return;
+ 	}
+@@ -553,8 +553,8 @@ DEFINE_TEST(test_read_format_cpio_filename_eucJP_CP932)
+ 	/*
+ 	 * Read eucJP filename in CP932/SJIS with "hdrcharset=eucJP" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Japanese_Japan") &&
+-	    NULL == setlocale(LC_ALL, "ja_JP.SJIS")) {
++	if (setlocale(LC_ALL, "Japanese_Japan") &&
++	    setlocale(LC_ALL, "ja_JP.SJIS")) {
+ 		skipping("CP932 locale not available on this system.");
+ 		return;
+ 	}
+@@ -604,8 +604,8 @@ DEFINE_TEST(test_read_format_cpio_filename_UTF8_CP932)
+ 	/*
+ 	 * Read UTF-8 filename in CP932/SJIS with "hdrcharset=UTF-8" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Japanese_Japan") &&
+-	    NULL == setlocale(LC_ALL, "ja_JP.SJIS")) {
++	if (setlocale(LC_ALL, "Japanese_Japan") &&
++	    setlocale(LC_ALL, "ja_JP.SJIS")) {
+ 		skipping("CP932 locale not available on this system.");
+ 		return;
+ 	}
+@@ -656,8 +656,8 @@ DEFINE_TEST(test_read_format_cpio_filename_CP866_CP1251)
+ 	/*
+ 	 * Read CP866 filename in CP1251 with "hdrcharset=CP866" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("CP1251 locale not available on this system.");
+ 		return;
+ 	}
+@@ -715,7 +715,7 @@ DEFINE_TEST(test_read_format_cpio_filename_CP866_CP1251_win)
+ 	/*
+ 	 * Read CP866 filename in CP1251 without "hdrcharset=CP866" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia")) {
++	if (setlocale(LC_ALL, "Russian_Russia")) {
+ 		skipping("Russian_Russia locale not available on this system.");
+ 		return;
+ 	}
+@@ -761,8 +761,8 @@ DEFINE_TEST(test_read_format_cpio_filename_KOI8R_CP1251)
+ 	/*
+ 	 * Read KOI8-R filename in CP1251 with "hdrcharset=KOI8-R" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("CP1251 locale not available on this system.");
+ 		return;
+ 	}
+@@ -814,8 +814,8 @@ DEFINE_TEST(test_read_format_cpio_filename_UTF8_CP1251)
+ 	/*
+ 	 * Read KOI8-R filename in CP1251 with "hdrcharset=KOI8-R" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("CP1251 locale not available on this system.");
+ 		return;
+ 	}
+--- libarchive-3.4.3/libarchive/test/test_read_format_gtar_filename.c
++++ libarchive-3.4.3/libarchive/test/test_read_format_gtar_filename.c
+@@ -89,8 +89,8 @@ DEFINE_TEST(test_read_format_gtar_filename_CP866_KOI8R)
+ 	/*
+ 	 * Read CP866 filename in ru_RU.KOI8-R with "hdrcharset=CP866" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.20866") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "Russian_Russia.20866") &&
++	    setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("ru_RU.KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -194,8 +194,8 @@ DEFINE_TEST(test_read_format_gtar_filename_KOI8R_CP866)
+ 	/*
+ 	 * Read KOI8-R filename in ru_RU.CP866 with "hdrcharset=KOI8-R" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.866") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP866")) {
++	if (setlocale(LC_ALL, "Russian_Russia.866") &&
++	    setlocale(LC_ALL, "ru_RU.CP866")) {
+ 		skipping("ru_RU.CP866 locale not available on this system.");
+ 		return;
+ 	}
+@@ -299,8 +299,8 @@ DEFINE_TEST(test_read_format_gtar_filename_eucJP_CP932)
+ 	/*
+ 	 * Read eucJP filename in CP932/SJIS with "hdrcharset=eucJP" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Japanese_Japan") &&
+-	    NULL == setlocale(LC_ALL, "ja_JP.SJIS")) {
++	if (setlocale(LC_ALL, "Japanese_Japan") &&
++	    setlocale(LC_ALL, "ja_JP.SJIS")) {
+ 		skipping("CP932 locale not available on this system.");
+ 		return;
+ 	}
+@@ -350,8 +350,8 @@ DEFINE_TEST(test_read_format_gtar_filename_CP866_CP1251)
+ 	/*
+ 	 * Read CP866 filename in CP1251 with "hdrcharset=CP866" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("CP1251 locale not available on this system.");
+ 		return;
+ 	}
+@@ -409,7 +409,7 @@ DEFINE_TEST(test_read_format_gtar_filename_CP866_CP1251_win)
+ 	/*
+ 	 * Read CP866 filename in CP1251 without "hdrcharset=CP866" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia")) {
++	if (setlocale(LC_ALL, "Russian_Russia")) {
+ 		skipping("Russian_Russia locale not available on this system.");
+ 		return;
+ 	}
+@@ -455,8 +455,8 @@ DEFINE_TEST(test_read_format_gtar_filename_KOI8R_CP1251)
+ 	/*
+ 	 * Read KOI8-R filename in CP1251 with "hdrcharset=KOI8-R" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("CP1251 locale not available on this system.");
+ 		return;
+ 	}
+--- libarchive-3.4.3/libarchive/test/test_read_format_lha_filename.c
++++ libarchive-3.4.3/libarchive/test/test_read_format_lha_filename.c
+@@ -36,7 +36,7 @@ test_read_format_lha_filename_CP932_eucJP(const char *refname)
+ 	/*
+ 	 * Read LHA filename in ja_JP.eucJP.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "ja_JP.eucJP")) {
++	if (setlocale(LC_ALL, "ja_JP.eucJP")) {
+ 		skipping("ja_JP.eucJP locale not available on this system.");
+ 		return;
+ 	}
+@@ -160,7 +160,7 @@ test_read_format_lha_filename_CP932_Windows(const char *refname)
+ 	/*
+ 	 * Read LHA filename in jpn on Windows.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "jpn")) {
++	if (setlocale(LC_ALL, "jpn")) {
+ 		skipping("jpn locale not available on this system.");
+ 		return;
+ 	}
+--- libarchive-3.4.3/libarchive/test/test_read_format_rar.c
++++ libarchive-3.4.3/libarchive/test/test_read_format_rar.c
+@@ -336,8 +336,8 @@ DEFINE_TEST(test_read_format_rar_unicode_CP932)
+   struct archive_entry *ae;
+   struct archive *a;
+ 
+-  if (NULL == setlocale(LC_ALL, "Japanese_Japan") &&
+-    NULL == setlocale(LC_ALL, "ja_JP.SJIS")) {
++  if (setlocale(LC_ALL, "Japanese_Japan") &&
++    setlocale(LC_ALL, "ja_JP.SJIS")) {
+ 	skipping("CP932 locale not available on this system.");
+ 	return;
+   }
+--- libarchive-3.4.3/libarchive/test/test_read_format_tar_filename.c
++++ libarchive-3.4.3/libarchive/test/test_read_format_tar_filename.c
+@@ -47,8 +47,8 @@ test_read_format_tar_filename_KOI8R_CP866(const char *refname)
+  	* Read filename in ru_RU.CP866 with "hdrcharset=KOI8-R" option.
+  	* We should correctly read two filenames.
+ 	*/
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.866") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP866")) {
++	if (setlocale(LC_ALL, "Russian_Russia.866") &&
++	    setlocale(LC_ALL, "ru_RU.CP866")) {
+ 		skipping("ru_RU.CP866 locale not available on this system.");
+ 		return;
+ 	}
+@@ -276,8 +276,8 @@ test_read_format_tar_filename_KOI8R_CP1251(const char *refname)
+  	* Read filename in CP1251 with "hdrcharset=KOI8-R" option.
+  	* We should correctly read two filenames.
+ 	*/
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("CP1251 locale not available on this system.");
+ 		return;
+ 	}
+--- libarchive-3.4.3/libarchive/test/test_read_format_ustar_filename.c
++++ libarchive-3.4.3/libarchive/test/test_read_format_ustar_filename.c
+@@ -90,8 +90,8 @@ test_read_format_ustar_filename_CP866_KOI8R(const char *refname)
+ 	/*
+ 	 * Read CP866 filename in ru_RU.KOI8-R with "hdrcharset=CP866" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.20866") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "Russian_Russia.20866") &&
++	    setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("ru_RU.KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -200,8 +200,8 @@ test_read_format_ustar_filename_KOI8R_CP866(const char *refname)
+ 	/*
+ 	 * Read KOI8-R filename in ru_RU.CP866 with "hdrcharset=KOI8-R" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.866") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP866")) {
++	if (setlocale(LC_ALL, "Russian_Russia.866") &&
++	    setlocale(LC_ALL, "ru_RU.CP866")) {
+ 		skipping("ru_RU.CP866 locale not available on this system.");
+ 		return;
+ 	}
+@@ -311,8 +311,8 @@ test_read_format_ustar_filename_eucJP_CP932(const char *refname)
+ 	/*
+ 	 * Read eucJP filename in CP932/SJIS with "hdrcharset=eucJP" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Japanese_Japan") &&
+-	    NULL == setlocale(LC_ALL, "ja_JP.SJIS")) {
++	if (setlocale(LC_ALL, "Japanese_Japan") &&
++	    setlocale(LC_ALL, "ja_JP.SJIS")) {
+ 		skipping("CP932 locale not available on this system.");
+ 		return;
+ 	}
+@@ -365,8 +365,8 @@ test_read_format_ustar_filename_CP866_CP1251(const char *refname)
+ 	/*
+ 	 * Read CP866 filename in CP1251 with "hdrcharset=CP866" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("CP1251 locale not available on this system.");
+ 		return;
+ 	}
+@@ -427,7 +427,7 @@ test_read_format_ustar_filename_CP866_CP1251_win(const char *refname)
+ 	/*
+ 	 * Read CP866 filename in CP1251 without "hdrcharset=CP866" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia")) {
++	if (setlocale(LC_ALL, "Russian_Russia")) {
+ 		skipping("Russian_Russia locale not available on this system.");
+ 		return;
+ 	}
+@@ -476,8 +476,8 @@ test_read_format_ustar_filename_KOI8R_CP1251(const char *refname)
+ 	/*
+ 	 * Read KOI8-R filename in CP1251 with "hdrcharset=KOI8-R" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("CP1251 locale not available on this system.");
+ 		return;
+ 	}
+--- libarchive-3.4.3/libarchive/test/test_read_format_zip_filename.c
++++ libarchive-3.4.3/libarchive/test/test_read_format_zip_filename.c
+@@ -36,7 +36,7 @@ DEFINE_TEST(test_read_format_zip_filename_CP932_eucJP)
+ 	/*
+ 	 * Read CP932 filename in ja_JP.eucJP with "hdrcharset=CP932" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "ja_JP.eucJP")) {
++	if (setlocale(LC_ALL, "ja_JP.eucJP")) {
+ 		skipping("ja_JP.eucJP locale not available on this system.");
+ 		return;
+ 	}
+@@ -176,7 +176,7 @@ DEFINE_TEST(test_read_format_zip_filename_UTF8_eucJP)
+ 	 * because the file name in the sample file is UTF-8 and
+ 	 * Bit 11 of its general purpose bit flag is set.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "ja_JP.eucJP")) {
++	if (setlocale(LC_ALL, "ja_JP.eucJP")) {
+ 		skipping("ja_JP.eucJP locale not availablefilename_ on "
+ 			 "this system.");
+ 		return;
+@@ -343,8 +343,8 @@ DEFINE_TEST(test_read_format_zip_filename_CP866_KOI8R)
+ 	/*
+ 	 * Read CP866 filename in ru_RU.KOI8-R with "hdrcharset=CP866" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.20866") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "Russian_Russia.20866") &&
++	    setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("ru_RU.KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -456,8 +456,8 @@ DEFINE_TEST(test_read_format_zip_filename_KOI8R_CP866)
+ 	/*
+ 	 * Read KOI8-R filename in ru_RU.CP866 with "hdrcharset=KOI8-R" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.866") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP866")) {
++	if (setlocale(LC_ALL, "Russian_Russia.866") &&
++	    setlocale(LC_ALL, "ru_RU.CP866")) {
+ 		skipping("ru_RU.CP866 locale not available on this system.");
+ 		return;
+ 	}
+@@ -569,8 +569,8 @@ DEFINE_TEST(test_read_format_zip_filename_UTF8_KOI8R)
+ 	/*
+ 	 * Read UTF-8 filename in ru_RU.KOI8-R with "hdrcharset=UTF-8" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.20866") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "Russian_Russia.20866") &&
++	    setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("ru_RU.KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -633,8 +633,8 @@ DEFINE_TEST(test_read_format_zip_filename_UTF8_CP866)
+ 	 * because the file name in the sample file is UTF-8 and
+ 	 * Bit 11 of its general purpose bit flag is set.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia.866") &&
+-		NULL == setlocale(LC_ALL, "ru_RU.CP866")) {
++	if (setlocale(LC_ALL, "Russian_Russia.866") &&
++		setlocale(LC_ALL, "ru_RU.CP866")) {
+ 		skipping("ru_RU.CP866 locale not available on this system.");
+ 		return;
+ 	}
+@@ -748,8 +748,8 @@ DEFINE_TEST(test_read_format_zip_filename_CP932_CP932)
+ 	/*
+ 	 * Read CP932 filename in CP932/SJIS with "hdrcharset=CP932" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Japanese_Japan") &&
+-	    NULL == setlocale(LC_ALL, "ja_JP.SJIS")) {
++	if (setlocale(LC_ALL, "Japanese_Japan") &&
++	    setlocale(LC_ALL, "ja_JP.SJIS")) {
+ 		skipping("CP932 locale not available on this system.");
+ 		return;
+ 	}
+@@ -809,8 +809,8 @@ DEFINE_TEST(test_read_format_zip_filename_UTF8_CP932)
+ 	 * because the file name in the sample file is UTF-8 and
+ 	 * Bit 11 of its general purpose bit flag is set.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Japanese_Japan") &&
+-	    NULL == setlocale(LC_ALL, "ja_JP.SJIS")) {
++	if (setlocale(LC_ALL, "Japanese_Japan") &&
++	    setlocale(LC_ALL, "ja_JP.SJIS")) {
+ 		skipping("CP932 locale not available on this system.");
+ 		return;
+ 	}
+@@ -884,8 +884,8 @@ DEFINE_TEST(test_read_format_zip_filename_CP866_CP1251)
+ 	/*
+ 	 * Read CP866 filename in CP1251 with "hdrcharset=CP866" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("CP1251 locale not available on this system.");
+ 		return;
+ 	}
+@@ -947,7 +947,7 @@ DEFINE_TEST(test_read_format_zip_filename_CP866_CP1251_win)
+ 	/*
+ 	 * Read CP866 filename in CP1251 without "hdrcharset=CP866" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia")) {
++	if (setlocale(LC_ALL, "Russian_Russia")) {
+ 		skipping("Russian_Russia locale not available on this system.");
+ 		return;
+ 	}
+@@ -997,8 +997,8 @@ DEFINE_TEST(test_read_format_zip_filename_KOI8R_CP1251)
+ 	/*
+ 	 * Read KOI8-R filename in CP1251 with "hdrcharset=KOI8-R" option.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("CP1251 locale not available on this system.");
+ 		return;
+ 	}
+@@ -1056,8 +1056,8 @@ DEFINE_TEST(test_read_format_zip_filename_UTF8_CP1251)
+ 	 * because the file name in the sample file is UTF-8 and
+ 	 * Bit 11 of its general purpose bit flag is set.
+ 	 */
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("CP1251 locale not available on this system.");
+ 		return;
+ 	}
+--- libarchive-3.4.3/libarchive/test/test_ustar_filename_encoding.c
++++ libarchive-3.4.3/libarchive/test/test_ustar_filename_encoding.c
+@@ -75,7 +75,7 @@ DEFINE_TEST(test_ustar_filename_encoding_KOI8R_UTF8)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -116,7 +116,7 @@ DEFINE_TEST(test_ustar_filename_encoding_KOI8R_CP866)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -157,8 +157,8 @@ DEFINE_TEST(test_ustar_filename_encoding_CP1251_UTF8)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia") &&
+-	    NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "Russian_Russia") &&
++	    setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -202,7 +202,7 @@ DEFINE_TEST(test_ustar_filename_encoding_ru_RU_CP1251)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -242,7 +242,7 @@ DEFINE_TEST(test_ustar_filename_encoding_Russian_Russia)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia")) {
++	if (setlocale(LC_ALL, "Russian_Russia")) {
+ 		skipping("Russian_Russia locale not available on this system.");
+ 		return;
+ 	}
+@@ -277,7 +277,7 @@ DEFINE_TEST(test_ustar_filename_encoding_EUCJP_UTF8)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ja_JP.eucJP")) {
++	if (setlocale(LC_ALL, "ja_JP.eucJP")) {
+ 		skipping("eucJP locale not available on this system.");
+ 		return;
+ 	}
+@@ -317,7 +317,7 @@ DEFINE_TEST(test_ustar_filename_encoding_EUCJP_CP932)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ja_JP.eucJP")) {
++	if (setlocale(LC_ALL, "ja_JP.eucJP")) {
+ 		skipping("eucJP locale not available on this system.");
+ 		return;
+ 	}
+@@ -357,8 +357,8 @@ DEFINE_TEST(test_ustar_filename_encoding_CP932_UTF8)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "Japanese_Japan") &&
+-	    NULL == setlocale(LC_ALL, "ja_JP.SJIS")) {
++	if (setlocale(LC_ALL, "Japanese_Japan") &&
++	    setlocale(LC_ALL, "ja_JP.SJIS")) {
+ 		skipping("CP932/SJIS locale not available on this system.");
+ 		return;
+ 	}
+--- libarchive-3.4.3/libarchive/test/test_zip_filename_encoding.c
++++ libarchive-3.4.3/libarchive/test/test_zip_filename_encoding.c
+@@ -122,7 +122,7 @@ DEFINE_TEST(test_zip_filename_encoding_KOI8R)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ru_RU.KOI8-R")) {
++	if (setlocale(LC_ALL, "ru_RU.KOI8-R")) {
+ 		skipping("KOI8-R locale not available on this system.");
+ 		return;
+ 	}
+@@ -222,7 +222,7 @@ DEFINE_TEST(test_zip_filename_encoding_ru_RU_CP1251)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ru_RU.CP1251")) {
++	if (setlocale(LC_ALL, "ru_RU.CP1251")) {
+ 		skipping("Russian_Russia locale not available on this system.");
+ 		return;
+ 	}
+@@ -265,7 +265,7 @@ DEFINE_TEST(test_zip_filename_encoding_Russian_Russia)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "Russian_Russia")) {
++	if (setlocale(LC_ALL, "Russian_Russia")) {
+ 		skipping("Russian_Russia locale not available on this system.");
+ 		return;
+ 	}
+@@ -334,7 +334,7 @@ DEFINE_TEST(test_zip_filename_encoding_EUCJP)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "ja_JP.eucJP")) {
++	if (setlocale(LC_ALL, "ja_JP.eucJP")) {
+ 		skipping("eucJP locale not available on this system.");
+ 		return;
+ 	}
+@@ -433,8 +433,8 @@ DEFINE_TEST(test_zip_filename_encoding_CP932)
+ 	char buff[4096];
+ 	size_t used;
+ 
+-	if (NULL == setlocale(LC_ALL, "Japanese_Japan") &&
+-	    NULL == setlocale(LC_ALL, "ja_JP.SJIS")) {
++	if (setlocale(LC_ALL, "Japanese_Japan") &&
++	    setlocale(LC_ALL, "ja_JP.SJIS")) {
+ 		skipping("CP932/SJIS locale not available on this system.");
+ 		return;
+ 	}
