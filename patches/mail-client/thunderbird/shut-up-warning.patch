@@ -1,0 +1,11 @@
+--- firefox-68.0.1/gfx/2d/HelpersCairo.h.old	2019-07-17 20:51:26.000000000 +0000
++++ firefox-68.0.1/gfx/2d/HelpersCairo.h	2019-08-10 11:38:36.047380153 +0000
+@@ -147,7 +147,7 @@
+     case SurfaceFormat::R5G6B5_UINT16:
+       return CAIRO_FORMAT_RGB16_565;
+     default:
+-      gfxCriticalError() << "Unknown image format " << (int)format;
++      //gfxCriticalError() << "Unknown image format " << (int)format;
+       return CAIRO_FORMAT_ARGB32;
+   }
+ }

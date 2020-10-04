@@ -1,0 +1,20 @@
+--- firefox-81.0.1/memory/build/Mutex.h
++++ firefox-81.0.1/memory/build/Mutex.h
+@@ -37,7 +37,7 @@ struct Mutex {
+     }
+ #elif defined(XP_DARWIN)
+     mMutex = OS_SPINLOCK_INIT;
+-#elif defined(XP_LINUX) && !defined(ANDROID)
++#elif defined(XP_LINUX) && !defined(ANDROID) && defined(__GLIBC__)
+     pthread_mutexattr_t attr;
+     if (pthread_mutexattr_init(&attr) != 0) {
+       return false;
+@@ -102,7 +102,7 @@ typedef Mutex StaticMutex;
+ 
+ #  if defined(XP_DARWIN)
+ #    define STATIC_MUTEX_INIT OS_SPINLOCK_INIT
+-#  elif defined(XP_LINUX) && !defined(ANDROID)
++#  elif defined(XP_LINUX) && !defined(ANDROID) && defined(__GLIBC__)
+ #    define STATIC_MUTEX_INIT PTHREAD_ADAPTIVE_MUTEX_INITIALIZER_NP
+ #  else
+ #    define STATIC_MUTEX_INIT PTHREAD_MUTEX_INITIALIZER

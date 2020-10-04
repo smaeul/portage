@@ -1,0 +1,21 @@
+- manconv requires //IGNORE pseudo-locales in iconv
+- man-deleted-directory is broken by sandbox (works fine outside sandbox)
+--- man-db-2.9.3/src/tests/Makefile.in
++++ man-db-2.9.3/src/tests/Makefile.in
+@@ -1692,7 +1692,6 @@ ALL_TESTS = \
+ 	lexgrog-backslash-dash-rhs \
+ 	lexgrog-basic \
+ 	lexgrog-multiple-whatis \
+-	man-deleted-directory \
+ 	man-exact-section-matches \
+ 	man-executable-page-on-path \
+ 	man-invalid-db-entry \
+@@ -1707,8 +1706,6 @@ ALL_TESTS = \
+ 	man-symlinks-with-matching-names \
+ 	manconv-coding-tags \
+ 	manconv-guess-from-encoding \
+-	manconv-incomplete-char-at-eof \
+-	manconv-odd-combinations \
+ 	mandb-basic \
+ 	mandb-bogus-symlink \
+ 	mandb-cachedir-tag \

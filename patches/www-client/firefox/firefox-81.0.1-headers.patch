@@ -1,0 +1,10 @@
+--- firefox-81.0.1/media/mtransport/third_party/nICEr/src/stun/addrs-netlink.c
++++ firefox-81.0.1/media/mtransport/third_party/nICEr/src/stun/addrs-netlink.c
+@@ -46,7 +46,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ #include <sys/utsname.h>
+ #include <sys/ioctl.h>
+ #include <netinet/in.h>
+-#include <net/if.h>
+ #include <unistd.h>
+ #include <errno.h>
+ #include <linux/netlink.h>

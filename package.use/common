@@ -59,6 +59,7 @@ dev-db/sqlite -icu
 dev-java/openjdk alsa
 dev-lang/ghc ghcbootstrap
 dev-lang/php bcmath gd fpm pdo
+dev-lang/ruby -rdoc
 dev-lang/rust clippy rls rustfmt system-llvm
 dev-libs/capstone python
 dev-libs/openssl -sslv3
@@ -94,13 +95,14 @@ net-print/cups-filters pclm
 net-vpn/wireguard-tools -wg-quick
 net-wireless/wpa_supplicant ap -hs2-0
 sys-apps/busybox savedconfig
+sys-apps/coreutils hostname
 sys-apps/debianutils -installkernel
 sys-apps/elfix -ptpax
 sys-apps/flashrom -* internal linux-mtd linux-spi tools
 sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
-sys-apps/util-linux -cramfs
+sys-apps/util-linux -cramfs cryptsetup
 sys-devel/clang default-compiler-rt default-libcxx
 sys-devel/clang-runtime compiler-rt libcxx -sanitize
 sys-devel/gcc ada

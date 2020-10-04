@@ -1,0 +1,23 @@
+- fails in network sandbox, passes outside.
+--- curl-7.72.0/tests/data/Makefile.inc
++++ curl-7.72.0/tests/data/Makefile.inc
+@@ -191,7 +191,7 @@ test1550 test1551 test1552 test1553 test1554 test1555 test1556 test1557 \
+ test1558 test1559 test1560 test1561 test1562 test1563 test1564 test1565 \
+ test1566 test1567 \
+ \
+-test1590 test1591 test1592 test1593 test1594 test1595 test1596 \
++test1590 test1591 test1593 test1594 test1595 test1596 \
+ \
+ test1600 test1601 test1602 test1603 test1604 test1605 test1606 test1607 \
+ test1608 test1609 test1610 test1611 test1612 \
+--- curl-7.72.0/tests/libtest/Makefile.inc
++++ curl-7.72.0/tests/libtest/Makefile.inc
+@@ -57,7 +57,7 @@ noinst_PROGRAMS = chkhostname libauthretry libntlmconnect                \
+  lib1540 lib1541 \
+  lib1550 lib1551 lib1552 lib1553 lib1554 lib1555 lib1556 lib1557 \
+  lib1558 lib1559 lib1560 lib1564 lib1565 lib1567 \
+- lib1591 lib1592 lib1593 lib1594 lib1596 \
++ lib1591 lib1593 lib1594 lib1596 \
+  lib1900 lib1905 lib1906 lib1907 lib1908 lib1910 \
+  lib2033 lib3010
+ 

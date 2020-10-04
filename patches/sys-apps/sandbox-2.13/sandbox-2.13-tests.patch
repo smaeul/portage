@@ -1,9 +1,0 @@
-- The test checks errno after passing a NULL filename to utimensat.
-  musl sets EFAULT instead of EINVAL, but the test is bogus.
---- sandbox-2.13/tests/utimensat.at
-+++ sandbox-2.13/tests/utimensat.at
-@@ -1,4 +1,3 @@
- SB_CHECK(1)
- SB_CHECK(2)
--SB_CHECK(3)
- SB_CHECK(4)

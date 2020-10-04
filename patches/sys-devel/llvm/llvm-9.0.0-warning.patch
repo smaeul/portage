@@ -1,5 +1,5 @@
---- llvm-9.0.0.src/include/llvm/ADT/SmallVector.h
-+++ llvm-9.0.0.src/include/llvm/ADT/SmallVector.h
+--- a/llvm/include/llvm/ADT/SmallVector.h
++++ b/llvm/include/llvm/ADT/SmallVector.h
 @@ -517,7 +517,10 @@ public:
      // the reference.
      const T *EltPtr = &Elt;

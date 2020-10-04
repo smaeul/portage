@@ -23,13 +23,13 @@
  	static char *utf8 = NULL, *output = NULL;
  	size_t utf8left = 0;
  	iconv_t cd_utf8, cd = NULL;
--	int to_utf8 = STREQ (try_to_code, "UTF-8") ||
--		      STRNEQ (try_to_code, "UTF-8//", 7);
+-	bool to_utf8 = STREQ (try_to_code, "UTF-8") ||
+-		       STRNEQ (try_to_code, "UTF-8//", 7);
 -	const char *utf8_target = last ? "UTF-8//IGNORE" : "UTF-8";
--	int ignore_errors = (strstr (try_to_code, "//IGNORE") != NULL);;
-+	int to_utf8 = STREQ (try_to_code, "UTF-8");
+-	bool ignore_errors = (strstr (try_to_code, "//IGNORE") != NULL);
++	bool to_utf8 = STREQ (try_to_code, "UTF-8");
 +	const char *utf8_target = "UTF-8";
-+	int ignore_errors = 0;
++	bool ignore_errors = 0;
  	int ret = 0;
  
  	debug ("trying encoding %s -> %s\n", try_from_code, try_to_code);

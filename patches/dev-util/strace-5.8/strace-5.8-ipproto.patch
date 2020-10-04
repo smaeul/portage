@@ -1,0 +1,15 @@
+--- strace-5.8/xlat/inet_protocols.h
++++ strace-5.8/xlat/inet_protocols.h
+@@ -236,10 +236,10 @@ DIAG_POP_IGNORE_TAUTOLOGICAL_COMPARE
+ #endif
+ #if defined(IPPROTO_MAX) || (defined(HAVE_DECL_IPPROTO_MAX) && HAVE_DECL_IPPROTO_MAX)
+ DIAG_PUSH_IGNORE_TAUTOLOGICAL_COMPARE
+-static_assert((IPPROTO_MAX) == (256), "IPPROTO_MAX != 256");
++static_assert((IPPROTO_MAX) == (263), "IPPROTO_MAX != 263");
+ DIAG_POP_IGNORE_TAUTOLOGICAL_COMPARE
+ #else
+-# define IPPROTO_MAX 256
++# define IPPROTO_MAX 263
+ #endif
+ #if defined(IPPROTO_MPTCP) || (defined(HAVE_DECL_IPPROTO_MPTCP) && HAVE_DECL_IPPROTO_MPTCP)
+ DIAG_PUSH_IGNORE_TAUTOLOGICAL_COMPARE

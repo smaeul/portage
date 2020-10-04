@@ -1,0 +1,10 @@
+--- liburing-0.7/test/accept-test.c
++++ liburing-0.7/test/accept-test.c
+@@ -4,6 +4,7 @@
+  */
+ #include <stdio.h>
+ #include <errno.h>
++#include <string.h>
+ #include <sys/socket.h>
+ #include <sys/un.h>
+ #include <assert.h>

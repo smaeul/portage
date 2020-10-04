@@ -11,4 +11,4 @@ net-wireless/crda-9999
 # Not needed with s6
 sys-fs/udev-init-scripts-9999
 # Managed outside of portage
-virtual/linux-sources-9999
+sys-kernel/vanilla-sources-9999

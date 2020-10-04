@@ -1,4 +1,4 @@
-From b5b429ed3e433e781a60c7c249ef544c1330f223 Mon Sep 17 00:00:00 2001
+From f1e4095dc8c414adcf4db094af1b9545a07cafcd Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Thu, 10 Oct 2019 20:10:57 -0500
 Subject: [PATCH 4/4] [Clang] Detect musl multiarch directories
@@ -7,10 +7,10 @@ Subject: [PATCH 4/4] [Clang] Detect musl multiarch directories
  clang/lib/Driver/ToolChains/Linux.cpp | 46 ++++++++++++++++++++++++++-
  1 file changed, 45 insertions(+), 1 deletion(-)
 
-diff --git clang/lib/Driver/ToolChains/Linux.cpp clang/lib/Driver/ToolChains/Linux.cpp
-index bff1ab1009b..1e7b0a861cc 100644
---- clang/lib/Driver/ToolChains/Linux.cpp
-+++ clang/lib/Driver/ToolChains/Linux.cpp
+diff --git a/clang/lib/Driver/ToolChains/Linux.cpp b/clang/lib/Driver/ToolChains/Linux.cpp
+index 6532c899492..7fee752febd 100644
+--- a/clang/lib/Driver/ToolChains/Linux.cpp
++++ b/clang/lib/Driver/ToolChains/Linux.cpp
 @@ -60,6 +60,12 @@ std::string Linux::getMultiarchTriple(const Driver &D,
    case llvm::Triple::thumb:
      if (IsAndroid) {
@@ -141,5 +141,5 @@ index bff1ab1009b..1e7b0a861cc 100644
      if (D.getVFS().exists(SysRoot + Dir)) {
        addExternCSystemInclude(DriverArgs, CC1Args, SysRoot + Dir);
 -- 
-2.24.1
+2.26.2
 

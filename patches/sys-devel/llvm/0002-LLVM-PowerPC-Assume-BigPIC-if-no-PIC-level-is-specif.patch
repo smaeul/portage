@@ -1,4 +1,4 @@
-From 673540d140c927486d29d2eaf95d655812431dad Mon Sep 17 00:00:00 2001
+From dd009ca631a68bfb65bf4da66edd2a9cc5147857 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 3 Nov 2019 10:57:27 -0600
 Subject: [PATCH 2/4] [LLVM][PowerPC] Assume BigPIC if no PIC level is
@@ -9,11 +9,11 @@ Subject: [PATCH 2/4] [LLVM][PowerPC] Assume BigPIC if no PIC level is
  llvm/lib/Target/PowerPC/PPCMCInstLower.cpp | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git llvm/lib/Target/PowerPC/PPCAsmPrinter.cpp llvm/lib/Target/PowerPC/PPCAsmPrinter.cpp
-index 4311df5dbeb..f3556f0bcee 100644
---- llvm/lib/Target/PowerPC/PPCAsmPrinter.cpp
-+++ llvm/lib/Target/PowerPC/PPCAsmPrinter.cpp
-@@ -500,7 +500,7 @@ void PPCAsmPrinter::EmitTlsCall(const MachineInstr *MI,
+diff --git a/llvm/lib/Target/PowerPC/PPCAsmPrinter.cpp b/llvm/lib/Target/PowerPC/PPCAsmPrinter.cpp
+index 20c5ac7b378..ecd715ca462 100644
+--- a/llvm/lib/Target/PowerPC/PPCAsmPrinter.cpp
++++ b/llvm/lib/Target/PowerPC/PPCAsmPrinter.cpp
+@@ -503,7 +503,7 @@ void PPCAsmPrinter::EmitTlsCall(const MachineInstr *MI,
  
    // Add 32768 offset to the symbol so we follow up the latest GOT/PLT ABI.
    if (Kind == MCSymbolRefExpr::VK_PLT && Subtarget->isSecurePlt() &&
@@ -22,10 +22,10 @@ index 4311df5dbeb..f3556f0bcee 100644
      TlsRef = MCBinaryExpr::createAdd(
          TlsRef, MCConstantExpr::create(32768, OutContext), OutContext);
    const MachineOperand &MO = MI->getOperand(2);
-diff --git llvm/lib/Target/PowerPC/PPCMCInstLower.cpp llvm/lib/Target/PowerPC/PPCMCInstLower.cpp
+diff --git a/llvm/lib/Target/PowerPC/PPCMCInstLower.cpp b/llvm/lib/Target/PowerPC/PPCMCInstLower.cpp
 index b6496f189a3..9dcf23114b5 100644
---- llvm/lib/Target/PowerPC/PPCMCInstLower.cpp
-+++ llvm/lib/Target/PowerPC/PPCMCInstLower.cpp
+--- a/llvm/lib/Target/PowerPC/PPCMCInstLower.cpp
++++ b/llvm/lib/Target/PowerPC/PPCMCInstLower.cpp
 @@ -116,7 +116,7 @@ static MCOperand GetSymbolRef(const MachineOperand &MO, const MCSymbol *Symbol,
    const MCExpr *Expr = MCSymbolRefExpr::create(Symbol, RefKind, Ctx);
    // If -msecure-plt -fPIC, add 32768 to symbol.
@@ -36,5 +36,5 @@ index b6496f189a3..9dcf23114b5 100644
      Expr =
          MCBinaryExpr::createAdd(Expr, MCConstantExpr::create(32768, Ctx), Ctx);
 -- 
-2.24.1
+2.26.2
 

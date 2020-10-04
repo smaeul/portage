@@ -1,4 +1,4 @@
-From 84a7ceeaadb5ae97f73fffcdcb6a6ba67433ee2a Mon Sep 17 00:00:00 2001
+From da85b0164f15f6ecd7b5f554d108775fce2545d8 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Thu, 10 Oct 2019 21:21:07 -0500
 Subject: [PATCH 3/4] [LLVM][PowerPC] Use the ELFv2 ABI for musl on both
@@ -9,10 +9,10 @@ Subject: [PATCH 3/4] [LLVM][PowerPC] Use the ELFv2 ABI for musl on both
  llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll   | 1 +
  2 files changed, 4 insertions(+)
 
-diff --git llvm/lib/Target/PowerPC/PPCTargetMachine.cpp llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
+diff --git a/llvm/lib/Target/PowerPC/PPCTargetMachine.cpp b/llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
 index 2caf4c99a1f..37897e403bf 100644
---- llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
-+++ llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
+--- a/llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
++++ b/llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
 @@ -215,6 +215,9 @@ static PPCTargetMachine::PPCABI computeTargetABI(const Triple &TT,
    case Triple::ppc64le:
      return PPCTargetMachine::PPC_ABI_ELFv2;
@@ -23,10 +23,10 @@ index 2caf4c99a1f..37897e403bf 100644
      return PPCTargetMachine::PPC_ABI_ELFv1;
    default:
      return PPCTargetMachine::PPC_ABI_UNKNOWN;
-diff --git llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
+diff --git a/llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll b/llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
 index 8b1cf6b5882..dc0bcf274ba 100644
---- llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
-+++ llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
+--- a/llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
++++ b/llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
 @@ -1,6 +1,7 @@
  ; RUN: llc -verify-machineinstrs -mtriple=powerpc64-unknown-linux-gnu < %s | FileCheck %s -check-prefix=CHECK-ELFv1
  ; RUN: llc -verify-machineinstrs -mtriple=powerpc64-unknown-linux-gnu -target-abi elfv1 < %s | FileCheck %s -check-prefix=CHECK-ELFv1
@@ -36,5 +36,5 @@ index 8b1cf6b5882..dc0bcf274ba 100644
  ; RUN: llc -verify-machineinstrs -mtriple=powerpc64le-unknown-linux-gnu -target-abi elfv1 < %s | FileCheck %s -check-prefix=CHECK-ELFv1
  ; RUN: llc -verify-machineinstrs -mtriple=powerpc64le-unknown-linux-gnu -target-abi elfv2 < %s | FileCheck %s -check-prefix=CHECK-ELFv2
 -- 
-2.24.1
+2.26.2
 
