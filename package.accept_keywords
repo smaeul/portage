@@ -21,14 +21,19 @@ net-mail/b4 ~amd64
 net-misc/streamlink ~amd64
 net-vpn/wireguard-tools ~amd64
 net-p2p/transmission-remote-cli ~amd64
+sci-electronics/pulseview ~amd64
+sci-electronics/sigrok-cli ~amd64
+sci-libs/libsigrokdecode ~amd64
 sci-misc/boinc ~amd64
 sys-apps/linux-misc-apps ~amd64
 sys-apps/opal-utils ~ppc64
 sys-block/sedutil ~amd64
 sys-devel/slibtool ~amd64
 sys-devel/sparse ~amd64
+sys-firmware/sigrok-firmware-fx2lafw ~amd64
 sys-power/brightnessctl ~amd64
 www-apps/gitea ~amd64
+www-plugins/passff-host ~amd64
 
 # These packages have a stable version, but either it is too out of date to be
 # useful, or I need the latest version for compatibility with other software.

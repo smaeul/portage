@@ -1,14 +1,14 @@
-From f1e4095dc8c414adcf4db094af1b9545a07cafcd Mon Sep 17 00:00:00 2001
+From 15510c31dfff8945d852d9ccd7190adb341a8815 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Thu, 10 Oct 2019 20:10:57 -0500
-Subject: [PATCH 4/4] [Clang] Detect musl multiarch directories
+Subject: [PATCH 3/3] [Clang] Detect musl multiarch directories
 
 ---
  clang/lib/Driver/ToolChains/Linux.cpp | 46 ++++++++++++++++++++++++++-
  1 file changed, 45 insertions(+), 1 deletion(-)
 
 diff --git a/clang/lib/Driver/ToolChains/Linux.cpp b/clang/lib/Driver/ToolChains/Linux.cpp
-index 6532c899492..7fee752febd 100644
+index 180350476c38..2c6c19cba42f 100644
 --- a/clang/lib/Driver/ToolChains/Linux.cpp
 +++ b/clang/lib/Driver/ToolChains/Linux.cpp
 @@ -60,6 +60,12 @@ std::string Linux::getMultiarchTriple(const Driver &D,
@@ -126,7 +126,7 @@ index 6532c899492..7fee752febd 100644
    if (Triple.isMIPS()) {
      if (Triple.isAndroid()) {
        StringRef CPUName;
-@@ -844,6 +881,13 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
+@@ -741,6 +778,13 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
    if (getTriple().isAndroid())
      MultiarchIncludeDirs = AndroidMultiarchIncludeDirs;
  

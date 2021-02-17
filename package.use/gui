@@ -1,6 +1,7 @@
 # Required by media-gfx/inkscape
 dev-cpp/cairomm X
 
+app-crypt/pinentry gtk
 app-office/libreoffice gtk
 app-text/mupdf X
 dev-java/icedtea gtk

@@ -9,8 +9,12 @@ app-text/poppler cxx
 app-text/xmlto text
 # Required by thunderbird
 dev-db/sqlite secure-delete
+# Required by sigrok-firmware-fx2lafw
+dev-embedded/sdcc device-lib mcs51
 # Required by ncmpcpp
 dev-libs/boost nls
+# Required for USE=test
+dev-libs/libzip tools
 # Required for static Haskell
 dev-libs/gmp static-libs
 # Required for static Haskell
@@ -39,8 +43,12 @@ media-libs/soxr examples
 net-analyzer/netperf demo
 # Required by unbound[test]
 net-dns/ldns-utils examples
+# Required for USE=test
+net-irc/weechat nls
 # Required by chromium
 net-libs/nodejs inspector
+# Required by pulseview
+sci-libs/libsigrok cxx
 # Required by !python:2.7
 sys-apps/ripgrep -man
 # Required by bitcoind (cxx) and for USE=test (tcl)
@@ -66,9 +74,10 @@ dev-libs/openssl -sslv3
 dev-ml/lablgtk -opengl
 dev-python/pypax -ptpax
 dev-qt/qtgui egl eglfs evdev tslib
+dev-util/geany -vte
 dev-vcs/git -pcre-jit perl
 gnome-base/librsvg tools
-mail-client/thunderbird eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+mail-client/thunderbird -clang eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/noto cjk
 media-gfx/imagemagick pango
 media-libs/imlib2 -mp3
@@ -97,6 +106,7 @@ net-wireless/wpa_supplicant ap -hs2-0
 sys-apps/busybox savedconfig
 sys-apps/coreutils hostname
 sys-apps/debianutils -installkernel
+sys-apps/dtc yaml
 sys-apps/elfix -ptpax
 sys-apps/flashrom -* internal linux-mtd linux-spi tools
 sys-apps/iproute2 -iptables
@@ -117,7 +127,8 @@ sys-libs/libcxx libcxxabi libunwind
 sys-libs/libcxxabi libunwind
 sys-power/nut -ups_drivers_* ups_drivers_usbhid-ups
 www-client/chromium -atk -hangouts system-ffmpeg -wayland
-www-client/firefox eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+www-client/firefox -clang eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+www-plugins/passff-host firefox
 x11-base/xorg-server xvfb
 x11-libs/gtk+ -vim-syntax
 x11-terms/rxvt-unicode 256-color -blink -fading-colors font-styles iso14755 mousewheel -pixbuf unicode3 -utmp -wtmp

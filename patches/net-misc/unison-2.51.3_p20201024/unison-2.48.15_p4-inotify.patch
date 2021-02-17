@@ -1,0 +1,24 @@
+https://github.com/whitequark/ocaml-inotify/commit/227d62c7a26442c4a474e3d08281340e4d60604d.patch
+
+--- unison/src/fsmonitor/linux/inotify_stubs.c
++++ unison/src/fsmonitor/linux/inotify_stubs.c
+@@ -27,19 +27,7 @@
+ #include <caml/signals.h>
+ #include <caml/callback.h>
+ 
+-#include <features.h>
+-
+-#if __GLIBC__ >= 2 && __GLIBC_MINOR__ >= 4
+-#define GLIBC_SUPPORT_INOTIFY 1
+-#else
+-#define GLIBC_SUPPORT_INOTIFY 0
+-#endif
+-
+-#if GLIBC_SUPPORT_INOTIFY
+ #include <sys/inotify.h>
+-#else
+-#include "inotify_compat.h"
+-#endif
+ 
+ static int inotify_flag_table[] = {
+ 	IN_ACCESS, IN_ATTRIB, IN_CLOSE_WRITE, IN_CLOSE_NOWRITE,

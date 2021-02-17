@@ -1,0 +1,22 @@
+--- apipkg-1.5/test_apipkg.py
++++ apipkg-1.5/test_apipkg.py
+@@ -319,8 +319,8 @@ def test_error_loading_one_element(monkeypatch, tmpdir):
+     import errorloading1
+     assert isinstance(errorloading1, apipkg.ApiModule)
+     assert errorloading1.y == 0
+-    py.test.raises(ImportError, 'errorloading1.x')
+-    py.test.raises(ImportError, 'errorloading1.x')
++    py.test.raises(ImportError, lambda: errorloading1.x)
++    py.test.raises(ImportError, lambda: errorloading1.x)
+ 
+ 
+ def test_onfirstaccess(tmpdir, monkeypatch):
+@@ -493,7 +493,7 @@ def test_aliasmodule_proxy_methods(tmpdir, monkeypatch):
+     assert doit is orig.doit
+ 
+     del proxy.doit
+-    py.test.raises(AttributeError, "orig.doit")
++    py.test.raises(AttributeError, lambda: orig.doit)
+ 
+     proxy.doit = doit
+     assert orig.doit is doit

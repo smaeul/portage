@@ -1,7 +1,7 @@
-From da85b0164f15f6ecd7b5f554d108775fce2545d8 Mon Sep 17 00:00:00 2001
+From 27353aceec003e37985bb331d14caccddef36668 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Thu, 10 Oct 2019 21:21:07 -0500
-Subject: [PATCH 3/4] [LLVM][PowerPC] Use the ELFv2 ABI for musl on both
+Subject: [PATCH 2/3] [LLVM][PowerPC] Use the ELFv2 ABI for musl on both
  endians
 
 ---
@@ -10,10 +10,10 @@ Subject: [PATCH 3/4] [LLVM][PowerPC] Use the ELFv2 ABI for musl on both
  2 files changed, 4 insertions(+)
 
 diff --git a/llvm/lib/Target/PowerPC/PPCTargetMachine.cpp b/llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
-index 2caf4c99a1f..37897e403bf 100644
+index f15f9c7f4942..8dee4acaf2f7 100644
 --- a/llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
 +++ b/llvm/lib/Target/PowerPC/PPCTargetMachine.cpp
-@@ -215,6 +215,9 @@ static PPCTargetMachine::PPCABI computeTargetABI(const Triple &TT,
+@@ -216,6 +216,9 @@ static PPCTargetMachine::PPCABI computeTargetABI(const Triple &TT,
    case Triple::ppc64le:
      return PPCTargetMachine::PPC_ABI_ELFv2;
    case Triple::ppc64:
@@ -24,7 +24,7 @@ index 2caf4c99a1f..37897e403bf 100644
    default:
      return PPCTargetMachine::PPC_ABI_UNKNOWN;
 diff --git a/llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll b/llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
-index 8b1cf6b5882..dc0bcf274ba 100644
+index 8b1cf6b58821..dc0bcf274bab 100644
 --- a/llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
 +++ b/llvm/test/CodeGen/PowerPC/ppc64-elf-abi.ll
 @@ -1,6 +1,7 @@
