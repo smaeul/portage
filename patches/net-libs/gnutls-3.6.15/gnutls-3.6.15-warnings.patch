@@ -1,0 +1,12 @@
+https://bugzilla.redhat.com/show_bug.cgi?id=1876600
+--- gnutls-3.6.15/lib/tls13/session_ticket.h
++++ gnutls-3.6.15/lib/tls13/session_ticket.h
+@@ -30,7 +30,7 @@ int _gnutls13_unpack_session_ticket(gnutls_session_t session,
+                                   gnutls_datum_t *data,
+                                   tls13_ticket_st *ticket_data);
+ 
+-inline static
++static
+ void tls13_ticket_deinit(tls13_ticket_st *ticket)
+ {
+       if (ticket) {

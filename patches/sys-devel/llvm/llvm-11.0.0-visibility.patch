@@ -1,5 +1,5 @@
---- llvm/lib/Target/VE/Disassembler/VEDisassembler.cpp
-+++ llvm/lib/Target/VE/Disassembler/VEDisassembler.cpp
+--- work/llvm/lib/Target/VE/Disassembler/VEDisassembler.cpp
++++ work/llvm/lib/Target/VE/Disassembler/VEDisassembler.cpp
 @@ -47,7 +47,7 @@ static MCDisassembler *createVEDisassembler(const Target &T,
    return new VEDisassembler(STI, Ctx);
  }
@@ -9,8 +9,8 @@
    // Register the disassembler.
    TargetRegistry::RegisterMCDisassembler(getTheVETarget(),
                                           createVEDisassembler);
---- llvm/lib/Target/VE/TargetInfo/VETargetInfo.cpp
-+++ llvm/lib/Target/VE/TargetInfo/VETargetInfo.cpp
+--- work/llvm/lib/Target/VE/TargetInfo/VETargetInfo.cpp
++++ work/llvm/lib/Target/VE/TargetInfo/VETargetInfo.cpp
 @@ -16,7 +16,7 @@ Target &llvm::getTheVETarget() {
    return TheVETarget;
  }
@@ -20,8 +20,8 @@
    RegisterTarget<Triple::ve, /*HasJIT=*/false> X(getTheVETarget(), "ve",
                                                   "VE", "VE");
  }
---- llvm/lib/Target/VE/MCTargetDesc/VEMCTargetDesc.cpp
-+++ llvm/lib/Target/VE/MCTargetDesc/VEMCTargetDesc.cpp
+--- work/llvm/lib/Target/VE/MCTargetDesc/VEMCTargetDesc.cpp
++++ work/llvm/lib/Target/VE/MCTargetDesc/VEMCTargetDesc.cpp
 @@ -80,7 +80,7 @@ static MCInstPrinter *createVEMCInstPrinter(const Triple &T,
    return new VEInstPrinter(MAI, MII, MRI);
  }
@@ -31,8 +31,8 @@
    // Register the MC asm info.
    RegisterMCAsmInfoFn X(getTheVETarget(), createVEMCAsmInfo);
  
---- llvm/lib/Target/VE/VEAsmPrinter.cpp
-+++ llvm/lib/Target/VE/VEAsmPrinter.cpp
+--- work/llvm/lib/Target/VE/VEAsmPrinter.cpp
++++ work/llvm/lib/Target/VE/VEAsmPrinter.cpp
 @@ -350,6 +350,6 @@ void VEAsmPrinter::emitInstruction(const MachineInstr *MI) {
  }
  
@@ -41,8 +41,8 @@
 +extern "C" LLVM_EXTERNAL_VISIBILITY void LLVMInitializeVEAsmPrinter() {
    RegisterAsmPrinter<VEAsmPrinter> X(getTheVETarget());
  }
---- llvm/lib/Target/VE/VETargetMachine.cpp
-+++ llvm/lib/Target/VE/VETargetMachine.cpp
+--- work/llvm/lib/Target/VE/VETargetMachine.cpp
++++ work/llvm/lib/Target/VE/VETargetMachine.cpp
 @@ -23,7 +23,7 @@ using namespace llvm;
  
  #define DEBUG_TYPE "ve"

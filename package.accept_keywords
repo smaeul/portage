@@ -114,6 +114,8 @@ sys-apps/s6-rc ~amd64
 ~dev-lang/python-exec-2.4.6-r2 ~amd64
 # Required by www-client/netsurf-3.10-r2
 ~dev-libs/libutf8proc-2.5.0 ~amd64
+# Required by www-client/firefox
+~dev-libs/nss-3.61 ~amd64
 # Required for !autogen
 ~media-libs/libsndfile-1.0.29 ~amd64
 # Required for gcc10

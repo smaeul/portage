@@ -1,0 +1,11 @@
+--- a/psutil/_psutil_linux.c
++++ b/psutil/_psutil_linux.c
+@@ -45,7 +45,7 @@ static const int NCPUS_START = sizeof(unsigned long) * CHAR_BIT;
+ // Linux >= 2.6.36 (supposedly) and glibc >= 2.13
+ #define PSUTIL_HAVE_PRLIMIT \
+     defined(__NR_prlimit64) && \
+-    (__GLIBC__ >= 2 && __GLIBC_MINOR__ >= 13)
++    (!defined(__GLIBC__) || (__GLIBC__ >= 2 && __GLIBC_MINOR__ >= 13))
+ 
+ #if PSUTIL_HAVE_PRLIMIT
+     #define _FILE_OFFSET_BITS 64

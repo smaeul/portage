@@ -1,0 +1,2 @@
+# Skip tests that intentionally use invalid pointers.
+OMIT_MISUSE=1

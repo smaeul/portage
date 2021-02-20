@@ -1,2 +1,0 @@
-CFLAGS="$CFLAGS -fcommon"
-CXXFLAGS="$CXXFLAGS -fcommon"

@@ -1,8 +1,8 @@
---- psutil-5.6.7/psutil/_pslinux.py
-+++ psutil-5.6.7/psutil/_pslinux.py
-@@ -721,6 +721,9 @@ elif os.path.exists("/proc/cpuinfo"):
+--- a/psutil/_pslinux.py
++++ b/psutil/_pslinux.py
+@@ -717,6 +717,9 @@ elif os.path.exists("/proc/cpuinfo"):
                  if line.lower().startswith(b'cpu mhz'):
-                     key, value = line.split(b'\t:', 1)
+                     key, value = line.split(b':', 1)
                      ret.append(_common.scpufreq(float(value), 0., 0.))
 +                elif line.lower().startswith(b'clock\t'):
 +                    key, value = line.split(b'\t:', 1)

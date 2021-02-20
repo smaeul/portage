@@ -12,7 +12,7 @@ dev-db/sqlite secure-delete
 # Required by sigrok-firmware-fx2lafw
 dev-embedded/sdcc device-lib mcs51
 # Required by ncmpcpp
-dev-libs/boost nls
+dev-libs/boost icu nls
 # Required for USE=test
 dev-libs/libzip tools
 # Required for static Haskell
@@ -43,10 +43,8 @@ media-libs/soxr examples
 net-analyzer/netperf demo
 # Required by unbound[test]
 net-dns/ldns-utils examples
-# Required for USE=test
-net-irc/weechat nls
 # Required by chromium
-net-libs/nodejs inspector
+net-libs/nodejs icu inspector
 # Required by pulseview
 sci-libs/libsigrok cxx
 # Required by !python:2.7
@@ -63,7 +61,6 @@ app-editors/vim python
 app-emulation/qemu -curl io-uring -jpeg numa -opengl -oss -png -pulseaudio spice usb -vnc
 app-eselect/eselect-php fpm
 app-shells/bash -net
-dev-db/sqlite -icu
 dev-java/openjdk alsa
 dev-lang/ghc ghcbootstrap
 dev-lang/php bcmath gd fpm pdo
