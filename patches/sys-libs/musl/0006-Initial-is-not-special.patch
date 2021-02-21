@@ -1,0 +1,26 @@
+From 71ae12b05607ae71a884222452dab6d5c1748c15 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sat, 20 Feb 2021 20:17:01 -0600
+Subject: [PATCH 6/6] Initial // is not special
+
+---
+ src/misc/realpath.c | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/src/misc/realpath.c b/src/misc/realpath.c
+index db8b74dc..414b4741 100644
+--- a/src/misc/realpath.c
++++ b/src/misc/realpath.c
+@@ -46,9 +46,6 @@ restart:
+ 			q=0;
+ 			output[q++] = '/';
+ 			p++;
+-			/* Initial // is special. */
+-			if (stack[p] == '/' && stack[p+1] != '/')
+-				output[q++] = '/';
+ 			continue;
+ 		}
+ 
+-- 
+2.26.2
+

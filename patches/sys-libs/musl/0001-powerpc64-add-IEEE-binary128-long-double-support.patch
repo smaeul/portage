@@ -1,7 +1,7 @@
-From cd8b0036f9607db7d687a43b3f1169786d7d9bce Mon Sep 17 00:00:00 2001
+From f61619ac5bba8927db310731f9a70af0264d15cc Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 30 Jun 2019 12:19:56 -0500
-Subject: [PATCH 1/7] powerpc64: add IEEE binary128 long double support
+Subject: [PATCH 1/6] powerpc64: add IEEE binary128 long double support
 
 This is added under a new "ieee128" sub-architecture. The 128-bit scalar
 floating-point ABI uses the Altivec registers for parameter passing, but
@@ -17,10 +17,10 @@ software fp.
  4 files changed, 31 insertions(+), 3 deletions(-)
 
 diff --git a/INSTALL b/INSTALL
-index a2a142bf..ce08bb17 100644
+index c583691d..0404c4c3 100644
 --- a/INSTALL
 +++ b/INSTALL
-@@ -76,8 +76,8 @@ and ABI combinations:
+@@ -77,8 +77,8 @@ and ABI combinations:
  
  * PowerPC64
      * Both little and big endian variants are supported
@@ -67,10 +67,10 @@ index c4a655e7..cc183824 100644
 +
 +#endif
 diff --git a/arch/powerpc64/reloc.h b/arch/powerpc64/reloc.h
-index faf70acd..5ef8f0e5 100644
+index 2f1bba05..740641b7 100644
 --- a/arch/powerpc64/reloc.h
 +++ b/arch/powerpc64/reloc.h
-@@ -6,7 +6,13 @@
+@@ -4,7 +4,13 @@
  #define ENDIAN_SUFFIX ""
  #endif
  
@@ -86,10 +86,10 @@ index faf70acd..5ef8f0e5 100644
  #define TPOFF_K (-0x7000)
  
 diff --git a/configure b/configure
-index 60e0b1fc..8e7a191b 100755
+index a5231a0e..c6999605 100755
 --- a/configure
 +++ b/configure
-@@ -652,6 +652,7 @@ test "$ARCH" = "microblaze" && trycppif __MICROBLAZEEL__ "$t" \
+@@ -691,6 +691,7 @@ test "$ARCH" = "microblaze" && trycppif __MICROBLAZEEL__ "$t" \
  if test "$ARCH" = "powerpc64" ; then
  trycppif "_CALL_ELF == 2" "$t" || fail "$0: error: unsupported powerpc64 ABI"
  trycppif __LITTLE_ENDIAN__ "$t" && SUBARCH=${SUBARCH}le
@@ -98,5 +98,5 @@ index 60e0b1fc..8e7a191b 100755
  fi
  
 -- 
-2.24.1
+2.26.2
 

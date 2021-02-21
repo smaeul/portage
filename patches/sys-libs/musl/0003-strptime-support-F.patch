@@ -1,7 +1,7 @@
-From 279e6958a6266cbfa3d949e1080abdc289c8448a Mon Sep 17 00:00:00 2001
+From fd65d1ff2f6670aad845ed8f629865947a1f1bc3 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 8 Mar 2020 14:04:46 -0500
-Subject: [PATCH 5/7] strptime: support %F
+Subject: [PATCH 3/6] strptime: support %F
 
 ---
  src/time/strptime.c | 4 ++++
@@ -23,5 +23,5 @@ index c54a0d8c..2c0d4557 100644
  			dest = &tm->tm_hour;
  			min = 0;
 -- 
-2.24.1
+2.26.2
 

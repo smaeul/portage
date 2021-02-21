@@ -1,7 +1,7 @@
-From 83e62dd4ccdb9b770481fd06177190b87e1baee9 Mon Sep 17 00:00:00 2001
+From 733416cf9abb8bf55bc76cd9d4901ffab2a509c6 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Mon, 22 Oct 2018 21:05:46 -0500
-Subject: [PATCH 6/7] strptime: support %s
+Subject: [PATCH 4/6] strptime: support %s
 
 patch from mailing list
 ---
@@ -42,5 +42,5 @@ index 2c0d4557..c5ab2dd2 100644
  			s = strptime(s, "%H:%M:%S", tm);
  			if (!s) return 0;
 -- 
-2.24.1
+2.26.2
 

@@ -1,7 +1,7 @@
-From 38f6e15e7b19b1b9e759657c2c02bd98b3cdb831 Mon Sep 17 00:00:00 2001
+From a3c566739dbb9293c68a372588e5729c9fcb839c Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 30 Jun 2019 21:01:07 -0500
-Subject: [PATCH 4/7] fix TLS when running as an interpreter
+Subject: [PATCH 2/6] fix TLS when running as an interpreter
 
 patch from Alpine
 ---
@@ -9,7 +9,7 @@ patch from Alpine
  1 file changed, 14 insertions(+), 4 deletions(-)
 
 diff --git a/src/env/__init_tls.c b/src/env/__init_tls.c
-index 772baba3..db929945 100644
+index a93141ed..fd51ff33 100644
 --- a/src/env/__init_tls.c
 +++ b/src/env/__init_tls.c
 @@ -72,8 +72,10 @@ void *__copy_tls(unsigned char *mem)
@@ -52,5 +52,5 @@ index 772baba3..db929945 100644
  			base = (size_t)_DYNAMIC - phdr->p_vaddr;
  		if (phdr->p_type == PT_TLS)
 -- 
-2.24.1
+2.26.2
 
