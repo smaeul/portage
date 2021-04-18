@@ -1,7 +1,7 @@
 From f61619ac5bba8927db310731f9a70af0264d15cc Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 30 Jun 2019 12:19:56 -0500
-Subject: [PATCH 1/6] powerpc64: add IEEE binary128 long double support
+Subject: [PATCH 1/7] powerpc64: add IEEE binary128 long double support
 
 This is added under a new "ieee128" sub-architecture. The 128-bit scalar
 floating-point ABI uses the Altivec registers for parameter passing, but
@@ -98,5 +98,5 @@ index a5231a0e..c6999605 100755
  fi
  
 -- 
-2.26.2
+2.26.3
 

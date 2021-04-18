@@ -1,7 +1,7 @@
 From a3c566739dbb9293c68a372588e5729c9fcb839c Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 30 Jun 2019 21:01:07 -0500
-Subject: [PATCH 2/6] fix TLS when running as an interpreter
+Subject: [PATCH 2/7] fix TLS when running as an interpreter
 
 patch from Alpine
 ---
@@ -52,5 +52,5 @@ index a93141ed..fd51ff33 100644
  			base = (size_t)_DYNAMIC - phdr->p_vaddr;
  		if (phdr->p_type == PT_TLS)
 -- 
-2.26.2
+2.26.3
 

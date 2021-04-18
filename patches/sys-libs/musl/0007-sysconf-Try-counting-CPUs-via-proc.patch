@@ -1,0 +1,47 @@
+From ee8f682cb61743ffe3026831143bf2be468f5a85 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 18 Apr 2021 15:42:09 -0500
+Subject: [PATCH 7/7] sysconf: Try counting CPUs via /proc
+
+---
+ src/conf/sysconf.c | 23 ++++++++++++++++++++---
+ 1 file changed, 20 insertions(+), 3 deletions(-)
+
+diff --git a/src/conf/sysconf.c b/src/conf/sysconf.c
+index 3baaed32..8f787b81 100644
+--- a/src/conf/sysconf.c
++++ b/src/conf/sysconf.c
+@@ -193,10 +193,27 @@ long sysconf(int name)
+ 		return SEM_VALUE_MAX;
+ 	case JT_DELAYTIMER_MAX & 255:
+ 		return DELAYTIMER_MAX;
+-	case JT_NPROCESSORS_CONF & 255:
+-	case JT_NPROCESSORS_ONLN & 255: ;
++	case JT_NPROCESSORS_CONF & 255: ;
++		FILE *f = fopen("/proc/softirqs", "rbe");
++		int i, cnt = 0;
++		if (f) {
++			while (fscanf(f, " CPU%u", &i) > 0) ++cnt;
++			fclose(f);
++		}
++		if (cnt)
++			return cnt;
++		/* fallthrough */
++	case JT_NPROCESSORS_ONLN & 255:
++		f = fopen("/proc/stat", "rbe");
++		cnt = 0;
++		if (f) {
++			fscanf(f, "cpu %*[^c]");
++			while (fscanf(f, "cpu%u %*[^c]", &i) > 0) ++cnt;
++			fclose(f);
++		}
++		if (cnt)
++			return cnt;
+ 		unsigned char set[128] = {1};
+-		int i, cnt;
+ 		__syscall(SYS_sched_getaffinity, 0, sizeof set, set);
+ 		for (i=cnt=0; i<sizeof set; i++)
+ 			for (; set[i]; set[i]&=set[i]-1, cnt++);
+-- 
+2.26.3
+
