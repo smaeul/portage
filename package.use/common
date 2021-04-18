@@ -43,6 +43,8 @@ media-libs/soxr examples
 net-analyzer/netperf demo
 # Required by unbound[test]
 net-dns/ldns-utils examples
+# Required for USE=test
+sys-libs/ldb python
 # Required by chromium
 net-libs/nodejs icu inspector
 # Required by pulseview
@@ -51,6 +53,12 @@ sci-libs/libsigrok cxx
 sys-apps/ripgrep -man
 # Required by bitcoind (cxx) and for USE=test (tcl)
 sys-libs/db cxx tcl
+# Required by sys-libs/ldb
+sys-libs/talloc python
+# Required by sys-libs/ldb
+sys-libs/tdb python
+# Required by sys-libs/ldb
+sys-libs/tevent python
 # Required by chromium
 sys-libs/zlib minizip
 # Required by x11-wm/i3
@@ -69,9 +77,11 @@ dev-lang/rust clippy rls rustfmt system-llvm
 dev-libs/capstone python
 dev-libs/openssl -sslv3
 dev-ml/lablgtk -opengl
+dev-python/hypothesis -cli
 dev-python/pypax -ptpax
 dev-qt/qtgui egl eglfs evdev tslib
 dev-util/geany -vte
+dev-util/geany-plugins ctags
 dev-vcs/git -pcre-jit perl
 gnome-base/librsvg tools
 mail-client/thunderbird -clang eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
@@ -86,6 +96,7 @@ media-video/ffmpeg dav1d libsoxr network openssl
 media-video/mpv cli drm egl -uchardet
 net-analyzer/flent -plots
 net-analyzer/nmap ncat nping
+net-analyzer/tcpdump -smi
 net-dns/bind-tools urandom
 net-dns/dnsmasq tftp
 net-fs/samba -cups

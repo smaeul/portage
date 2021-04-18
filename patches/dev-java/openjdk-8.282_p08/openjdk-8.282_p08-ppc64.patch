@@ -1,0 +1,21 @@
+--- openjdk-8.282_p08/common/autoconf/flags.m4
++++ openjdk-8.282_p08/common/autoconf/flags.m4
+@@ -592,7 +592,7 @@ AC_DEFUN_ONCE([FLAGS_SETUP_COMPILER_FLAGS_FOR_JDK],
+       CCXXFLAGS_JDK="$CCXXFLAGS_JDK -D_BIG_ENDIAN"
+     fi
+   fi
+-  if test "x$OPENJDK_TARGET_CPU" = xppc64le; then
++  if test "x$OPENJDK_TARGET_CPU" = xppc64 || test "x$OPENJDK_TARGET_CPU" = xppc64le; then
+     CCXXFLAGS_JDK="$CCXXFLAGS_JDK -DABI_ELFv2"
+   fi
+   
+--- openjdk-8.282_p08/hotspot/make/linux/makefiles/ppc64.make
++++ openjdk-8.282_p08/hotspot/make/linux/makefiles/ppc64.make
+@@ -39,6 +39,7 @@ endif
+ ifeq ($(OPENJDK_TARGET_CPU_ENDIAN),big)
+   # fixes `relocation truncated to fit' error for gcc 4.1.
+   CFLAGS += -mminimal-toc
++  CFLAGS += -DABI_ELFv2
+ 
+   # finds use ppc64 instructions, but schedule for power5
+   CFLAGS += -mcpu=powerpc64 -mtune=power5 -minsert-sched-nops=regroup_exact -mno-multiple -mno-string

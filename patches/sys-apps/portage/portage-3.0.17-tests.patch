@@ -1,0 +1,14 @@
+dbm implementations may add extensions to the shelve file name.
+--- portage-3.0.17-python3_8/lib/portage/tests/util/test_shelve.py
++++ portage-3.0.17-python3_8/lib/portage/tests/util/test_shelve.py
+@@ -45,9 +45,8 @@ class ShelveUtilsTestCase(TestCase):
+ 				db.close()
+ 				dump(dump_args)
+ 
+-				os.unlink(dump_args.src)
+ 				restore_args = argparse.Namespace(
+-					dest=dump_args.src,
++					dest=os.path.join(tmpdir, "restored_file"),
+ 					src=dump_args.dest,
+ 				)
+ 				restore(restore_args)

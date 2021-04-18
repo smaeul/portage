@@ -1,0 +1,148 @@
+From 3e0043e723a7fd10c49e1106cb4c9dbf09fcb66d Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Thu, 10 Oct 2019 20:10:57 -0500
+Subject: [PATCH 3/3] [Clang] Detect musl multiarch directories
+
+---
+ clang/lib/Driver/ToolChains/Linux.cpp | 46 ++++++++++++++++++++++++++-
+ 1 file changed, 45 insertions(+), 1 deletion(-)
+
+diff --git a/clang/lib/Driver/ToolChains/Linux.cpp b/clang/lib/Driver/ToolChains/Linux.cpp
+index 9663a7390ada..cb2d75e37436 100644
+--- a/clang/lib/Driver/ToolChains/Linux.cpp
++++ b/clang/lib/Driver/ToolChains/Linux.cpp
+@@ -60,6 +60,12 @@ std::string Linux::getMultiarchTriple(const Driver &D,
+   case llvm::Triple::thumb:
+     if (IsAndroid) {
+       return "arm-linux-androideabi";
++    } else if (TargetEnvironment == llvm::Triple::MuslEABIHF) {
++      if (D.getVFS().exists(SysRoot + "/lib/arm-linux-musleabihf"))
++        return "arm-linux-musleabihf";
++    } else if (TargetEnvironment == llvm::Triple::MuslEABI) {
++      if (D.getVFS().exists(SysRoot + "/lib/arm-linux-musleabi"))
++        return "arm-linux-musleabi";
+     } else if (TargetEnvironment == llvm::Triple::GNUEABIHF) {
+       if (D.getVFS().exists(SysRoot + "/lib/arm-linux-gnueabihf"))
+         return "arm-linux-gnueabihf";
+@@ -70,7 +76,13 @@ std::string Linux::getMultiarchTriple(const Driver &D,
+     break;
+   case llvm::Triple::armeb:
+   case llvm::Triple::thumbeb:
+-    if (TargetEnvironment == llvm::Triple::GNUEABIHF) {
++    if (TargetEnvironment == llvm::Triple::MuslEABIHF) {
++      if (D.getVFS().exists(SysRoot + "/lib/armeb-linux-musleabihf"))
++        return "armeb-linux-musleabihf";
++    } else if (TargetEnvironment == llvm::Triple::MuslEABI) {
++      if (D.getVFS().exists(SysRoot + "/lib/armeb-linux-musleabi"))
++        return "armeb-linux-musleabi";
++    } else if (TargetEnvironment == llvm::Triple::GNUEABIHF) {
+       if (D.getVFS().exists(SysRoot + "/lib/armeb-linux-gnueabihf"))
+         return "armeb-linux-gnueabihf";
+     } else {
+@@ -83,6 +95,8 @@ std::string Linux::getMultiarchTriple(const Driver &D,
+       return "i686-linux-android";
+     if (D.getVFS().exists(SysRoot + "/lib/i386-linux-gnu"))
+       return "i386-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/i386-linux-musl"))
++      return "i386-linux-musl";
+     break;
+   case llvm::Triple::x86_64:
+     if (IsAndroid)
+@@ -91,19 +105,28 @@ std::string Linux::getMultiarchTriple(const Driver &D,
+     if (TargetEnvironment != llvm::Triple::GNUX32 &&
+         D.getVFS().exists(SysRoot + "/lib/x86_64-linux-gnu"))
+       return "x86_64-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/x86_64-linux-musl"))
++      return "x86_64-linux-musl";
+     break;
+   case llvm::Triple::aarch64:
+     if (IsAndroid)
+       return "aarch64-linux-android";
+     if (D.getVFS().exists(SysRoot + "/lib/aarch64-linux-gnu"))
+       return "aarch64-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/aarch64-linux-musl"))
++      return "aarch64-linux-musl";
+     break;
+   case llvm::Triple::aarch64_be:
+     if (D.getVFS().exists(SysRoot + "/lib/aarch64_be-linux-gnu"))
+       return "aarch64_be-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/aarch64_be-linux-musl"))
++      return "aarch64_be-linux-musl";
+     break;
+   case llvm::Triple::mips: {
+     std::string MT = IsMipsR6 ? "mipsisa32r6-linux-gnu" : "mips-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/" + MT))
++      return MT;
++    MT = IsMipsR6 ? "mipsisa32r6-linux-musl" : "mips-linux-musl";
+     if (D.getVFS().exists(SysRoot + "/lib/" + MT))
+       return MT;
+     break;
+@@ -112,6 +135,9 @@ std::string Linux::getMultiarchTriple(const Driver &D,
+     if (IsAndroid)
+       return "mipsel-linux-android";
+     std::string MT = IsMipsR6 ? "mipsisa32r6el-linux-gnu" : "mipsel-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/" + MT))
++      return MT;
++    MT = IsMipsR6 ? "mipsisa32r6el-linux-musl" : "mipsel-linux-musl";
+     if (D.getVFS().exists(SysRoot + "/lib/" + MT))
+       return MT;
+     break;
+@@ -141,6 +167,8 @@ std::string Linux::getMultiarchTriple(const Driver &D,
+       return "powerpc-linux-gnuspe";
+     if (D.getVFS().exists(SysRoot + "/lib/powerpc-linux-gnu"))
+       return "powerpc-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/powerpc-linux-musl"))
++      return "powerpc-linux-musl";
+     break;
+   case llvm::Triple::ppcle:
+     if (D.getVFS().exists(SysRoot + "/lib/powerpcle-linux-gnu"))
+@@ -149,10 +177,14 @@ std::string Linux::getMultiarchTriple(const Driver &D,
+   case llvm::Triple::ppc64:
+     if (D.getVFS().exists(SysRoot + "/lib/powerpc64-linux-gnu"))
+       return "powerpc64-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/powerpc64-linux-musl"))
++      return "powerpc64-linux-musl";
+     break;
+   case llvm::Triple::ppc64le:
+     if (D.getVFS().exists(SysRoot + "/lib/powerpc64le-linux-gnu"))
+       return "powerpc64le-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/powerpc64le-linux-musl"))
++      return "powerpc64le-linux-musl";
+     break;
+   case llvm::Triple::sparc:
+     if (D.getVFS().exists(SysRoot + "/lib/sparc-linux-gnu"))
+@@ -165,12 +197,17 @@ std::string Linux::getMultiarchTriple(const Driver &D,
+   case llvm::Triple::systemz:
+     if (D.getVFS().exists(SysRoot + "/lib/s390x-linux-gnu"))
+       return "s390x-linux-gnu";
++    if (D.getVFS().exists(SysRoot + "/lib/s390x-linux-musl"))
++      return "s390x-linux-musl";
+     break;
+   }
+   return TargetTriple.str();
+ }
+ 
+ static StringRef getOSLibDir(const llvm::Triple &Triple, const ArgList &Args) {
++  if (Triple.isMusl())
++    return "lib";
++
+   if (Triple.isMIPS()) {
+     if (Triple.isAndroid()) {
+       StringRef CPUName;
+@@ -754,6 +791,13 @@ void Linux::AddClangSystemIncludeArgs(const ArgList &DriverArgs,
+   if (getTriple().isAndroid())
+     MultiarchIncludeDirs = AndroidMultiarchIncludeDirs;
+ 
++  const std::string MuslMultiarchIncludeDir =
++      std::string("/usr/include/") +
++      getMultiarchTriple(D, getTriple(), SysRoot);
++  const StringRef MuslMultiarchIncludeDirs[] = {MuslMultiarchIncludeDir};
++  if (getTriple().isMusl())
++    MultiarchIncludeDirs = MuslMultiarchIncludeDirs;
++
+   for (StringRef Dir : MultiarchIncludeDirs) {
+     if (D.getVFS().exists(SysRoot + Dir)) {
+       addExternCSystemInclude(DriverArgs, CC1Args, SysRoot + Dir);
+-- 
+2.26.3
+

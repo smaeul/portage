@@ -1,0 +1,44 @@
+From 68335f3a4b4700eb8fc61f6168a6810bcceefbf4 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sat, 5 May 2018 04:09:27 +0000
+Subject: [PATCH 1/2] libfdisk: Clear errno before processing files
+
+Otherwise, errno is left over from setting up color output when
+printing the banner. errno is then used in warn() when reporting
+failure to open/read/process a file, even if the failure did not
+itself set errno.
+
+This manifests in the error messsage reported at the terminal
+depending on the existence of terminal color configuration:
+
+$ ./fdisk -c=dos -u=cylinders -l oddinput.toosmall > /dev/null
+fdisk: cannot open oddinput.toosmall: Invalid argument
+$ ./fdisk -c=dos -u=cylinders -l oddinput.toosmall
+fdisk: cannot open oddinput.toosmall: No such file or directory
+$ mkdir -p ~/.config/terminal-colors.d
+$ ./fdisk -c=dos -u=cylinders -l oddinput.toosmall
+fdisk: cannot open oddinput.toosmall: Invalid argument
+
+Clear errno at the beginning of fdisk_assign_device() so it is at
+least consistent, even if not always descriptive.
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+
+--- util-linux-2.36.2/libfdisk/src/context.c
++++ util-linux-2.36.2/libfdisk/src/context.c
+@@ -597,6 +597,7 @@ static int fdisk_assign_fd(struct fdisk_context *cxt, int fd,
+ 
+ 	reset_context(cxt);
+ 
++	errno = EINVAL;
+ 	if (fstat(fd, &cxt->dev_st) != 0)
+ 		goto fail;
+ 
+--- util-linux-2.36.2/tests/expected/fdisk/oddinput.err
++++ util-linux-2.36.2/tests/expected/fdisk/oddinput.err
+@@ -1,4 +1,4 @@
+ ---Nonexistent file
+ fdisk: cannot open _a_file_that_does_not_exist_: ENOENT
+ ---Too small file
+-fdisk: cannot open oddinput.toosmall: ENOTTY
++fdisk: cannot open oddinput.toosmall: EINVAL
