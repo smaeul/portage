@@ -1,0 +1,30 @@
+From f120ad001200a0cabecd96a24aeb24174105ae49 Mon Sep 17 00:00:00 2001
+From: Seungha Yang <seungha@centricular.com>
+Date: Tue, 15 Sep 2020 04:24:20 +0900
+Subject: [PATCH] tests: element: Don't run too many loop
+
+g_thread_yield() doesn't ensure thread switching actually.
+It would result to adding so many pads. Depending on system,
+timeout might happen then.
+
+Part-of: <https://gitlab.freedesktop.org/gstreamer/gstreamer/-/merge_requests/625>
+---
+ tests/check/gst/gstelement.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/tests/check/gst/gstelement.c b/tests/check/gst/gstelement.c
+index 62d469c4eb..9c96244fd5 100644
+--- a/tests/check/gst/gstelement.c
++++ b/tests/check/gst/gstelement.c
+@@ -870,7 +870,7 @@ GST_START_TEST (test_foreach_pad)
+   MAIN_START_THREAD_FUNCTION (0, thread_add_remove_pads, e);
+   MAIN_SYNCHRONIZE ();
+ 
+-  for (i = 0; i < 10000; ++i) {
++  for (i = 0; i < 1000; ++i) {
+     gchar num[32];
+ 
+     g_snprintf (num, 32, "foreach-test-%u", i);
+-- 
+GitLab
+
