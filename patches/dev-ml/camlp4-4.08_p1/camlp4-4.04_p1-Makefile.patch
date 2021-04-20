@@ -4,8 +4,8 @@
  
  .PHONY: install
  install:
--	env DESTDIR=$(DESTDIR) ./build/install.sh
-+	env DESTDIR=$(DESTDIR) BINDIR=$(BINDIR) LIBDIR=$(LIBDIR) ./build/install.sh
+-	env DESTDIR=$(DESTDIR) sh ./build/install.sh
++	env DESTDIR=$(DESTDIR) BINDIR=$(BINDIR) LIBDIR=$(LIBDIR) sh ./build/install.sh
  
  .PHONY: install-META
  install-META: camlp4/META

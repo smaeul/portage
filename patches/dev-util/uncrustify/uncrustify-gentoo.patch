@@ -1,0 +1,12 @@
+"Gentoo" != "Release"
+--- uncrustify-9999/tests/cli/test_cli_options.py
++++ uncrustify-9999/tests/cli/test_cli_options.py
+@@ -705,7 +705,7 @@ def main(args):
+     #
+     # Test --tracking_space FILE
+     #
+-    if parsed_args.config == 'Release':
++    if parsed_args.config != 'Debug':
+         eprint("Release")
+         if not check_uncrustify_output(
+                 uncr_bin,
