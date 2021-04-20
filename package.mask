@@ -4,7 +4,6 @@ dev-lang/python:2.7
 dev-lang/python:3.9
 dev-util/pkgconfig
 media-libs/mesa::gentoo
-sys-apps/dbus
 sys-devel/autogen
 sys-libs/libunwind
 virtual/rust::gentoo

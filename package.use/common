@@ -96,6 +96,7 @@ media-sound/mpd -fifo -id3tag libsoxr -mad -network -sqlite
 media-sound/pulseaudio alsa -asyncns
 media-video/ffmpeg dav1d libsoxr network openssl
 media-video/mpv cli drm egl -uchardet
+media-video/pipewire aptx extra gstreamer ldac pipewire-alsa
 net-analyzer/flent -plots
 net-analyzer/nmap ncat nping
 net-analyzer/tcpdump -smi
@@ -112,6 +113,7 @@ net-misc/freerdp -usb
 net-print/cups -usb
 net-print/cups-filters pclm
 net-vpn/wireguard-tools -wg-quick
+net-wireless/bluez deprecated extra-tools
 net-wireless/wpa_supplicant ap -hs2-0
 sys-apps/busybox savedconfig
 sys-apps/coreutils hostname

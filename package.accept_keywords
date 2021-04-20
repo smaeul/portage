@@ -16,6 +16,8 @@ dev-util/pahole ~amd64
 dev-util/perf ~amd64
 dev-util/radare2 ~amd64
 mail-client/s-nail ~amd64
+media-libs/libopenaptx ~amd64
+media-video/pipewire ~amd64
 net-analyzer/flent ~amd64
 net-mail/b4 ~amd64
 net-misc/streamlink ~amd64
