@@ -1,7 +1,7 @@
-From 8bce614e9094d6575702dfb3204a7022a0a410ab Mon Sep 17 00:00:00 2001
+From d340c28de62942259dfa60f5da5ec533f9fbb5ee Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 30 Jun 2019 13:08:50 -0500
-Subject: [PATCH 4/7] Add IEEE 128-bit long double ABI to powerpc64 musl
+Subject: [PATCH 7/9] Add IEEE 128-bit long double ABI to powerpc64 musl
 
 ---
  gcc/config/rs6000/linux.h   |  3 ++-
@@ -9,7 +9,7 @@ Subject: [PATCH 4/7] Add IEEE 128-bit long double ABI to powerpc64 musl
  2 files changed, 11 insertions(+), 3 deletions(-)
 
 diff --git a/gcc/config/rs6000/linux.h b/gcc/config/rs6000/linux.h
-index b7026fcbee79..d6f8bfb0e611 100644
+index 47c9d9ac0b68..e315ee939e0d 100644
 --- a/gcc/config/rs6000/linux.h
 +++ b/gcc/config/rs6000/linux.h
 @@ -126,8 +126,9 @@
@@ -24,10 +24,10 @@ index b7026fcbee79..d6f8bfb0e611 100644
  
  /* Static stack checking is supported by means of probes.  */
 diff --git a/gcc/config/rs6000/linux64.h b/gcc/config/rs6000/linux64.h
-index 34776c8421e5..aab6dd1eea8d 100644
+index e3f2cd254f69..7779fcdea94d 100644
 --- a/gcc/config/rs6000/linux64.h
 +++ b/gcc/config/rs6000/linux64.h
-@@ -431,12 +431,18 @@ extern int dot_symbols;
+@@ -348,12 +348,18 @@ extern int dot_symbols;
  ":%(dynamic_linker_prefix)/lib64/ld64.so.1}"
  #endif
  
@@ -47,7 +47,7 @@ index 34776c8421e5..aab6dd1eea8d 100644
  
  #undef  DEFAULT_ASM_ENDIAN
  #if (TARGET_DEFAULT & MASK_LITTLE_ENDIAN)
-@@ -612,8 +618,9 @@ extern int dot_symbols;
+@@ -529,8 +535,9 @@ extern int dot_symbols;
  #define POWERPC_LINUX
  
  /* ppc{32,64} linux has 128-bit long double support in glibc 2.4 and later.  */
@@ -59,5 +59,5 @@ index 34776c8421e5..aab6dd1eea8d 100644
  
  /* Static stack checking is supported by means of probes.  */
 -- 
-2.24.1
+2.31.1
 

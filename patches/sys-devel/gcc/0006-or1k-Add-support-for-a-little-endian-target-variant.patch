@@ -1,0 +1,132 @@
+From 67d91a4411fbf8dac88952a034591d5c339be003 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Thu, 22 Apr 2021 00:17:56 -0500
+Subject: [PATCH 6/9] or1k: Add support for a little-endian target variant
+
+---
+ gcc/config.gcc           |  5 +++++
+ gcc/config/or1k/elf.h    |  1 +
+ gcc/config/or1k/linux.h  |  1 +
+ gcc/config/or1k/or1k.h   | 19 +++++++++++++++++--
+ gcc/config/or1k/or1k.opt |  8 ++++++++
+ libgcc/config.host       |  4 ++--
+ 6 files changed, 34 insertions(+), 4 deletions(-)
+
+diff --git a/gcc/config.gcc b/gcc/config.gcc
+index 357b0bed0673..82aea16ee782 100644
+--- a/gcc/config.gcc
++++ b/gcc/config.gcc
+@@ -2867,6 +2867,11 @@ or1k*-*-*)
+ 	done
+ 	TM_MULTILIB_CONFIG=`echo $TM_MULTILIB_CONFIG | sed 's/^,//'`
+ 
++	case ${target} in
++	or1k*le*-*)
++		tm_defines="${tm_defines} TARGET_LITTLE_ENDIAN_DEFAULT=1"
++		;;
++	esac
+ 	case ${target} in
+ 	or1k*-*-linux*)
+ 		tm_file="${tm_file} gnu-user.h linux.h glibc-stdint.h"
+diff --git a/gcc/config/or1k/elf.h b/gcc/config/or1k/elf.h
+index 130be9a0daa8..32cde25718c1 100644
+--- a/gcc/config/or1k/elf.h
++++ b/gcc/config/or1k/elf.h
+@@ -27,6 +27,7 @@
+ 
+ #undef	LINK_SPEC
+ #define LINK_SPEC "%{h*}			\
++   %{mbig-endian:-EB} %{mlittle-endian:-EL}	\
+    %{static:-Bstatic}				\
+    %{shared:-shared}				\
+    %{symbolic:-Bsymbolic}			\
+diff --git a/gcc/config/or1k/linux.h b/gcc/config/or1k/linux.h
+index 196f3f3c8f02..ed60625ea614 100644
+--- a/gcc/config/or1k/linux.h
++++ b/gcc/config/or1k/linux.h
+@@ -34,6 +34,7 @@
+ 
+ #undef LINK_SPEC
+ #define LINK_SPEC "%{h*}			\
++   %{mbig-endian:-EB} %{mlittle-endian:-EL}	\
+    %{static:-Bstatic}				\
+    %{shared:-shared}				\
+    %{symbolic:-Bsymbolic}			\
+diff --git a/gcc/config/or1k/or1k.h b/gcc/config/or1k/or1k.h
+index fe01ab81ead5..02128edc79d8 100644
+--- a/gcc/config/or1k/or1k.h
++++ b/gcc/config/or1k/or1k.h
+@@ -21,6 +21,21 @@
+ #ifndef GCC_OR1K_H
+ #define GCC_OR1K_H
+ 
++#ifndef TARGET_LITTLE_ENDIAN_DEFAULT
++#define ENDIAN_SPEC "-mbig-endian"
++#else
++#define ENDIAN_SPEC "-mlittle-endian"
++#endif
++
++/* Force the default endianness and ABI flags onto the command line
++   in order to make the other specs easier to write.  */
++#undef DRIVER_SELF_SPECS
++#define DRIVER_SELF_SPECS \
++  " %{!mbig-endian:%{!mlittle-endian:" ENDIAN_SPEC "}}"
++
++#define ASM_SPEC "%{mbig-endian:-EB} %{mlittle-endian:-EL}"
++#define LINK_SPEC "%{mbig-endian:-EB} %{mlittle-endian:-EL}"
++
+ /* Names to predefine in the preprocessor for this target machine.  */
+ #define TARGET_CPU_CPP_BUILTINS()		\
+   do						\
+@@ -41,8 +56,8 @@
+ 
+ #define DEFAULT_SIGNED_CHAR 1
+ #define BITS_BIG_ENDIAN 0
+-#define BYTES_BIG_ENDIAN 1
+-#define WORDS_BIG_ENDIAN 1
++#define BYTES_BIG_ENDIAN (TARGET_BIG_ENDIAN)
++#define WORDS_BIG_ENDIAN (TARGET_BIG_ENDIAN)
+ #define BITS_PER_WORD 32
+ #define UNITS_PER_WORD 4
+ #define POINTER_SIZE 32
+diff --git a/gcc/config/or1k/or1k.opt b/gcc/config/or1k/or1k.opt
+index 6bd0f3eee6dd..e993a353af52 100644
+--- a/gcc/config/or1k/or1k.opt
++++ b/gcc/config/or1k/or1k.opt
+@@ -21,6 +21,14 @@
+ ; See the GCC internals manual (options.texi) for a description of
+ ; this file's format.
+ 
++mbig-endian
++Target RejectNegative Mask(BIG_ENDIAN)
++Use big-endian byte order.
++
++mlittle-endian
++Target RejectNegative InverseMask(BIG_ENDIAN, LITTLE_ENDIAN)
++Use little-endian byte order.
++
+ mhard-div
+ Target RejectNegative InverseMask(SOFT_DIV)
+ Enable generation of hardware divide (l.div, l.divu) instructions.  This is the
+diff --git a/libgcc/config.host b/libgcc/config.host
+index f808b61be704..da378275e530 100644
+--- a/libgcc/config.host
++++ b/libgcc/config.host
+@@ -1118,12 +1118,12 @@ nios2-*-*)
+ 	tmake_file="$tmake_file nios2/t-nios2 t-softfp-sfdf t-softfp-excl t-softfp"
+ 	extra_parts="$extra_parts crti.o crtn.o"
+ 	;;
+-or1k-*-linux*)
++or1k*-*-linux*)
+ 	tmake_file="$tmake_file or1k/t-or1k"
+ 	tmake_file="$tmake_file t-softfp-sfdf t-softfp"
+ 	md_unwind_header=or1k/linux-unwind.h
+ 	;;
+-or1k-*-*)
++or1k*-*-*)
+ 	tmake_file="$tmake_file or1k/t-or1k"
+ 	tmake_file="$tmake_file t-softfp-sfdf t-softfp"
+ 	;;
+-- 
+2.31.1
+

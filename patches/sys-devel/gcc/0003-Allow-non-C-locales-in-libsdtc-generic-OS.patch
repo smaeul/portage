@@ -1,17 +1,17 @@
-From e4a7ab3057ab49acda84bc39791b89dd103520a1 Mon Sep 17 00:00:00 2001
+From 2c047f87f804688fb27d19f7726616b47b51dd8f Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 7 Jul 2019 02:17:49 -0500
-Subject: [PATCH 1/7] Allow non-C locales in libsdtc++ generic OS
+Subject: [PATCH 3/9] Allow non-C locales in libsdtc++ generic OS
 
 ---
  libstdc++-v3/config/locale/generic/c_locale.cc | 3 ---
  1 file changed, 3 deletions(-)
 
 diff --git a/libstdc++-v3/config/locale/generic/c_locale.cc b/libstdc++-v3/config/locale/generic/c_locale.cc
-index 61ead91ec1ed..bf7fe12e35cc 100644
+index a6676a7cf510..e71bc6019b81 100644
 --- a/libstdc++-v3/config/locale/generic/c_locale.cc
 +++ b/libstdc++-v3/config/locale/generic/c_locale.cc
-@@ -223,9 +223,6 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
+@@ -242,9 +242,6 @@ _GLIBCXX_BEGIN_NAMESPACE_VERSION
      // Currently, the generic model only supports the "C" locale.
      // See http://gcc.gnu.org/ml/libstdc++/2003-02/msg00345.html
      __cloc = 0;
@@ -22,5 +22,5 @@ index 61ead91ec1ed..bf7fe12e35cc 100644
  
    void
 -- 
-2.24.1
+2.31.1
 

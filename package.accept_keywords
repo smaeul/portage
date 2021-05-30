@@ -43,6 +43,7 @@ dev-lang/go ~amd64
 dev-lang/mono ~amd64
 dev-libs/elfutils::musl ~amd64
 net-irc/weechat ~amd64
+net-misc/gallery-dl ~amd64
 net-misc/youtube-dl ~amd64
 net-p2p/syncthing ~amd64
 sys-apps/flashrom ~amd64

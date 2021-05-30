@@ -1,0 +1,46 @@
+From 14c22400b01e4e139bf777cb02cd28afd421eb21 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Fri, 28 May 2021 22:14:04 -0500
+Subject: [PATCH 2/2] libext2fs: improve error handling in POSIX ACL
+ conversions
+
+When encoding a POSIX ACL to the EXT4 ACL format, if an unknown tag
+is encountered, that entry is silently ignored. It would be better
+to return an error to inform the user that the ACL is incompatible.
+
+Also fix the mismatched indentation in the opposite function.
+
+Signed-off-by: Samuel Holland <samuel@sholland.org>
+---
+ lib/ext2fs/ext_attr.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/lib/ext2fs/ext_attr.c b/lib/ext2fs/ext_attr.c
+index 5e5e162c..a29b89f1 100644
+--- a/lib/ext2fs/ext_attr.c
++++ b/lib/ext2fs/ext_attr.c
+@@ -574,6 +574,8 @@ static errcode_t convert_posix_acl_to_disk_buffer(const void *value, size_t size
+ 				e += sizeof(ext4_acl_entry);
+ 				s += sizeof(ext4_acl_entry);
+ 				break;
++			default:
++				return EINVAL;
+ 		}
+ 	}
+ 	*size_out = s;
+@@ -627,9 +629,9 @@ static errcode_t convert_disk_buffer_to_posix_acl(const void *value, size_t size
+ 				cp += sizeof(ext4_acl_entry);
+ 				size -= sizeof(ext4_acl_entry);
+ 				break;
+-		default:
+-			ext2fs_free_mem(&out);
+-			return EINVAL;
++			default:
++				ext2fs_free_mem(&out);
++				return EINVAL;
+ 		}
+ 		entry++;
+ 	}
+-- 
+2.26.3
+
