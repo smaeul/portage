@@ -1,3 +1,4 @@
+*/*-bin
 dev-lang/python:2.7
 dev-lang/python:3.9
 dev-libs/elfutils::gentoo
@@ -6,7 +7,6 @@ dev-util/pkgconfig
 media-libs/mesa::gentoo
 sys-apps/dbus
 sys-devel/autogen
-sys-devel/gcc::gentoo
 sys-libs/libunwind
 # Broken patches, ::gentoo works fine
 =sys-process/psmisc-23.3-r1::musl

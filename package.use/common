@@ -76,6 +76,7 @@ dev-lang/ruby -rdoc
 dev-lang/rust clippy rls rustfmt system-llvm
 dev-libs/capstone python
 dev-libs/openssl -sslv3
+dev-ml/lablgl glut
 dev-ml/lablgtk -opengl
 dev-python/hypothesis -cli
 dev-python/pypax -ptpax

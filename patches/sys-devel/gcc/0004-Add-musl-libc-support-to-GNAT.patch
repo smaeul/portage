@@ -1,7 +1,7 @@
-From f2a689be247d7aad3f29639ae89a4180524e460e Mon Sep 17 00:00:00 2001
+From 393ff33e7f1c671b4d103613b50533a32389829c Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 7 Jul 2019 02:02:37 -0500
-Subject: [PATCH 3/7] Add musl libc support to GNAT
+Subject: [PATCH 4/9] Add musl libc support to GNAT
 
 ---
  gcc/ada/Makefile.rtl                 |  2 +-
@@ -13,20 +13,20 @@ Subject: [PATCH 3/7] Add musl libc support to GNAT
  gcc/ada/cstreams.c                   |  4 +-
  gcc/ada/init.c                       |  3 +-
  gcc/ada/libgnarl/s-osinte__linux.ads | 11 ----
- gcc/ada/libgnarl/s-taprop__linux.adb | 53 ++-----------------
+ gcc/ada/libgnarl/s-taprop__linux.adb | 59 ++-------------------
  gcc/ada/libgnat/s-dwalin.adb         |  4 ++
  gcc/ada/libgnat/s-tsmona__linux.adb  | 76 +++++++++++++++-------------
  gcc/ada/mkdir.c                      |  4 +-
  gcc/ada/raise.c                      |  3 +-
  gcc/ada/sysdep.c                     |  4 +-
  gcc/ada/terminals.c                  |  3 +-
- 16 files changed, 67 insertions(+), 115 deletions(-)
+ 16 files changed, 67 insertions(+), 121 deletions(-)
 
 diff --git a/gcc/ada/Makefile.rtl b/gcc/ada/Makefile.rtl
-index 55ff9b0f3d56..5bb8e15ffd69 100644
+index 987eff0abba0..e77c592f8d07 100644
 --- a/gcc/ada/Makefile.rtl
 +++ b/gcc/ada/Makefile.rtl
-@@ -2112,7 +2112,7 @@ ifeq ($(strip $(filter-out powerpc% linux%,$(target_cpu) $(target_os))),)
+@@ -2386,7 +2386,7 @@ ifeq ($(strip $(filter-out powerpc% linux%,$(target_cpu) $(target_os))),)
  endif
  
  # ARM linux, GNU eabi
@@ -36,7 +36,7 @@ index 55ff9b0f3d56..5bb8e15ffd69 100644
    a-intnam.ads<libgnarl/a-intnam__linux.ads \
    s-inmaop.adb<libgnarl/s-inmaop__posix.adb \
 diff --git a/gcc/ada/adadecode.c b/gcc/ada/adadecode.c
-index f87d421224f2..f5d8e5eca5ab 100644
+index 43a378f90587..8752d490c23e 100644
 --- a/gcc/ada/adadecode.c
 +++ b/gcc/ada/adadecode.c
 @@ -34,8 +34,6 @@
@@ -49,10 +49,10 @@ index f87d421224f2..f5d8e5eca5ab 100644
  #define ISDIGIT(c) isdigit(c)
  #endif
 diff --git a/gcc/ada/adaint.c b/gcc/ada/adaint.c
-index 595abf87d65e..29649a84b27f 100644
+index 0a90c92402cd..1f5033169a1d 100644
 --- a/gcc/ada/adaint.c
 +++ b/gcc/ada/adaint.c
-@@ -99,6 +99,8 @@
+@@ -100,6 +100,8 @@
  #include <sys/syspage.h>
  #endif
  
@@ -61,20 +61,20 @@ index 595abf87d65e..29649a84b27f 100644
  #ifdef IN_RTS
  
  #ifdef STANDALONE
-@@ -234,8 +236,6 @@ UINT __gnat_current_ccs_encoding;
+@@ -242,8 +244,6 @@ UINT __gnat_current_ccs_encoding;
  #include <utime.h>
  #endif
  
 -#include "adaint.h"
 -
- /* Define symbols O_BINARY and O_TEXT as harmless zeroes if they are not
-    defined in the current system. On DOS-like systems these flags control
-    whether the file is opened/created in text-translation mode (CR/LF in
+ int __gnat_in_child_after_fork = 0;
+ 
+ #if defined (__APPLE__) && defined (st_mtime)
 diff --git a/gcc/ada/adaint.h b/gcc/ada/adaint.h
-index 311e240dfcce..20007c814e22 100644
+index 85997b9ba685..1a038a17b8b5 100644
 --- a/gcc/ada/adaint.h
 +++ b/gcc/ada/adaint.h
-@@ -316,6 +316,7 @@ extern void   *__gnat_lwp_self			   (void);
+@@ -325,6 +325,7 @@ extern void   *__gnat_lwp_self			   (void);
  
  /* Routines for interface to required CPU set primitives */
  
@@ -83,7 +83,7 @@ index 311e240dfcce..20007c814e22 100644
  
  extern cpu_set_t *__gnat_cpu_alloc                 (size_t);
 diff --git a/gcc/ada/argv.c b/gcc/ada/argv.c
-index ca82ed596e9d..326e957596a4 100644
+index 2b298fca78ba..ab5eae31d112 100644
 --- a/gcc/ada/argv.c
 +++ b/gcc/ada/argv.c
 @@ -42,6 +42,8 @@
@@ -105,7 +105,7 @@ index ca82ed596e9d..326e957596a4 100644
  extern "C" {
  #endif
 diff --git a/gcc/ada/cio.c b/gcc/ada/cio.c
-index 7fca41285c0d..46f4ee09cc44 100644
+index 2a9fe1a6c24b..480d37cc7a3c 100644
 --- a/gcc/ada/cio.c
 +++ b/gcc/ada/cio.c
 @@ -29,6 +29,8 @@
@@ -127,10 +127,10 @@ index 7fca41285c0d..46f4ee09cc44 100644
  #include <stdio.h>
  
 diff --git a/gcc/ada/cstreams.c b/gcc/ada/cstreams.c
-index 92392fcbd1c5..2395083233b3 100644
+index 8072320ae10c..3a617e35be6d 100644
 --- a/gcc/ada/cstreams.c
 +++ b/gcc/ada/cstreams.c
-@@ -52,6 +52,8 @@
+@@ -57,6 +57,8 @@
  #include "vxWorks.h"
  #endif
  
@@ -139,7 +139,7 @@ index 92392fcbd1c5..2395083233b3 100644
  #ifdef IN_RTS
  #include <string.h>
  #else
-@@ -59,8 +61,6 @@
+@@ -64,8 +66,6 @@
  #include "system.h"
  #endif
  
@@ -149,7 +149,7 @@ index 92392fcbd1c5..2395083233b3 100644
  extern "C" {
  #endif
 diff --git a/gcc/ada/init.c b/gcc/ada/init.c
-index 67ea4dc25798..66336c3a8d02 100644
+index 3ceb1a31b02c..bd129d5e7649 100644
 --- a/gcc/ada/init.c
 +++ b/gcc/ada/init.c
 @@ -53,6 +53,8 @@
@@ -170,10 +170,10 @@ index 67ea4dc25798..66336c3a8d02 100644
  
  #ifdef __cplusplus
 diff --git a/gcc/ada/libgnarl/s-osinte__linux.ads b/gcc/ada/libgnarl/s-osinte__linux.ads
-index 80cb2b2a793e..701b7a3aeabc 100644
+index 2272f83d68d4..1d78456544a3 100644
 --- a/gcc/ada/libgnarl/s-osinte__linux.ads
 +++ b/gcc/ada/libgnarl/s-osinte__linux.ads
-@@ -399,12 +399,6 @@ package System.OS_Interface is
+@@ -401,12 +401,6 @@ package System.OS_Interface is
     PTHREAD_RWLOCK_PREFER_WRITER_NP              : constant := 1;
     PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP : constant := 2;
  
@@ -186,7 +186,7 @@ index 80cb2b2a793e..701b7a3aeabc 100644
     function pthread_rwlock_init
       (mutex : access pthread_rwlock_t;
        attr  : access pthread_rwlockattr_t) return int;
-@@ -466,11 +460,6 @@ package System.OS_Interface is
+@@ -468,11 +462,6 @@ package System.OS_Interface is
        protocol : int) return int;
     pragma Import (C, pthread_mutexattr_setprotocol);
  
@@ -199,10 +199,10 @@ index 80cb2b2a793e..701b7a3aeabc 100644
        sched_priority : int;  --  scheduling priority
     end record;
 diff --git a/gcc/ada/libgnarl/s-taprop__linux.adb b/gcc/ada/libgnarl/s-taprop__linux.adb
-index c45559e5ba00..0b0f173e7d46 100644
+index 757a6cdfdadd..18e60e8d1f2e 100644
 --- a/gcc/ada/libgnarl/s-taprop__linux.adb
 +++ b/gcc/ada/libgnarl/s-taprop__linux.adb
-@@ -202,9 +202,6 @@ package body System.Task_Primitives.Operations is
+@@ -198,9 +198,6 @@ package body System.Task_Primitives.Operations is
     pragma Import
       (C, GNAT_pthread_condattr_setup, "__gnat_pthread_condattr_setup");
  
@@ -212,7 +212,7 @@ index c45559e5ba00..0b0f173e7d46 100644
     --  We do not have pragma Linker_Options ("-lcap"); here, because this
     --  library is not present on many Linux systems. 'libcap' is the Linux
     --  "capabilities" library, called by __gnat_has_cap_sys_nice.
-@@ -214,38 +211,6 @@ package body System.Task_Primitives.Operations is
+@@ -210,44 +207,6 @@ package body System.Task_Primitives.Operations is
     --  Convert Ada priority to Linux priority. Priorities are 1 .. 99 on
     --  GNU/Linux, so we map 0 .. 98 to 1 .. 99.
  
@@ -245,13 +245,19 @@ index c45559e5ba00..0b0f173e7d46 100644
 -      return Ceiling_Support;
 -   end Get_Ceiling_Support;
 -
--   pragma Warnings (Off, "non-static call not allowed in preelaborated unit");
+-   pragma Warnings (Off, "non-preelaborable call not allowed*");
 -   Ceiling_Support : constant Boolean := Get_Ceiling_Support;
--   pragma Warnings (On, "non-static call not allowed in preelaborated unit");
-    --  True if the locking policy is Ceiling_Locking, and the current process
-    --  has permission to use this policy. The process has permission if it is
-    --  running as 'root', or if the capability was set by the setcap command,
-@@ -348,7 +313,9 @@ package body System.Task_Primitives.Operations is
+-   pragma Warnings (On, "non-preelaborable call not allowed*");
+-   --  True if the locking policy is Ceiling_Locking, and the current process
+-   --  has permission to use this policy. The process has permission if it is
+-   --  running as 'root', or if the capability was set by the setcap command,
+-   --  as in "sudo /sbin/setcap cap_sys_nice=ep exe_file". If it doesn't have
+-   --  permission, then a request for Ceiling_Locking is ignored.
+-
+    type RTS_Lock_Ptr is not null access all RTS_Lock;
+ 
+    function Init_Mutex (L : RTS_Lock_Ptr; Prio : Any_Priority) return C.int;
+@@ -344,7 +303,9 @@ package body System.Task_Primitives.Operations is
     -- Init_Mutex --
     ----------------
  
@@ -261,7 +267,7 @@ index c45559e5ba00..0b0f173e7d46 100644
        Mutex_Attr : aliased pthread_mutexattr_t;
        Result, Result_2 : C.int;
  
-@@ -360,16 +327,7 @@ package body System.Task_Primitives.Operations is
+@@ -356,16 +317,7 @@ package body System.Task_Primitives.Operations is
           return Result;
        end if;
  
@@ -279,7 +285,7 @@ index c45559e5ba00..0b0f173e7d46 100644
           Result := pthread_mutexattr_setprotocol
             (Mutex_Attr'Access, PTHREAD_PRIO_INHERIT);
           pragma Assert (Result = 0);
-@@ -409,11 +367,6 @@ package body System.Task_Primitives.Operations is
+@@ -405,11 +357,6 @@ package body System.Task_Primitives.Operations is
              Result := pthread_rwlockattr_init (RWlock_Attr'Access);
              pragma Assert (Result = 0);
  
@@ -292,10 +298,10 @@ index c45559e5ba00..0b0f173e7d46 100644
  
              pragma Assert (Result in 0 | ENOMEM);
 diff --git a/gcc/ada/libgnat/s-dwalin.adb b/gcc/ada/libgnat/s-dwalin.adb
-index 5307eae2603c..68fb8d4f59c0 100644
+index d8b15c5dd668..94e37af75430 100644
 --- a/gcc/ada/libgnat/s-dwalin.adb
 +++ b/gcc/ada/libgnat/s-dwalin.adb
-@@ -1283,6 +1283,10 @@ package body System.Dwarf_Lines is
+@@ -1287,6 +1287,10 @@ package body System.Dwarf_Lines is
              --  Read table
              loop
                 Read_Aranges_Entry (C, Ar_Start, Ar_Len);
@@ -307,7 +313,7 @@ index 5307eae2603c..68fb8d4f59c0 100644
  
                 Len   := uint32 (Ar_Len);
 diff --git a/gcc/ada/libgnat/s-tsmona__linux.adb b/gcc/ada/libgnat/s-tsmona__linux.adb
-index bc3ee23be8d1..4fe0ac685f83 100644
+index 98c99925f864..e4820a6d9a2d 100644
 --- a/gcc/ada/libgnat/s-tsmona__linux.adb
 +++ b/gcc/ada/libgnat/s-tsmona__linux.adb
 @@ -87,45 +87,49 @@ package body Module_Name is
@@ -397,7 +403,7 @@ index bc3ee23be8d1..4fe0ac685f83 100644
  
     ---------
 diff --git a/gcc/ada/mkdir.c b/gcc/ada/mkdir.c
-index e0efccec36f7..e016722a3867 100644
+index a11b1e5fa2a3..01e3355c94d2 100644
 --- a/gcc/ada/mkdir.c
 +++ b/gcc/ada/mkdir.c
 @@ -34,6 +34,8 @@
@@ -419,7 +425,7 @@ index e0efccec36f7..e016722a3867 100644
  
  int
 diff --git a/gcc/ada/raise.c b/gcc/ada/raise.c
-index bf8a8797afc7..d8a9127ce383 100644
+index 0454c202ece2..eaa3d44eea27 100644
 --- a/gcc/ada/raise.c
 +++ b/gcc/ada/raise.c
 @@ -32,6 +32,8 @@
@@ -440,7 +446,7 @@ index bf8a8797afc7..d8a9127ce383 100644
  
  #ifdef __cplusplus
 diff --git a/gcc/ada/sysdep.c b/gcc/ada/sysdep.c
-index 1e1f5eeb5e6e..b8d016e0b3cb 100644
+index 51ffbd5545e7..e03bbe02dcf0 100644
 --- a/gcc/ada/sysdep.c
 +++ b/gcc/ada/sysdep.c
 @@ -52,6 +52,8 @@
@@ -462,10 +468,10 @@ index 1e1f5eeb5e6e..b8d016e0b3cb 100644
     imcompatible changes in some VxWorks versions */
  #ifdef __vxworks
 diff --git a/gcc/ada/terminals.c b/gcc/ada/terminals.c
-index af4417fab906..7d717d08b992 100644
+index ec9db3a6a4c6..f3695ab928ab 100644
 --- a/gcc/ada/terminals.c
 +++ b/gcc/ada/terminals.c
-@@ -1159,7 +1159,8 @@ __gnat_setup_winsize (void *desc, int rows, int columns)
+@@ -1146,7 +1146,8 @@ __gnat_setup_winsize (void *desc ATTRIBUTE_UNUSED,
  #if defined (__APPLE__) || defined (BSD)
  #define USE_OPENPTY
  #elif defined (__linux__)
@@ -476,5 +482,5 @@ index af4417fab906..7d717d08b992 100644
  #define USE_CLONE_DEVICE "/dev/ptmx"
  #elif defined (_AIX)
 -- 
-2.24.1
+2.31.1
 

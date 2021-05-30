@@ -1,0 +1,19 @@
+--- a/passff-host-1.2.1.py
++++ b/passff-host-1.2.1.py
+@@ -4,6 +4,7 @@
+     that wraps around the zx2c4 pass script.
+ """
+ 
++import appdirs
+ import json
+ import os
+ import struct
+@@ -20,6 +21,8 @@ COMMAND = "pass"
+ COMMAND_ENV = {
+     "TREE_CHARSET": "ISO-8859-1",
+     "PATH": "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
++    "GNUPGHOME": appdirs.user_config_dir('gnupg'),
++    "PASSWORD_STORE_DIR": appdirs.user_config_dir('pass'),
+ }
+ CHARSET = "UTF-8"
+ 
