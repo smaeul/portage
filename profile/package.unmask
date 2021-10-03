@@ -1,3 +1,2 @@
-dev-libs/elfutils
 >virtual/libelf-2
 >=www-client/firefox-54.0

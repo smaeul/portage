@@ -88,6 +88,7 @@ gnome-base/librsvg tools
 mail-client/thunderbird -clang eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 media-fonts/noto cjk
 media-gfx/imagemagick pango
+media-libs/freetype harfbuzz
 media-libs/imlib2 -mp3
 media-libs/mesa gles2 osmesa
 media-plugins/alsa-plugins -ffmpeg
@@ -122,7 +123,7 @@ sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
 sys-apps/util-linux -cramfs cryptsetup
-sys-devel/clang default-compiler-rt default-libcxx
+sys-devel/clang default-compiler-rt default-libcxx llvm-libunwind
 sys-devel/clang-runtime compiler-rt libcxx -sanitize
 sys-devel/gcc ada
 sys-devel/gdb multitarget python

@@ -12,7 +12,7 @@ app-misc/ddcutil ~amd64
 dev-lang/zig ~amd64
 dev-libs/capstone ~amd64
 dev-util/creduce ~amd64
-dev-util/dwarves ~amd64
+dev-util/pahole ~amd64
 dev-util/perf ~amd64
 dev-util/radare2 ~amd64
 mail-client/s-nail ~amd64
@@ -39,6 +39,7 @@ www-plugins/passff-host ~amd64
 # useful, or I need the latest version for compatibility with other software.
 app-i18n/unicode-data ~amd64
 app-misc/ca-certificates ~amd64
+dev-embedded/sdcc ~amd64
 dev-lang/go ~amd64
 dev-lang/mono ~amd64
 dev-libs/elfutils::musl ~amd64
