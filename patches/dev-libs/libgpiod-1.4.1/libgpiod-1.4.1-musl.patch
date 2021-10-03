@@ -1,0 +1,23 @@
+--- libgpiod-1.4.1/tests/gpiod-test.c
++++ libgpiod-1.4.1/tests/gpiod-test.c
+@@ -27,6 +27,9 @@
+ 
+ #include "gpiod-test.h"
+ 
++#undef stdout
++#undef stderr
++
+ #define NORETURN	__attribute__((noreturn))
+ #define MALLOC		__attribute__((malloc))
+ 
+--- libgpiod-1.4.1/tests/gpiod-test.c
++++ libgpiod-1.4.1/tests/gpiod-test.c
+@@ -1048,7 +1048,7 @@ bool test_regex_match(const char *str, const char *pattern)
+ 	}
+ 
+ 	rv = regexec(&regex, str, 0, 0, 0);
+-	if (rv == REG_NOERROR) {
++	if (rv == REG_OK) {
+ 		ret = true;
+ 	} else if (rv == REG_NOMATCH) {
+ 		ret = false;
