@@ -1,0 +1,1 @@
+CONFIG_SITE="${PORTAGE_CONFIGROOT}etc/portage/config.site"

@@ -1,6 +1,8 @@
 # These USE changes are necessary to fulfill a dependency from another package.
 # Required by gitea
 acct-user/git gitea
+# Required by dev-python/fonttools
+app-arch/brotli python
 # Required by libreoffice
 app-crypt/gpgme cxx
 # Required by cups-filters
@@ -49,8 +51,6 @@ sys-libs/ldb python
 net-libs/nodejs icu inspector
 # Required by pulseview
 sci-libs/libsigrok cxx
-# Required by !python:2.7
-sys-apps/ripgrep -man
 # Required by bitcoind (cxx) and for USE=test (tcl)
 sys-libs/db cxx tcl
 # Required by sys-libs/ldb
@@ -96,6 +96,7 @@ media-sound/mpd -fifo -id3tag libsoxr -mad -network -sqlite
 media-sound/pulseaudio alsa -asyncns
 media-video/ffmpeg dav1d libsoxr network openssl
 media-video/mpv cli drm egl -uchardet
+media-video/pipewire aptx extra gstreamer ldac pipewire-alsa
 net-analyzer/flent -plots
 net-analyzer/nmap ncat nping
 net-analyzer/tcpdump -smi
@@ -112,6 +113,7 @@ net-misc/freerdp -usb
 net-print/cups -usb
 net-print/cups-filters pclm
 net-vpn/wireguard-tools -wg-quick
+net-wireless/bluez deprecated extra-tools
 net-wireless/wpa_supplicant ap -hs2-0
 sys-apps/busybox savedconfig
 sys-apps/coreutils hostname
@@ -123,6 +125,7 @@ sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
 sys-apps/util-linux -cramfs cryptsetup
+sys-devel/binutils multitarget
 sys-devel/clang default-compiler-rt default-libcxx llvm-libunwind
 sys-devel/clang-runtime compiler-rt libcxx -sanitize
 sys-devel/gcc ada
@@ -139,6 +142,7 @@ sys-power/nut -ups_drivers_* ups_drivers_usbhid-ups
 www-client/chromium -atk -hangouts system-ffmpeg -wayland
 www-client/firefox -clang eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
 www-plugins/passff-host firefox
+www-servers/lighttpd -sqlite
 x11-base/xorg-server xvfb
 x11-libs/gtk+ -vim-syntax
 x11-terms/rxvt-unicode 256-color -blink -fading-colors font-styles iso14755 mousewheel -pixbuf unicode3 -utmp -wtmp

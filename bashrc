@@ -1,4 +1,3 @@
-export CONFIG_SITE="${PORTAGE_CONFIGROOT}/etc/portage/config.site"
 export TZ=":Etc/UTC"
 
 pre_src_prepare() {
