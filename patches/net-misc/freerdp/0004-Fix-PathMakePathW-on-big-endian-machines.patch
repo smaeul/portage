@@ -1,0 +1,56 @@
+From b854c52420ea6cdd842c447ae6545c2257442219 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 3 Oct 2021 11:02:36 -0500
+Subject: [PATCH 4/4] Fix PathMakePathW on big endian machines
+
+---
+ winpr/libwinpr/path/path.c  | 3 +++
+ winpr/libwinpr/path/shell.c | 4 ++--
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/winpr/libwinpr/path/path.c b/winpr/libwinpr/path/path.c
+index f5a2db5ec..6be73cc4b 100644
+--- a/winpr/libwinpr/path/path.c
++++ b/winpr/libwinpr/path/path.c
+@@ -22,6 +22,7 @@
+ #endif
+ 
+ #include <winpr/crt.h>
++#include <winpr/endian.h>
+ #include <winpr/heap.h>
+ #include <winpr/tchar.h>
+ 
+@@ -926,6 +927,8 @@ WCHAR PathGetSeparatorW(unsigned long dwFlags)
+ 	else if (dwFlags == PATH_STYLE_NATIVE)
+ 		separator = PATH_SEPARATOR_CHR;
+ 
++	Data_Read_UINT16(&separator, separator);
++
+ 	return separator;
+ }
+ 
+diff --git a/winpr/libwinpr/path/shell.c b/winpr/libwinpr/path/shell.c
+index 6e0cc00d6..fc7453415 100644
+--- a/winpr/libwinpr/path/shell.c
++++ b/winpr/libwinpr/path/shell.c
+@@ -522,7 +522,7 @@ BOOL PathMakePathW(LPCWSTR path, LPSECURITY_ATTRIBUTES lpAttributes)
+ #elif defined(_WIN32)
+ 	return (SHCreateDirectoryExW(NULL, path, lpAttributes) == ERROR_SUCCESS);
+ #else
+-	const WCHAR delim = PathGetSeparatorW(PATH_STYLE_NATIVE);
++	const char delim = PathGetSeparatorA(PATH_STYLE_NATIVE);
+ 	char* dup;
+ 	char* p;
+ 	BOOL result = TRUE;
+@@ -534,7 +534,7 @@ BOOL PathMakePathW(LPCWSTR path, LPSECURITY_ATTRIBUTES lpAttributes)
+ 
+ #else
+ 
+-	if (!path || *path != delim)
++	if (!path || *path != PathGetSeparatorW(PATH_STYLE_NATIVE))
+ 		return FALSE;
+ 
+ #endif
+-- 
+2.32.0
+

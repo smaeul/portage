@@ -1,0 +1,25 @@
+From 6761a372e8cccdf6791930a8703b4b79b68d467d Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 3 Oct 2021 11:07:09 -0500
+Subject: [PATCH 2/4] streamdump: Include time.h for time_t
+
+---
+ libfreerdp/core/streamdump.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/libfreerdp/core/streamdump.c b/libfreerdp/core/streamdump.c
+index cdb441767..ec9be6f7c 100644
+--- a/libfreerdp/core/streamdump.c
++++ b/libfreerdp/core/streamdump.c
+@@ -18,6 +18,8 @@
+  * limitations under the License.
+  */
+ 
++#include <time.h>
++
+ #include <winpr/sysinfo.h>
+ #include <winpr/path.h>
+ #include <winpr/string.h>
+-- 
+2.32.0
+

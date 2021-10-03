@@ -1,0 +1,18 @@
+In function 'bbtree_del',
+    inlined from '_cairo_recording_surface_create_bbtree' at /tmp/portage/x11-libs/cairo-1.16.0-r4/work/cairo-1.16.0/src/cairo-recording-surface.c:358:5,
+    inlined from '_cairo_recording_surface_get_visible_commands' at /tmp/portage/x11-libs/cairo-1.16.0-r4/work/cairo-1.16.0/src/cairo-recording-surface.c:1740:2,
+    inlined from '_cairo_recording_surface_replay_internal' at /tmp/portage/x11-libs/cairo-1.16.0-r4/work/cairo-1.16.0/src/cairo-recording-surface.c:1869:6:
+/tmp/portage/x11-libs/cairo-1.16.0-r4/work/cairo-1.16.0/src/cairo-recording-surface.c:248:5: warning: 'free' called on pointer 'surface' with nonzero offset 432 [-Wfree-nonheap-object]
+  248 |     free (bbt);
+      |     ^~~~~~~~~~
+--- cairo-1.16.0/src/cairo-recording-surface.c
++++ cairo-1.16.0/src/cairo-recording-surface.c
+@@ -355,7 +355,7 @@ _cairo_recording_surface_create_bbtree (cairo_recording_surface_t *surface)
+     return CAIRO_STATUS_SUCCESS;
+ 
+ cleanup:
+-    bbtree_del (&surface->bbtree);
++    _cairo_recording_surface_destroy_bbtree (surface);
+     return status;
+ }
+ 

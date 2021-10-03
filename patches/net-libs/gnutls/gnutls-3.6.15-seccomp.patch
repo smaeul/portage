@@ -1,0 +1,15 @@
+--- gnutls-3.7.2/tests/seccomp.c
++++ gnutls-3.7.2/tests/seccomp.c
+@@ -84,9 +84,12 @@ int disable_system_calls(void)
+ 
+ 	/* used in to detect reading timeouts */
+ 	ADD_SYSCALL(poll, 0);
++	ADD_SYSCALL(ppoll, 0);
+ 
+ 	/* for memory allocation */
+ 	ADD_SYSCALL(brk, 0);
++	ADD_SYSCALL(mmap, 0);
++	ADD_SYSCALL(munmap, 0);
+ 
+ 	/* the following are for generic operations, not specific to
+ 	 * gnutls. */

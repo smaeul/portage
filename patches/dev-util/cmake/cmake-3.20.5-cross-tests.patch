@@ -1,0 +1,11 @@
+--- cmake-3.20.5/Tests/CMakeLists.txt
++++ cmake-3.20.5/Tests/CMakeLists.txt
+@@ -3422,7 +3422,7 @@ if(BUILD_TESTING)
+   endif()
+ 
+   # add some cross compiler tests, for now only with makefile based generators
+-  if(CMAKE_GENERATOR MATCHES "Makefiles")
++  if(CMAKE_GENERATOR MATCHES "skipme")
+ 
+     # if sdcc is found, build the SimpleCOnly project with sdcc
+     find_program(SDCC_EXECUTABLE sdcc)

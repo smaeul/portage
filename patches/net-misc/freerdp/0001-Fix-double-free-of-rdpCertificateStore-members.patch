@@ -1,0 +1,29 @@
+From e47162d72aab06a7370d9008e4b1a36c0ac0c910 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 3 Oct 2021 10:44:55 -0500
+Subject: [PATCH 1/4] Fix double-free of rdpCertificateStore members
+
+certificate_store_uninit is always called from certificate_store_free
+before freeing the certificate store. Since the certificate store is
+freed if certificate_store_init fails, calling certificate_store_uninit
+from certificate_store_init means it gets called twice, and all of the
+struct members get double-freed.
+---
+ libfreerdp/crypto/certificate.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/libfreerdp/crypto/certificate.c b/libfreerdp/crypto/certificate.c
+index e8039b198..594bba4a3 100644
+--- a/libfreerdp/crypto/certificate.c
++++ b/libfreerdp/crypto/certificate.c
+@@ -175,7 +175,6 @@ static BOOL certificate_store_init(rdpCertificateStore* certificate_store)
+ 	return TRUE;
+ fail:
+ 	WLog_ERR(TAG, "certificate store initialization failed");
+-	certificate_store_uninit(certificate_store);
+ 	return FALSE;
+ }
+ 
+-- 
+2.32.0
+

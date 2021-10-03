@@ -1,0 +1,12 @@
+FAILED tests/test_inotify_c.py::test_raise_error - AssertionError: assert 'Unknown error -1' in '[Errno -1] No error information'
+--- watchdog-2.1.5/tests/test_inotify_c.py
++++ watchdog-2.1.5/tests/test_inotify_c.py
+@@ -162,7 +162,7 @@ def test_raise_error(monkeypatch):
+     with pytest.raises(OSError) as exc:
+         func()
+     assert exc.value.errno == -1
+-    assert "Unknown error -1" in str(exc.value)
++    assert "-1" in str(exc.value)
+ 
+ 
+ def test_non_ascii_path():

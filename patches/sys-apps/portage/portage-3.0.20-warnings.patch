@@ -1,6 +1,15 @@
---- portage-2.3.49/bin/install-qa-check.d/90gcc-warnings
-+++ portage-2.3.49/bin/install-qa-check.d/90gcc-warnings
-@@ -43,16 +43,11 @@ gcc_warn_check() {
+--- portage-3.0.20/bin/install-qa-check.d/90gcc-warnings
++++ portage-3.0.20/bin/install-qa-check.d/90gcc-warnings
+@@ -27,8 +27,4 @@ gcc_warn_check() {
+ 			'warning: .*mathematical meaning*\[-Wparentheses\]'
+ 			# null argument where non-null required
+ 			'warning: .*\[-Wnonnull\]'
+-			# array subscript is above/below/outside array bounds
+-			'warning: .*\[-Warray-bounds\]'
+-			# attempt to free a non-heap object
+-			'warning: .*\[-Wfree-nonheap-object\]'
+ 			# those three do not have matching -W flags, it seems
+@@ -43,16 +41,11 @@ gcc_warn_check() {
  			'warning: .*NULL.*\[-Wpointer-arith\]'
  			# pointer to a function used in arithmetic and likes
  			'warning: .*function.*\[-Wpointer-arith\]'

@@ -1,0 +1,11 @@
+--- m4-1.4.19/tests/test-posix_spawn_file_actions_addclose.c
++++ m4-1.4.19/tests/test-posix_spawn_file_actions_addclose.c
+@@ -38,6 +38,8 @@ big_fd (void)
+ #ifdef OPEN_MAX
+   if (fd < OPEN_MAX)
+     fd = OPEN_MAX;
++#else
++  fd = -1;
+ #endif
+   return fd;
+ }

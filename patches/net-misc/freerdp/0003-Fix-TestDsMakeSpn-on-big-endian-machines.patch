@@ -1,0 +1,48 @@
+From 8f23717fb687971a557c0221edaa5c3ebfcb7025 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Sun, 3 Oct 2021 10:51:05 -0500
+Subject: [PATCH 3/4] Fix TestDsMakeSpn on big endian machines
+
+Since commit f722dc5c280f ("winpr/crt: Fix endianness in unicode
+conversions"), wide characters are always expected to be UTF16LE.
+This means wide character literals cannot be used, because they are
+stored in native endianness. Instead, use a correctly-ordered byte
+array.
+---
+ winpr/libwinpr/dsparse/test/TestDsMakeSpn.c | 20 +++++++++++++-------
+ 1 file changed, 13 insertions(+), 7 deletions(-)
+
+diff --git a/winpr/libwinpr/dsparse/test/TestDsMakeSpn.c b/winpr/libwinpr/dsparse/test/TestDsMakeSpn.c
+index 26e6f0019..99ccea39d 100644
+--- a/winpr/libwinpr/dsparse/test/TestDsMakeSpn.c
++++ b/winpr/libwinpr/dsparse/test/TestDsMakeSpn.c
+@@ -60,13 +60,19 @@ fail:
+ 
+ static BOOL test_DsMakeSpnW(void)
+ {
+-	WCHAR testServiceClass[] = { 'H', 'T', 'T', 'P', '\0' };
+-	WCHAR testServiceName[] = { 'L', 'A', 'B', '1', '-', 'W', '2', 'K', '8', 'R', '2',
+-		                        '-', 'G', 'W', '.', 'l', 'a', 'b', '1', '.', 'a', 'w',
+-		                        'a', 'k', 'e', '.', 'l', 'o', 'c', 'a', 'l', '\0' };
+-	WCHAR testSpn[] = { 'H', 'T', 'T', 'P', '/', 'L', 'A', 'B', '1', '-', 'W', '2', 'K',
+-		                '8', 'R', '2', '-', 'G', 'W', '.', 'l', 'a', 'b', '1', '.', 'a',
+-		                'w', 'a', 'k', 'e', '.', 'l', 'o', 'c', 'a', 'l', '\0' };
++	BYTE testServiceClassW[] = { 'H', 0, 'T', 0, 'T', 0, 'P', 0, '\0', 0 };
++	BYTE testServiceNameW[] = { 'L', 0, 'A', 0, 'B', 0, '1', 0, '-', 0, 'W', 0, '2', 0, 'K', 0,
++				    '8', 0, 'R', 0, '2', 0, '-', 0, 'G', 0, 'W', 0, '.', 0, 'l', 0,
++				    'a', 0, 'b', 0, '1', 0, '.', 0, 'a', 0, 'w', 0, 'a', 0, 'k', 0,
++				    'e', 0, '.', 0, 'l', 0, 'o', 0, 'c', 0, 'a', 0, 'l', 0, 0, 0 };
++	BYTE testSpnW[] = { 'H', 0, 'T', 0, 'T', 0, 'P', 0, '/', 0, 'L', 0, 'A', 0, 'B', 0, '1', 0,
++			    '-', 0, 'W', 0, '2', 0, 'K', 0, '8', 0, 'R', 0, '2', 0, '-', 0, 'G', 0,
++			    'W', 0, '.', 0, 'l', 0, 'a', 0, 'b', 0, '1', 0, '.', 0, 'a', 0, 'w', 0,
++			    'a', 0, 'k', 0, 'e', 0, '.', 0, 'l', 0, 'o', 0, 'c', 0, 'a', 0, 'l', 0,
++			    0, 0 };
++	WCHAR *testServiceClass = (WCHAR *)testServiceClassW;
++	WCHAR *testServiceName = (WCHAR *)testServiceNameW;
++	WCHAR *testSpn = (WCHAR *)testSpnW;
+ 	BOOL rc = FALSE;
+ 	WCHAR Spn[100] = { 0 };
+ 	DWORD status;
+-- 
+2.32.0
+
