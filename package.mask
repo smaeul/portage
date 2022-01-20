@@ -7,4 +7,3 @@ media-libs/mesa::gentoo
 sys-apps/dbus
 sys-devel/autogen
 sys-libs/libunwind
-virtual/rust::gentoo

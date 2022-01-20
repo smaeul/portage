@@ -30,11 +30,15 @@ dev-libs/nss utils
 # Required by libreoffice
 dev-libs/xmlsec nss
 # Required for USE=test
+dev-python/pillow jpeg2k
+# Required for USE=test
 media-gfx/fontforge python
 # Required by inkscape[imagemagick]
 media-gfx/imagemagick cxx
 # Required for ffmpeg-4
 media-libs/gegl -ffmpeg
+# Required by app-text/texlive-core
+media-libs/harfbuzz icu
 # Required by chromium
 media-libs/libpng apng
 # Required by thunderbird (postproc) and chromium (svc)
@@ -49,6 +53,8 @@ net-dns/ldns-utils examples
 sys-libs/ldb python
 # Required by chromium
 net-libs/nodejs icu inspector
+# Required by dev-python/pyzmq
+net-libs/zeromq drafts
 # Required by pulseview
 sci-libs/libsigrok cxx
 # Required by bitcoind (cxx) and for USE=test (tcl)
@@ -73,7 +79,7 @@ dev-java/openjdk alsa
 dev-lang/ghc ghcbootstrap
 dev-lang/php bcmath gd fpm pdo
 dev-lang/ruby -rdoc
-dev-lang/rust clippy rls rustfmt system-llvm
+dev-lang/rust clippy rls rust-src rustfmt system-llvm
 dev-libs/capstone python
 dev-libs/openssl -sslv3
 dev-ml/lablgl glut
@@ -85,7 +91,7 @@ dev-util/geany -vte
 dev-util/geany-plugins ctags
 dev-vcs/git -pcre-jit perl
 gnome-base/librsvg tools
-mail-client/thunderbird -clang eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+mail-client/thunderbird -clang eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-png system-sqlite
 media-fonts/noto cjk
 media-gfx/imagemagick pango
 media-libs/freetype harfbuzz
@@ -107,6 +113,7 @@ net-im/bitlbee oscar twitter
 net-irc/weechat -charset -fset python
 net-libs/glib-networking -gnome -libproxy
 net-libs/gnutls -openssl
+net-libs/zeromq -libbsd
 net-misc/iputils tracepath
 net-misc/s6-networking -ssl
 net-misc/freerdp -usb
@@ -114,7 +121,7 @@ net-print/cups -usb
 net-print/cups-filters pclm
 net-vpn/wireguard-tools -wg-quick
 net-wireless/bluez deprecated extra-tools
-net-wireless/wpa_supplicant ap -hs2-0
+net-wireless/wpa_supplicant ap -crda -hs2-0
 sys-apps/busybox savedconfig
 sys-apps/coreutils hostname
 sys-apps/debianutils -installkernel
@@ -139,8 +146,9 @@ sys-libs/ldb -ldap
 sys-libs/libcxx libcxxabi libunwind
 sys-libs/libcxxabi libunwind
 sys-power/nut -ups_drivers_* ups_drivers_usbhid-ups
+virtual/rust rustfmt
 www-client/chromium -atk -hangouts system-ffmpeg -wayland
-www-client/firefox -clang eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-sqlite
+www-client/firefox -clang eme-free -gmp-autoupdate system-harfbuzz system-icu system-jpeg system-libevent system-libvpx system-png system-sqlite -wayland
 www-plugins/passff-host firefox
 www-servers/lighttpd -sqlite
 x11-base/xorg-server xvfb

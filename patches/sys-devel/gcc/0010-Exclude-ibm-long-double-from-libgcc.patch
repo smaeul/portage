@@ -1,3 +1,13 @@
+From 12c8eba295a92141f970b25859d31b2337cc3ea4 Mon Sep 17 00:00:00 2001
+From: Samuel Holland <samuel@sholland.org>
+Date: Wed, 19 Jan 2022 21:03:31 -0600
+Subject: [PATCH 10/10] Exclude ibm long double from libgcc
+
+---
+ libgcc/config/rs6000/t-linux   | 2 --
+ libgcc/config/rs6000/t-ppccomm | 2 +-
+ 2 files changed, 1 insertion(+), 3 deletions(-)
+
 diff --git a/libgcc/config/rs6000/t-linux b/libgcc/config/rs6000/t-linux
 index 500210ddaf20..9d573adc8ccc 100644
 --- a/libgcc/config/rs6000/t-linux
@@ -20,3 +30,6 @@ index fb812d3801fe..6a82d4bcd35e 100644
  	   $(srcdir)/config/rs6000/tramp.S
  
  # This can't end up in shared libgcc
+-- 
+2.33.1
+

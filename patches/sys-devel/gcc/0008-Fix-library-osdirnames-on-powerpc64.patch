@@ -1,7 +1,7 @@
-From cf81329296542d202835f2dda04b44e8e866a3d8 Mon Sep 17 00:00:00 2001
+From d68adbe88bac6082cb648c1e4db908325b1142d0 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 7 Jul 2019 02:22:44 -0500
-Subject: [PATCH 8/9] Fix library osdirnames on powerpc64
+Subject: [PATCH 08/10] Fix library osdirnames on powerpc64
 
 ---
  gcc/config/rs6000/t-linux       | 2 +-
@@ -50,5 +50,5 @@ index 97c1ee6fb4d7..6cb4cb707f9a 100644
  MULTILIB_OSDIRNAMES += $(subst $(if $(findstring 64,$(target)),m64,m32).,,$(filter $(if $(findstring 64,$(target)),m64,m32).mlittle%,$(MULTILIB_OSDIRNAMES)))
  MULTILIB_MATCHES    := ${MULTILIB_MATCHES_ENDIAN}
 -- 
-2.31.1
+2.33.1
 

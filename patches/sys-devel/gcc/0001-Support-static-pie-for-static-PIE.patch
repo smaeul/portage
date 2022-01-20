@@ -1,7 +1,7 @@
-From 001b7ec02b1198df0b6869bdd0a5ebb9dc099bcc Mon Sep 17 00:00:00 2001
+From 4b67e622cc529b5ea18f08734e997eea31a38db1 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sat, 9 May 2020 17:08:13 -0500
-Subject: [PATCH 1/9] Support '-static -pie' for static PIE
+Subject: [PATCH 01/10] Support '-static -pie' for static PIE
 
 ---
  gcc/common.opt        |  4 ++--
@@ -68,7 +68,7 @@ index 5ebbf42a13d2..a72adac8ba9b 100644
  
  #define GNU_USER_TARGET_LINK_GCC_C_SEQUENCE_SPEC \
 diff --git a/gcc/gcc.c b/gcc/gcc.c
-index 7837553958b4..81e47efa2e00 100644
+index 8ba410c9e176..eec0886e2853 100644
 --- a/gcc/gcc.c
 +++ b/gcc/gcc.c
 @@ -1009,7 +1009,7 @@ proper position among the other output files.  */
@@ -96,5 +96,5 @@ index 7837553958b4..81e47efa2e00 100644
  
  #ifndef LINK_BUILDID_SPEC
 -- 
-2.31.1
+2.33.1
 

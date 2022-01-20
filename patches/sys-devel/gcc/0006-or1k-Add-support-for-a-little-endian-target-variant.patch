@@ -1,7 +1,7 @@
-From 67d91a4411fbf8dac88952a034591d5c339be003 Mon Sep 17 00:00:00 2001
+From 5ab8265e484017037bdadc1253f7089abfee7c05 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Thu, 22 Apr 2021 00:17:56 -0500
-Subject: [PATCH 6/9] or1k: Add support for a little-endian target variant
+Subject: [PATCH 06/10] or1k: Add support for a little-endian target variant
 
 ---
  gcc/config.gcc           |  5 +++++
@@ -13,10 +13,10 @@ Subject: [PATCH 6/9] or1k: Add support for a little-endian target variant
  6 files changed, 34 insertions(+), 4 deletions(-)
 
 diff --git a/gcc/config.gcc b/gcc/config.gcc
-index 357b0bed0673..82aea16ee782 100644
+index a020e0808c94..67763982bc93 100644
 --- a/gcc/config.gcc
 +++ b/gcc/config.gcc
-@@ -2867,6 +2867,11 @@ or1k*-*-*)
+@@ -2869,6 +2869,11 @@ or1k*-*-*)
  	done
  	TM_MULTILIB_CONFIG=`echo $TM_MULTILIB_CONFIG | sed 's/^,//'`
  
@@ -109,10 +109,10 @@ index 6bd0f3eee6dd..e993a353af52 100644
  Target RejectNegative InverseMask(SOFT_DIV)
  Enable generation of hardware divide (l.div, l.divu) instructions.  This is the
 diff --git a/libgcc/config.host b/libgcc/config.host
-index f808b61be704..da378275e530 100644
+index 0ab18dcc9ff5..3cd8f172607d 100644
 --- a/libgcc/config.host
 +++ b/libgcc/config.host
-@@ -1118,12 +1118,12 @@ nios2-*-*)
+@@ -1121,12 +1121,12 @@ nios2-*-*)
  	tmake_file="$tmake_file nios2/t-nios2 t-softfp-sfdf t-softfp-excl t-softfp"
  	extra_parts="$extra_parts crti.o crtn.o"
  	;;
@@ -128,5 +128,5 @@ index f808b61be704..da378275e530 100644
  	tmake_file="$tmake_file t-softfp-sfdf t-softfp"
  	;;
 -- 
-2.31.1
+2.33.1
 

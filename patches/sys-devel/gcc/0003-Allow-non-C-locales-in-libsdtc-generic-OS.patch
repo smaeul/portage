@@ -1,7 +1,7 @@
-From 2c047f87f804688fb27d19f7726616b47b51dd8f Mon Sep 17 00:00:00 2001
+From d9ab62142dbeca0d6789d2229840ad99ebea60a9 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 7 Jul 2019 02:17:49 -0500
-Subject: [PATCH 3/9] Allow non-C locales in libsdtc++ generic OS
+Subject: [PATCH 03/10] Allow non-C locales in libsdtc++ generic OS
 
 ---
  libstdc++-v3/config/locale/generic/c_locale.cc | 3 ---
@@ -22,5 +22,5 @@ index a6676a7cf510..e71bc6019b81 100644
  
    void
 -- 
-2.31.1
+2.33.1
 

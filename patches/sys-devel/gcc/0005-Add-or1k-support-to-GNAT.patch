@@ -1,7 +1,7 @@
-From 4f86a813787cd417b571ed2f8bfbc301182947fe Mon Sep 17 00:00:00 2001
+From 385bba7982669c79baf12b85e10d933c77f11010 Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sat, 29 May 2021 12:43:53 -0500
-Subject: [PATCH 5/9] Add or1k support to GNAT
+Subject: [PATCH 05/10] Add or1k support to GNAT
 
 ---
  gcc/ada/Makefile.rtl                  |  34 ++++++
@@ -12,10 +12,10 @@ Subject: [PATCH 5/9] Add or1k support to GNAT
  create mode 100644 gcc/ada/libgnat/system-linux-or1k.ads
 
 diff --git a/gcc/ada/Makefile.rtl b/gcc/ada/Makefile.rtl
-index e77c592f8d07..65658306a2f9 100644
+index 0f7916a1dd03..cb3fefc8de85 100644
 --- a/gcc/ada/Makefile.rtl
 +++ b/gcc/ada/Makefile.rtl
-@@ -2796,6 +2796,40 @@ ifeq ($(strip $(filter-out riscv% linux%,$(target_cpu) $(target_os))),)
+@@ -2801,6 +2801,40 @@ ifeq ($(strip $(filter-out riscv% linux%,$(target_cpu) $(target_os))),)
    LIBRARY_VERSION := $(LIB_VERSION)
  endif
  
@@ -358,5 +358,5 @@ index 000000000000..f746bd2b7583
 +
 +end System;
 -- 
-2.31.1
+2.33.1
 

@@ -15,8 +15,8 @@
 +++ Python-3.8.7/Lib/ctypes/test/test_find.py
 @@ -68,7 +68,7 @@ class Test_OpenGL_libs(unittest.TestCase):
      def test_shell_injection(self):
-         result = find_library('; echo Hello shell > ' + test.support.TESTFN)
-         self.assertFalse(os.path.lexists(test.support.TESTFN))
+         result = find_library('; echo Hello shell > ' + os_helper.TESTFN)
+         self.assertFalse(os.path.lexists(os_helper.TESTFN))
 -        self.assertIsNone(result)
 +        # self.assertIsNone(result)
  
@@ -29,5 +29,5 @@
 -            self.assertIsNone(find_library(libname))
 +            # self.assertIsNone(find_library(libname))
              # now add the location to LD_LIBRARY_PATH
-             with test.support.EnvironmentVarGuard() as env:
+             with os_helper.EnvironmentVarGuard() as env:
                  KEY = 'LD_LIBRARY_PATH'

@@ -1,7 +1,7 @@
-From 393ff33e7f1c671b4d103613b50533a32389829c Mon Sep 17 00:00:00 2001
+From 7652fcfc80301cda5eeaba3bbf6f4fb20ff8ebee Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 7 Jul 2019 02:02:37 -0500
-Subject: [PATCH 4/9] Add musl libc support to GNAT
+Subject: [PATCH 04/10] Add musl libc support to GNAT
 
 ---
  gcc/ada/Makefile.rtl                 |  2 +-
@@ -23,7 +23,7 @@ Subject: [PATCH 4/9] Add musl libc support to GNAT
  16 files changed, 67 insertions(+), 121 deletions(-)
 
 diff --git a/gcc/ada/Makefile.rtl b/gcc/ada/Makefile.rtl
-index 987eff0abba0..e77c592f8d07 100644
+index 96c0a5b089c2..0f7916a1dd03 100644
 --- a/gcc/ada/Makefile.rtl
 +++ b/gcc/ada/Makefile.rtl
 @@ -2386,7 +2386,7 @@ ifeq ($(strip $(filter-out powerpc% linux%,$(target_cpu) $(target_os))),)
@@ -49,7 +49,7 @@ index 43a378f90587..8752d490c23e 100644
  #define ISDIGIT(c) isdigit(c)
  #endif
 diff --git a/gcc/ada/adaint.c b/gcc/ada/adaint.c
-index 0a90c92402cd..1f5033169a1d 100644
+index 2e54e69643a3..fae99e3f82d1 100644
 --- a/gcc/ada/adaint.c
 +++ b/gcc/ada/adaint.c
 @@ -100,6 +100,8 @@
@@ -298,18 +298,18 @@ index 757a6cdfdadd..18e60e8d1f2e 100644
  
              pragma Assert (Result in 0 | ENOMEM);
 diff --git a/gcc/ada/libgnat/s-dwalin.adb b/gcc/ada/libgnat/s-dwalin.adb
-index d8b15c5dd668..94e37af75430 100644
+index 81f064df0923..df48b88a217d 100644
 --- a/gcc/ada/libgnat/s-dwalin.adb
 +++ b/gcc/ada/libgnat/s-dwalin.adb
-@@ -1287,6 +1287,10 @@ package body System.Dwarf_Lines is
-             --  Read table
+@@ -1542,6 +1542,10 @@ package body System.Dwarf_Lines is
+ 
              loop
                 Read_Aranges_Entry (C, Ar_Start, Ar_Len);
 +               --  Skip references to discarded sections
-+               while Ar_Start = 0 and Ar_Len /= 0 loop
++               while Ar_Start = Null_Address and Ar_Len /= 0 loop
 +                  Read_Aranges_Entry (C, Ar_Start, Ar_Len);
 +               end loop;
-                exit when Ar_Start = 0 and Ar_Len = 0;
+                exit when Ar_Start = Null_Address and Ar_Len = 0;
  
                 Len   := uint32 (Ar_Len);
 diff --git a/gcc/ada/libgnat/s-tsmona__linux.adb b/gcc/ada/libgnat/s-tsmona__linux.adb
@@ -482,5 +482,5 @@ index ec9db3a6a4c6..f3695ab928ab 100644
  #define USE_CLONE_DEVICE "/dev/ptmx"
  #elif defined (_AIX)
 -- 
-2.31.1
+2.33.1
 

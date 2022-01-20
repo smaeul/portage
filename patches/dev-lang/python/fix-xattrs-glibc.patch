@@ -6,7 +6,7 @@
  
 -#if defined(HAVE_SYS_XATTR_H) && defined(__GLIBC__) && !defined(__FreeBSD_kernel__) && !defined(__GNU__)
 +#if defined(HAVE_SYS_XATTR_H) && defined(__linux__) && !defined(__FreeBSD_kernel__) && !defined(__GNU__)
- #define USE_XATTRS
+ #  define USE_XATTRS
 +#include <linux/limits.h>
  #endif
  

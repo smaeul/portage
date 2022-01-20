@@ -86,23 +86,23 @@
          .section ".opd","aw"
  #else
          .section ".text"
-@@ -338,14 +334,14 @@ FUNCTION(caml_c_call)
+@@ -327,14 +327,14 @@ FUNCTION(caml_c_call)
  #if defined(MODEL_ppc)
-         mtctr   28
+         mtctr   C_CALL_FUN
          bctrl
 -#elif defined(MODEL_ppc64)
 +#elif _CALL_ELF == 1
-         ld      0, 0(28)
-         mr      26, 2   /* save current TOC in a callee-save register */
+         ld      0, 0(C_CALL_FUN)
+         mr      C_CALL_TOC, 2   /* save current TOC in a callee-save register */
          mtctr   0
-         ld      2, 8(28)
+         ld      2, 8(C_CALL_FUN)
          bctrl
-         mr      2, 26   /* restore current TOC */
+         mr      2, C_CALL_TOC   /* restore current TOC */
 -#elif defined(MODEL_ppc64le)
 +#elif _CALL_ELF == 2
-         mtctr   28
-         mr      12, 28
-         mr      26, 2   /* save current TOC in a callee-save register */
+         mtctr   C_CALL_FUN
+         mr      12, C_CALL_FUN
+         mr      C_CALL_TOC, 2   /* save current TOC in a callee-save register */
 @@ -514,14 +510,14 @@ FUNCTION(caml_start_program)
  #if defined(MODEL_ppc)
          mtctr   12

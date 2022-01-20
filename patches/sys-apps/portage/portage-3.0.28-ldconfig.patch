@@ -1,0 +1,11 @@
+--- portage-3.0.28/lib/portage/util/env_update.py
++++ portage-3.0.28/lib/portage/util/env_update.py
+@@ -349,7 +349,7 @@ def _env_update(makelinks, target_root, prev_mtimes, contents, env, writemsg_lev
+     ):
+         ldconfig = find_binary("%s-ldconfig" % settings["CHOST"])
+     else:
+-        ldconfig = os.path.join(eroot, "sbin", "ldconfig")
++        ldconfig = find_binary("ldconfig")
+ 
+     if ldconfig is None:
+         pass

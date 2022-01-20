@@ -1,14 +1,14 @@
-From f2b72df6a4afccde81716b3026e0da637fbc4c8a Mon Sep 17 00:00:00 2001
+From b09fe5bbdb19e327e11a903d3709d622592f25df Mon Sep 17 00:00:00 2001
 From: Samuel Holland <samuel@sholland.org>
 Date: Sun, 7 Jul 2019 02:20:51 -0500
-Subject: [PATCH 2/9] Link libssp_nonshared when SSP is enabled
+Subject: [PATCH 02/10] Link libssp_nonshared when SSP is enabled
 
 ---
  gcc/gcc.c | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
 diff --git a/gcc/gcc.c b/gcc/gcc.c
-index 81e47efa2e00..ec1109988687 100644
+index eec0886e2853..0f2ec942aacc 100644
 --- a/gcc/gcc.c
 +++ b/gcc/gcc.c
 @@ -979,8 +979,7 @@ proper position among the other output files.  */
@@ -22,5 +22,5 @@ index 81e47efa2e00..ec1109988687 100644
  #define LINK_SSP_SPEC "%{fstack-protector|fstack-protector-all" \
  		       "|fstack-protector-strong|fstack-protector-explicit" \
 -- 
-2.31.1
+2.33.1
 

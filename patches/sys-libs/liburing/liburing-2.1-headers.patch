@@ -1,0 +1,24 @@
+sendmsg_fs_cve.c:68:9: warning: implicit declaration of function 'strcpy' [-Wimplicit-function-declaration]
+sendmsg_fs_cve.c:68:9: warning: incompatible implicit declaration of built-in function 'strcpy' [-Wbuiltin-declaration-mismatch]
+shutdown.c:111:55: warning: implicit declaration of function 'strerror'; did you mean 'perror'? [-Wimplicit-function-declaration]
+
+--- liburing-2.1/test/sendmsg_fs_cve.c
++++ liburing-2.1/test/sendmsg_fs_cve.c
+@@ -20,6 +20,7 @@
+ 
+ #include <unistd.h>
+ #include <stdio.h>
++#include <string.h>
+ #include <sys/mman.h>
+ #include <sys/socket.h>
+ #include <sys/un.h>
+--- liburing-2.1/test/shutdown.c
++++ liburing-2.1/test/shutdown.c
+@@ -6,6 +6,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <stdint.h>
++#include <string.h>
+ #include <assert.h>
+ 
+ #include <errno.h>

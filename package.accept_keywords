@@ -12,6 +12,7 @@ app-benchmarks/stress-ng ~amd64
 app-misc/ddcutil ~amd64
 dev-lang/zig ~amd64
 dev-libs/capstone ~amd64
+dev-python/patatt ~amd64
 dev-util/creduce ~amd64
 dev-util/pahole ~amd64
 dev-util/perf ~amd64
@@ -92,7 +93,7 @@ net-libs/libdom ~amd64
 www-client/netsurf ~amd64
 
 # rust and friends
-dev-lang/rust::smaeul ~amd64
+dev-lang/rust ~amd64
 virtual/rust ~amd64
 
 # s6 and friends
@@ -117,3 +118,5 @@ sys-apps/s6-rc ~amd64
 # The following packages have significant features or bugfixes in an unstable
 # version. These entries should be removed once that version is stabilized.
 #
+# Required by www-client/firefox
+~dev-libs/nss-3.72.1 ~amd64

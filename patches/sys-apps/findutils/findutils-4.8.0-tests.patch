@@ -1,0 +1,11 @@
+--- findutils-4.8.0/gnulib-tests/Makefile.in
++++ findutils-4.8.0/gnulib-tests/Makefile.in
+@@ -140,7 +140,7 @@ TESTS = test-accept$(EXEEXT) test-alloca-opt$(EXEEXT) \
+ 	test-ftell.sh test-ftell2.sh test-ftell3$(EXEEXT) \
+ 	test-ftello.sh test-ftello2.sh test-ftello3$(EXEEXT) \
+ 	test-ftello4.sh test-ftruncate.sh test-fwrite$(EXEEXT) \
+-	test-getcwd-lgpl$(EXEEXT) test-getcwd.sh \
++	test-getcwd-lgpl$(EXEEXT) \
+ 	test-getdelim$(EXEEXT) test-getdtablesize$(EXEEXT) \
+ 	test-getgroups$(EXEEXT) test-gethostname$(EXEEXT) \
+ 	test-getline$(EXEEXT) test-getopt-gnu$(EXEEXT) \
