@@ -1,0 +1,28 @@
+- stdio flushing
+- printf() does not support grouping
+- strerror() difference
+--- gawk-5.1.1/test/clos1way6.ok
++++ gawk-5.1.1/test/clos1way6.ok
+@@ -1,3 +1,3 @@
+ gawk: clos1way6.awk:5: warning: fflush: cannot flush: two-way pipe `cat - 1>&2; sleep 2' has closed write end
+-test1
+ Bad file descriptor
++test1
+--- gawk-5.1.1/test/commas.ok
++++ gawk-5.1.1/test/commas.ok
+@@ -1,2 +1,2 @@
+-123,456,789
+-123,456,789.000000
++123456789
++123456789.000000
+--- gawk-5.1.1/test/testext.ok
++++ gawk-5.1.1/test/testext.ok
+@@ -21,7 +21,7 @@ var_test: sym_update of ARGC failed - correctly
+ var_test: sym_update("testvar") succeeded
+ var_test() returned 1, test_var = 42
+ 
+-test_errno() returned 1, ERRNO = No child processes
++test_errno() returned 1, ERRNO = No child process
+ 
+ fubar = 9
+ rumpus = -5

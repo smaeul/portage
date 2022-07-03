@@ -1,0 +1,23 @@
+--- cmake-3.22.2/Modules/GNUInstallDirs.cmake
++++ cmake-3.22.2/Modules/GNUInstallDirs.cmake
+@@ -269,7 +269,7 @@ if(NOT DEFINED CMAKE_INSTALL_LIBDIR OR (_libdir_set
+       endif()
+     endif()
+ 
+-    if(__system_type_for_install STREQUAL "debian")
++    if(TRUE) # multiarch system
+       if(CMAKE_LIBRARY_ARCHITECTURE)
+         if("${CMAKE_INSTALL_PREFIX}" MATCHES "^/usr/?$")
+           set(_LIBDIR_DEFAULT "lib/${CMAKE_LIBRARY_ARCHITECTURE}")
+--- cmake-3.22.2/Modules/Platform/UnixPaths.cmake
++++ cmake-3.22.2/Modules/Platform/UnixPaths.cmake
+@@ -117,6 +117,6 @@ if(CMAKE_COMPILER_SYSROOT)
+ endif()
+ 
+ # Enable use of lib32 and lib64 search path variants by default.
+-set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB32_PATHS TRUE)
+-set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS TRUE)
+-set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIBX32_PATHS TRUE)
++set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB32_PATHS FALSE)
++set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS FALSE)
++set_property(GLOBAL PROPERTY FIND_LIBRARY_USE_LIBX32_PATHS FALSE)

@@ -1,0 +1,59 @@
+--- firefox-99.0/third_party/libwebrtc/common_audio/wav_file.cc
++++ firefox-99.0/third_party/libwebrtc/common_audio/wav_file.cc
+@@ -89,10 +89,6 @@ void WavReader::Reset() {
+ 
+ size_t WavReader::ReadSamples(const size_t num_samples,
+                               int16_t* const samples) {
+-#ifndef WEBRTC_ARCH_LITTLE_ENDIAN
+-#error "Need to convert samples to big-endian when reading from WAV file"
+-#endif
+-
+   size_t num_samples_left_to_read = num_samples;
+   size_t next_chunk_start = 0;
+   while (num_samples_left_to_read > 0 && num_unread_samples_ > 0) {
+@@ -129,10 +125,6 @@ size_t WavReader::ReadSamples(const size_t num_samples,
+ }
+ 
+ size_t WavReader::ReadSamples(const size_t num_samples, float* const samples) {
+-#ifndef WEBRTC_ARCH_LITTLE_ENDIAN
+-#error "Need to convert samples to big-endian when reading from WAV file"
+-#endif
+-
+   size_t num_samples_left_to_read = num_samples;
+   size_t next_chunk_start = 0;
+   while (num_samples_left_to_read > 0 && num_unread_samples_ > 0) {
+@@ -213,10 +205,6 @@ WavWriter::WavWriter(FileWrapper file,
+ }
+ 
+ void WavWriter::WriteSamples(const int16_t* samples, size_t num_samples) {
+-#ifndef WEBRTC_ARCH_LITTLE_ENDIAN
+-#error "Need to convert samples to little-endian when writing to WAV file"
+-#endif
+-
+   for (size_t i = 0; i < num_samples; i += kMaxChunksize) {
+     const size_t num_remaining_samples = num_samples - i;
+     const size_t num_samples_to_write =
+@@ -243,10 +231,6 @@ void WavWriter::WriteSamples(const int16_t* samples, size_t num_samples) {
+ }
+ 
+ void WavWriter::WriteSamples(const float* samples, size_t num_samples) {
+-#ifndef WEBRTC_ARCH_LITTLE_ENDIAN
+-#error "Need to convert samples to little-endian when writing to WAV file"
+-#endif
+-
+   for (size_t i = 0; i < num_samples; i += kMaxChunksize) {
+     const size_t num_remaining_samples = num_samples - i;
+     const size_t num_samples_to_write =
+--- firefox-99.0/third_party/libwebrtc/common_audio/wav_header.cc
++++ firefox-99.0/third_party/libwebrtc/common_audio/wav_header.cc
+@@ -26,10 +26,6 @@
+ namespace webrtc {
+ namespace {
+ 
+-#ifndef WEBRTC_ARCH_LITTLE_ENDIAN
+-#error "Code not working properly for big endian platforms."
+-#endif
+-
+ #pragma pack(2)
+ struct ChunkHeader {
+   uint32_t ID;

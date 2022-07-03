@@ -1,0 +1,12 @@
+musl getaddrinfo always fills in ai_canonname
+--- anyio-3.5.0/tests/test_sockets.py
++++ anyio-3.5.0/tests/test_sockets.py
+@@ -1135,7 +1135,7 @@ async def test_getaddrinfo_ipv6addr(sock_type: Literal[socket.SocketKind.SOCK_ST
+     # IDNA trips up over raw IPv6 addresses
+     proto = 0 if platform.system() == 'Windows' else 6
+     assert await getaddrinfo('::1', 0, type=sock_type) == [
+-        (socket.AddressFamily.AF_INET6, socket.SocketKind.SOCK_STREAM, proto, '', ('::1', 0))
++        (socket.AddressFamily.AF_INET6, socket.SocketKind.SOCK_STREAM, proto, '::1', ('::1', 0))
+     ]
+ 
+ 

@@ -1,0 +1,47 @@
+--- oneTBB-2021.5.0/test/conformance/conformance_resumable_tasks.cpp
++++ oneTBB-2021.5.0/test/conformance/conformance_resumable_tasks.cpp
+@@ -16,7 +16,7 @@
+ 
+ #include "common/test.h"
+ 
+-#if (!__TBB_WIN8UI_SUPPORT && !defined(WINAPI_FAMILY) && !__ANDROID__)
++#if __TBB_RESUMABLE_TASKS
+ 
+ #include "oneapi/tbb/task.h"
+ #include "oneapi/tbb/task_group.h"
+--- oneTBB-2021.5.0/test/tbbmalloc/test_malloc_overload.cpp
++++ oneTBB-2021.5.0/test/tbbmalloc/test_malloc_overload.cpp
+@@ -52,7 +52,7 @@
+ #endif
+ 
+ #define __TBB_POSIX_MEMALIGN_PRESENT (__unix__ && !__ANDROID__) || __APPLE__
+-#define __TBB_PVALLOC_PRESENT __unix__ && !__ANDROID__
++#define __TBB_PVALLOC_PRESENT __unix__ && __GLIBC__
+ #if __GLIBC__
+   // aligned_alloc available since GLIBC 2.16
+   #define __TBB_ALIGNED_ALLOC_PRESENT __GLIBC_PREREQ(2, 16)
+@@ -396,7 +396,7 @@ void FuncReplacementInfoCheck() {
+ //! Testing tbbmalloc_proxy overload capabilities
+ //! \brief \ref error_guessing
+ TEST_CASE("Main set of tests") {
+-#if __unix__
++#if __GLIBC__
+     REQUIRE(mallopt(0, 0)); // add dummy mallopt call for coverage
+ #endif // __unix__
+ 
+@@ -449,6 +449,7 @@ TEST_CASE("Main set of tests") {
+     CheckMemalignFuncOverload(aligned_alloc, free);
+ #endif
+ 
++ #if __GLIBC__
+ #pragma GCC diagnostic push
+ #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+     struct mallinfo info = mallinfo();
+@@ -457,6 +458,7 @@ TEST_CASE("Main set of tests") {
+     REQUIRE((!info.arena && !info.ordblks && !info.smblks && !info.hblks
+            && !info.hblkhd && !info.usmblks && !info.fsmblks
+            && !info.uordblks && !info.fordblks && !info.keepcost));
++ #endif
+ 
+  #if !__ANDROID__
+     // These non-standard functions are exported by GLIBC, and might be used

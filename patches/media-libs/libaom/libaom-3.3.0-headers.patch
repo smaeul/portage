@@ -1,0 +1,44 @@
+--- libaom-3.3.0/apps/aomenc.c
++++ libaom-3.3.0/apps/aomenc.c
+@@ -9,6 +9,8 @@
+  * PATENTS file, you can obtain it at www.aomedia.org/license/patent.
+  */
+ 
++#define _POSIX_C_SOURCE 200112L
++
+ #include "apps/aomenc.h"
+ 
+ #include "config/aom_config.h"
+--- libaom-3.3.0/examples/lightfield_bitstream_parsing.c
++++ libaom-3.3.0/examples/lightfield_bitstream_parsing.c
+@@ -36,6 +36,8 @@
+ // tile_colN, and tile_rowN identify an individual tile to be decoded and
+ // to use anchor_indexN anchor image for MCP.
+ 
++#define _POSIX_C_SOURCE 200112L
++
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+--- libaom-3.3.0/examples/lightfield_decoder.c
++++ libaom-3.3.0/examples/lightfield_decoder.c
+@@ -35,6 +35,8 @@
+ // tile_colN, and tile_rowN identify an individual tile to be decoded and
+ // to use anchor_indexN anchor image for MCP.
+ 
++#define _POSIX_C_SOURCE 200112L
++
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+--- libaom-3.3.0/examples/svc_encoder_rtc.c
++++ libaom-3.3.0/examples/svc_encoder_rtc.c
+@@ -11,6 +11,8 @@
+ //  This is an example demonstrating how to implement a multi-layer AOM
+ //  encoding scheme for RTC video applications.
+ 
++#define _POSIX_C_SOURCE 200112L
++
+ #include <assert.h>
+ #include <math.h>
+ #include <stdio.h>

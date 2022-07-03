@@ -1,0 +1,37 @@
+--- psmisc-23.4/configure.ac
++++ psmisc-23.4/configure.ac
+@@ -205,12 +205,6 @@ AC_CHECK_FUNCS([atexit getmntent memset nl_langinfo rawmemchr regcomp rpmatch se
+ dnl Checks for Large File System
+ AC_SYS_LARGEFILE
+ 
+-if test x"$DEJAGNU" = x
+-then
+-  DEJAGNU="\$(top_srcdir)/testsuite/global-conf.exp"
+-fi
+-AC_SUBST(DEJAGNU)
+-	
+ AC_CONFIG_FILES([Makefile
+ 		 doc/Makefile
+ 		 icons/Makefile
+--- psmisc-23.4/testsuite/Makefile.am
++++ psmisc-23.4/testsuite/Makefile.am
+@@ -1,5 +1,4 @@
+ AUTOMAKE_OPTIONS = dejagnu
+-export DEJAGNU
+ 
+ # Programs that are expected across the board.
+ DEJATOOL = killall
+--- psmisc-23.4/testsuite/killall.test/killall.exp
++++ psmisc-23.4/testsuite/killall.test/killall.exp
+@@ -24,9 +24,9 @@ expect_pass "$test" "${fake_proc_name}: no process found"
+ set signals [regexp -all -inline {\w+} [exec $killall -l]]
+ foreach signame $signals {
+   set test "killall using signal $signame"
+-  spawn $killall -$signame ${fake_proc_name}
++  spawn $killall -s $signame ${fake_proc_name}
+   expect_pass "$test" "${fake_proc_name}: no process found"
+   set test "killall using signal SIG$signame"
+-  spawn $killall -SIG$signame ${fake_proc_name}
++  spawn $killall -s SIG$signame ${fake_proc_name}
+   expect_pass "$test" "${fake_proc_name}: no process found"
+ }

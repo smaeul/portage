@@ -1,0 +1,12 @@
+https://github.com/python-hyper/hyperlink/issues/153
+--- hyperlink-21.0.0/src/hyperlink/hypothesis.py
++++ hyperlink-21.0.0/src/hyperlink/hypothesis.py
+@@ -261,7 +261,7 @@ else:
+                     c = unichr(i)
+ 
+                     # Exclude reserved characters
+-                    if c in "#/?":
++                    if c in "#/?%":
+                         continue
+ 
+                     # Exclude anything not UTF-8 compatible
