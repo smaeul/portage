@@ -11,26 +11,18 @@ x11-misc/j4-dmenu-desktop::smaeul **
 app-benchmarks/stress-ng ~amd64
 app-misc/ddcutil ~amd64
 dev-lang/zig ~amd64
-dev-libs/capstone ~amd64
 dev-python/patatt ~amd64
-dev-util/creduce ~amd64
-dev-util/pahole ~amd64
-dev-util/perf ~amd64
 dev-util/radare2 ~amd64
 mail-client/s-nail ~amd64
 net-analyzer/flent ~amd64
 net-mail/b4 ~amd64
+net-misc/gallery-dl ~amd64
 net-misc/streamlink ~amd64
-net-vpn/wireguard-tools ~amd64
-net-p2p/transmission-remote-cli ~amd64
 sci-electronics/pulseview ~amd64
 sci-electronics/sigrok-cli ~amd64
 sci-libs/libsigrokdecode ~amd64
 sci-misc/boinc ~amd64
-sys-apps/lcdtest ~amd64
 sys-apps/linux-misc-apps ~amd64
-sys-apps/opal-utils ~ppc64
-sys-block/sedutil ~amd64
 sys-devel/slibtool ~amd64
 sys-devel/sparse ~amd64
 sys-firmware/sigrok-firmware-fx2lafw ~amd64
@@ -45,12 +37,6 @@ app-misc/ca-certificates ~amd64
 dev-embedded/sdcc ~amd64
 dev-lang/go ~amd64
 dev-lang/mono ~amd64
-dev-libs/elfutils::musl ~amd64
-net-irc/weechat ~amd64
-net-misc/gallery-dl ~amd64
-net-misc/youtube-dl ~amd64
-net-p2p/syncthing ~amd64
-sys-apps/flashrom ~amd64
 sys-devel/gcc ~amd64
 sys-fs/zfs ~amd64
 sys-fs/zfs-kmod ~amd64
@@ -66,6 +52,7 @@ sys-devel/clang-runtime ~amd64
 sys-devel/lld ~amd64
 sys-devel/llvm ~amd64
 sys-devel/llvm-common ~amd64
+sys-devel/llvmgold ~amd64
 sys-libs/compiler-rt ~amd64
 sys-libs/libcxx ~amd64
 sys-libs/libcxxabi ~amd64
@@ -119,4 +106,6 @@ sys-apps/s6-rc ~amd64
 # version. These entries should be removed once that version is stabilized.
 #
 # Required by www-client/firefox
-~dev-libs/nss-3.72.1 ~amd64
+~dev-libs/nss-3.77 ~amd64
+# Required by www-client/firefox
+~media-libs/dav1d-1.0.0 ~amd64

@@ -97,6 +97,7 @@ media-gfx/imagemagick pango
 media-libs/freetype harfbuzz
 media-libs/imlib2 -mp3
 media-libs/mesa gles2 osmesa
+media-libs/opencv -opengl python
 media-plugins/alsa-plugins -ffmpeg
 media-sound/mpd -fifo -id3tag libsoxr -mad -network -sqlite
 media-sound/pulseaudio alsa -asyncns
@@ -115,8 +116,9 @@ net-libs/glib-networking -gnome -libproxy
 net-libs/gnutls -openssl
 net-libs/zeromq -libbsd
 net-misc/iputils tracepath
-net-misc/s6-networking -ssl
 net-misc/freerdp -usb
+net-misc/s6-networking -ssl
+net-misc/sntpd adjtimex
 net-print/cups -usb
 net-print/cups-filters pclm
 net-vpn/wireguard-tools -wg-quick
@@ -131,7 +133,7 @@ sys-apps/flashrom -* internal linux-mtd linux-spi tools
 sys-apps/iproute2 -iptables
 sys-apps/man-db berkdb -manpager
 sys-apps/pciutils dns
-sys-apps/util-linux -cramfs cryptsetup
+sys-apps/util-linux -cramfs cryptsetup -su
 sys-devel/binutils multitarget
 sys-devel/clang default-compiler-rt default-libcxx llvm-libunwind
 sys-devel/clang-runtime compiler-rt libcxx -sanitize
